@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"营地等级"</Description>
+      <LastState Value="1" RealAddress="0D831A28"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NorthernTale.exe+19FD00</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"食物[Ctrl+F12]"</Description>
+          <LastState Value="8" Activated="1" RealAddress="0D831A2C"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>NorthernTale.exe+19FD00</Address>
+          <Offsets>
+            <Offset>4</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation Allow Increase</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>123</Key>
+              </Keys>
+              <ID>0</ID>
+              <ActivateSound>Activate</ActivateSound>
+              <DeactivateSound>Deactivate</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"石头[Ctrl+F12]"</Description>
+          <LastState Value="5" Activated="1" RealAddress="0D831A30"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>NorthernTale.exe+19FD00</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation Allow Increase</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>123</Key>
+              </Keys>
+              <ID>0</ID>
+              <ActivateSound>Activate</ActivateSound>
+              <DeactivateSound>Deactivate</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"黄金[Ctrl+F12]"</Description>
+          <LastState Value="5" Activated="1" RealAddress="0D831A34"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>NorthernTale.exe+19FD00</Address>
+          <Offsets>
+            <Offset>c</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation Allow Increase</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>123</Key>
+              </Keys>
+              <ID>0</ID>
+              <ActivateSound>Activate</ActivateSound>
+              <DeactivateSound>Deactivate</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
