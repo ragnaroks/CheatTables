@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"#1 普通关卡时间不增"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//TopGUIBarBase:get_GetMinutes
+{$STRICT}
+[ENABLE]
+{$LUA}
+local failedString = 'define(cheat1_entry,0)\nregistersymbol(cheat1_entry)\nunregistersymbol(*)';
+if syntaxcheck then return failedString end;
+if LaunchMonoDataCollector() == 0 then return failedString end;
+local classId = mono_findClass('Assembly-CSharp','TopGUIBarBase');
+if classId == 0 then return failedString end;
+local methodId = mono_class_findMethod(classId,'get_GetMinutes');
+if methodId == 0 then return failedString end;
+local addressId = mono_compile_method(methodId);
+if addressId == 0 then return failedString end;
+return string.format('define(cheat1_entry,%x)\nregistersymbol(cheat1_entry)',addressId);
+{$ASM}
+assert(cheat1_entry+06,8B 45 08 D9 40 2C)
+alloc(cheat1_code,32,cheat1_entry)
+registersymbol(cheat1_code)
+label(returnhere)
+
+cheat1_code:
+  mov eax,[ebp+08]
+  mov [eax+2C],00
+  fld dword ptr [eax+2C]
+  jmp returnhere
+
+cheat1_entry+06:
+  jmp cheat1_code
+  nop
+returnhere:
+
+[DISABLE]
+cheat1_entry+06:
+  DB 8B 45 08 D9 40 2C
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#2 道具不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Inventory:RemoveItem
+{$STRICT}
+[ENABLE]
+{$LUA}
+local failedString = 'define(cheat2_entry,0)\nregistersymbol(cheat2_entry)\nunregistersymbol(*)';
+if syntaxcheck then return failedString end;
+if LaunchMonoDataCollector() == 0 then return failedString end;
+local classId = mono_findClass('Assembly-CSharp','Inventory');
+if classId == 0 then return failedString end;
+local methodId = mono_class_findMethod(classId,'RemoveItem');
+if methodId == 0 then return failedString end;
+local addressId = mono_compile_method(methodId);
+if addressId == 0 then return failedString end;
+return string.format('define(cheat2_entry,%x)\nregistersymbol(cheat2_entry)',addressId);
+{$ASM}
+assert(cheat2_entry,55)
+
+cheat2_entry:
+  DB C3
+
+[DISABLE]
+cheat2_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"#3 身体不增长"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Robal:AddRobalNode
+{$STRICT}
+[ENABLE]
+{$LUA}
+local failedString = 'define(cheat3_entry,0)\nregistersymbol(cheat3_entry)\nunregistersymbol(*)';
+if syntaxcheck then return failedString end;
+if LaunchMonoDataCollector() == 0 then return failedString end;
+local classId = mono_findClass('Assembly-CSharp','Robal');
+if classId == 0 then return failedString end;
+local methodId = mono_class_findMethod(classId,'AddRobalNode');
+if methodId == 0 then return failedString end;
+local addressId = mono_compile_method(methodId);
+if addressId == 0 then return failedString end;
+return string.format('define(cheat3_entry,%x)\nregistersymbol(cheat3_entry)',addressId);
+{$ASM}
+assert(cheat3_entry,55)
+
+cheat3_entry:
+  DB C3
+
+[DISABLE]
+cheat3_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"#4 飞行关卡时间不增"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//MiniStoper:get_GetMinutes
+{$STRICT}
+[ENABLE]
+{$LUA}
+local failedString = 'define(cheat4_entry,0)\nregistersymbol(cheat4_entry)\nunregistersymbol(*)';
+if syntaxcheck then return failedString end;
+if LaunchMonoDataCollector() == 0 then return failedString end;
+local classId = mono_findClass('Assembly-CSharp','MiniStoper');
+if classId == 0 then return failedString end;
+local methodId = mono_class_findMethod(classId,'get_GetMinutes');
+if methodId == 0 then return failedString end;
+local addressId = mono_compile_method(methodId);
+if addressId == 0 then return failedString end;
+return string.format('define(cheat4_entry,%x)\nregistersymbol(cheat4_entry)',addressId);
+{$ASM}
+assert(cheat4_entry+06,8B 45 08 D9 40 14)
+alloc(cheat4_code,32,cheat4_entry)
+registersymbol(cheat4_code)
+label(returnhere)
+
+cheat4_code:
+  mov eax,[ebp+08]
+  mov [eax+14],00
+  fld dword ptr [eax+14]
+  jmp returnhere
+
+cheat4_entry+06:
+  jmp cheat4_code
+  nop
+returnhere:
+
+[DISABLE]
+cheat4_entry+06:
+  DB 8B 45 08 D9 40 14
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

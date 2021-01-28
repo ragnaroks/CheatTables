@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"HP"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Enchanted Cave 2.exe"+2DBDE0C</Address>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation Allow Increase</Action>
+          <Keys>
+            <Key>18</Key>
+            <Key>97</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound>Activate</ActivateSound>
+          <DeactivateSound>Deactivate</DeactivateSound>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"MP"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE10</Address>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation Allow Increase</Action>
+          <Keys>
+            <Key>18</Key>
+            <Key>98</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound>Activate</ActivateSound>
+          <DeactivateSound>Activate</DeactivateSound>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Money"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Enchanted Cave 2.exe"+2DBDE88</Address>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation Allow Increase</Action>
+          <Keys>
+            <Key>18</Key>
+            <Key>99</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound>Activate</ActivateSound>
+          <DeactivateSound>Deactivate</DeactivateSound>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"攻击力"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE14</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"防御力"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE18</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"魔法力"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE1C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"技能点"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Enchanted Cave 2.exe"+2DBDEA8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"闪避几率"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE54</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"暴击几率"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE58</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"野怪物品掉落几率"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE5C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"野怪金币奖励(额外)"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Enchanted Cave 2.exe"+2DBDE68</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"野怪经验值奖励(额外)"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE6C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"HP恢复"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE70</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"MP恢复"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE74</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"重伤伤害"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE78</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"生命流失"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE7C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"闪击几率"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FF745F3DE80</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Info"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"NextLevelXp"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>7FF745F3DE9C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"MaxMP"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>7FF745F3DE08</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"MaxHP"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>7FF745F3DE04</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

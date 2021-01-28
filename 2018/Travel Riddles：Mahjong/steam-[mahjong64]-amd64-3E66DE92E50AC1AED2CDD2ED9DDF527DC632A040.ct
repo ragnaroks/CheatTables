@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"金币道具不变"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("mahjong64.exe"+47033D,48 89 03)
+
+// r9==1
+"mahjong64.exe"+47033D:
+  nop 3
+
+[DISABLE]
+"mahjong64.exe"+47033D:
+  mov [rbx],rax
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

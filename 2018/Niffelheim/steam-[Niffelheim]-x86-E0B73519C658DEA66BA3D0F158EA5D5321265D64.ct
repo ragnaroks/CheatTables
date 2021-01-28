@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"角色免疫攻击"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{STRICT}
+[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+--local mi1 = mono_findMethod('Assembly-CSharp:Ellada.Game.Players','Player','GetHit');
+--if mi1 == nil then return end;
+--mono_compile_method(mi1);
+{$ASM}
+assert(Ellada.Game.Players:Player:GetHit+2F,E8 ? ? ? ? 85 C0 7E 07 33 C0)
+alloc(cheat1_store1,4,Ellada.Game.Players:Player:GetHit)
+registersymbol(cheat1_store1)
+
+cheat1_store1:
+  readmem(Ellada.Game.Players:Player:GetHit+30,4)
+
+Ellada.Game.Players:Player:GetHit+2F:
+  nop 5
+  nop 2
+  nop 2
+  nop 2
+
+[DISABLE]
+Ellada.Game.Players:Player:GetHit+2F:
+  DB E8
+  readmem(cheat1_store1,4)
+  DB 85 C0
+  DB 7E 07
+  DB 33 C0
+
+unregistersymbol(cheat1_store1)
+dealloc(cheat1_store1)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

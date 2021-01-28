@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#1 设定生命值和魔法值"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("flare.exe"+225DC,F3 0F 10 8B 78 02 00 00)
+alloc(cheat1_newmem,128,"flare.exe")
+registersymbol(cheat1_newmem)
+label(returnhere)
+label(cheat1_code)
+label(cheat1_data1)
+label(cheat1_data2)
+
+cheat1_newmem:
+  nop 4
+cheat1_data1:
+  DB 00 00 80 45
+cheat1_data2:
+  DB 00 00 80 44
+cheat1_code:
+  movss xmm1,[cheat1_data2]
+  movss [rbx+27C],xmm1
+  movss xmm1,[cheat1_data1]
+  movss [rbx+278],xmm1
+  jmp returnhere
+
+"flare.exe"+225DC:
+  jmp cheat1_code
+  nop 3
+returnhere:
+
+[DISABLE]
+"flare.exe"+225DC:
+  DB F3 0F 10 8B 78 02 00 00
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_newmem+04</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"魔法值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_newmem+08</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"#2 攻击力 10 倍"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("flare.exe"+D6C96,F3 0F 10 44 C2 04 F3 0F 5F 04 C2)
+assert("flare.exe"+D6CA1,F3 0F 11 43 0C)
+alloc(cheat2_newmem,128,"flare.exe")
+label(returnhere)
+label(cheat2_data1)
+label(cheat2_code)
+label(case_default)
+
+cheat2_newmem:
+  nop 4
+cheat2_data1:
+  DB 00 00 20 41
+cheat2_code:
+  pushfq
+  push rax
+  mov rax,[flare.exe+189750]
+  mov rax,[rax+1D8]
+  cmp rdx,rax
+  pop rax
+  jne case_default
+  mulss xmm0,[cheat2_data1]
+  cmp [rdx],00
+case_default:
+  popfq
+  movss [rbx+0C],xmm0
+  jmp returnhere
+
+"flare.exe"+D6CA1:
+  jmp cheat2_code
+returnhere:
+
+
+[DISABLE]
+"flare.exe"+D6CA1:
+  DB F3 0F 11 43 0C
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"==== 调试用 ===="</Description>
+      <Options moManualExpandCollapse="1" moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>flare.exe+189750</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1D8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"魔法值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>flare.exe+189750</Address>
+          <Offsets>
+            <Offset>6C</Offset>
+            <Offset>1D8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

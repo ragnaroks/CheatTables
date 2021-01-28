@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"#1 获取坐标"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：48 8B 01 48 8D 54 24 30 41 B8 07 00 00 00 FF 90 00 03 00 00 44 0F 10 50 20 66 41 0F 73 DA 04 44
+{$STRICT}
+[ENABLE]
+assert(hitman3.exe+2BB1F1,48 8B 01 48 8D 54 24 30)
+alloc(newmem,64,hitman3.exe)
+label(returnhere)
+label(cheat1_code)
+label(cheat1_data)
+registersymbol(cheat1_data)
+
+newmem:
+  nop 4
+cheat1_data:
+  DB 00 00 00 00 00 00 00 00
+cheat1_code:
+  mov [cheat1_data],rcx
+  DB 48 8B 01
+  DB 48 8D 54 24 30
+  jmp returnhere
+
+hitman3.exe+2BB1F1:
+  jmp cheat1_code
+  nop 3
+returnhere:
+
+
+[DISABLE]
+hitman3.exe+2BB1F1:
+  DB 48 8B 01
+  DB 48 8D 54 24 30
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"East+/West-"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_data</Address>
+          <Offsets>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"North+/South-"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_data</Address>
+          <Offsets>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"Height"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_data</Address>
+          <Offsets>
+            <Offset>4C</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"#2 当前弹药不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：74 ** 4D 8B 45 00 8D 50 FF 49 8B CD 41 FF 90 A0 00 00 00 33 DB 39 9F 30 09 00 00 76 ** 89 9F A8
+//实际扣减位于 hitman3.exe+48E456 - lea edx,[rax-01]
+{$STRICT}
+[ENABLE]
+assert(hitman3.exe+48E450,74 11)
+
+hitman3.exe+48E450:
+  DB EB 11
+
+
+[DISABLE]
+hitman3.exe+48E450:
+  DB 74 11
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"备用弹药（仅显示）"</Description>
+          <ShowAsSigned>1</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>hitman3.exe+3B9B760</Address>
+          <Offsets>
+            <Offset>3C</Offset>
+            <Offset>E0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>hitman3.exe+866FDC 处理备用弹药，但需要进一步分析
+</Comments>
+</CheatTable>

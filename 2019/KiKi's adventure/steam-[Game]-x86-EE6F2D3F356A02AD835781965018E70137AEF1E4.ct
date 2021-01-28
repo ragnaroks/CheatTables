@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#1 获取玩家结构地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+aobscan(cheat1_entry,55 48 8B EC 56 48 81 EC 78 09 00 00 48 8B F1 33 C0,"+W+X")
+assert(cheat1_entry+2983,48 83 C4 20 48 B8)
+registersymbol(cheat1_entry)
+alloc(cheat1_code,32,cheat1_entry)
+registersymbol(cheat1_code)
+label(cheat1_store1)
+registersymbol(cheat1_store1)
+
+cheat1_code:
+  DB 00 00 00 00 00 00 00 00
+cheat1_store1:
+  readmem(cheat1_entry+2989,8)
+
+[DISABLE]
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"结构地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"武器伤害 (修改无效)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"生命值 (修改无效)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"上帝模式"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">00:默认
+01:激活
+</DropDownList>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>3F</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#2 获取魔法值地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+aobscan(cheat2_entry,55 48 8B EC 56 48 83 EC 08 48 8B F1 48 B8 ? ? ? ? ? ? ? ? 0F B6 00 85 C0 0F 85,"+W+X")
+assert(cheat2_entry+16,0F B6 00 85 C0)
+registersymbol(cheat2_entry)
+alloc(cheat2_code,48,cheat2_entry)
+registersymbol(cheat2_code)
+label(returnhere)
+label(cheat2_store1)
+registersymbol(cheat2_store1)
+
+cheat2_code:
+  movzx eax,byte ptr [rax]
+  test eax,eax
+  mov [cheat2_store1],rcx
+  jmp returnhere
+cheat2_store1:
+  DB 00 00 00 00 00 00 00 00
+
+cheat2_entry+16:
+  jmp cheat2_code
+returnhere:
+
+[DISABLE]
+cheat2_entry+16:
+  DB 0F B6 00 85 C0
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"结构地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"魔法值地址"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+          <Offsets>
+            <Offset>1DC</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

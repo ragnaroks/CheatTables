@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="39">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#1 回合数固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(wesnoth.exe+5C25AD,E8 7E B0 D2 FF)
+
+"wesnoth.exe"+5C25AD:
+  nop 5
+
+[DISABLE]
+"wesnoth.exe"+5C25AD:
+  DB E8 7E B0 D2 FF
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#2 金币不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(wesnoth.exe+3D98C1,8B 45 18 29 42 04)
+alloc(cheat2_code,64,wesnoth.exe)
+registersymbol(cheat2_code)
+label(return)
+label(default)
+label(player)
+
+wesnoth.exe+3D98C1:
+  jmp cheat2_code
+  nop
+return:
+
+cheat2_code:
+  mov eax,[ebp+18]
+//sub [edx+04],eax
+  pushfd
+  cmp [edx+F8],00
+  jne player
+default:
+  popfd
+  mov [edx+04],00
+  jmp return
+player:
+  popfd
+  jmp return
+
+[DISABLE]
+wesnoth.exe+3D98C1:
+  DB 8B 45 18 29 42 04
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"注入代码地址"</Description>
+          <LastState Value="" RealAddress="001B0000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#3 生命值不减 (有问题)"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(wesnoth.exe+3D3301,29 FB)
+assert(wesnoth.exe+3D3303,85 DB)
+assert(wesnoth.exe+3D3305,89 98 80 00 00 00)
+assert(wesnoth.exe+3D330B,89 9D 30 FC FF FF)
+alloc(cheat3_code,128,wesnoth.exe)
+registersymbol(cheat3_code)
+label(return)
+label(enemy)
+
+wesnoth.exe+3D3301:
+  jmp cheat3_code
+  nop 5
+  nop 6
+return:
+
+cheat3_code:
+  pushfd
+  cmp [eax+10],00
+  je enemy
+  cmp [eax+14],00
+  je enemy
+  cmp [eax+18],00
+  je enemy
+  popfd
+  jmp return
+enemy:
+  popfd
+  sub ebx,edi
+  test ebx,ebx
+  mov [eax+00000080],ebx
+  mov [ebp-000003D0],ebx
+  jmp return
+
+[DISABLE]
+wesnoth.exe+3D3301:
+  DB 29 FB
+wesnoth.exe+3D3303:
+  DB 85 DB
+wesnoth.exe+3D3305:
+  DB 89 98 80 00 00 00
+wesnoth.exe+3D330B:
+  DB 89 9D 30 FC FF FF
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入代码地址"</Description>
+          <LastState Value="" RealAddress="00120000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

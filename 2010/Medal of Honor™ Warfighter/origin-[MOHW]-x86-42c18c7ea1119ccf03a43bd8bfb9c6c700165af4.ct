@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 无限子弹"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(MOHW.exe+43666C,03 C0 FF 0C C1 8B 04 C1)
+
+MOHW.exe+43666E:
+  nop 3
+
+
+
+[DISABLE]
+MOHW.exe+43666E:
+  DB FF 0C C1
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#2 武器精准度"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(MOHW.exe+12DA1C6,F3 0F 10 44 24 0C F3 0F 11 46 3C)
+
+MOHW.exe+12DA1C6:
+  mov [esi+3C],00
+  nop 4
+
+
+[DISABLE]
+MOHW.exe+12DA1C6:
+  DB F3 0F 10 44 24 0C F3 0F 11 46 3C
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

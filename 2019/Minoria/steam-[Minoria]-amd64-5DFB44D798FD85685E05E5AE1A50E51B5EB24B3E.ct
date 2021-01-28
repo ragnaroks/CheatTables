@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"生命值固定"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aip1,F3 0F 5A C0 F2 0F 2C C0 F2 0F 2A C0 F2 0F 5A E8 F3 0F 11 AD 1C FF FF FF 48 B8 ? ? ? ? ? ? ? ? F3 0F 10 00 F3 0F 5A C0 F3 0F 10 8D 1C FF FF FF F3 0F 5A C9 F2 0F 5C C1 48 B8 ? ? ? ? ? ? ? ? F2 0F 5A E8 F3 0F 11 28)
+assert(aip1+36,F2 0F 5C C1)
+registersymbol(aip1)
+
+aip1+36:
+  nop 4
+
+[DISABLE]
+aip1+36:
+  subsd xmm0,xmm1
+
+unregistersymbol(aip1)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="1ED4492E268"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aip1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"生命值"</Description>
+          <LastState Value="300" RealAddress="1ED16A2FDD8"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>aip1+1A</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

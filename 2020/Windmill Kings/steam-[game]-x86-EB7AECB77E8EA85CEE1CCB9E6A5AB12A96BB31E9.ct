@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"红方金钱不减"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("game.exe"+4CF55,2B 45 E8 89 42 38)
+label(return)
+alloc(cave,64,"game.exe")
+label(default)
+label(case1)
+
+"game.exe"+4CF55:
+  jmp cave
+  nop
+return:
+
+cave:
+  pushfd
+  cmp [edx+0C],3F800000
+  jne case1
+default:
+  popfd
+  sub eax,[ebp-18]
+  mov [edx+38],eax
+  jmp return
+case1:
+  popfd
+//  add eax,[ebp-18]
+//  mov [edx+38],eax
+  jmp return
+
+[DISABLE]
+"game.exe"+4CF55:
+  DB 2B 45 E8 89 42 38
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"红方金钱不减，蓝方金钱清空"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("game.exe"+4CF55,2B 45 E8 89 42 38)
+label(return)
+alloc(cave,64,"game.exe")
+label(default)
+label(case1)
+
+"game.exe"+4CF55:
+  jmp cave
+  nop
+return:
+
+cave:
+  pushfd
+  cmp [edx+0C],3F800000
+  jne case1
+default:
+  popfd
+  mov [edx+38],00
+  jmp return
+case1:
+  popfd
+  jmp return
+
+[DISABLE]
+"game.exe"+4CF55:
+  DB 2B 45 E8 89 42 38
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>

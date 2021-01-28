@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 步数不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("Last Resort Island.exe"+143254,8B 44 82 18 83 C0 01 89 44 8E 18)
+
+"Last Resort Island.exe"+143254:
+  nop 4
+  nop 3
+  nop 4
+
+[DISABLE]
+"Last Resort Island.exe"+143254:
+  DB 8B 44 82 18 83 C0 01 89 44 8E 18
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#2 金钱不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("Last Resort Island.exe"+120A3E,2B 4C 82 18 89 4C 9E 18)
+
+"Last Resort Island.exe"+120A3E:
+  nop 4
+  nop 4
+
+[DISABLE]
+"Last Resort Island.exe"+120A3E:
+  DB 2B 4C 82 18 89 4C 9E 18
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#3 消除攻击力 256"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("Last Resort Island.exe"+EB3D8,8B 44 81 1C 03 45 10)
+label(returnhere)
+alloc(cheat3_code,32,"Last Resort Island.exe")
+registersymbol(cheat3_code)
+
+cheat3_code:
+  mov [ebp+10],100
+  mov eax,[ecx+eax*4+1C]
+  add eax,[ebp+10]
+  jmp returnhere
+
+"Last Resort Island.exe"+EB3D8:
+  jmp cheat3_code
+  nop 2
+returnhere:
+
+[DISABLE]
+"Last Resort Island.exe"+EB3D8:
+  DB 8B 44 81 1C 03 45 10
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"#4 消除产生火箭"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("Last Resort Island.exe"+14443B,0F 85 88 01 00 00 83 7D FC 02 0F 85 7E 01 00 00)
+"Last Resort Island.exe"+14443B:
+  nop 6
+  nop 4
+  nop 6
+
+[DISABLE]
+"Last Resort Island.exe"+14443B:
+  DB 0F 85 88 01 00 00 83 7D FC 02 0F 85 7E 01 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#5 无视消除顺序"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert("Last Resort Island.exe"+1401FF,75 2C)
+
+"Last Resort Island.exe"+1401FF:
+  nop 2
+
+[DISABLE]
+"Last Resort Island.exe"+1401FF:
+  DB 75 2C
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

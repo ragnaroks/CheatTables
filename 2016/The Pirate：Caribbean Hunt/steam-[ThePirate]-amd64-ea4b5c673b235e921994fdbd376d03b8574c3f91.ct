@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#1 购买不减金币"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,:Player:AddGold)
+registersymbol(cheat1_entry)
+alloc(cheat1_code,32,cheat1_entry)
+
+cheat1_code:
+  pushfq
+  push rax
+  xor rax,rax
+  // 这里用 ecx 是为了仅限 0xFFFFFFFF 补码 -1
+  cmp ecx,00
+  cmovl rcx,rax
+  pop rax
+  popfq
+  mov rsi,rcx
+  jmp cheat1_entry+16
+
+cheat1_entry+10:
+  jmp cheat1_code
+  nop
+
+[DISABLE]
+cheat1_entry+10:
+  DB 48 8B F1
+  DB 66 66 90
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#2 战斗时弹药不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,:Ship:AddAmmo)
+registersymbol(cheat2_entry)
+alloc(newmem,128,cheat2_entry)
+label(cheat2_split)
+label(cheat2_code)
+label(cheat2_code_player)
+label(cheat2_code_enemy)
+
+newmem:
+cheat2_split:
+  DB 90 90 90 90
+cheat2_code:
+  pushfq
+  push rsi
+  // Ship.manifest,0x18
+  mov rsi,[rcx+18]
+  // Ship.manifest.activeShip,0x60
+  mov rsi,[rsi+60]
+  test esi,esi
+  pop rsi
+  jz cheat2_code_enemy
+cheat2_code_player:
+  popfq
+  pop rbp
+  ret
+cheat2_code_enemy:
+  popfq
+  DB 48 8B EC
+  DB 48 83 EC 40
+  jmp cheat2_entry+08
+
+
+cheat2_entry+01:
+  jmp cheat2_code
+  nop 2
+
+[DISABLE]
+cheat2_entry+01:
+  DB 48 8B EC
+  DB 48 83 EC 40
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"#3 装弹速度提升 10 倍"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,:Ship:CrewLoadCannonSpeed)
+registersymbol(cheat3_entry)
+alloc(newmem,128,cheat3_entry)
+label(cheat3_data1)
+label(cheat3_data2)
+label(cheat3_split)
+label(cheat3_code)
+label(cheat3_code_player)
+label(cheat3_code_enemy)
+
+newmem:
+align 4
+cheat3_data1:
+  // 10.0F
+  DB 00 00 20 41
+cheat3_data2:
+  // 5.0F
+  DB 00 00 A0 40
+cheat3_split:
+  DB 90 90 90 90
+cheat3_code:
+  pushfq
+  push rsi
+  // Ship.manifest,0x18
+  mov rsi,[rcx+18]
+  // Ship.manifest.activeShip,0x60
+  mov rsi,[rsi+60]
+  //cmp esi,00
+  test esi,esi
+  pop rsi
+  jz cheat3_code_enemy
+cheat3_code_player:
+  popfq
+  movss xmm0,[cheat3_data1]
+  // dead angle start
+  push rax
+  mov eax,[cheat3_data2]
+  mov [rcx+1E8],eax
+  xor rax,rax
+  mov [rcx+1EC],eax
+  pop rax
+  // dead angle end
+  pop rbp
+  ret
+cheat3_code_enemy:
+  popfq
+  DB 48 8B EC
+  DB 48 83 EC 30
+  jmp cheat3_entry+08
+
+cheat3_entry+01:
+  jmp cheat3_code
+  nop 2
+
+[DISABLE]
+cheat3_entry+01:
+  DB 48 8B EC
+  DB 48 83 EC 30
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"#4 舰船无敌"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat4_entry,:Ship:Hit)
+registersymbol(cheat4_entry)
+alloc(newmem,128,cheat4_entry)
+label(cheat4_split)
+label(cheat4_code)
+label(cheat4_code_player)
+label(cheat4_code_enemy)
+
+newmem:
+cheat4_split:
+  DB 90 90 90 90
+cheat4_code:
+  DB 49 8B F1
+  DB 48 8D 6D 00
+  pushfq
+  push rsi
+  // Ship.manifest,0x18
+  mov rsi,[rcx+18]
+  // Ship.manifest.activeShip,0x60
+  mov rsi,[rsi+60]
+  test esi,esi
+  pop rsi
+  jz cheat4_code_enemy
+cheat4_code_player:
+  popfq
+  jmp cheat4_entry+23B
+cheat4_code_enemy:
+  popfq
+  jmp cheat4_entry+26
+
+cheat4_entry+1F:
+  jmp cheat4_code
+  nop 2
+
+[DISABLE]
+cheat4_entry+1F:
+  DB 49 8B F1
+  DB 48 8D 6D 00
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#5 无负重（如果实际上超重需要一直开启，否则战斗中不能移动）"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat5_entry,:CargoHold:GetTotalWeight)
+registersymbol(cheat5_entry)
+
+cheat5_entry:
+  xor rax,rax
+  ret
+
+[DISABLE]
+cheat5_entry:
+  DB 55
+  DB 48 8B EC
+
+unregistersymbol(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"#6 经验 16 倍"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat6_entry,:Player:AddExperience)
+registersymbol(cheat6_entry)
+alloc(newmem,128,cheat6_entry)
+label(cheat6_split)
+label(cheat6_code)
+
+newmem:
+cheat6_split:
+  DB 90 90 90 90
+cheat6_code:
+  DB 48 81 EC 80 00 00 00
+  shl ecx,04
+  jmp cheat6_entry+0B
+
+cheat6_entry+04:
+  jmp cheat6_code
+  nop 2
+ 
+ 
+[DISABLE]
+cheat6_entry+04:
+  DB 48 81 EC 80 00 00 00
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#7 购买不减红宝石"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat7_entry,:Player:UseRuby)
+registersymbol(cheat7_entry)
+
+cheat7_entry:
+  DB C3
+
+[DISABLE]
+cheat7_entry:
+  DB 55
+
+unregistersymbol(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"#8 不产生海盗遭遇战"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat8_entry,:Player:GeneratePiratesMission)
+registersymbol(cheat8_entry)
+
+cheat8_entry:
+  DB C3
+
+[DISABLE]
+cheat8_entry:
+  DB 55
+
+unregistersymbol(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#9 不产生缉私遭遇战"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat9_entry,:Player:GeneratePursuitMission)
+registersymbol(cheat9_entry)
+
+cheat9_entry:
+  DB C3
+
+[DISABLE]
+cheat9_entry:
+  DB 55
+
+unregistersymbol(*)
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 时间不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//LevelTimer:get_remainingTime+44
+{$STRICT}
+[ENABLE]
+aobscan(cheat1_entry,55 48 8B EC 48 83 EC 40 48 89 75 F8 48 8B F1 F3 0F 10 46 20 F3 0F 5A C0 F2 0F 11 45 E8 48 8B 46 18 48 8B C8 83 38 00 48 8D AD 00 00 00 00 49 BB,"+W+X")
+assert(cheat1_entry+44,F2 0F 5C C1)
+registersymbol(cheat1_entry)
+
+cheat1_entry+44:
+  nop 4
+
+[DISABLE]
+cheat1_entry+44:
+  DB F2 0F 5C C1
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#2 己方无敌"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Combat:Hurt
+{$STRICT}
+[ENABLE]
+aobscan(cheat2_entry,55 48 8B EC 48 81 EC 80 00 00 00 48 89 75 E8 48 89 7D F0 4C 89 7D F8 4C 8B F9 48 8B FA 49 8B F0 4C 89 4D A0 41 0F B6 87 9C 00 00 00 85 C0 0F 85,"+X+W")
+registersymbol(cheat2_entry)
+alloc(cheat2_code,64,cheat2_entry)
+registersymbol(cheat2_code)
+label(returnhere)
+label(default)
+label(team0)
+
+cheat2_code:
+  pushfq
+  cmp DWORD PTR [r15+94],00
+  jne default
+team0:
+  popfq
+  jmp cheat2_entry+217
+default:
+  popfq
+  movzx eax,byte ptr [r15+9C]
+  jmp returnhere
+
+cheat2_entry+24:
+  jmp cheat2_code
+  nop 3
+returnhere:
+[DISABLE]
+cheat2_entry+24:
+  DB 41 0F B6 87 9C 00 00 00
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

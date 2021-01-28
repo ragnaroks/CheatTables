@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>26236</ID>
+      <Description>"#1 无限弹药"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// [     6B0]
+// 000001BF033C40B0
+// BoolProperty
+// 00000101
+// /Script/ExampleGame.ExamplePlayerController:bInfiniteAmmo
+// 初始值 0x10 AND 0x01 =&gt; 0x11
+{$STRICT}
+[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+21D798,75 0D)
+
+ExampleGame-Win64-Shipping.exe+21D798:
+  DB EB 0D
+
+
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+21D798:
+  DB 75 0D
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26237</ID>
+      <Description>"#3 无限生命"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// [     6B0]
+// 000001BF033C3FB0
+// BoolProperty
+// 00000404
+// /Script/ExampleGame.ExamplePlayerController:bGodMode
+{$STRICT}
+[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+21D717,C0 E8 02)
+
+ExampleGame-Win64-Shipping.exe+21D717:
+  shr al,04
+
+
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+21D717:
+  DB C0 E8 02
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26230</ID>
+      <Description>"#4 隐身"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// [     6B0]
+// 000001BF033C3F30
+// BoolProperty
+// 00000808
+// /Script/ExampleGame.ExamplePlayerController:bGhostMode
+{$STRICT}
+[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+21E647,C0 E8 03)
+
+ExampleGame-Win64-Shipping.exe+21E647:
+  shr al,04
+
+
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+21E647:
+  DB C0 E8 03
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26227</ID>
+      <Description>"生命值指针"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>"ExampleGame-Win64-Shipping.exe"+2D4C608</Address>
+      <Offsets>
+        <Offset>B24</Offset>
+        <Offset>358</Offset>
+        <Offset>30</Offset>
+        <Offset>0</Offset>
+        <Offset>38</Offset>
+        <Offset>E10</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>生命值变动</Description>
+      <AddressString>ExampleGame-Win64-Shipping.exe+1EFAB9</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>83</Byte>
+        <Byte>24</Byte>
+        <Byte>0B</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>1A</Byte>
+        <Byte>ED</Byte>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

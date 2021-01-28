@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 生命值不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(unmetal.exe+14B00,51 56 8B F1 80 BE 28 05 00 00 00 8B 86 68 0B 00 00 8D 44 00 18 89 44 24 04 89 86 F0 04 00 00)
+alloc(cheat1_code,32,unmetal.exe)
+
+cheat1_code:
+  mov eax,64
+  mov [esi+000004E8],eax
+  mov [esi+000004F0],eax
+  jmp unmetal.exe+14B4A
+
+unmetal.exe+14B0B:
+  jmp cheat1_code
+  nop
+
+
+
+[DISABLE]
+unmetal.exe+14B0B:
+  DB 8B 86 68 0B 00 00
+
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>0</ID>
+          <Description>"生命值"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>unmetal.exe+3805F0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"生命值上限"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>unmetal.exe+3805F8</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#2 道具不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(unmetal.exe+232C2,4A 89 94 81 84 09 00 00 85 D2)
+alloc(cheat2_code,64,unmetal.exe)
+label(default)
+label(restore)
+
+cheat2_code:
+  pushfd
+  cmp eax,03
+  je short restore
+  cmp eax,31
+  je short restore
+  cmp eax,04
+  je short restore
+  cmp eax,59
+  je short restore
+  cmp eax,40
+  je short restore
+  cmp eax,05
+  je short restore
+default:
+  popfd
+  mov [ecx+eax*4+00000984],edx
+  jmp unmetal.exe+232CA
+restore:
+  inc edx
+  jmp short default
+
+unmetal.exe+232C3:
+  jmp cheat2_code
+  nop 2
+
+
+
+[DISABLE]
+unmetal.exe+232C3:
+  DB 89 94 81 84 09 00 00
+
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"弹匣 0x03"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780A98</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"子弹 0x31"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780B50</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"弹槽"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780BB8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"铀球 0x40"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780B8C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"电磁波手雷 0x59"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>unmetal.exe+380BF0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"体力"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780C70</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"手雷 0x04"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780A9C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"火箭弹 0x05"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00780AA0</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"#3 禁用检测"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// unmetal.exe+2EBDD -&gt; unmetal.exe+261DA -&gt; unmetal.exe+50B65
+[ENABLE]
+assert(unmetal.exe+2EBDB,8B CB E8 9E DD FF FF 53)
+
+unmetal.exe+2EBDD:
+  nop 5
+
+
+
+[DISABLE]
+unmetal.exe+2EBDD:
+  DB E8 9E DD FF FF
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"#4 禁用警报"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// unmetal.exe+2EBDD -&gt; unmetal.exe+261DA -&gt; unmetal.exe+50B65
+[ENABLE]
+assert(unmetal.exe+261D8,8B CE E8 C1 A7 02 00 83 BE 78 02 00 00 49)
+
+unmetal.exe+261DA:
+  nop 5
+
+
+
+[DISABLE]
+unmetal.exe+261DA:
+  DB E8 C1 A7 02 00
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"unmetal.exe"+423EB</Address>
+      <Comment>遍历道具数量</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>

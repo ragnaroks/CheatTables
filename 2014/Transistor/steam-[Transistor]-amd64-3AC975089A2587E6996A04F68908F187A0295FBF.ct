@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"构造角色指针"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//经测试，建议只使用"放逐"功能即可通关
+//最终BOSS战的时候不要使用任何功能，否则卡关
+
+[ENABLE]
+assert(GSGE.Code.Things.LivingThing::getHealthFraction,C5 F8 77 48 8B 81 18 04 00 00 48 8B D0 C4 E1 7A 10 42 14 C4 E1 70 57 C9 C4 E1 78 2E C1 7A 08 75 06 C4 E1 78 57 C0 C3 48 8B D0 C4 E1 7A 10 42 14 8B 10 48 8B 40 70 C4 E1 7A 10 88 D8 00 00 00 C4 E1 7A 5E C1 C3)
+alloc(begin,64,GSGE.Code.Things.LivingThing::getHealthFraction)
+label(return)
+label(default)
+label(case1)
+label(cheat1_store)
+registersymbol(cheat1_store)
+
+GSGE.Code.Things.LivingThing::getHealthFraction+0D:
+  jmp begin
+  nop
+return:
+
+begin:
+  pushfq
+  cmp byte ptr [rdx+13],01
+  je case1
+default:
+  popfq
+  mov [rdx+A4],41000000
+  vmovss xmm0,[rdx+14]
+  jmp return
+case1:
+  popfq
+  mov [cheat1_store],rdx
+  mov [rdx+A4],3F800000
+  vmovss xmm0,[rdx+14]
+  jmp return
+cheat1_store:
+  DB 00 00 00 00
+
+[DISABLE]
+GSGE.Code.Things.LivingThing::getHealthFraction+0D:
+  DB C4 E1 7A 10 42 14//vmovss xmm0,[rdx+14]
+
+unregistersymbol(cheat1_store)
+dealloc(begin)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"指针"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"无敌 (使用右边的选项)"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:关闭
+1:激活
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>11</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"放逐 (使用右边的选项)"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:激活
+1:关闭
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>12</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>14</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"生命值恢复延迟"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>90</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"无敌时间"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>94</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"无敌量 (?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>98</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"装甲值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>9C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"装甲覆盖范围 (?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>A0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"受击伤害倍率"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>A4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"闪避率 (?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>A8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"反射率 (?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>AC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"反射冷却"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>B0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"反射护盾值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>B4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"隐身 (?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>B8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

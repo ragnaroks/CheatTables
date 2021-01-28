@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#1 获取数据地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+//MusicDetailsController:setDetails
+aobscan(cheat1_entry,55 8B EC 57 56 81 EC 80 00 00 00 8B 75 08 8B 7D 0C,"+W+X")
+assert(cheat1_entry+137,E8)
+assert(cheat1_entry+13C,8B 05)
+assert(cheat1_entry+142,8B 4F 34)
+registersymbol(cheat1_entry)
+alloc(cheat1_code,32,cheat1_entry)
+registersymbol(cheat1_code)
+label(cheat1_store1)
+registersymbol(cheat1_store1)
+
+cheat1_code:
+  DB 00 00 00 00
+cheat1_store1:
+  readmem(cheat1_entry+13E,4)
+
+[DISABLE]
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"暂存地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"大航海数量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>-8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"粉丝数量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>-4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"音乐点"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

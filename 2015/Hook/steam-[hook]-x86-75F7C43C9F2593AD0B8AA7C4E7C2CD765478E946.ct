@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 尝试次数不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+aobscan(cheat1_entry,55 8B EC 53 57 56 83 EC 1C 8B 7D 08 8B 77 0C 83 FE 03 73 10 8B CE C1 E1 02 B8 ? ? ? ? 03 C1 8B 00 FF E0 8B 47 10 0F B6 40 24 85 C0,"+W+X")
+registersymbol(cheat1_entry)
+assert(cheat1_entry+3D,8B C8 8B 49 20 49 89 48 20)
+
+cheat1_entry+3D:
+  nop 2
+  nop 3
+  nop
+  nop 3
+ 
+[DISABLE]
+cheat1_entry+3D:
+  DB 8B C8 8B 49 20 49 89 48 20
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

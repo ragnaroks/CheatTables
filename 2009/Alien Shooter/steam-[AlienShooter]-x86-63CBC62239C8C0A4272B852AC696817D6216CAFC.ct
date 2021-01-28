@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"meta"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"address"</Description>
+          <LastState Value="" RealAddress="00810000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('AlienShooter.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"moduleSize"</Description>
+          <LastState Value="" RealAddress="00276000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getModuleSize('AlienShooter.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"address+moduleSize"</Description>
+          <LastState Value="" RealAddress="00A86000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('AlienShooter.exe')+getModuleSize('AlienShooter.exe')</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"金钱固定 (仅在商店使用,否则可能异常)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+assert("AlienShooter.exe"+5C476,29 7E 04)
+"AlienShooter.exe"+5C476:
+  //add [esi+04],edi
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+5C476:
+  sub [esi+04],edi
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"子弹固定 (400发)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">// 在 +728E7 处取消子弹变动的操作
+// 在 +728F8 除利用游戏本身的异常处理赋值子弹数量（原本是清零）
+// 子弹实际数量=显示数量*64
+
+[ENABLE]
+assert("AlienShooter.exe"+728E7,01 87 84 00 00 00)
+assert("AlienShooter.exe"+728F8,C7 87 84 00 00 00 00 00 00 00)
+
+"AlienShooter.exe"+728E7:
+  nop 6
+
+"AlienShooter.exe"+728F8:
+  mov [edi+00000084],6400
+
+[DISABLE]
+"AlienShooter.exe"+728E7:
+  add [edi+00000084],eax
+
+"AlienShooter.exe"+728F8:
+  mov [edi+00000084],00000000
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"炸弹不减 (避免到处找)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+"AlienShooter.exe"+5CAEF:
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+5CAEF:
+  dec [ecx+04]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"生命值固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+assert("AlienShooter.exe"+6C07A,89 7E 58)
+label(return)
+alloc(cave,72,"AlienShooter.exe"+6C07A)
+label(player)
+label(enemy)
+label(player_address)
+registersymbol(player_address)
+label(after)
+
+"AlienShooter.exe"+6C07A:
+  jmp cave
+  nop
+return:
+
+// [esi+2C] =&gt; ANY:玩家,0:敌方
+// [esi+64] =&gt; 0:玩家,4:敌方
+// [esi+84] =&gt; 63999936/ANY:玩家,6399936:敌方 (只要是 63999936 就正常处理即可)
+// [esi+90] =&gt; 0:玩家,3:敌方
+
+cave:
+  cmp [esi+64],00
+  jne enemy
+  cmp [esi+84],3D08FC0
+  je enemy
+  cmp [esi+90],00
+  jne enemy
+player:
+  mov [player_address],esi
+  jmp after
+enemy:
+  mov [esi+58],edi
+after:
+  pop edi
+  pop esi
+  pop ebp
+  jmp return
+player_address:
+  DB 00 00 00 00
+
+[DISABLE]
+"AlienShooter.exe"+6C07A:
+  mov [esi+58],edi
+  pop edi
+  pop esi
+  pop ebp
+
+unregistersymbol(player_address)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"玩家指针"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_address</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"子弹逻辑数量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_address</Address>
+          <Offsets>
+            <Offset>84</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_address</Address>
+          <Offsets>
+            <Offset>58</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

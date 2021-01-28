@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#1 无开销"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+USEMONO()
+FINDMONOMETHOD(cheat1_entry,Assembly-CSharp:PlayerData:PayCost)
+assert(cheat1_entry,55)
+registersymbol(cheat1_entry)
+
+cheat1_entry:
+  DB C3
+
+[DISABLE]
+cheat1_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#2 金钱不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+USEMONO()
+FINDMONOMETHOD(cheat2_entry,Assembly-CSharp:PlayerData:RemoveMoney)
+assert(cheat2_entry,55)
+registersymbol(cheat2_entry)
+
+cheat2_entry:
+  DB C3
+
+[DISABLE]
+cheat2_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#3 资源不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+USEMONO()
+FINDMONOMETHOD(cheat3_entry,Assembly-CSharp:PlayerData:RemoveResources)
+assert(cheat3_entry,55)
+registersymbol(cheat3_entry)
+
+cheat3_entry:
+  DB C3
+
+[DISABLE]
+cheat3_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"#4 卡片无敌"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+USEMONO()
+FINDMONOMETHOD(cheat4_entry,Assembly-CSharp:BattleManager+&lt;Duel&gt;c__Iterator0:MoveNext)
+assert(cheat4_entry+AB,8B 40 08 8B C8)
+registersymbol(cheat4_entry)
+label(returnhere)
+alloc(cheat4_code,64,cheat4_entry)
+registersymbol(cheat4_code)
+label(define1)
+
+cheat4_code:
+  mov eax,[eax+08]
+  mov ecx,eax
+  mov ecx,[ecx+28]
+  push esi
+  mov esi,[define1]
+  mov [ecx+18],64
+  mov [ecx+20],4000
+  mov [ecx+38],esi
+  mov [ecx+3C],esi
+  mov [ecx+40],esi
+  mov [ecx+44],esi
+  mov [ecx+48],esi
+  pop esi
+  mov ecx,eax
+  jmp returnhere
+align 4
+define1:
+  DB 00 00 80 3F
+
+cheat4_entry+AB:
+  jmp cheat4_code
+returnhere:
+
+
+
+[DISABLE]
+cheat4_entry+AB:
+  DB 8B 40 08 8B C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"#5 探索点数不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+USEMONO()
+FINDMONOMETHOD(cheat5_entry,Assembly-CSharp:FieldController:RemoveSabotagePoints)
+assert(cheat5_entry,55)
+registersymbol(cheat5_entry)
+
+cheat5_entry:
+  DB C3
+
+[DISABLE]
+cheat5_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#6 快速战斗"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+USEMONO()
+FINDMONOMETHOD(cheat6_entry,Assembly-CSharp:EnemyManager:IsLastWave)
+assert(cheat6_entry,55 8B EC 57 56 83 EC 20)
+registersymbol(cheat6_entry)
+
+cheat6_entry:
+  xor eax,eax
+  inc eax
+  ret
+
+[DISABLE]
+cheat6_entry:
+  DB 55 8B EC 57
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat6_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

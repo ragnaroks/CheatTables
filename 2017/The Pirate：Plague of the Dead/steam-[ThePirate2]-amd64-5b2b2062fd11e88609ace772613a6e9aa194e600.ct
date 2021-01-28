@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 金币不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,:Player:AddGold)
+assert(cheat1_entry+08,48 89 4D D8 66 90)
+registersymbol(cheat1_entry)
+alloc(newmem,128,cheat1_entry)
+label(cheat1_code)
+
+newmem:
+  DB 90 90 90 90
+cheat1_code:
+  pushfq
+  push rax
+  xor rax,rax
+  cmp ecx,00
+  cmovl rcx,rax
+  pop rax
+  popfq
+  DB 48 89 4D D8
+  jmp cheat1_entry+0E
+
+cheat1_entry+08:
+  jmp cheat1_code
+  nop
+
+[DISABLE]
+cheat1_entry+08:
+  DB 48 89 4D D8
+  DB 66 90
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#2 经验 16 倍"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,:Player:AddExperience)
+assert(cheat2_entry+04,48 83 EC 60 48 89 4D C8)
+registersymbol(cheat2_entry)
+alloc(newmem,128,cheat2_entry)
+label(cheat2_code)
+
+newmem:
+  DB 90 90 90 90
+cheat2_code:
+  DB 48 83 EC 60
+  shl ecx,04
+  DB 48 89 4D C8
+  jmp cheat2_entry+0C
+
+cheat2_entry+04:
+  jmp cheat2_code
+  nop 3
+
+[DISABLE]
+cheat2_entry+04:
+  DB 48 83 EC 60
+  DB 48 89 4D C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#3 弹药不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,:Ship:AddAmmo)
+assert(cheat3_entry+10,4C 89 45 E8 48 8B C1)
+registersymbol(cheat3_entry)
+alloc(newmem,128,cheat3_entry)
+label(cheat3_code)
+label(player)
+label(enemy)
+
+newmem:
+  DB 90 90 90 90
+cheat3_code:
+  pushfq
+  cmp [rcx+114],00
+  jne enemy
+player:
+  xor r8,r8
+enemy:
+  popfq
+  DB 4C 89 45 E8
+  DB 48 8B C1
+  jmp cheat3_entry+17
+
+cheat3_entry+10:
+  jmp cheat3_code
+  nop 2
+
+[DISABLE]
+cheat3_entry+10:
+  DB 4C 89 45 E8
+  DB 48 8B C1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#4 加速装弹"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat4_entry,:Ship:CrewLoadCannonSpeed)
+assert(cheat4_entry+08,48 89 75 F8 48 8B F1)
+registersymbol(cheat4_entry)
+alloc(newmem,128,cheat4_entry)
+label(cheat4_code)
+label(cheat4_data1)
+label(enemy)
+label(player)
+
+newmem:
+  DB 90 90 90 90
+cheat4_data1:
+  DB 00 00 20 41
+cheat4_code:
+  DB 48 89 75 F8
+  DB 48 8B F1
+  pushfq
+  cmp [rcx+114],00
+  je player
+enemy:
+  popfq
+  jmp cheat4_entry+0F
+player:
+  popfq
+  movss xmm0,[cheat4_data1]
+// dead angle
+  movss [rcx+1E8],xmm0
+  mov [rcx+1EC],00
+//
+  DB 48 8B 75 F8
+  DB 48 8D 65 00
+  DB 5D
+  DB C3
+
+cheat4_entry+08:
+  jmp cheat4_code
+  nop 2
+
+[DISABLE]
+cheat4_entry+08:
+  DB 48 89 75 F8
+  DB 48 8B F1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#5 舰船无敌"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat5_entry,:Ship:Hit)
+assert(cheat5_entry+01,48 8B EC 48 83 EC 50)
+registersymbol(cheat5_entry)
+alloc(newmem,128,cheat5_entry)
+label(cheat5_code)
+label(player)
+label(enemy)
+
+newmem:
+  DB 90 90 90 90
+cheat5_code:
+  pushfq
+  cmp [rcx+114],00
+  jne enemy
+player:
+  popfq
+  pop rbp
+  ret
+enemy:
+  popfq
+  DB 48 8B EC
+  DB 48 83 EC 50
+  jmp cheat5_entry+08
+
+cheat5_entry+01:
+  jmp cheat5_code
+  nop 2
+
+[DISABLE]
+cheat5_entry+01:
+  DB 48 8B EC
+  DB 48 83 EC 50
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

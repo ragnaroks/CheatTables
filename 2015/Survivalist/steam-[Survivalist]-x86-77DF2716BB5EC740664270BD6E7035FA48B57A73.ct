@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"玩家指针"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Survivalist.exe"+000C3C3C</Address>
+      <Offsets>
+        <Offset>4C</Offset>
+        <Offset>37C</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"CachedInventoryWeight (负重,越低越轻)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>"Survivalist.exe"+000C3C3C</Address>
+          <Offsets>
+            <Offset>1B0</Offset>
+            <Offset>4C</Offset>
+            <Offset>37C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Hunger (饥饿值,越低越饱)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>"Survivalist.exe"+000C3C3C</Address>
+          <Offsets>
+            <Offset>1C0</Offset>
+            <Offset>4C</Offset>
+            <Offset>37C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"Thirst (口渴值,越低越好)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>"Survivalist.exe"+000C3C3C</Address>
+          <Offsets>
+            <Offset>1C4</Offset>
+            <Offset>4C</Offset>
+            <Offset>37C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"Disappeared (是否隐身?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>"Survivalist.exe"+000C3C3C</Address>
+          <Offsets>
+            <Offset>218</Offset>
+            <Offset>4C</Offset>
+            <Offset>37C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"God (是否上帝模式?)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>"Survivalist.exe"+000C3C3C</Address>
+          <Offsets>
+            <Offset>22B</Offset>
+            <Offset>4C</Offset>
+            <Offset>37C</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"精力值固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(ZombieApocalypse.Character::ApplyFatiguePenalty+64,D9 9E B4 01 00 00)
+
+ZombieApocalypse.Character::ApplyFatiguePenalty+64:
+  nop 6
+
+[DISABLE]
+ZombieApocalypse.Character::ApplyFatiguePenalty+64:
+  fstp dword ptr [esi+000001B4]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"负重固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(ZombieApocalypse.EquipmentContainer::CacheEncumbered+24,D9 9F B0 01 00 00)
+
+ZombieApocalypse.EquipmentContainer::CacheEncumbered+24:
+  nop 6
+
+[DISABLE]
+ZombieApocalypse.EquipmentContainer::CacheEncumbered+24:
+  fstp dword ptr [edi+000001B0]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"手枪子弹固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip1,8B CB 8B 01 8B 40 44 FF 50 18 85 C0 74 09 8B 85 7C FE FF FF FF 48 10)
+assert(aobeip1+14,FF 48 10)
+registersymbol(aobeip1)
+
+aobeip1+14:
+  nop 3
+
+[DISABLE]
+aobeip1+14:
+  dec [eax+10]
+
+unregistersymbol(aobeip1)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"步枪子弹固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip2,D9 5D E0 83 7D E4 00 75 03 FF 4B 10 83 7D E4 00 75 05)
+assert(aobeip2+09,FF 4B 10)
+registersymbol(aobeip2)
+
+aobeip2+09:
+  nop 3
+
+[DISABLE]
+aobeip2+09:
+  dec [ebx+10]
+
+unregistersymbol(aobeip2)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

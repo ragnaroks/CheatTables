@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"经验值 / 金币 / 生命值 / 魔法值 (双击脚本看说明)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">// 启用此项后,经验值、金币、生命值、魔法值会增加但不会减少
+// 由于经验值不会减少,所以下级将会继承经验值,可以达到快速升级的效果
+// 观察"关联数值"是否和玩家某个数据匹配,若匹配则修改"关联数值"即可
+
+[ENABLE]
+aobscan(aobeip1,55 8B EC 83 EC 08 8B 4D 0C 8B 45 08 89 48 18 C9 C3)
+registersymbol(aobeip1)
+label(return)
+alloc(begin,64,aobeip1)
+label(case0)
+label(case1)
+label(end)
+label(aobeip1_data_assoc_struct_address)
+registersymbol(aobeip1_data_assoc_struct_address)
+
+aobeip1+06:
+  jmp begin
+  nop 4
+return:
+
+// [[[eax+08]+10]+0C] =&gt; 0x00000000:玩家生命值/玩家魔法值/玩家经验/金币,ANY:其它
+// [[[eax+08]+10]+10] =&gt; SameValue1:玩家生命值/玩家魔法值/玩家经验/金币,ANY:其它
+// [[[eax+08]+10]+14] =&gt; 0x00000000:玩家生命值/玩家魔法值/玩家经验/金币,ANY:其它
+
+begin:
+  mov ecx,[ebp+0C]
+  mov eax,[ebp+08]
+  pushfd
+  cmp [eax+08],00/*[eax+08] 可能没有*/
+  je case0
+  push ebx
+  mov ebx,[eax+08]
+  mov ebx,[ebx+10]
+  cmp [ebx+0C],00
+  pop ebx
+  je case1
+case0:
+  mov [eax+18],ecx
+end:
+  popfd
+  jmp return
+case1:
+  //nop
+  mov [aobeip1_data_assoc_struct_address],eax
+  cmp [eax+18],ecx
+  jg end
+  jmp case0
+aobeip1_data_assoc_struct_address:
+  DB 00 00 00 00
+
+[DISABLE]
+aobeip1+06:
+  mov ecx,[ebp+0C]
+  mov eax,[ebp+08]
+  mov [eax+18],ecx
+
+unregistersymbol(aobeip1_data_assoc_struct_address)
+unregistersymbol(aobeip1)
+dealloc(begin)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="060242C0"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"关联地址 (勿动此项)"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aobeip1_data_assoc_struct_address</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"关联数值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aobeip1_data_assoc_struct_address</Address>
+          <Offsets>
+            <Offset>18</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 弹匣弹药不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(RelicHuntersZero.exe+3EB22,F2 0F 10 06 F2 0F 58 05 30 F4 6B 01 F2 0F 11 06)
+
+RelicHuntersZero.exe+3EB22:
+  nop 4
+  nop 8
+  nop 4
+
+
+
+[DISABLE]
+RelicHuntersZero.exe+3EB22:
+  DB F2 0F 10 06 F2 0F 58 05 30 F4 6B 01 F2 0F 11 06
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#2 手榴弹不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(RelicHuntersZero.exe+9816D2,F2 0F 10 06 F2 0F 58 05 30 F4 6B 01 F2 0F 11 06)
+
+RelicHuntersZero.exe+9816D2:
+  nop 4
+  nop 8
+  nop 4
+
+
+
+[DISABLE]
+RelicHuntersZero.exe+9816D2:
+  DB F2 0F 10 06 F2 0F 58 05 30 F4 6B 01 F2 0F 11 06
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"#3 无限生命、护盾"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(RelicHuntersZero.exe+23949,F2 0F 10 07 F2 0F 10 0E)
+label(returnhere)
+alloc(cheat3_code,32,RelicHuntersZero.exe)
+label(cheat3_base)
+label(cheat3_data1)
+
+
+cheat3_code:
+  mov [cheat3_base],RelicHuntersZero.exe
+{$CCODE refEBP=ebp}
+  extern unsigned int cheat3_base;
+  extern unsigned int cheat3_data1;
+  unsigned long int * ptrEBP = (unsigned long int *)refEBP;
+  // shield
+  if(*(ptrEBP-14)==cheat3_base+0xD5AEC7 &amp;&amp; *(ptrEBP-10)==cheat3_base+0xD09C71 &amp;&amp; *(ptrEBP-4)==cheat3_base+0xD0AC97){
+    cheat3_data1 = *(ptrEBP-1);
+    *(double *)*(ptrEBP-1) = 1024;
+  }
+  // health
+  if(*(ptrEBP-13)==cheat3_base+0xD26EF5 &amp;&amp; *(ptrEBP-9)==cheat3_base+0xD270D9 &amp;&amp; *(ptrEBP+1)==cheat3_base+0xC58EB6){
+    cheat3_data1 = *(ptrEBP-1);
+    *(double *)*(ptrEBP-1) = 4096;
+  }
+{$ASM}
+  movsd xmm0,[edi]
+  movsd xmm1,[esi]
+  jmp returnhere
+align 4
+cheat3_base:
+  DB 00 00 00 00
+cheat3_data1:
+  DB 00 00 00 00
+
+RelicHuntersZero.exe+23949:
+  jmp cheat3_code
+  nop 3
+returnhere:
+
+
+
+[DISABLE]
+RelicHuntersZero.exe+23949:
+  DB F2 0F 10 07 F2 0F 10 0E
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

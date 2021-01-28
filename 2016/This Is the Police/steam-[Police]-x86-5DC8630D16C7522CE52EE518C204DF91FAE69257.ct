@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 获取金钱地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//InfoPanel:UpdateMoney+17
+{$STRICT}
+[ENABLE]
+aobscan(cheat1_entry,55 8B EC 56 83 EC 04 E8 ? ? ? ? 8B C8 39 09 8B 40 0C 8B C8 39 09 8B 70 10 8B C6 8B 4D 08 8B)
+assert(cheat1_entry+17,8B 70 10 8B C6)
+registersymbol(cheat1_entry)
+alloc(cheat1_code,32,cheat1_entry)
+registersymbol(cheat1_code)
+label(returnhere)
+label(cheat1_store1)
+registersymbol(cheat1_store1)
+
+cheat1_code:
+  mov [cheat1_store1],eax
+  mov esi,[eax+10]
+  mov eax,esi
+  jmp returnhere
+cheat1_store1:
+  DB 00 00 00 00
+
+cheat1_entry+17:
+  jmp cheat1_code
+returnhere:
+[DISABLE]
+cheat1_entry+17:
+  DB 8B 70 10 8B C6
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"金钱地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"金钱"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#2 获取警员数量地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//CandidateCollection:get_NumPossibleHires+3b
+//CandidateCollection:get_NumPossibleHires+9b
+{$STRICT}
+[ENABLE]
+aobscan(cheat2_entry,55 8B EC 53 57 56 83 EC 1C 8B 7D 08 8B 47 14 8B C8 39 09 8B 40 0C 39 3F 8B 4F 0C 3B C1 74 0C,"+W+X")
+assert(cheat2_entry+34,8B 40 10 8B C8)
+registersymbol(cheat2_entry)
+alloc(cheat2_code,32,cheat2_entry)
+registersymbol(cheat2_code)
+label(returnhere)
+label(cheat2_store1)
+registersymbol(cheat2_store1)
+
+cheat2_code:
+  mov eax,[eax+10]
+  mov ecx,eax
+  mov [cheat2_store1],eax
+  jmp returnhere
+cheat2_store1:
+  DB 00 00 00 00
+
+cheat2_entry+34:
+  jmp cheat2_code
+returnhere:
+[DISABLE]
+cheat2_entry+34:
+  DB 8B 40 10 8B C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"警员数量地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"警员槽位"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+          <Offsets>
+            <Offset>40</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"探员槽位"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+          <Offsets>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"#3 失败任务数量不增加"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Crime:ExecuteResult+3e5
+[ENABLE]
+aobscan(cheat3_entry,55 8B EC 57 56 81 EC 80 00 00 00 8B 75 08 C7 45 9C 00 00 00 00 C7 45 A0 00 00 00 00 C7 45 A4 00 00 00 00 C7 45 A8 00 00 00 00 83 EC 0C,"+W+X")
+assert(cheat3_entry+3DF,8B 48 78 41 39 12 89 48 78)
+registersymbol(cheat3_entry)
+
+cheat3_entry+3E2:
+  nop
+
+[DISABLE]
+cheat3_entry+3E2:
+  DB 41
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#4 警员状态提升"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//EmployeeCollection:get_NumCops+3a
+{$STRICT}
+[ENABLE]
+aobscan(cheat4_entry,55 8B EC 53 57 56 83 EC 0C 8B 7D 08 C7 45 F0 00 00 00 00 33 DB E9 67 00 00 00 8D AD 00 00 00 00,"+W+X")
+assert(cheat4_entry+3A,8B 00 90 90 90)
+registersymbol(cheat4_entry)
+alloc(cheat4_code,48,cheat4_entry)
+registersymbol(cheat4_code)
+label(returnhere)
+label(cheat4_store1)
+registersymbol(cheat4_store1)
+
+// eax 是当前警员结构地址
+cheat4_code:
+  mov [eax+20],00 //alcoholismTendency@float
+  mov [eax+24],00 //alcoholism@float
+//  mov [eax+28],00 //laziness@int32
+  mov [eax+2C],05 //energy@int32
+//  mov [eax+30],00 //timeToCheckForAccident@float
+  mov [eax+34],640 //Professionalism@int32
+//  mov [eax+38],00 //SuccessfulAssignments@int32
+//  mov [eax+3C],00 //FailedAssignments@int32
+//  mov [eax+40],00 //FailedAssignmentsInARow@int32
+//  mov [eax+44],00 //PoliticalViews@int32
+  mov byte ptr [eax+48],01 //PoliticalViewKnown@byte
+//  mov [eax+4C],00 //Badges@int32
+//  mov byte ptr [eax+50],00 //PromotedRecently@byte
+//  mov [eax+54],00 //ZeroAlcoholicTendencyOverrideDays@int32
+  mov byte ptr [eax+58],00 //IsDrunk@byte
+//  mov byte ptr [eax+59],00 //GotDrunkOnSideQuest@byte
+//  mov [eax+5C],00 //FamilyProblemSeverity@int32
+  mov [cheat4_store1],eax
+  mov eax,[eax]
+  jmp returnhere
+cheat4_store1:
+  DB 00 00 00 00
+
+cheat4_entry+3A:
+  jmp cheat4_code
+returnhere:
+[DISABLE]
+cheat4_entry+3A:
+  DB 8B 00 90 90 90
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"当前警员地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"当前警员能力值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_store1</Address>
+          <Offsets>
+            <Offset>34</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>

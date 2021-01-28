@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"金钱"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>RA3_1.12.game+8E8C9C</Address>
+      <Offsets>
+        <Offset>4</Offset>
+        <Offset>0</Offset>
+        <Offset>E4</Offset>
+        <Offset>28</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"编号"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>RA3_1.12.game+8E8C9C</Address>
+      <Offsets>
+        <Offset>C</Offset>
+        <Offset>0</Offset>
+        <Offset>E4</Offset>
+        <Offset>28</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"金钱不减"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//"RA3_1.12.game"+44927E
+//"RA3_1.12.game"+449557
+
+[ENABLE]
+assert("RA3_1.12.game"+44927E,2B C7 89 46 04)
+label(return)
+alloc(cave,64,"RA3_1.12.game")
+label(default)
+label(case1)
+label(cheat1_setting1)
+registersymbol(cheat1_setting1)
+
+"RA3_1.12.game"+44927E:
+  jmp cave
+return:
+
+cave:
+  pushfd
+  push ecx
+  mov ecx,[cheat1_setting1]
+  cmp [esi+0C],ecx
+  pop ecx
+  je case1
+default:
+  popfd
+  sub eax,edi
+  mov [esi+04],eax
+  jmp return
+case1:
+  popfd
+  jmp return
+cheat1_setting1:
+  DB 02 00 00 00
+
+[DISABLE]
+"RA3_1.12.game"+44927E:
+  DB 2B C7
+  DB 89 46 04
+
+unregistersymbol(cheat1_setting1)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"编号 (战役默认是2号)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_setting1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

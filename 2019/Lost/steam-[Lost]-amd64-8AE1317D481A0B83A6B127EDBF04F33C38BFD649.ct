@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"提示次数固定"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aip1,55 48 8B EC 56 57 48 83 EC 20 48 8B F1 48 89 55 E8 48 BF ? ? ? ? ? ? ? ? 48 63 86 B4 00 00 00 85 C0 75 08 48 8B C7 E9 ? ? ? ? 48 63 86 B4 00 00 00 FF C8 89 86 B4 00 00 00)
+assert(aip1+35,FF C8)
+registersymbol(aip1)
+
+aip1+35:
+  nop 2
+
+[DISABLE]
+aip1+35:
+  dec eax
+
+registersymbol(aip1)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

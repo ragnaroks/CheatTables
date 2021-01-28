@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 阳光不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(popcapgame1.exe+1F620,56 8B B7 78 55 00 00)
+label(returnhere)
+alloc(newmem,128,popcapgame1.exe)
+label(cheat1_code)
+
+newmem:
+  nop 4
+cheat1_code:
+  xor ebx,ebx
+  DB 8B B7 78 55 00 00
+  jmp returnhere
+
+
+popcapgame1.exe+1F621:
+  jmp cheat1_code
+  nop
+returnhere:
+ 
+ 
+[DISABLE]
+popcapgame1.exe+1F621:
+  DB 8B B7 78 55 00 00
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"#2 植物无冷却"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(popcapgame1.exe+958BF,8B 47 24 3B 47 28)
+assert(popcapgame1.exe+958C5,7E 14)
+
+popcapgame1.exe+958C5:
+  nop 2
+
+
+[DISABLE]
+popcapgame1.exe+958C5:
+  DB 7E 14
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"==== 调试数据 ===="</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"金钱（显示 10 倍）"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>popcapgame1.exe+331C50</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>94C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"阳光"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>popcapgame1.exe+331C50</Address>
+          <Offsets>
+            <Offset>5578</Offset>
+            <Offset>868</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

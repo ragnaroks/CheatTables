@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 金钱不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:GameManager_:AddMoney)
+assert(cheat1_entry+17,8B 75 08 33 DB)
+registersymbol(cheat1_entry)
+label(returnhere)
+alloc(newmem,128,cheat1_entry)
+label(cheat1_code)
+
+newmem:
+  nop 4
+cheat1_code:
+  push eax
+  xor eax,eax
+  sub eax,ecx
+  cmovl eax,ecx
+  mov ecx,eax
+  mov [ebp+0C],eax
+  pop eax
+  DB 8B 75 08 33 DB
+  jmp returnhere
+
+
+cheat1_entry+17:
+  jmp cheat1_code
+returnhere:
+
+
+[DISABLE]
+cheat1_entry+17:
+  DB 8B 75 08 33 DB
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Info about this table:
+</Comments>
+</CheatTable>

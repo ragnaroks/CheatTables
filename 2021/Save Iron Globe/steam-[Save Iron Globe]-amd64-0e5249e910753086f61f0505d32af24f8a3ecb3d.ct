@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 生命值不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:Health:SetDamage)
+assert(cheat1_entry+26,2B C6 89 47 44)
+registersymbol(cheat1_entry)
+label(returnhere)
+alloc(cheat1_code,32,cheat1_entry)
+label(default)
+label(allay)
+
+cheat1_code:
+  pushfq
+  cmp [rcx+48],0
+  je short allay
+  cmp [rcx+48],1
+  je short allay
+default:
+  popfq
+  sub eax,esi
+  mov [rdi+44],eax
+  jmp returnhere
+allay:
+  popfq
+  jmp returnhere
+
+cheat1_entry+26:
+  jmp cheat1_code
+returnhere:
+
+
+[DISABLE]
+cheat1_entry+26:
+  DB 2B C6 89 47 44
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#2 关闭镜头晃动"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:CameraShake:Update)
+registersymbol(cheat2_entry)
+
+cheat2_entry:
+  DB C3
+
+
+[DISABLE]
+cheat2_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

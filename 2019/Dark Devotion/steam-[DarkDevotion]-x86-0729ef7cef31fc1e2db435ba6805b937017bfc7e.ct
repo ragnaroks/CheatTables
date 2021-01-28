@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 无限体力"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("DarkDevotion.exe"+1545F,8B 46 08 29 41 08)
+
+DarkDevotion.exe+15462:
+  nop 3
+
+
+[DISABLE]
+DarkDevotion.exe+15462:
+  DB 29 41 08
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#2 无限消耗品"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("DarkDevotion.exe"+15276,29 50 08)
+
+DarkDevotion.exe+15276:
+  nop 3
+
+
+[DISABLE]
+DarkDevotion.exe+15276:
+  DB 29 50 08
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable UsesMono="1" CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#1 生命值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:EntityPlayer:PostHurt)
+assert(cheat1_entry+1860,F2 0F 5C C1)
+registersymbol(cheat1_entry)
+
+cheat1_entry+1860:
+  nop 4
+
+
+[DISABLE]
+cheat1_entry+1860:
+  DB F2 0F 5C C1
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"-------- 调试 --------"</Description>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"HP 指针"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>World._instance</Address>
+          <Offsets>
+            <Offset>E0</Offset>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"MP 指针"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>World._instance</Address>
+          <Offsets>
+            <Offset>E8</Offset>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 己方生命值不减"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//assert("wesnoth.exe"+36DDAA,29 86 80 00 00 00) 这个不产生影响
+//assert("wesnoth.exe"+36E007,89 B0 80 00 00 00) 这个不产生影响
+//assert("wesnoth.exe"+3743A2,89 81 80 00 00 00) 这个是加血
+assert("wesnoth.exe"+3D3401,29 FB)
+assert("wesnoth.exe"+3D3403,85 DB)
+assert("wesnoth.exe"+3D3405,89 98 80 00 00 00)
+assert("wesnoth.exe"+3D340B,89 9D 30 FC FF FF)
+alloc(cheat1_code,64,"wesnoth.exe")
+registersymbol(cheat1_code)
+label(return)
+label(default)
+label(case1)
+
+"wesnoth.exe"+3D3401:
+  jmp cheat1_code
+  nop 5
+  nop 6
+return:
+
+// [eax+1C]+20C =&gt; 1:己方,2:敌方
+// [eax+1C]+67 (兵种代码?) =&gt; 8/32:己方,65/84:敌方
+// [eax+28]+20 =&gt; ANY:己方,0x00:敌方
+// [eax+28]+2C =&gt; 1:己方,0:敌方
+// [eax+28]+30 =&gt; ANY:己方,0x00:敌方
+// [eax+28]+34 =&gt; ANY:己方,0x00:敌方
+// [eax+28]+38 =&gt; ANY:己方,0x00:敌方
+cheat1_code:
+  pushfd
+  push edi
+  mov edi,[eax+28]
+  cmp [edi+2C],00
+  pop edi
+  je default
+  jmp case1
+default:
+  popfd
+  sub ebx,edi
+  test ebx,ebx
+  mov [eax+00000080],ebx
+  mov [ebp-000003D0],ebx
+  jmp return
+case1:
+  popfd
+//  test ebx,ebx
+//  mov [eax+00000080],ebx
+//  mov [ebp-000003D0],ebx
+  jmp return
+
+[DISABLE]
+"wesnoth.exe"+3D3401:
+  DB 29 FB
+"wesnoth.exe"+3D3403:
+  DB 85 DB
+"wesnoth.exe"+3D3405:
+  DB 89 98 80 00 00 00
+"wesnoth.exe"+3D340B:
+  DB 89 9D 30 FC FF FF
+
+unregistersymbol(cheat1_code)
+dealloc(cheat1_code)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"cheat1_code"</Description>
+          <LastState Value="" RealAddress="00120000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#2 己方金币不减"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("wesnoth.exe"+3D99C1,8B 45 18)
+assert("wesnoth.exe"+3D99C4,29 42 04)
+alloc(cheat2_code,64,"wesnoth.exe")
+registersymbol(cheat2_code)
+label(return)
+label(default)
+label(case1)
+
+"wesnoth.exe"+3D99C1:
+  jmp cheat2_code
+  nop
+return:
+
+cheat2_code:
+  mov eax,[ebp+18]
+  pushfd
+  cmp [edx+9C],79616C70
+  jne default
+  cmp [edx+A0],00007265
+  jne default
+  cmp [edx+10],00
+  je default
+  jmp case1
+default:
+  popfd
+  sub [edx+04],eax
+  jmp return
+case1:
+  popfd
+  jmp return
+
+[DISABLE]
+"wesnoth.exe"+3D99C1:
+  DB 8B 45 18
+"wesnoth.exe"+3D99C4:
+  DB 29 42 04
+
+unregistersymbol(cheat2_code)
+dealloc(cheat2_code)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"cheat2_code"</Description>
+          <LastState Value="" RealAddress="00130000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#3 回合数固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("wesnoth.exe"+2ED776,89 41 1C)
+
+"wesnoth.exe"+2ED776:
+  nop 3
+
+[DISABLE]
+"wesnoth.exe"+2ED776:
+  DB 89 41 1C
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"回合数"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"wesnoth.exe"+01165DCC</Address>
+      <Offsets>
+        <Offset>1C</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>

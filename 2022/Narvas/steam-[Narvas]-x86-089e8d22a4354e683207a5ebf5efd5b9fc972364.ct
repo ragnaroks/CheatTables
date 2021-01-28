@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#1 无限能量"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+{$LUA}
+if syntaxcheck then
+  return 'define(cheat1_entry,0x00)'
+end
+local results = AOBScan('?? ?? ?? ?? DF 86 01 00 30 A7 B6 55 ?? ?? ?? ?? B0 86 01 00 B1 4F 87 49','-X+W')
+if results == nil then
+  error('无匹配项')
+end
+if results.Count&lt;1 then
+  results.destroy()
+  error('无匹配项')
+  return defined
+end
+local address = results[0]
+results.destroy()
+--return string.format('define(cheat1_entry,%x)',address)
+return 'define(cheat1_entry,0x'..address..')'
+{$ASM}
+registersymbol(cheat1_entry)
+
+[DISABLE]
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"能量值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>cheat1_entry</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#2 无限生命"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+{$LUA}
+if syntaxcheck then
+  return 'define(cheat2_entry,0x00)'
+end
+local bytes = {
+'?? ?? ?? ?? 71 88 01 00 22 BF D3 48',
+'00 00 00 00 00 00 00 00 00 00 00 00',
+'?? ?? ?? ?? 93 89 01 00 A4 99 AB 03',
+'00 00 00 00 00 00 00 00 00 00 00 00',
+'?? ?? ?? ?? B5 86 01 00 26 B0 9C 60',
+'?? ?? ?? ?? 86 89 01 00 A7 6B DA 7A',
+'00 00 00 00 00 00 00 00 00 00 00 00',
+'?? ?? ?? ?? A8 86 01 00 29 82 CB 57'
+}
+local results = AOBScan(table.concat(bytes,' '),'-X+W')
+if results == nil then
+  error('无匹配项')
+end
+if results.Count&lt;1 then
+  results.destroy()
+  error('无匹配项')
+  return defined
+end
+local address = results[0]
+results.destroy()
+--return string.format('define(cheat2_entry,%x)',address)
+return 'define(cheat2_entry,0x'..address..')'
+{$ASM}
+registersymbol(cheat2_entry)
+
+[DISABLE]
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>cheat2_entry</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"#3 替代方案（对应值变动后才会出现）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(Narvas.exe+167E52,C7 06 00 00 00 00)
+alloc(newmem,128,Narvas.exe)
+label(returnhere)
+label(cheat3_data1)
+registersymbol(cheat3_data1)
+label(cheat3_data2)
+registersymbol(cheat3_data2)
+label(cheat3_code)
+
+newmem:
+  nop 4
+cheat3_data1:
+  DB 00 00 00 00
+cheat3_data2:
+  DB 00 00 00 00
+cheat3_code:
+  DB C7 06 00 00 00 00
+{$CCODE refEBP=EBP}
+  extern unsigned int cheat3_data1;
+  extern unsigned int cheat3_data2;
+
+  unsigned int * ebp64 = (unsigned int *)refEBP - (0x64/4);
+  unsigned int * ebp5C = (unsigned int *)refEBP - (0x5C/4);
+  unsigned int * ebp24 = (unsigned int *)refEBP - (0x24/4);
+
+  if(*ebp5C==0x18871 &amp;&amp; *ebp24==0x18871){
+    cheat3_data1 = *ebp64;
+  }
+
+  if(*ebp5C==0x186DF &amp;&amp; *ebp24==0x186DF){
+    cheat3_data2 = *ebp64;
+  }
+{$ASM}
+  jmp returnhere
+
+Narvas.exe+167E52:
+  jmp cheat3_code
+  nop
+returnhere:
+
+
+[DISABLE]
+Narvas.exe+167E52:
+  DB C7 06 00 00 00 00
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>cheat3_data1</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"能量值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>cheat3_data2</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Code :mov eax,[Narvas.exe+4EA8AC]</Description>
+      <AddressString>Narvas.exe+97140</AddressString>
+      <Before>
+        <Byte>A8</Byte>
+        <Byte>8E</Byte>
+        <Byte>00</Byte>
+        <Byte>7D</Byte>
+        <Byte>09</Byte>
+      </Before>
+      <Actual>
+        <Byte>A1</Byte>
+        <Byte>AC</Byte>
+        <Byte>A8</Byte>
+        <Byte>8E</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>04</Byte>
+        <Byte>88</Byte>
+        <Byte>C3</Byte>
+        <Byte>33</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :mov [Narvas.exe+449AA8],eax</Description>
+      <AddressString>Narvas.exe+1BFA</AddressString>
+      <Before>
+        <Byte>68</Byte>
+        <Byte>D0</Byte>
+        <Byte>33</Byte>
+        <Byte>74</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>A3</Byte>
+        <Byte>A8</Byte>
+        <Byte>9A</Byte>
+        <Byte>84</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>05</Byte>
+        <Byte>9C</Byte>
+        <Byte>9A</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="39">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#1 友军无敌"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat1_hijack,55 8B EC 53 57 56 83 EC 3C 8B 75 08 8B 7D 0C 0F B6 46 18 85 C0 83 EC 0C 57 39 3F,"+X")
+assert(cheat1_hijack+B2,FF 50 44)
+registersymbol(cheat1_hijack)
+
+cheat1_hijack+B2:
+  nop 3
+
+[DISABLE]
+cheat1_hijack+B2:
+  DB FF 50 44
+
+unregistersymbol(*)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_hijack</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#2 锁定时间"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat2_hijack,55 8B EC 57 83 EC 24 8B 7D 08 83 EC 0C 57,"+X")
+assert(cheat2_hijack+58,75 3B)
+registersymbol(cheat2_hijack)
+
+cheat2_hijack+58:
+  DB EB
+
+[DISABLE]
+cheat2_hijack+58:
+  DB 75
+
+unregistersymbol(*)
+
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>96</Key>
+          </Keys>
+          <Description>锁定时间</Description>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat2_hijack</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"#3 移动速度"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(cheat3_hijack,55 8B EC 57 83 EC 64 8B 7D 08 D9 EE D9 5D F8 C7 45 A8 00 00 00 00 C7 45 AC 00 00 00 00 C7 45 B0 00 00 00 00 C7 45 B4 00 00 00 00 D9 05,"+X")
+registersymbol(cheat3_hijack)
+alloc(cheat3_code,128,cheat3_hijack)
+registersymbol(cheat3_code)
+label(return)
+alloc(cheat3_store1,6,cheat3_hijack)
+registersymbol(cheat3_store1)
+alloc(cheat3_store2,4,cheat3_hijack)
+registersymbol(cheat3_store2)
+
+cheat3_hijack+2B:
+  jmp cheat3_code
+  nop
+return:
+
+cheat3_code:
+  fld dword ptr [cheat3_store2]
+  jmp return
+
+//原地址上的字节
+cheat3_store1:
+  readmem(cheat3_hijack+2B,6)
+//速度值
+cheat3_store2:
+  DB 00 00 16 43
+
+[DISABLE]
+cheat3_hijack+2B:
+  readmem(cheat3_store1,6)
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"注入地址"</Description>
+          <LastState Value="57EC8B55" RealAddress="07361CB8"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_hijack</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"原地址上的字节"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>6</ByteLength>
+          <Address>cheat3_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"新速度值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat3_store2</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
