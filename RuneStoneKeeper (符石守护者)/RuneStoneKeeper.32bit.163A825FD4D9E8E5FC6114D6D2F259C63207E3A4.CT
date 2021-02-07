@@ -11,7 +11,7 @@
         <CheatEntry>
           <ID>5</ID>
           <Description>"getAddress"</Description>
-          <LastState Value="" RealAddress="00E00000"/>
+          <LastState Value="" RealAddress="00700000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>getAddress('RuneStoneKeeper.exe')</Address>
@@ -27,7 +27,7 @@
         <CheatEntry>
           <ID>6</ID>
           <Description>"getAddress+getModuleSize"</Description>
-          <LastState Value="" RealAddress="02033000"/>
+          <LastState Value="" RealAddress="01933000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>getAddress('RuneStoneKeeper.exe')+getModuleSize('RuneStoneKeeper.exe')</Address>
@@ -57,7 +57,7 @@ unregistersymbol(aob_eip1)
         <CheatEntry>
           <ID>31</ID>
           <Description>"灵魂值"</Description>
-          <LastState Value="50" RealAddress="14018F58"/>
+          <LastState Value="120" RealAddress="13F38F58"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip1+10</Address>
@@ -65,83 +65,15 @@ unregistersymbol(aob_eip1)
             <Offset>0</Offset>
           </Offsets>
         </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>27</ID>
-      <Description>"魔法不减 (使用过魔法后才能启用)"</Description>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript Async="1">[ENABLE]
-aobscan(aob_eip3,55 8B EC 56 83 EC 04 8B 75 08 8B 46 28 8B 48 20 2B 4D 0C 89 48 20 8B 46 28 8B 40 20 85 C0 7D 0C)
-registersymbol(aob_eip3)
-alloc(cave,1024,aob_eip3)
-label(return)
-label(group1)
-label(group2)
-label(aob_eip3_player)
-registersymbol(aob_eip3_player)
-
-aob_eip3+10:
-  jmp cave
-  nop
-  return:
-
-cave:
-  cmp [eax+24],00 //魔法值,敌方是0
-  je group2
-  jne group1
-group1:
-  mov [aob_eip3_player],eax
-  jmp return
-group2:
-  sub ecx,[ebp+0C]
-  mov [eax+20],ecx
-  jmp return
-aob_eip3_player:
-  db 00 00 00 00
-
-[DISABLE]
-aob_eip3+10:
-  sub ecx,[ebp+0C]
-  mov [eax+20],ecx
-
-unregistersymbol(aob_eip3)
-unregistersymbol(aob_eip3ca_player)
-dealloc(cave)
-</AssemblerScript>
-      <CheatEntries>
         <CheatEntry>
-          <ID>28</ID>
-          <Description>"生命值"</Description>
-          <LastState Value="216" RealAddress="21269F50"/>
+          <ID>37</ID>
+          <Description>"灵魂值上限"</Description>
+          <LastState Value="120" RealAddress="13F38F68"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
-          <Address>aob_eip3_player</Address>
+          <Address>aob_eip1+10</Address>
           <Offsets>
             <Offset>10</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>29</ID>
-          <Description>"魔法值"</Description>
-          <LastState Value="0" RealAddress="21269F60"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>aob_eip3_player</Address>
-          <Offsets>
-            <Offset>20</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>33</ID>
-          <Description>"耐力值"</Description>
-          <LastState Value="0" RealAddress="21269F64"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>aob_eip3_player</Address>
-          <Offsets>
-            <Offset>24</Offset>
           </Offsets>
         </CheatEntry>
       </CheatEntries>
@@ -193,7 +125,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>25</ID>
           <Description>"生命值"</Description>
-          <LastState Value="119" RealAddress="213F3B50"/>
+          <LastState Value="157" RealAddress="2176F350"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -204,7 +136,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>26</ID>
           <Description>"魔法值"</Description>
-          <LastState Value="9" RealAddress="213F3B60"/>
+          <LastState Value="9" RealAddress="2176F360"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -215,10 +147,86 @@ dealloc(cave)
         <CheatEntry>
           <ID>34</ID>
           <Description>"耐力值"</Description>
-          <LastState Value="4" RealAddress="213F3B64"/>
+          <LastState Value="3" RealAddress="2176F364"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
+          <Offsets>
+            <Offset>24</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"魔法不减 (使用过魔法后才能启用)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aob_eip3,55 8B EC 56 83 EC 04 8B 75 08 8B 46 28 8B 48 20 2B 4D 0C 89 48 20 8B 46 28 8B 40 20 85 C0 7D 0C)
+registersymbol(aob_eip3)
+alloc(cave,1024,aob_eip3)
+label(return)
+label(group1)
+label(group2)
+label(aob_eip3_player)
+registersymbol(aob_eip3_player)
+
+aob_eip3+10:
+  jmp cave
+  nop
+  return:
+
+cave:
+  cmp [eax+24],00 //魔法值,敌方是0
+  je group2
+  jne group1
+group1:
+  mov [aob_eip3_player],eax
+  jmp return
+group2:
+  sub ecx,[ebp+0C]
+  mov [eax+20],ecx
+  jmp return
+aob_eip3_player:
+  db 00 00 00 00
+
+[DISABLE]
+aob_eip3+10:
+  sub ecx,[ebp+0C]
+  mov [eax+20],ecx
+
+unregistersymbol(aob_eip3)
+unregistersymbol(aob_eip3ca_player)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aob_eip3_player</Address>
+          <Offsets>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"魔法值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aob_eip3_player</Address>
+          <Offsets>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"耐力值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aob_eip3_player</Address>
           <Offsets>
             <Offset>24</Offset>
           </Offsets>
@@ -249,7 +257,7 @@ unregistersymbol(aob_eip4)
           <Description>"金币数量"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
-          <Address>aob_eip3+08</Address>
+          <Address>aob_eip4+08</Address>
           <Offsets>
             <Offset>14</Offset>
             <Offset>0</Offset>
@@ -260,7 +268,7 @@ unregistersymbol(aob_eip4)
     <CheatEntry>
       <ID>36</ID>
       <Description>"更多经验 (得到过经验后才能启用)"</Description>
-      <LastState Activated="1"/>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip5,83 C4 10 8B C8 8B 45 F4 03 C1 89 86 A8 01 00 00 8D 86 A8 01 00 00)
@@ -288,7 +296,75 @@ unregistersymbol(aob_eip5)
 dealloc(cave)
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>39</ID>
+      <Description>"护甲不减 (护甲减少后才能启用)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aob_eip6,83 C4 10 8B F8 8B 83 EC 00 00 00 2B C7 89 45 F0 89 BB EC 00 00 00 D9 EE)
+registersymbol(aob_eip6)
+alloc(cave,1024,aob_eip6)
+label(return)
+label(friend)
+label(enemy)
+
+aob_eip6+03:
+  jmp cave
+  nop 3
+  return:
+
+cave:
+  mov edi,eax
+  cmp [ebx+0C],00 // +0C/+10 己方好像是0
+  je friend
+  jmp enemy
+enemy:
+  mov eax,[ebx+000000EC]
+  //mov edi,00 =&gt; 清空敌方护甲
+  jmp return
+friend:
+  mov edi,[ebx+000000EC]
+  jmp return
+
+[DISABLE]
+aob_eip6+03:
+  mov edi,eax
+  mov eax,[ebx+000000EC]
+
+unregistersymbol(aob_eip6)
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
   </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="80000008">
+      <Description>替换了 mov eax,[ebx+000000EC]</Description>
+      <AddressString>1BD24FBD</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>10</Byte>
+        <Byte>8B</Byte>
+        <Byte>F8</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>2B</Byte>
+        <Byte>C7</Byte>
+        <Byte>89</Byte>
+        <Byte>45</Byte>
+        <Byte>F0</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
   <UserdefinedSymbols/>
   <Structures StructVersion="2">
     <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
