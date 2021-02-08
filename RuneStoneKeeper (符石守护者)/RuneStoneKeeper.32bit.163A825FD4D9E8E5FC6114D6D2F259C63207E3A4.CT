@@ -4,7 +4,7 @@
     <CheatEntry>
       <ID>1</ID>
       <Description>"meta"</Description>
-      <Options moManualExpandCollapse="1"/>
+      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
       <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
@@ -57,7 +57,7 @@ unregistersymbol(aob_eip1)
         <CheatEntry>
           <ID>31</ID>
           <Description>"灵魂值"</Description>
-          <LastState Value="120" RealAddress="13F38F58"/>
+          <LastState Value="520" RealAddress="13F28F58"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip1+10</Address>
@@ -68,7 +68,7 @@ unregistersymbol(aob_eip1)
         <CheatEntry>
           <ID>37</ID>
           <Description>"灵魂值上限"</Description>
-          <LastState Value="120" RealAddress="13F38F68"/>
+          <LastState Value="520" RealAddress="13F28F68"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip1+10</Address>
@@ -125,7 +125,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>25</ID>
           <Description>"生命值"</Description>
-          <LastState Value="157" RealAddress="2176F350"/>
+          <LastState Value="393" RealAddress="2847CC10"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -136,7 +136,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>26</ID>
           <Description>"魔法值"</Description>
-          <LastState Value="9" RealAddress="2176F360"/>
+          <LastState Value="11" RealAddress="2847CC20"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -147,7 +147,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>34</ID>
           <Description>"耐力值"</Description>
-          <LastState Value="3" RealAddress="2176F364"/>
+          <LastState Value="10" RealAddress="2847CC24"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -204,6 +204,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>28</ID>
           <Description>"生命值"</Description>
+          <LastState Value="551989584" RealAddress="22AF2790"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip3_player</Address>
@@ -214,6 +215,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>29</ID>
           <Description>"魔法值"</Description>
+          <LastState Value="0" RealAddress="22AF27A0"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip3_player</Address>
@@ -224,6 +226,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>33</ID>
           <Description>"耐力值"</Description>
+          <LastState Value="0" RealAddress="22AF27A4"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip3_player</Address>
@@ -299,7 +302,7 @@ dealloc(cave)
     <CheatEntry>
       <ID>39</ID>
       <Description>"护甲不减 (护甲减少后才能启用)"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip6,83 C4 10 8B F8 8B 83 EC 00 00 00 2B C7 89 45 F0 89 BB EC 00 00 00 D9 EE)
@@ -336,35 +339,27 @@ unregistersymbol(aob_eip6)
 dealloc(cave)
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>40</ID>
+      <Description>"护甲不清空 (护甲减少后才能启用,清空指的是攻击高于护甲导致护甲归零)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aob_eip7,FF 90 D0 00 00 00 83 C4 20 33 C0 EB 39 39 7D 10 7E 32 8B 45 10 2B C7 89 45 F0 C7 83 EC 00 00 00 00 00 00 00 D9 EE)
+registersymbol(aob_eip7)
+
+aob_eip7+1A:
+  mov [ebx+EC],32
+
+[DISABLE]
+aob_eip7+1A:
+  mov [ebx+000000EC],00000000
+
+unregistersymbol(aob_eip7)
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="80000008">
-      <Description>替换了 mov eax,[ebx+000000EC]</Description>
-      <AddressString>1BD24FBD</AddressString>
-      <Before>
-        <Byte>83</Byte>
-        <Byte>C4</Byte>
-        <Byte>10</Byte>
-        <Byte>8B</Byte>
-        <Byte>F8</Byte>
-      </Before>
-      <Actual>
-        <Byte>8B</Byte>
-        <Byte>83</Byte>
-        <Byte>EC</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Actual>
-      <After>
-        <Byte>2B</Byte>
-        <Byte>C7</Byte>
-        <Byte>89</Byte>
-        <Byte>45</Byte>
-        <Byte>F0</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
   <Structures StructVersion="2">
     <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
