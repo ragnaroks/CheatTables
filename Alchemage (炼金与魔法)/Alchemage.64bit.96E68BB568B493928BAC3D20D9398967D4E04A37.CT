@@ -36,18 +36,19 @@
     </CheatEntry>
     <CheatEntry>
       <ID>12</ID>
-      <Description>"生命值不变"</Description>
-      <LastState Activated="1"/>
+      <Description>"生命值不减 (同时对目标两击必杀)"</Description>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aobeip1,55 48 8B EC 48 83 EC 40 48 89 75 F8 48 8B F1 F3 0F 11 4D F0 F3 0F 10 45 F0 F3 0F 5A C0 F3 0F 10 8E D0 00 00 00 F3 0F 5A C9 66 0F 2F C8 76 1A 48 8B CE 48 8B 06 FF 90 58 02 00 00 48 8B CE 33 D2 48 8B 06 FF 90 C8 01 00 00 F3 0F 10 45 F0 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 F3 0F 10 86 D0 00 00 00 F3 0F 5A C0 66 0F 57 C9 66 0F 2F C8 76 10 66 0F 57 C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 F3 0F 10 86 D0 00 00 00 F3 0F 5A C0 F2 0F 11 45 E8 48 8B CE 48 8B 06 FF 90 28 03 00 00 F3 0F 5A C8 F2 0F 10 45 E8 66 0F 2F C8 0F 8A 22 00 00 00 0F 83 1C 00 00 00 48 8B CE 48 8B 06 FF 90 28 03 00 00 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 48 8B 75 F8 48 8D 65 00 5D C3)
 registersymbol(aobeip1)
-alloc(cave,64,aobeip1)
+alloc(cave,96,aobeip1)
 label(return)
 label(player)
 label(other)
-label(aobeip1_player)
-registersymbol(aobeip1_player)
+label(aobeip1_data_less)
+label(aobeip1_data_player)
+registersymbol(aobeip1_data_player)
 
 aobeip1+56:
   jmp cave
@@ -57,29 +58,38 @@ return:
 // 可能的对比项
 // [rsi+10]
 // [rsi+14]
-// [rsi+20] =&gt; 9:玩家,0:其它
-// [rsi+C0] =&gt; -1:玩家,1:其它
+// [rsi+20] =&gt; 1/9:玩家,0:其它
+// [rsi+7C] =&gt; 257:跳跃,256:地面
 // [rsi+CC] =&gt; 0:玩家/中立,1:攻击性
 
 cave:
-  cmp [rsi+C0],(float)-1
-  je player
-  jmp other
+  cmp [rsi+20],00
+  je other
+  cmp [rsi+CC],00
+  jne other
+  jmp player
 player:
-  mov [aobeip1_player],rsi
-  //movss [rsi+000000D0],xmm5
-  jmp return
-other:
+  mov [aobeip1_data_player],rsi
+  comiss xmm5,[rsi+000000D0]
+  jg return
   movss [rsi+000000D0],xmm5
   jmp return
-aobeip1_player:
+other:
+  comiss xmm5,[aobeip1_data_less]
+  jnae other+11
+  movss xmm5,[aobeip1_data_less]
+  movss [rsi+000000D0],xmm5
+  jmp return
+aobeip1_data_less:
+  DD (float)1
+aobeip1_data_player:
   DB 00 00 00 00 00 00 00 00
 
 [DISABLE]
 aobeip1+56:
   movss [rsi+000000D0],xmm5
 
-unregistersymbol(aobeip1_player)
+unregistersymbol(aobeip1_data_player)
 unregistersymbol(aobeip1)
 dealloc(cave)
 </AssemblerScript>
@@ -87,7 +97,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>13</ID>
           <Description>"EIP"</Description>
-          <LastState Value="" RealAddress="1D7432FEEA0"/>
+          <LastState Value="" RealAddress="20CA8B4F460"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>aobeip1</Address>
@@ -95,17 +105,218 @@ dealloc(cave)
         <CheatEntry>
           <ID>14</ID>
           <Description>"生命值"</Description>
-          <LastState Value="100" RealAddress="1D7412FDD50"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
-          <Address>aobeip1_player</Address>
+          <Address>aobeip1_data_player</Address>
           <Offsets>
             <Offset>D0</Offset>
           </Offsets>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"生命值不减"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip2,55 48 8B EC 48 83 EC 40 48 89 75 F8 48 8B F1 F3 0F 11 4D F0 F3 0F 10 45 F0 F3 0F 5A C0 F3 0F 10 8E D0 00 00 00 F3 0F 5A C9 66 0F 2F C8 76 1A 48 8B CE 48 8B 06 FF 90 58 02 00 00 48 8B CE 33 D2 48 8B 06 FF 90 C8 01 00 00 F3 0F 10 45 F0 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 F3 0F 10 86 D0 00 00 00 F3 0F 5A C0 66 0F 57 C9 66 0F 2F C8 76 10 66 0F 57 C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 F3 0F 10 86 D0 00 00 00 F3 0F 5A C0 F2 0F 11 45 E8 48 8B CE 48 8B 06 FF 90 28 03 00 00 F3 0F 5A C8 F2 0F 10 45 E8 66 0F 2F C8 0F 8A 22 00 00 00 0F 83 1C 00 00 00 48 8B CE 48 8B 06 FF 90 28 03 00 00 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 48 8B 75 F8 48 8D 65 00 5D C3)
+registersymbol(aobeip2)
+alloc(cave,96,aobeip2)
+label(return)
+label(player)
+label(other)
+label(aobeip2_data_player)
+registersymbol(aobeip2_data_player)
+
+aobeip2+56:
+  jmp cave
+  nop 3
+return:
+
+// 可能的对比项
+// [rsi+10]
+// [rsi+14]
+// [rsi+20] =&gt; 1/9:玩家,0:其它
+// [rsi+7C] =&gt; 257:跳跃,256:地面
+// [rsi+CC] =&gt; 0:玩家/中立,1:攻击性
+
+cave:
+  cmp [rsi+20],00
+  je other
+  cmp [rsi+CC],00
+  jne other
+  jmp player
+player:
+  mov [aobeip2_data_player],rsi
+  comiss xmm5,[rsi+000000D0]
+  jg return
+  movss [rsi+000000D0],xmm5
+  jmp return
+other:
+  movss [rsi+000000D0],xmm5
+  jmp return
+aobeip2_data_player:
+  DB 00 00 00 00 00 00 00 00
+
+[DISABLE]
+aobeip2+56:
+  movss [rsi+000000D0],xmm5
+
+unregistersymbol(aobeip2_data_player)
+unregistersymbol(aobeip2)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"EIP"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip2</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>aobeip2_data_player</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"物品只增不减 (未完整测试,,不建议使用)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip4,48 83 EC 18 48 89 3C 24 48 8B F9 48 89 54 24 08 48 8B C2 89 47 20 85 C0 7F 0E C7 47 20 00 00 00 00 C7 47 24 00 00 00 00 48 8B 3C 24 48 83 C4 18 C3)
+registersymbol(aobeip4)
+alloc(cave,64,aobeip4)
+label(return)
+
+aobeip4+10:
+  jmp cave
+  nop
+return:
+
+/// [rdi+34] 应该是物品id
+
+cave:
+  mov rax,rdx
+  cmp [rdi+20],eax
+  jg return
+  mov [rdi+20],edx
+  jmp return
+
+[DISABLE]
+aobeip4+10:
+  mov rax,rdx
+  mov [rdi+20],eax
+
+unregistersymbol(aobeip4)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"EIP"</Description>
+          <LastState Value="" RealAddress="1D707D03480"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"物品指针"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>aobeip4_data_item</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"攻击力调整(无效功能)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip3,55 48 8B EC 48 83 EC 40 48 89 7D F8 48 8B F9 48 89 55 F0 48 8B C2 89 87 58 01 00 00 48 8B 87 C0 00 00 00 48 89 45 E8 48 85 FF 0F 84 45 00 00 00 48 8D 8F 58 01 00 00 48 8D AD 00 00 00 00 49 BB)
+registersymbol(aobeip3)
+alloc(cave,32,aobeip3)
+label(return)
+label(aobeip3_attack)
+registersymbol(aobeip3_attack)
+
+aobeip3+16:
+  jmp cave
+  nop
+return:
+
+cave:
+  mov rax,[aobeip3_attack]
+  mov [rdi+00000158],rax
+  jmp return
+aobeip3_attack:
+  DD (int)256
+
+[DISABLE]
+aobeip3+16:
+  mov [rdi+00000158],eax
+
+unregistersymbol(aobeip3_attack)
+unregistersymbol(aobeip3)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"EIP"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip3</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"攻击力"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aobeip3_attack</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
   </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="80000008">
+      <Description>替换了 mov [rdi+20],eax</Description>
+      <AddressString>1D707D03493</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C2</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>47</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>7F</Byte>
+        <Byte>0E</Byte>
+        <Byte>C7</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
   <UserdefinedSymbols/>
   <Structures StructVersion="2">
     <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
@@ -130,7 +341,7 @@ dealloc(cave)
         <Element Offset="196" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C4" DisplayMethod="无符号整数"/>
         <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" DisplayMethod="无符号整数"/>
         <Element Offset="204" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000CC" DisplayMethod="无符号整数"/>
-        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" DisplayMethod="无符号整数"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" Description="生命值" DisplayMethod="无符号整数"/>
         <Element Offset="212" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D4" DisplayMethod="无符号整数"/>
         <Element Offset="216" Vartype="Float" Bytesize="4" RLECount="2" OffsetHex="000000D8" DisplayMethod="无符号整数"/>
         <Element Offset="224" Vartype="String" Bytesize="5" OffsetHex="000000E0" DisplayMethod="无符号整数"/>
