@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"meta"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"address"</Description>
+          <LastState Value="" RealAddress="7FF614F00000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('Alchemage.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"moduleSize"</Description>
+          <LastState Value="" RealAddress="000A3000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getModuleSize('Alchemage.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"address+moduleSize"</Description>
+          <LastState Value="" RealAddress="7FF614FA3000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('Alchemage.exe')+getModuleSize('Alchemage.exe')</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"生命值不变"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip1,55 48 8B EC 48 83 EC 40 48 89 75 F8 48 8B F1 F3 0F 11 4D F0 F3 0F 10 45 F0 F3 0F 5A C0 F3 0F 10 8E D0 00 00 00 F3 0F 5A C9 66 0F 2F C8 76 1A 48 8B CE 48 8B 06 FF 90 58 02 00 00 48 8B CE 33 D2 48 8B 06 FF 90 C8 01 00 00 F3 0F 10 45 F0 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 F3 0F 10 86 D0 00 00 00 F3 0F 5A C0 66 0F 57 C9 66 0F 2F C8 76 10 66 0F 57 C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 F3 0F 10 86 D0 00 00 00 F3 0F 5A C0 F2 0F 11 45 E8 48 8B CE 48 8B 06 FF 90 28 03 00 00 F3 0F 5A C8 F2 0F 10 45 E8 66 0F 2F C8 0F 8A 22 00 00 00 0F 83 1C 00 00 00 48 8B CE 48 8B 06 FF 90 28 03 00 00 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE D0 00 00 00 48 8B 75 F8 48 8D 65 00 5D C3)
+registersymbol(aobeip1)
+alloc(cave,64,aobeip1)
+label(return)
+label(player)
+label(other)
+label(aobeip1_player)
+registersymbol(aobeip1_player)
+
+aobeip1+56:
+  jmp cave
+  nop 3
+return:
+
+// 可能的对比项
+// [rsi+10]
+// [rsi+14]
+// [rsi+20] =&gt; 9:玩家,0:其它
+// [rsi+C0] =&gt; -1:玩家,1:其它
+// [rsi+CC] =&gt; 0:玩家/中立,1:攻击性
+
+cave:
+  cmp [rsi+C0],(float)-1
+  je player
+  jmp other
+player:
+  mov [aobeip1_player],rsi
+  //movss [rsi+000000D0],xmm5
+  jmp return
+other:
+  movss [rsi+000000D0],xmm5
+  jmp return
+aobeip1_player:
+  DB 00 00 00 00 00 00 00 00
+
+[DISABLE]
+aobeip1+56:
+  movss [rsi+000000D0],xmm5
+
+unregistersymbol(aobeip1_player)
+unregistersymbol(aobeip1)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"EIP"</Description>
+          <LastState Value="" RealAddress="1D7432FEEA0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"生命值"</Description>
+          <LastState Value="100" RealAddress="1D7412FDD50"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>aobeip1_player</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" DisplayMethod="无符号整数"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000008" DisplayMethod="无符号整数"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" DisplayMethod="无符号整数"/>
+        <Element Offset="32" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000020" DisplayMethod="无符号整数"/>
+        <Element Offset="36" Vartype="Float" Bytesize="4" OffsetHex="00000024" DisplayMethod="无符号整数"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000028" DisplayMethod="无符号整数"/>
+        <Element Offset="52" Vartype="Double" Bytesize="8" OffsetHex="00000034" DisplayMethod="无符号整数"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="0000003C" DisplayMethod="无符号整数"/>
+        <Element Offset="72" Vartype="Float" Bytesize="4" RLECount="4" OffsetHex="00000048" DisplayMethod="无符号整数"/>
+        <Element Offset="88" Vartype="Double" Bytesize="8" OffsetHex="00000058" DisplayMethod="无符号整数"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000060" DisplayMethod="无符号整数"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000068" DisplayMethod="十六进制"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="0000006C" DisplayMethod="无符号整数"/>
+        <Element Offset="128" Vartype="Float" Bytesize="4" RLECount="2" OffsetHex="00000080" DisplayMethod="无符号整数"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000088" DisplayMethod="无符号整数"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" RLECount="4" OffsetHex="00000098" DisplayMethod="无符号整数"/>
+        <Element Offset="184" Vartype="Float" Bytesize="4" RLECount="3" OffsetHex="000000B8" DisplayMethod="无符号整数"/>
+        <Element Offset="196" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C4" DisplayMethod="无符号整数"/>
+        <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" DisplayMethod="无符号整数"/>
+        <Element Offset="204" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000CC" DisplayMethod="无符号整数"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" DisplayMethod="无符号整数"/>
+        <Element Offset="212" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D4" DisplayMethod="无符号整数"/>
+        <Element Offset="216" Vartype="Float" Bytesize="4" RLECount="2" OffsetHex="000000D8" DisplayMethod="无符号整数"/>
+        <Element Offset="224" Vartype="String" Bytesize="5" OffsetHex="000000E0" DisplayMethod="无符号整数"/>
+        <Element Offset="229" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000000E5" DisplayMethod="无符号整数"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" RLECount="8" OffsetHex="000000E8" DisplayMethod="无符号整数"/>
+        <Element Offset="264" Vartype="Double" Bytesize="8" OffsetHex="00000108" DisplayMethod="无符号整数"/>
+        <Element Offset="272" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000110" DisplayMethod="无符号整数"/>
+        <Element Offset="276" Vartype="Double" Bytesize="8" OffsetHex="00000114" DisplayMethod="无符号整数"/>
+        <Element Offset="284" Vartype="Float" Bytesize="4" OffsetHex="0000011C" DisplayMethod="无符号整数"/>
+        <Element Offset="288" Vartype="4 Bytes" Bytesize="4" RLECount="10" OffsetHex="00000120" DisplayMethod="无符号整数"/>
+        <Element Offset="328" Vartype="Double" Bytesize="8" OffsetHex="00000148" DisplayMethod="无符号整数"/>
+        <Element Offset="336" Vartype="Float" Bytesize="4" OffsetHex="00000150" DisplayMethod="无符号整数"/>
+        <Element Offset="340" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000154" DisplayMethod="无符号整数"/>
+        <Element Offset="352" Vartype="Float" Bytesize="4" OffsetHex="00000160" DisplayMethod="无符号整数"/>
+        <Element Offset="356" Vartype="4 Bytes" Bytesize="4" RLECount="14" OffsetHex="00000164" DisplayMethod="无符号整数"/>
+        <Element Offset="412" Vartype="Double" Bytesize="8" OffsetHex="0000019C" DisplayMethod="无符号整数"/>
+        <Element Offset="420" Vartype="4 Bytes" Bytesize="4" RLECount="23" OffsetHex="000001A4" DisplayMethod="无符号整数"/>
+        <Element Offset="512" Vartype="Byte" Bytesize="1" OffsetHex="00000200" DisplayMethod="无符号整数"/>
+        <Element Offset="513" Vartype="String" Bytesize="4" OffsetHex="00000201" DisplayMethod="无符号整数"/>
+        <Element Offset="517" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000205" DisplayMethod="无符号整数"/>
+        <Element Offset="520" Vartype="4 Bytes" Bytesize="4" RLECount="18" OffsetHex="00000208" DisplayMethod="无符号整数"/>
+        <Element Offset="592" Vartype="Byte" Bytesize="1" OffsetHex="00000250" DisplayMethod="无符号整数"/>
+        <Element Offset="593" Vartype="String" Bytesize="4" OffsetHex="00000251" DisplayMethod="无符号整数"/>
+        <Element Offset="597" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000255" DisplayMethod="无符号整数"/>
+        <Element Offset="600" Vartype="4 Bytes" Bytesize="4" RLECount="9" OffsetHex="00000258" DisplayMethod="无符号整数"/>
+        <Element Offset="636" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000027C" DisplayMethod="十六进制"/>
+        <Element Offset="640" Vartype="4 Bytes" Bytesize="4" RLECount="8" OffsetHex="00000280" DisplayMethod="无符号整数"/>
+        <Element Offset="672" Vartype="Byte" Bytesize="1" OffsetHex="000002A0" DisplayMethod="无符号整数"/>
+        <Element Offset="673" Vartype="String" Bytesize="4" OffsetHex="000002A1" DisplayMethod="无符号整数"/>
+        <Element Offset="677" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000002A5" DisplayMethod="无符号整数"/>
+        <Element Offset="680" Vartype="4 Bytes" Bytesize="4" RLECount="18" OffsetHex="000002A8" DisplayMethod="无符号整数"/>
+        <Element Offset="752" Vartype="Byte" Bytesize="1" OffsetHex="000002F0" DisplayMethod="无符号整数"/>
+        <Element Offset="753" Vartype="String" Bytesize="4" OffsetHex="000002F1" DisplayMethod="无符号整数"/>
+        <Element Offset="757" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000002F5" DisplayMethod="无符号整数"/>
+        <Element Offset="760" Vartype="4 Bytes" Bytesize="4" RLECount="18" OffsetHex="000002F8" DisplayMethod="无符号整数"/>
+        <Element Offset="832" Vartype="Byte" Bytesize="1" OffsetHex="00000340" DisplayMethod="无符号整数"/>
+        <Element Offset="833" Vartype="String" Bytesize="4" OffsetHex="00000341" DisplayMethod="无符号整数"/>
+        <Element Offset="837" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000345" DisplayMethod="无符号整数"/>
+        <Element Offset="840" Vartype="4 Bytes" Bytesize="4" RLECount="18" OffsetHex="00000348" DisplayMethod="无符号整数"/>
+        <Element Offset="912" Vartype="Byte" Bytesize="1" OffsetHex="00000390" DisplayMethod="无符号整数"/>
+        <Element Offset="913" Vartype="String" Bytesize="4" OffsetHex="00000391" DisplayMethod="无符号整数"/>
+        <Element Offset="917" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000395" DisplayMethod="无符号整数"/>
+        <Element Offset="920" Vartype="4 Bytes" Bytesize="4" RLECount="18" OffsetHex="00000398" DisplayMethod="无符号整数"/>
+        <Element Offset="992" Vartype="Byte" Bytesize="1" OffsetHex="000003E0" DisplayMethod="无符号整数"/>
+        <Element Offset="993" Vartype="String" Bytesize="4" OffsetHex="000003E1" DisplayMethod="无符号整数"/>
+        <Element Offset="997" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000003E5" DisplayMethod="无符号整数"/>
+        <Element Offset="1000" Vartype="4 Bytes" Bytesize="4" RLECount="6" OffsetHex="000003E8" DisplayMethod="无符号整数"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
