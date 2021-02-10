@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"meta"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"address"</Description>
+          <LastState Value="" RealAddress="00810000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('AlienShooter.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"moduleSize"</Description>
+          <LastState Value="" RealAddress="00276000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getModuleSize('AlienShooter.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"address+moduleSize"</Description>
+          <LastState Value="" RealAddress="00A86000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('AlienShooter.exe')+getModuleSize('AlienShooter.exe')</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"金钱固定 (仅在商店使用,否则可能异常)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+assert("AlienShooter.exe"+5C476,29 7E 04)
+"AlienShooter.exe"+5C476:
+  //add [esi+04],edi
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+5C476:
+  sub [esi+04],edi
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"子弹固定 (400发)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">// 在 +728E7 处取消子弹变动的操作
+// 在 +728F8 除利用游戏本身的异常处理赋值子弹数量（原本是清零）
+// 子弹实际数量=显示数量*64
+
+[ENABLE]
+assert("AlienShooter.exe"+728E7,01 87 84 00 00 00)
+assert("AlienShooter.exe"+728F8,C7 87 84 00 00 00 00 00 00 00)
+
+"AlienShooter.exe"+728E7:
+  nop 6
+
+"AlienShooter.exe"+728F8:
+  mov [edi+00000084],6400
+
+[DISABLE]
+"AlienShooter.exe"+728E7:
+  add [edi+00000084],eax
+
+"AlienShooter.exe"+728F8:
+  mov [edi+00000084],00000000
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"炸弹不减 (避免到处找)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+"AlienShooter.exe"+5CAEF:
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+5CAEF:
+  dec [ecx+04]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"生命值固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+assert("AlienShooter.exe"+6C07A,89 7E 58)
+label(return)
+alloc(cave,72,"AlienShooter.exe"+6C07A)
+label(player)
+label(enemy)
+label(player_address)
+registersymbol(player_address)
+label(after)
+
+"AlienShooter.exe"+6C07A:
+  jmp cave
+  nop
+return:
+
+// [esi+2C] =&gt; ANY:玩家,0:敌方
+// [esi+64] =&gt; 0:玩家,4:敌方
+// [esi+84] =&gt; 63999936/ANY:玩家,6399936:敌方 (只要是 63999936 就正常处理即可)
+// [esi+90] =&gt; 0:玩家,3:敌方
+
+cave:
+  cmp [esi+64],00
+  jne enemy
+  cmp [esi+84],3D08FC0
+  je enemy
+  cmp [esi+90],00
+  jne enemy
+player:
+  mov [player_address],esi
+  jmp after
+enemy:
+  mov [esi+58],edi
+after:
+  pop edi
+  pop esi
+  pop ebp
+  jmp return
+player_address:
+  DB 00 00 00 00
+
+[DISABLE]
+"AlienShooter.exe"+6C07A:
+  mov [esi+58],edi
+  pop edi
+  pop esi
+  pop ebp
+
+unregistersymbol(player_address)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"玩家指针"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_address</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"子弹逻辑数量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_address</Address>
+          <Offsets>
+            <Offset>84</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_address</Address>
+          <Offsets>
+            <Offset>58</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="MAN" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" DisplayMethod="无符号整数"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000004" DisplayMethod="无符号整数"/>
+        <Element Offset="20" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000014" DisplayMethod="十六进制"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" DisplayMethod="无符号整数"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" OffsetHex="0000001C" Description="Pointer to instance of VID_SOFTWARE" DisplayMethod="无符号整数"/>
+        <Element Offset="32" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000020" DisplayMethod="无符号整数"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" DisplayMethod="十六进制"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" DisplayMethod="无符号整数"/>
+        <Element Offset="48" Vartype="Float" Bytesize="4" RLECount="2" OffsetHex="00000030" DisplayMethod="无符号整数"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000038" DisplayMethod="无符号整数"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="4" OffsetHex="00000040" Description="Pointer to instance of TERRAIN" DisplayMethod="无符号整数"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000044" DisplayMethod="无符号整数"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000050" DisplayMethod="十六进制"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000054" DisplayMethod="无符号整数"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="生命值" DisplayMethod="无符号整数"/>
+        <Element Offset="92" Vartype="Pointer" Bytesize="4" OffsetHex="0000005C" DisplayMethod="无符号整数"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000060" DisplayMethod="无符号整数"/>
+        <Element Offset="108" Vartype="Pointer" Bytesize="4" OffsetHex="0000006C" DisplayMethod="无符号整数"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="00000070" DisplayMethod="无符号整数"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000084" Description="子弹逻辑数量" DisplayMethod="无符号整数"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000088" DisplayMethod="无符号整数"/>
+        <Element Offset="148" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000094" DisplayMethod="十六进制"/>
+        <Element Offset="156" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000009C" Description="2号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="160" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A0" Description="3号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A4" Description="4号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="168" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A8" Description="5号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000AC" Description="6号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B0" Description="7号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="180" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B4" Description="8号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B8" Description="9号位武器最后实际子弹数量" DisplayMethod="无符号整数"/>
+        <Element Offset="188" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="000000BC" DisplayMethod="十六进制"/>
+        <Element Offset="200" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C8" DisplayMethod="无符号整数"/>
+        <Element Offset="204" Vartype="String" Bytesize="5" OffsetHex="000000CC" DisplayMethod="无符号整数"/>
+        <Element Offset="209" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000000D1" DisplayMethod="无符号整数"/>
+        <Element Offset="212" Vartype="String" Bytesize="5" OffsetHex="000000D4" DisplayMethod="无符号整数"/>
+        <Element Offset="217" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000000D9" DisplayMethod="无符号整数"/>
+        <Element Offset="220" Vartype="String" Bytesize="4" OffsetHex="000000DC" DisplayMethod="无符号整数"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" DisplayMethod="无符号整数"/>
+        <Element Offset="228" Vartype="Byte" Bytesize="1" RLECount="4" OffsetHex="000000E4" DisplayMethod="无符号整数"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E8" DisplayMethod="无符号整数"/>
+        <Element Offset="236" Vartype="String" Bytesize="4" OffsetHex="000000EC" DisplayMethod="无符号整数"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F0" DisplayMethod="无符号整数"/>
+        <Element Offset="244" Vartype="String" Bytesize="5" OffsetHex="000000F4" DisplayMethod="无符号整数"/>
+        <Element Offset="249" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000000F9" DisplayMethod="无符号整数"/>
+        <Element Offset="252" Vartype="String" Bytesize="5" OffsetHex="000000FC" DisplayMethod="无符号整数"/>
+        <Element Offset="257" Vartype="Byte" Bytesize="1" RLECount="7" OffsetHex="00000101" DisplayMethod="无符号整数"/>
+        <Element Offset="264" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000108" DisplayMethod="无符号整数"/>
+        <Element Offset="268" Vartype="String" Bytesize="6" OffsetHex="0000010C" DisplayMethod="无符号整数"/>
+        <Element Offset="274" Vartype="Unicode String" Bytesize="57" OffsetHex="00000112" DisplayMethod="无符号整数"/>
+        <Element Offset="331" Vartype="2 Bytes" Bytesize="2" OffsetHex="0000014B" DisplayMethod="无符号整数"/>
+        <Element Offset="333" Vartype="Byte" Bytesize="1" OffsetHex="0000014D" DisplayMethod="无符号整数"/>
+        <Element Offset="334" Vartype="Unicode String" Bytesize="27" OffsetHex="0000014E" DisplayMethod="无符号整数"/>
+        <Element Offset="361" Vartype="Byte" Bytesize="1" OffsetHex="00000169" DisplayMethod="无符号整数"/>
+        <Element Offset="362" Vartype="Unicode String" Bytesize="13" OffsetHex="0000016A" DisplayMethod="无符号整数"/>
+        <Element Offset="375" Vartype="Byte" Bytesize="1" OffsetHex="00000177" DisplayMethod="无符号整数"/>
+        <Element Offset="376" Vartype="Unicode String" Bytesize="6" OffsetHex="00000178" DisplayMethod="无符号整数"/>
+        <Element Offset="382" Vartype="Byte" Bytesize="1" OffsetHex="0000017E" DisplayMethod="无符号整数"/>
+        <Element Offset="383" Vartype="2 Bytes" Bytesize="2" OffsetHex="0000017F" DisplayMethod="无符号整数"/>
+        <Element Offset="385" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000181" DisplayMethod="无符号整数"/>
+        <Element Offset="388" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000184" DisplayMethod="无符号整数"/>
+        <Element Offset="392" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000188" DisplayMethod="十六进制"/>
+        <Element Offset="400" Vartype="Unicode String" Bytesize="94" OffsetHex="00000190" DisplayMethod="无符号整数"/>
+        <Element Offset="494" Vartype="Unicode String" Bytesize="47" OffsetHex="000001EE" DisplayMethod="无符号整数"/>
+        <Element Offset="541" Vartype="Byte" Bytesize="1" OffsetHex="0000021D" DisplayMethod="无符号整数"/>
+        <Element Offset="542" Vartype="Unicode String" Bytesize="23" OffsetHex="0000021E" DisplayMethod="无符号整数"/>
+        <Element Offset="565" Vartype="Byte" Bytesize="1" OffsetHex="00000235" DisplayMethod="无符号整数"/>
+        <Element Offset="566" Vartype="Unicode String" Bytesize="11" OffsetHex="00000236" DisplayMethod="无符号整数"/>
+        <Element Offset="577" Vartype="Byte" Bytesize="1" OffsetHex="00000241" DisplayMethod="无符号整数"/>
+        <Element Offset="578" Vartype="Unicode String" Bytesize="5" OffsetHex="00000242" DisplayMethod="无符号整数"/>
+        <Element Offset="583" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000247" DisplayMethod="无符号整数"/>
+        <Element Offset="585" Vartype="Byte" Bytesize="1" RLECount="2" OffsetHex="00000249" DisplayMethod="无符号整数"/>
+        <Element Offset="587" Vartype="2 Bytes" Bytesize="2" OffsetHex="0000024B" DisplayMethod="无符号整数"/>
+        <Element Offset="589" Vartype="Byte" Bytesize="1" RLECount="2" OffsetHex="0000024D" DisplayMethod="无符号整数"/>
+        <Element Offset="591" Vartype="2 Bytes" Bytesize="2" OffsetHex="0000024F" DisplayMethod="无符号整数"/>
+        <Element Offset="593" Vartype="Byte" Bytesize="1" OffsetHex="00000251" DisplayMethod="无符号整数"/>
+        <Element Offset="594" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000252" DisplayMethod="无符号整数"/>
+        <Element Offset="596" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000254" DisplayMethod="十六进制"/>
+        <Element Offset="600" Vartype="Unicode String" Bytesize="94" OffsetHex="00000258" DisplayMethod="无符号整数"/>
+        <Element Offset="694" Vartype="Unicode String" Bytesize="47" OffsetHex="000002B6" DisplayMethod="无符号整数"/>
+        <Element Offset="741" Vartype="Byte" Bytesize="1" OffsetHex="000002E5" DisplayMethod="无符号整数"/>
+        <Element Offset="742" Vartype="Unicode String" Bytesize="23" OffsetHex="000002E6" DisplayMethod="无符号整数"/>
+        <Element Offset="765" Vartype="Byte" Bytesize="1" OffsetHex="000002FD" DisplayMethod="无符号整数"/>
+        <Element Offset="766" Vartype="Unicode String" Bytesize="11" OffsetHex="000002FE" DisplayMethod="无符号整数"/>
+        <Element Offset="777" Vartype="Byte" Bytesize="1" OffsetHex="00000309" DisplayMethod="无符号整数"/>
+        <Element Offset="778" Vartype="Unicode String" Bytesize="5" OffsetHex="0000030A" DisplayMethod="无符号整数"/>
+        <Element Offset="783" Vartype="2 Bytes" Bytesize="2" OffsetHex="0000030F" DisplayMethod="无符号整数"/>
+        <Element Offset="785" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000311" DisplayMethod="无符号整数"/>
+        <Element Offset="788" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000314" DisplayMethod="无符号整数"/>
+        <Element Offset="792" Vartype="4 Bytes" Bytesize="4" RLECount="17" OffsetHex="00000318" DisplayMethod="十六进制"/>
+        <Element Offset="860" Vartype="Pointer" Bytesize="4" OffsetHex="0000035C" DisplayMethod="无符号整数"/>
+        <Element Offset="864" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000360" DisplayMethod="十六进制"/>
+        <Element Offset="872" Vartype="String" Bytesize="4" OffsetHex="00000368" DisplayMethod="无符号整数"/>
+        <Element Offset="876" Vartype="Float" Bytesize="4" OffsetHex="0000036C" DisplayMethod="无符号整数"/>
+        <Element Offset="880" Vartype="Byte" Bytesize="1" RLECount="4" OffsetHex="00000370" DisplayMethod="无符号整数"/>
+        <Element Offset="884" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000374" DisplayMethod="十六进制"/>
+        <Element Offset="892" Vartype="String" Bytesize="4" OffsetHex="0000037C" DisplayMethod="无符号整数"/>
+        <Element Offset="896" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000380" DisplayMethod="十六进制"/>
+        <Element Offset="900" Vartype="Float" Bytesize="4" OffsetHex="00000384" DisplayMethod="无符号整数"/>
+        <Element Offset="904" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000388" DisplayMethod="十六进制"/>
+        <Element Offset="912" Vartype="Float" Bytesize="4" OffsetHex="00000390" DisplayMethod="无符号整数"/>
+        <Element Offset="916" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000394" DisplayMethod="十六进制"/>
+        <Element Offset="924" Vartype="String" Bytesize="4" OffsetHex="0000039C" DisplayMethod="无符号整数"/>
+        <Element Offset="928" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="000003A0" DisplayMethod="十六进制"/>
+        <Element Offset="936" Vartype="Byte" Bytesize="1" RLECount="4" OffsetHex="000003A8" DisplayMethod="无符号整数"/>
+        <Element Offset="940" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="000003AC" DisplayMethod="十六进制"/>
+        <Element Offset="952" Vartype="Pointer" Bytesize="4" OffsetHex="000003B8" DisplayMethod="无符号整数"/>
+        <Element Offset="956" Vartype="Float" Bytesize="4" OffsetHex="000003BC" DisplayMethod="无符号整数"/>
+        <Element Offset="960" Vartype="4 Bytes" Bytesize="4" OffsetHex="000003C0" DisplayMethod="十六进制"/>
+        <Element Offset="964" Vartype="Pointer" Bytesize="4" OffsetHex="000003C4" DisplayMethod="无符号整数"/>
+        <Element Offset="968" Vartype="Byte" Bytesize="1" RLECount="4" OffsetHex="000003C8" DisplayMethod="无符号整数"/>
+        <Element Offset="972" Vartype="Float" Bytesize="4" OffsetHex="000003CC" DisplayMethod="无符号整数"/>
+        <Element Offset="976" Vartype="4 Bytes" Bytesize="4" OffsetHex="000003D0" DisplayMethod="十六进制"/>
+        <Element Offset="980" Vartype="Float" Bytesize="4" OffsetHex="000003D4" DisplayMethod="无符号整数"/>
+        <Element Offset="984" Vartype="4 Bytes" Bytesize="4" RLECount="9" OffsetHex="000003D8" DisplayMethod="十六进制"/>
+        <Element Offset="1020" Vartype="Pointer" Bytesize="4" OffsetHex="000003FC" DisplayMethod="无符号整数"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
