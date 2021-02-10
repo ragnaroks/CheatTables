@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"meta"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"address"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('AlienShooter.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"moduleSize"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getModuleSize('AlienShooter.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"address+moduleSize"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('AlienShooter.exe')+getModuleSize('AlienShooter.exe')</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"备注"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 实际配置文件在 C:\Users\%USERNAME%\Documents\AlienShooter2 Reloaded Saves\Saves\_global.dat 里面,直接以文本格式打开即可
+// 添加 iFullScreen=0 则变为窗口模式
+// iScreenX 和 iScreenY 不建议修改
+
+// 正常玩法建议只开启"弹匣固定"
+// 弱鸡玩法可以再开启"生命值固定"
+// 坦克玩法可以创建 boxer 角色,并在加点的时候把所有属性都拉满(200),你的拳头就是最厉害的武器
+
+// 生命值实际数值=显示数值*200
+// 子弹实际数值=显示数值*64
+
+[ENABLE]
+assert("AlienShooter.exe",FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF)
+[DISABLE]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"生命值固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("AlienShooter.exe"+A30CE,89 8E D4 01 00 00)
+
+"AlienShooter.exe"+A30CE:
+  //nop 6
+  inc [esi+1D4]
+
+[DISABLE]
+"AlienShooter.exe"+A30CE:
+  mov [esi+000001D4],ecx
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"弹匣固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("AlienShooter.exe"+447AF,01 58 40)
+
+"AlienShooter.exe"+447AF:
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+447AF:
+  add [eax+40],ebx
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"备弹固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("AlienShooter.exe"+A9F9E,01 43 40)
+
+"AlienShooter.exe"+A9F9E:
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+A9F9E:
+  add [ebx+40],eax
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"载具生命值固定 (功能不正常,敌方大型单位生命值也固定,不要使用)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 可能需要分配新内存进行处理,划不来
+
+[ENABLE]
+assert("AlienShooter.exe"+436E0,89 5E 28)
+
+"AlienShooter.exe"+436E0:
+  nop 3
+  //inc [esi+28]
+
+[DISABLE]
+"AlienShooter.exe"+436E0:
+  mov [esi+28],ebx
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
