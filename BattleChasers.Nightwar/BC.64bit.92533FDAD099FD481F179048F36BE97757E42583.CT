@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"meta"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"address"</Description>
+          <LastState Value="" RealAddress="7FF6DCC70000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('BC.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"moduleSize"</Description>
+          <LastState Value="" RealAddress="0163D000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getModuleSize('BC.exe')</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"address+moduleSize"</Description>
+          <LastState Value="" RealAddress="7FF6DE2AD000"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>getAddress('BC.exe')+getModuleSize('BC.exe')</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"己方无敌,敌方秒杀"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip1,55 48 8B EC 56 48 83 EC 18 48 8B F1 F3 0F 11 4D E8 F3 0F 10 45 E8 F3 0F 5A C0 66 0F 57 C9 F3 0F 10 56 7C F3 0F 5A D2 F2 0F 5A EA F3 0F 11 6D F4 F3 0F 10 55 F4 F3 0F 5A D2 F2 0F 5A D2 F2 0F 5A C9 F2 0F 5A C0 48 83 EC 20 49 BB * * * * * * * * 41 FF D3 48 83 C4 20 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 6E 78 48 8B 75 F8 C9 C3)
+registersymbol(aobeip1)
+label(return)
+alloc(cave,64,aobeip1)
+label(aobeip1_enemy_mode)
+registersymbol(aobeip1_enemy_mode)
+
+aobeip1+5A:
+  jmp cave
+  nop 8
+return:
+
+// [rsi+68] =&gt; 0x10100:己方,0x10000:敌方
+// [rsi+6C] =&gt; 5:己方,4/3:敌方
+// [rsi+70] =&gt; 5:己方,4/3:敌方
+
+cave:
+  cvtss2sd xmm0,xmm0
+  cvtsd2ss xmm5,xmm0
+  cmp [rsi+68],10100
+  je return
+  cmp [aobeip1_enemy_mode],01
+  je enemy1
+  mov [rsi+78],00
+  jmp return
+enemy1:
+  movss [rsi+78],xmm5
+  jmp return
+aobeip1_enemy_mode:
+  DW 01
+ 
+[DISABLE]
+aobeip1+5A:
+  cvtss2sd xmm0,xmm0
+  cvtsd2ss xmm5,xmm0
+  movss [rsi+78],xmm5
+
+unregistersymbol(aobeip1_enemy_mode)
+unregistersymbol(aobeip1)
+dealloc(cave)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"地址 (勿动此项)"</Description>
+          <LastState Value="" RealAddress="24882540"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"敌方处理模式 (勿动此项,改后面选项)"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">1:默认
+0:秒杀 (不获得经验)
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aobeip1_enemy_mode</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"无限空格技能"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip2,55 48 8B EC 57 41 57 48 83 EC 10 4C 8B F9 48 8B FA 4C 89 45 E8 48 83 EC 20 49 BB * * * * * * * * 41 FF D3 48 83 C4 20 85 C0 0F 85 5B 00 00 00 48 63 47 18 85 C0 7E 1F 48 8B 47 10 48 63 40 58 83 F8 05 75 09 49 89 BF C0 00 00 00 EB 09 48 63 47 18 FF C8 89 47 18 48 8B 57 10 49 8B CF 4C 63 45 E8 48 83 EC 10 48 8B 45 30 48 89 04 24 48 63 45 38 89 44 24 08 48 83 EC 20 49 BB * * * * * * * * 41 FF D3 48 83 C4 30 48 8D 65 F0 41 5F 5F C9 C3)
+registersymbol(aobeip2)
+
+// 上一行的 dec eax 也可以利用
+aobeip2+56:
+  nop 3
+
+[DISABLE]
+aobeip2+56:
+  mov [rdi+18],eax
+
+unregistersymbol(aobeip2)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"地址 (勿动此项)"</Description>
+          <LastState Value="" RealAddress="0F6282A0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip2</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"金币不减反增"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aobeip3,48 83 EC 18 48 89 34 24 48 89 7C 24 08 4C 89 7C 24 10 4C 8B F9 48 8B FA 49 8B F0 85 FF 74 07 83 FF 01 74 0E EB 16 49 63 47 28 2B C6 41 89 47 28 EB 0A 49 63 47 2C 2B C6 41 89 47 2C 48 8B 34 24 48 8B 7C 24 08 4C 8B 7C 24 10 48 83 C4 18 C3)
+registersymbol(aobeip3)
+
+aobeip3+2A:
+  add eax,esi
+
+[DISABLE]
+aobeip3+2A:
+  //sub eax,esi
+  DB 2B C6
+
+unregistersymbol(aobeip3)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"地址 (勿动此项)"</Description>
+          <LastState Value="" RealAddress="49DDF5A0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aobeip3</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="80000008">
+      <Description>替换了 mov [rsi+00000124],eax</Description>
+      <AddressString>0F6A7E4A</AddressString>
+      <Before>
+        <Byte>D3</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>86</Byte>
+        <Byte>24</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>46</Byte>
+        <Byte>60</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
