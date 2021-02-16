@@ -11,7 +11,7 @@
         <CheatEntry>
           <ID>16</ID>
           <Description>"address"</Description>
-          <LastState Value="" RealAddress="006E0000"/>
+          <LastState Value="" RealAddress="000F0000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>getAddress('braveland_pirate.exe')</Address>
@@ -27,7 +27,7 @@
         <CheatEntry>
           <ID>17</ID>
           <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="00781000"/>
+          <LastState Value="" RealAddress="00191000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>getAddress('braveland_pirate.exe')+getModuleSize('braveland_pirate.exe')</Address>
@@ -59,7 +59,7 @@ unregistersymbol(aobeip1)
         <CheatEntry>
           <ID>14</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="10727590"/>
+          <LastState Value="" RealAddress="00000000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -94,7 +94,7 @@ unregistersymbol(aobeip2)
         <CheatEntry>
           <ID>13</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="10759828"/>
+          <LastState Value="" RealAddress="00000000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -111,7 +111,7 @@ unregistersymbol(aobeip2)
 aobscan(aobeip3,EB 28 BA * * * * E8 * * * * 8B 4E 68 0F B6 55 D3 83 EC 08 FF 75 2C 52 FF 75 BC 51 56 50 39 00 E8 * * * * 83 C4 20 8B 45 C0 89 46 3C 8B 45 BC 89 46 68 8B 46 34)
 registersymbol(aobeip3)
 label(return)
-alloc(cave,64,aobeip3)
+alloc(cave,96,aobeip3)
 label(enemy0)
 label(enemy1)
 label(self)
@@ -126,11 +126,8 @@ aobeip3+2A:
   nop 3
 return:
 
-// [esi+5C] =&gt; 1:友军,0:敌军
-
 cave:
-  //cmp [esi+5C],01
-  //je self
+  pushfd
   push eax
   mov eax,[esi+2C]
   cmp [eax+14],00
@@ -139,6 +136,7 @@ cave:
   cmp [aobeip3_setting1],01
   je enemy1
 enemy0:
+  popfd
   mov eax,[ebp-40]
   mov [esi+3C],eax
   mov eax,[ebp-44]
@@ -146,11 +144,13 @@ enemy0:
   mov eax,[esi+34]
   jmp return
 enemy1:
+  popfd
   mov [esi+3C],00
   mov [esi+68],00
   mov eax,[esi+34]
   jmp return
 self:
+  popfd
   mov eax,[esi+34]
   jmp return
 aobeip3_setting1:
@@ -173,7 +173,7 @@ dealloc(cave)
         <CheatEntry>
           <ID>12</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="10711329"/>
+          <LastState Value="" RealAddress="1CC98741"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -215,7 +215,7 @@ unregistersymbol(aobeip4)
         <CheatEntry>
           <ID>21</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="1070FEB0"/>
+          <LastState Value="" RealAddress="00000000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -246,7 +246,7 @@ unregistersymbol(aobeip5)
         <CheatEntry>
           <ID>23</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="1076FEF8"/>
+          <LastState Value="" RealAddress="00000000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
