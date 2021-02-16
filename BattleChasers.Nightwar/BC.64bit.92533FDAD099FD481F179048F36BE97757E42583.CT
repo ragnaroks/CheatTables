@@ -164,33 +164,5 @@ unregistersymbol(aobeip3)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="80000008">
-      <Description>替换了 mov [rsi+00000124],eax</Description>
-      <AddressString>0F6A7E4A</AddressString>
-      <Before>
-        <Byte>D3</Byte>
-        <Byte>48</Byte>
-        <Byte>83</Byte>
-        <Byte>C4</Byte>
-        <Byte>20</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>86</Byte>
-        <Byte>24</Byte>
-        <Byte>01</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Actual>
-      <After>
-        <Byte>48</Byte>
-        <Byte>8B</Byte>
-        <Byte>46</Byte>
-        <Byte>60</Byte>
-        <Byte>48</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>

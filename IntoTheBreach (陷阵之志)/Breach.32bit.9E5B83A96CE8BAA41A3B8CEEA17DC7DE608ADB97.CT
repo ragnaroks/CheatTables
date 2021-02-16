@@ -96,24 +96,12 @@
       <AssemblerScript>//code from here to '[DISABLE]' will be used to enable the cheat
 [ENABLE]
 "Breach.exe"+DBFC3:
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
+  nop 3
+  nop 3
   jns "Breach.exe"+DBFD5
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-
+  nop 3
+  nop 3
+  nop 4
  
 //code from here till the end of the code will be used to disable the cheat
 [DISABLE]
@@ -210,30 +198,5 @@ dealloc(newmem)
 </AssemblerScript>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="80000008">
-      <Description>替换了 mov [edi+10],eax</Description>
-      <AddressString>Breach.exe+126249</AddressString>
-      <Before>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>FF</Byte>
-        <Byte>47</Byte>
-        <Byte>14</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>47</Byte>
-        <Byte>10</Byte>
-      </Actual>
-      <After>
-        <Byte>EB</Byte>
-        <Byte>17</Byte>
-        <Byte>8B</Byte>
-        <Byte>47</Byte>
-        <Byte>08</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>

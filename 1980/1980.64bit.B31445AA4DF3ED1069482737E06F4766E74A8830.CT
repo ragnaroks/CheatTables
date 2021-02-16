@@ -82,30 +82,5 @@ unregistersymbol(aob_eip2)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="80000008">
-      <Description>替换了 sub eax,[rbp-28]</Description>
-      <AddressString>24267F29402</AddressString>
-      <Before>
-        <Byte>86</Byte>
-        <Byte>A0</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Before>
-      <Actual>
-        <Byte>2B</Byte>
-        <Byte>45</Byte>
-        <Byte>D8</Byte>
-      </Actual>
-      <After>
-        <Byte>41</Byte>
-        <Byte>89</Byte>
-        <Byte>86</Byte>
-        <Byte>A0</Byte>
-        <Byte>00</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>

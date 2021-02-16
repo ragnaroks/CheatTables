@@ -3,7 +3,7 @@
   <CheatEntries>
     <CheatEntry>
       <ID>11</ID>
-      <Description>"基础信息(只读)"</Description>
+      <Description>"meta"</Description>
       <Options moManualExpandCollapse="1"/>
       <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
@@ -87,19 +87,6 @@
           <Offsets>
             <Offset>CC</Offset>
           </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation Allow Increase</Action>
-              <Keys>
-                <Key>17</Key>
-                <Key>18</Key>
-                <Key>97</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
           <CheatEntries>
             <CheatEntry>
               <ID>39</ID>
@@ -125,19 +112,6 @@
             <Offset>1EC</Offset>
             <Offset>44</Offset>
           </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation Allow Increase</Action>
-              <Keys>
-                <Key>17</Key>
-                <Key>18</Key>
-                <Key>97</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
           <CheatEntries>
             <CheatEntry>
               <ID>73</ID>
@@ -162,19 +136,6 @@
           <Offsets>
             <Offset>4D4</Offset>
           </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation Allow Increase</Action>
-              <Keys>
-                <Key>17</Key>
-                <Key>18</Key>
-                <Key>98</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>14</ID>
@@ -186,19 +147,6 @@
           <Offsets>
             <Offset>494</Offset>
           </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation Allow Increase</Action>
-              <Keys>
-                <Key>17</Key>
-                <Key>18</Key>
-                <Key>98</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>15</ID>
@@ -211,19 +159,6 @@
             <Offset>1E8</Offset>
             <Offset>48</Offset>
           </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation Allow Increase</Action>
-              <Keys>
-                <Key>18</Key>
-                <Key>17</Key>
-                <Key>98</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>75</ID>

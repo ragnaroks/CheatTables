@@ -122,51 +122,5 @@
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="80000008">
-      <Description>替换了 mov [edi],ebx</Description>
-      <AddressString>12ibt6.exe+13D2B4</AddressString>
-      <Before>
-        <Byte>0C</Byte>
-        <Byte>05</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>1F</Byte>
-      </Actual>
-      <After>
-        <Byte>8B</Byte>
-        <Byte>48</Byte>
-        <Byte>0C</Byte>
-        <Byte>89</Byte>
-        <Byte>4F</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry Color="80000008">
-      <Description>替换了 fstp qword ptr [edi]</Description>
-      <AddressString>12ibt6.exe+13D306</AddressString>
-      <Before>
-        <Byte>5B</Byte>
-        <Byte>59</Byte>
-        <Byte>C3</Byte>
-        <Byte>DD</Byte>
-        <Byte>00</Byte>
-      </Before>
-      <Actual>
-        <Byte>DD</Byte>
-        <Byte>1F</Byte>
-      </Actual>
-      <After>
-        <Byte>5F</Byte>
-        <Byte>5E</Byte>
-        <Byte>5D</Byte>
-        <Byte>5B</Byte>
-        <Byte>59</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>
