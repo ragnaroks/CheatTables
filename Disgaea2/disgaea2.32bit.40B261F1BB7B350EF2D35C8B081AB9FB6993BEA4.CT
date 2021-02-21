@@ -11,7 +11,7 @@
         <CheatEntry>
           <ID>2</ID>
           <Description>"address"</Description>
-          <LastState Value="" RealAddress="002B0000"/>
+          <LastState Value="" RealAddress="00D60000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>getAddress('disgaea2.exe')</Address>
@@ -27,7 +27,7 @@
         <CheatEntry>
           <ID>3</ID>
           <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="00A21000"/>
+          <LastState Value="" RealAddress="014D1000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>getAddress('disgaea2.exe')+getModuleSize('disgaea2.exe')</Address>
@@ -37,10 +37,17 @@
     <CheatEntry>
       <ID>0</ID>
       <Description>"HL"</Description>
-      <LastState Value="300" RealAddress="0054FE10"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>disgaea2.exe+29FE10</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>225</ID>
+      <Description>"BonusLevel (勿锁定,建议不动)"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>disgaea2.exe+34D98C</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>227</ID>
@@ -53,22 +60,11 @@ disgaea2.exe+34D98C:
 
 [DISABLE]
 </AssemblerScript>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>225</ID>
-          <Description>"BonusLevel (勿动此项)"</Description>
-          <LastState Value="00000000" RealAddress="005FD98C"/>
-          <ShowAsHex>1</ShowAsHex>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>disgaea2.exe+34D98C</Address>
-        </CheatEntry>
-      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>219</ID>
       <Description>"友军单位生命值不减"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("disgaea2.exe"+44FF6,8B 55 F0)
@@ -134,42 +130,6 @@ dealloc(begin)
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
-          <ID>220</ID>
-          <Description>"关联友军单位地址 (勿动此项)"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>aa1_address1</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>223</ID>
-          <Description>"关联友军单位生命值"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>aa1_address1</Address>
-          <Offsets>
-            <Offset>C20</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>221</ID>
-          <Description>"关联敌军单位地址 (勿动此项)"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>aa1_address2</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>224</ID>
-          <Description>"关联敌军单位生命值"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>aa1_address2</Address>
-          <Offsets>
-            <Offset>C20</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
           <ID>222</ID>
           <Description>"敌军单位处理方式 (勿动此项，修改后面的选项)"</Description>
           <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:默认
@@ -178,6 +138,66 @@ dealloc(begin)
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
           <Address>aa1_setting1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>220</ID>
+          <Description>"关联友军单位地址 (勿动此项)"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aa1_address1</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>223</ID>
+              <Description>"关联友军单位生命值"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>aa1_address1</Address>
+              <Offsets>
+                <Offset>C20</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>228</ID>
+              <Description>"关联友军单位魔法值"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>aa1_address1</Address>
+              <Offsets>
+                <Offset>C24</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>221</ID>
+          <Description>"关联敌军单位地址 (勿动此项)"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>aa1_address2</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>224</ID>
+              <Description>"关联敌军单位生命值"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>aa1_address2</Address>
+              <Offsets>
+                <Offset>C20</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>229</ID>
+              <Description>"关联敌军单位魔法值"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>aa1_address2</Address>
+              <Offsets>
+                <Offset>C24</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
@@ -198,7 +218,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>5</ID>
               <Description>"HP"</Description>
-              <LastState Value="22" RealAddress="00551358"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C20</Address>
@@ -206,7 +225,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>9</ID>
               <Description>"MP"</Description>
-              <LastState Value="7" RealAddress="0055135C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C24</Address>
@@ -214,7 +232,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>8</ID>
               <Description>"HP max"</Description>
-              <LastState Value="22" RealAddress="00551360"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C28</Address>
@@ -222,7 +239,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>7</ID>
               <Description>"MP max"</Description>
-              <LastState Value="7" RealAddress="00551364"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C2C</Address>
@@ -230,7 +246,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>10</ID>
               <Description>"ATK"</Description>
-              <LastState Value="23" RealAddress="00551368"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C30</Address>
@@ -238,7 +253,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>11</ID>
               <Description>"DEF"</Description>
-              <LastState Value="11" RealAddress="0055136C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C34</Address>
@@ -246,7 +260,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>12</ID>
               <Description>"INT"</Description>
-              <LastState Value="7" RealAddress="00551370"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C38</Address>
@@ -254,7 +267,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>13</ID>
               <Description>"SPD"</Description>
-              <LastState Value="21" RealAddress="00551374"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C3C</Address>
@@ -262,7 +274,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>14</ID>
               <Description>"HIT"</Description>
-              <LastState Value="11" RealAddress="00551378"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C40</Address>
@@ -270,7 +281,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>15</ID>
               <Description>"RES"</Description>
-              <LastState Value="7" RealAddress="0055137C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+738+C44</Address>
@@ -287,7 +297,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>121</ID>
               <Description>"HP"</Description>
-              <LastState Value="35" RealAddress="00552258"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C20</Address>
@@ -295,7 +304,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>122</ID>
               <Description>"MP"</Description>
-              <LastState Value="25" RealAddress="0055225C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C24</Address>
@@ -303,7 +311,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>123</ID>
               <Description>"HP max"</Description>
-              <LastState Value="35" RealAddress="00552260"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C28</Address>
@@ -311,7 +318,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>124</ID>
               <Description>"MP max"</Description>
-              <LastState Value="25" RealAddress="00552264"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C2C</Address>
@@ -319,7 +325,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>125</ID>
               <Description>"ATK"</Description>
-              <LastState Value="16" RealAddress="00552268"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C30</Address>
@@ -327,7 +332,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>126</ID>
               <Description>"DEF"</Description>
-              <LastState Value="17" RealAddress="0055226C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C34</Address>
@@ -335,7 +339,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>127</ID>
               <Description>"INT"</Description>
-              <LastState Value="22" RealAddress="00552270"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C38</Address>
@@ -343,7 +346,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>128</ID>
               <Description>"SPD"</Description>
-              <LastState Value="20" RealAddress="00552274"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C3C</Address>
@@ -351,7 +353,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>129</ID>
               <Description>"HIT"</Description>
-              <LastState Value="33" RealAddress="00552278"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C40</Address>
@@ -359,7 +360,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>130</ID>
               <Description>"RES"</Description>
-              <LastState Value="26" RealAddress="0055227C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+1638+C44</Address>
@@ -376,7 +376,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>132</ID>
               <Description>"HP"</Description>
-              <LastState Value="26" RealAddress="00553158"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C20</Address>
@@ -384,7 +383,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>133</ID>
               <Description>"MP"</Description>
-              <LastState Value="9" RealAddress="0055315C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C24</Address>
@@ -392,7 +390,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>134</ID>
               <Description>"HP max"</Description>
-              <LastState Value="26" RealAddress="00553160"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C28</Address>
@@ -400,7 +397,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>135</ID>
               <Description>"MP max"</Description>
-              <LastState Value="9" RealAddress="00553164"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C2C</Address>
@@ -408,7 +404,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>136</ID>
               <Description>"ATK"</Description>
-              <LastState Value="22" RealAddress="00553168"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C30</Address>
@@ -416,7 +411,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>137</ID>
               <Description>"DEF"</Description>
-              <LastState Value="20" RealAddress="0055316C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C34</Address>
@@ -424,7 +418,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>138</ID>
               <Description>"INT"</Description>
-              <LastState Value="6" RealAddress="00553170"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C38</Address>
@@ -432,7 +425,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>139</ID>
               <Description>"SPD"</Description>
-              <LastState Value="11" RealAddress="00553174"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C3C</Address>
@@ -440,7 +432,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>140</ID>
               <Description>"HIT"</Description>
-              <LastState Value="11" RealAddress="00553178"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C40</Address>
@@ -448,7 +439,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>141</ID>
               <Description>"RES"</Description>
-              <LastState Value="5" RealAddress="0055317C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+2538+C44</Address>
@@ -465,7 +455,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>143</ID>
               <Description>"HP"</Description>
-              <LastState Value="12" RealAddress="00554058"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C20</Address>
@@ -473,7 +462,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>144</ID>
               <Description>"MP"</Description>
-              <LastState Value="18" RealAddress="0055405C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C24</Address>
@@ -481,7 +469,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>145</ID>
               <Description>"HP max"</Description>
-              <LastState Value="12" RealAddress="00554060"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C28</Address>
@@ -489,7 +476,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>146</ID>
               <Description>"MP max"</Description>
-              <LastState Value="18" RealAddress="00554064"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C2C</Address>
@@ -497,7 +483,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>147</ID>
               <Description>"ATK"</Description>
-              <LastState Value="7" RealAddress="00554068"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C30</Address>
@@ -505,7 +490,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>148</ID>
               <Description>"DEF"</Description>
-              <LastState Value="13" RealAddress="0055406C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C34</Address>
@@ -513,7 +497,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>149</ID>
               <Description>"INT"</Description>
-              <LastState Value="20" RealAddress="00554070"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C38</Address>
@@ -521,7 +504,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>150</ID>
               <Description>"SPD"</Description>
-              <LastState Value="9" RealAddress="00554074"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C3C</Address>
@@ -529,7 +511,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>151</ID>
               <Description>"HIT"</Description>
-              <LastState Value="7" RealAddress="00554078"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C40</Address>
@@ -537,7 +518,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>152</ID>
               <Description>"RES"</Description>
-              <LastState Value="12" RealAddress="0055407C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+3438+C44</Address>
@@ -554,7 +534,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>154</ID>
               <Description>"HP"</Description>
-              <LastState Value="15" RealAddress="00554F58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C20</Address>
@@ -562,7 +541,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>155</ID>
               <Description>"MP"</Description>
-              <LastState Value="15" RealAddress="00554F5C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C24</Address>
@@ -570,7 +548,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>156</ID>
               <Description>"HP max"</Description>
-              <LastState Value="15" RealAddress="00554F60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C28</Address>
@@ -578,7 +555,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>157</ID>
               <Description>"MP max"</Description>
-              <LastState Value="15" RealAddress="00554F64"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C2C</Address>
@@ -586,7 +562,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>158</ID>
               <Description>"ATK"</Description>
-              <LastState Value="14" RealAddress="00554F68"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C30</Address>
@@ -594,7 +569,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>159</ID>
               <Description>"DEF"</Description>
-              <LastState Value="10" RealAddress="00554F6C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C34</Address>
@@ -602,7 +576,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>160</ID>
               <Description>"INT"</Description>
-              <LastState Value="11" RealAddress="00554F70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C38</Address>
@@ -610,7 +583,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>161</ID>
               <Description>"SPD"</Description>
-              <LastState Value="5" RealAddress="00554F74"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C3C</Address>
@@ -618,7 +590,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>162</ID>
               <Description>"HIT"</Description>
-              <LastState Value="16" RealAddress="00554F78"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C40</Address>
@@ -626,7 +597,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>163</ID>
               <Description>"RES"</Description>
-              <LastState Value="16" RealAddress="00554F7C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+4338+C44</Address>
@@ -643,7 +613,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>165</ID>
               <Description>"HP"</Description>
-              <LastState Value="298" RealAddress="00555E58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C20</Address>
@@ -651,7 +620,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>166</ID>
               <Description>"MP"</Description>
-              <LastState Value="161" RealAddress="00555E5C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C24</Address>
@@ -659,7 +627,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>167</ID>
               <Description>"HP max"</Description>
-              <LastState Value="298" RealAddress="00555E60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C28</Address>
@@ -667,7 +634,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>168</ID>
               <Description>"MP max"</Description>
-              <LastState Value="161" RealAddress="00555E64"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C2C</Address>
@@ -675,7 +641,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>169</ID>
               <Description>"ATK"</Description>
-              <LastState Value="174" RealAddress="00555E68"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C30</Address>
@@ -683,7 +648,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>170</ID>
               <Description>"DEF"</Description>
-              <LastState Value="117" RealAddress="00555E6C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C34</Address>
@@ -691,7 +655,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>171</ID>
               <Description>"INT"</Description>
-              <LastState Value="171" RealAddress="00555E70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C38</Address>
@@ -699,7 +662,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>172</ID>
               <Description>"SPD"</Description>
-              <LastState Value="74" RealAddress="00555E74"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C3C</Address>
@@ -707,7 +669,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>173</ID>
               <Description>"HIT"</Description>
-              <LastState Value="122" RealAddress="00555E78"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C40</Address>
@@ -715,7 +676,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>174</ID>
               <Description>"RES"</Description>
-              <LastState Value="124" RealAddress="00555E7C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+5238+C44</Address>
@@ -732,7 +692,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>176</ID>
               <Description>"HP"</Description>
-              <LastState Value="298" RealAddress="00556D58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C20</Address>
@@ -740,7 +699,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>177</ID>
               <Description>"MP"</Description>
-              <LastState Value="161" RealAddress="00556D5C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C24</Address>
@@ -748,7 +706,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>178</ID>
               <Description>"HP max"</Description>
-              <LastState Value="298" RealAddress="00556D60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C28</Address>
@@ -756,7 +713,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>179</ID>
               <Description>"MP max"</Description>
-              <LastState Value="161" RealAddress="00556D64"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C2C</Address>
@@ -764,7 +720,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>180</ID>
               <Description>"ATK"</Description>
-              <LastState Value="174" RealAddress="00556D68"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C30</Address>
@@ -772,7 +727,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>181</ID>
               <Description>"DEF"</Description>
-              <LastState Value="117" RealAddress="00556D6C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C34</Address>
@@ -780,7 +734,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>182</ID>
               <Description>"INT"</Description>
-              <LastState Value="171" RealAddress="00556D70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C38</Address>
@@ -788,7 +741,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>183</ID>
               <Description>"SPD"</Description>
-              <LastState Value="74" RealAddress="00556D74"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C3C</Address>
@@ -796,7 +748,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>184</ID>
               <Description>"HIT"</Description>
-              <LastState Value="122" RealAddress="00556D78"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C40</Address>
@@ -804,7 +755,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>185</ID>
               <Description>"RES"</Description>
-              <LastState Value="124" RealAddress="00556D7C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+6138+C44</Address>
@@ -821,7 +771,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>187</ID>
               <Description>"HP"</Description>
-              <LastState Value="298" RealAddress="00557C58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C20</Address>
@@ -829,7 +778,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>188</ID>
               <Description>"MP"</Description>
-              <LastState Value="161" RealAddress="00557C5C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C24</Address>
@@ -837,7 +785,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>189</ID>
               <Description>"HP max"</Description>
-              <LastState Value="298" RealAddress="00557C60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C28</Address>
@@ -845,7 +792,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>190</ID>
               <Description>"MP max"</Description>
-              <LastState Value="161" RealAddress="00557C64"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C2C</Address>
@@ -853,7 +799,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>191</ID>
               <Description>"ATK"</Description>
-              <LastState Value="174" RealAddress="00557C68"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C30</Address>
@@ -861,7 +806,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>192</ID>
               <Description>"DEF"</Description>
-              <LastState Value="117" RealAddress="00557C6C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C34</Address>
@@ -869,7 +813,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>193</ID>
               <Description>"INT"</Description>
-              <LastState Value="171" RealAddress="00557C70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C38</Address>
@@ -877,7 +820,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>194</ID>
               <Description>"SPD"</Description>
-              <LastState Value="74" RealAddress="00557C74"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C3C</Address>
@@ -885,7 +827,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>195</ID>
               <Description>"HIT"</Description>
-              <LastState Value="122" RealAddress="00557C78"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C40</Address>
@@ -893,7 +834,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>196</ID>
               <Description>"RES"</Description>
-              <LastState Value="124" RealAddress="00557C7C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7038+C44</Address>
@@ -910,7 +850,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>198</ID>
               <Description>"HP"</Description>
-              <LastState Value="298" RealAddress="00558B58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C20</Address>
@@ -918,7 +857,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>199</ID>
               <Description>"MP"</Description>
-              <LastState Value="161" RealAddress="00558B5C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C24</Address>
@@ -926,7 +864,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>200</ID>
               <Description>"HP max"</Description>
-              <LastState Value="298" RealAddress="00558B60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C28</Address>
@@ -934,7 +871,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>201</ID>
               <Description>"MP max"</Description>
-              <LastState Value="161" RealAddress="00558B64"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C2C</Address>
@@ -942,7 +878,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>202</ID>
               <Description>"ATK"</Description>
-              <LastState Value="174" RealAddress="00558B68"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C30</Address>
@@ -950,7 +885,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>203</ID>
               <Description>"DEF"</Description>
-              <LastState Value="117" RealAddress="00558B6C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C34</Address>
@@ -958,7 +892,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>204</ID>
               <Description>"INT"</Description>
-              <LastState Value="171" RealAddress="00558B70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C38</Address>
@@ -966,7 +899,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>205</ID>
               <Description>"SPD"</Description>
-              <LastState Value="74" RealAddress="00558B74"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C3C</Address>
@@ -974,7 +906,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>206</ID>
               <Description>"HIT"</Description>
-              <LastState Value="122" RealAddress="00558B78"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C40</Address>
@@ -982,7 +913,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>207</ID>
               <Description>"RES"</Description>
-              <LastState Value="124" RealAddress="00558B7C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+7F38+C44</Address>
@@ -999,7 +929,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>209</ID>
               <Description>"HP"</Description>
-              <LastState Value="298" RealAddress="00559A58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C20</Address>
@@ -1007,7 +936,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>210</ID>
               <Description>"MP"</Description>
-              <LastState Value="161" RealAddress="00559A5C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C24</Address>
@@ -1015,7 +943,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>211</ID>
               <Description>"HP max"</Description>
-              <LastState Value="298" RealAddress="00559A60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C28</Address>
@@ -1023,7 +950,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>212</ID>
               <Description>"MP max"</Description>
-              <LastState Value="161" RealAddress="00559A64"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C2C</Address>
@@ -1031,7 +957,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>213</ID>
               <Description>"ATK"</Description>
-              <LastState Value="174" RealAddress="00559A68"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C30</Address>
@@ -1039,7 +964,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>214</ID>
               <Description>"DEF"</Description>
-              <LastState Value="117" RealAddress="00559A6C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C34</Address>
@@ -1047,7 +971,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>215</ID>
               <Description>"INT"</Description>
-              <LastState Value="171" RealAddress="00559A70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C38</Address>
@@ -1055,7 +978,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>216</ID>
               <Description>"SPD"</Description>
-              <LastState Value="74" RealAddress="00559A74"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C3C</Address>
@@ -1063,7 +985,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>217</ID>
               <Description>"HIT"</Description>
-              <LastState Value="122" RealAddress="00559A78"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C40</Address>
@@ -1071,7 +992,6 @@ dealloc(begin)
             <CheatEntry>
               <ID>218</ID>
               <Description>"RES"</Description>
-              <LastState Value="124" RealAddress="00559A7C"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>disgaea2.exe+2A0000+8E38+C44</Address>
