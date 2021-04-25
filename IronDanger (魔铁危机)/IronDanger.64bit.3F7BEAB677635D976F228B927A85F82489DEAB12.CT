@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"生命值固定"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(aip1,55 48 8B EC 48 83 EC 70 48 89 75 E8 48 89 7D F0 4C 89 75 F8 48 8B F9 48 8B F2 C7 45 B8 00 00 00 00 C7 45 BC 00 00 00 00 C7 45 C0 00 00 00 00 48 63 87 C8 00 00 00 89 45 B0 48 63 87 C8 00 00 00 4C 8B F6 44 2B F0 89 B7 C8 00 00 00 45 85 F6 0F 84 6E 00 00 00 48 8B 87 80 00 00 00 C7 45 B8 00 00 00 00 C7 45 BC 00 00 00 00 C7 45 C0 00 00 00 00 89 75 B8 44 89 75 BC 48 63 4D B0 89 4D C0 48 63 4D B8 89 4D C8 48 63 4D BC 89 4D CC 48 63 4D C0 89 4D D0 48 8B C8 48 8B D5 48 83 C2 D8 4C 8B 45 C8 4C 89 45 D8 4C 63 45 D0 44 89 45 E0 48 8D 12 83 38 00 66 90 49 BB ? ? ? ? ? ? ? ? 41 FF D3 48 8B 75 E8 48 8B 7D F0 4C 8B 75 F8 48 8D 65 00 5D C3)
+assert(aip1+46,89 B7 C8 00 00 00)
+registersymbol(aip1)
+alloc(cave,128,aip1)
+label(return)
+label(default)
+label(case1)
+
+aip1+46:
+  jmp cave
+  nop
+return:
+
+cave:
+  pushfq
+  cmp [rdi+E8],3F800000
+  je case1
+default:
+  popfq
+  mov [rdi+C8],esi
+  jmp return
+case1:
+  popfq
+  jmp return
+
+[DISABLE]
+aip1+46:
+  DB 89 B7 C8 00 00 00//mov [rdi+000000C8],esi
+
+unregistersymbol(aip1)
+dealloc(cave)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="1E4664129A0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>aip1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
