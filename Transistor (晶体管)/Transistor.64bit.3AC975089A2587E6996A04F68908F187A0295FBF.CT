@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"构造角色指针"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//经测试，建议只使用"放逐"功能即可通关
+
+[ENABLE]
+assert(GSGE.Code.Things.LivingThing::getHealthFraction,C5 F8 77 48 8B 81 18 04 00 00 48 8B D0 C4 E1 7A 10 42 14 C4 E1 70 57 C9 C4 E1 78 2E C1 7A 08 75 06 C4 E1 78 57 C0 C3 48 8B D0 C4 E1 7A 10 42 14 8B 10 48 8B 40 70 C4 E1 7A 10 88 D8 00 00 00 C4 E1 7A 5E C1 C3)
+alloc(begin,64,GSGE.Code.Things.LivingThing::getHealthFraction)
+label(return)
+label(default)
+label(case1)
+label(cheat1_store)
+registersymbol(cheat1_store)
+
+GSGE.Code.Things.LivingThing::getHealthFraction+0D:
+  jmp begin
+  nop
+return:
+
+begin:
+  pushfq
+  cmp byte ptr [rdx+13],01
+  je case1
+default:
+  popfq
+  vmovss xmm0,[rdx+14]
+  jmp return
+case1:
+  popfq
+  mov [cheat1_store],rdx
+  vmovss xmm0,[rdx+14]
+  jmp return
+cheat1_store:
+  DB 00 00 00 00
+
+[DISABLE]
+GSGE.Code.Things.LivingThing::getHealthFraction+0D:
+  DB C4 E1 7A 10 42 14//vmovss xmm0,[rdx+14]
+
+unregistersymbol(cheat1_store)
+dealloc(begin)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"指针"</Description>
+          <LastState Value="00007FFF8C337370" RealAddress="0C850928"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"无敌 (使用右边的选项)"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:关闭
+1:激活
+</DropDownList>
+          <LastState Value="0" RealAddress="0C850939"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>11</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"放逐 (使用右边的选项)"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:激活
+1:关闭
+</DropDownList>
+          <LastState Value="0" RealAddress="0C85093A"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>12</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"生命值"</Description>
+          <LastState Value="100" RealAddress="0C85093C"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>14</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"生命值恢复延迟"</Description>
+          <LastState Value="0" RealAddress="0C8509B8"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>90</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"无敌时间"</Description>
+          <LastState Value="3212836864" RealAddress="0C8509BC"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>94</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"无敌量 (?)"</Description>
+          <LastState Value="0" RealAddress="0C8509C0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>98</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"装甲值"</Description>
+          <LastState Value="0" RealAddress="0C8509C4"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>9C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"装甲覆盖范围 (?)"</Description>
+          <LastState Value="6.283185482" RealAddress="0C8509C8"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>A0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"受击伤害倍率"</Description>
+          <LastState Value="1" RealAddress="0C8509CC"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>A4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"闪避率 (?)"</Description>
+          <LastState Value="0" RealAddress="0C8509D0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>A8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"反射率 (?)"</Description>
+          <LastState Value="0" RealAddress="0C8509D4"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>AC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"反射冷却"</Description>
+          <LastState Value="0" RealAddress="0C8509D8"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>B0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"反射护盾值"</Description>
+          <LastState Value="6" RealAddress="0C8509DC"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>B4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"隐身 (?)"</Description>
+          <LastState Value="0" RealAddress="0C8509E0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>B8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="GSGE.Code.Things.LifeComponent" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="无符号整数"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Owner&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="16" Vartype="Byte" Bytesize="1" OffsetHex="00000010" Description="&lt;IsEnabled&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="17" Vartype="Byte" Bytesize="1" OffsetHex="00000011" Description="&lt;IsInvulnerable&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="18" Vartype="Byte" Bytesize="1" OffsetHex="00000012" Description="&lt;Targetable&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="19" Vartype="Byte" Bytesize="1" OffsetHex="00000013" Description="&lt;IsPlayerControlled&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="20" Vartype="Float" Bytesize="4" OffsetHex="00000014" Description="&lt;Health&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="_lastHitSource" DisplayMethod="无符号整数"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="_lastDamageSource" DisplayMethod="无符号整数"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="OnHealthChanged" DisplayMethod="无符号整数"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="OnHealed" DisplayMethod="无符号整数"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="OnHit" DisplayMethod="无符号整数"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="OnDeath" DisplayMethod="无符号整数"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="OnFallDeath" DisplayMethod="无符号整数"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="OnLastStand" DisplayMethod="无符号整数"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="OnDamaged" DisplayMethod="无符号整数"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="_lastStandFx" DisplayMethod="无符号整数"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="_hasReflectionFx" DisplayMethod="无符号整数"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="&lt;Data&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="&lt;DeathExplosion&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="&lt;LastProjectileImpactName&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="&lt;KillingProjectile&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="144" Vartype="Float" Bytesize="4" OffsetHex="00000090" Description="&lt;HealthRegenDelay&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="148" Vartype="Float" Bytesize="4" OffsetHex="00000094" Description="&lt;InvulnerableUntilTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="152" Vartype="Float" Bytesize="4" OffsetHex="00000098" Description="&lt;InvulnerableUntilHealed&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="156" Vartype="Float" Bytesize="4" OffsetHex="0000009C" Description="&lt;Armor&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="160" Vartype="Float" Bytesize="4" OffsetHex="000000A0" Description="&lt;ArmorCoverage&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="164" Vartype="Float" Bytesize="4" OffsetHex="000000A4" Description="&lt;DamageTakenMultiplier&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="168" Vartype="Float" Bytesize="4" OffsetHex="000000A8" Description="&lt;Dodging&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="172" Vartype="Float" Bytesize="4" OffsetHex="000000AC" Description="&lt;Reflecting&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="176" Vartype="Float" Bytesize="4" OffsetHex="000000B0" Description="&lt;ReflectionCooldown&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="180" Vartype="Float" Bytesize="4" OffsetHex="000000B4" Description="&lt;ReflectionShieldHealth&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="184" Vartype="Float" Bytesize="4" OffsetHex="000000B8" Description="&lt;Stealth&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="188" Vartype="Float" Bytesize="4" OffsetHex="000000BC" Description="&lt;LastHitTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="192" Vartype="Float" Bytesize="4" OffsetHex="000000C0" Description="&lt;LastDamageTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="196" Vartype="Float" Bytesize="4" OffsetHex="000000C4" Description="&lt;LastReviveTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" Description="&lt;LastImpactFx&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="204" Vartype="Float" Bytesize="4" OffsetHex="000000CC" Description="&lt;LastCritFxTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" Description="&lt;LastDamagingHitTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="212" Vartype="Float" Bytesize="4" OffsetHex="000000D4" Description="&lt;LastDamageAmount&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="216" Vartype="Float" Bytesize="4" OffsetHex="000000D8" Description="&lt;PreviousHealth&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="220" Vartype="Float" Bytesize="4" OffsetHex="000000DC" Description="&lt;LastHealTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="224" Vartype="Float" Bytesize="4" OffsetHex="000000E0" Description="&lt;DeathTime&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="228" Vartype="Float" Bytesize="4" OffsetHex="000000E4" Description="&lt;RecentDamageTotal&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="232" Vartype="Byte" Bytesize="1" OffsetHex="000000E8" Description="&lt;IsObstacle&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F0" Description="&lt;DeathLocation&gt;k__BackingField" DisplayMethod="无符号整数"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F4" Description="&lt;DeathLocation&gt;k__BackingField_2" DisplayMethod="无符号整数"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="&lt;DeathLocation&gt;k__BackingField_3" DisplayMethod="无符号整数"/>
+        <Element Offset="252" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000FC" Description="&lt;DeathLocation&gt;k__BackingField_4" DisplayMethod="无符号整数"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
