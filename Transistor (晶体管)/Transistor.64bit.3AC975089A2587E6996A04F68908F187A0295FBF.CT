@@ -7,6 +7,7 @@
       <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>//经测试，建议只使用"放逐"功能即可通关
+//最终BOSS战的时候不要使用任何功能，否则卡关
 
 [ENABLE]
 assert(GSGE.Code.Things.LivingThing::getHealthFraction,C5 F8 77 48 8B 81 18 04 00 00 48 8B D0 C4 E1 7A 10 42 14 C4 E1 70 57 C9 C4 E1 78 2E C1 7A 08 75 06 C4 E1 78 57 C0 C3 48 8B D0 C4 E1 7A 10 42 14 8B 10 48 8B 40 70 C4 E1 7A 10 88 D8 00 00 00 C4 E1 7A 5E C1 C3)
@@ -28,11 +29,13 @@ begin:
   je case1
 default:
   popfq
+  mov [rdx+A4],41000000
   vmovss xmm0,[rdx+14]
   jmp return
 case1:
   popfq
   mov [cheat1_store],rdx
+  mov [rdx+A4],3F800000
   vmovss xmm0,[rdx+14]
   jmp return
 cheat1_store:
@@ -49,7 +52,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>9</ID>
           <Description>"指针"</Description>
-          <LastState Value="00007FFF8C337370" RealAddress="0C850928"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
@@ -64,7 +66,6 @@ dealloc(begin)
           <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:关闭
 1:激活
 </DropDownList>
-          <LastState Value="0" RealAddress="0C850939"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
           <Address>cheat1_store</Address>
@@ -78,7 +79,6 @@ dealloc(begin)
           <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:激活
 1:关闭
 </DropDownList>
-          <LastState Value="0" RealAddress="0C85093A"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
           <Address>cheat1_store</Address>
@@ -89,7 +89,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>11</ID>
           <Description>"生命值"</Description>
-          <LastState Value="100" RealAddress="0C85093C"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>cheat1_store</Address>
@@ -100,7 +99,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>15</ID>
           <Description>"生命值恢复延迟"</Description>
-          <LastState Value="0" RealAddress="0C8509B8"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat1_store</Address>
@@ -111,7 +109,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>16</ID>
           <Description>"无敌时间"</Description>
-          <LastState Value="3212836864" RealAddress="0C8509BC"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat1_store</Address>
@@ -122,7 +119,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>17</ID>
           <Description>"无敌量 (?)"</Description>
-          <LastState Value="0" RealAddress="0C8509C0"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat1_store</Address>
@@ -133,7 +129,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>18</ID>
           <Description>"装甲值"</Description>
-          <LastState Value="0" RealAddress="0C8509C4"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat1_store</Address>
@@ -144,7 +139,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>19</ID>
           <Description>"装甲覆盖范围 (?)"</Description>
-          <LastState Value="6.283185482" RealAddress="0C8509C8"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>cheat1_store</Address>
@@ -155,7 +149,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>20</ID>
           <Description>"受击伤害倍率"</Description>
-          <LastState Value="1" RealAddress="0C8509CC"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>cheat1_store</Address>
@@ -166,7 +159,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>21</ID>
           <Description>"闪避率 (?)"</Description>
-          <LastState Value="0" RealAddress="0C8509D0"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>cheat1_store</Address>
@@ -177,7 +169,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>22</ID>
           <Description>"反射率 (?)"</Description>
-          <LastState Value="0" RealAddress="0C8509D4"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>cheat1_store</Address>
@@ -188,7 +179,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>23</ID>
           <Description>"反射冷却"</Description>
-          <LastState Value="0" RealAddress="0C8509D8"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat1_store</Address>
@@ -199,7 +189,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>24</ID>
           <Description>"反射护盾值"</Description>
-          <LastState Value="6" RealAddress="0C8509DC"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>cheat1_store</Address>
@@ -210,7 +199,6 @@ dealloc(begin)
         <CheatEntry>
           <ID>25</ID>
           <Description>"隐身 (?)"</Description>
-          <LastState Value="0" RealAddress="0C8509E0"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat1_store</Address>

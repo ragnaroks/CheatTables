@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"备注"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 默认生命值为 300F，初始场景的小兵一次打掉 20F
+
+[ENABLE]
+[DISABLE]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"构造角色指针，生命值固定，一击必杀"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+1CED20,0F 57 C0 0F 2F 81 24 0B 00 00 73 0C)
+label(return)
+alloc(cave,128,ExampleGame-Win64-Shipping.exe)
+//label(cheat1_store)
+
+ExampleGame-Win64-Shipping.exe+1CED23:
+  jmp cave
+  nop 2
+return:
+
+cave:
+  pushfq
+  cmp [rcx+B48],00
+  je case1
+default:
+  mov [rcx+B24],3F800000
+  popfq
+  comiss xmm0,[rcx+00000B24]
+  jmp return
+case1:
+  //mov [cheat1_store],rcx
+  mov [rcx+B24],43960000
+  popfq
+  comiss xmm0,[rcx+00000B24]
+  jmp return
+//cheat1_store:
+//  DB 00 00 00 00
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+1CED23:
+  comiss xmm0,[rcx+00000B24]
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
