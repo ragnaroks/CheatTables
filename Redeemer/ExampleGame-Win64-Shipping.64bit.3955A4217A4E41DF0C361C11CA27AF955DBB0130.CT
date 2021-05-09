@@ -13,15 +13,85 @@
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
-      <ID>3</ID>
-      <Description>"构造角色指针，生命值固定，一击必杀"</Description>
+      <ID>6</ID>
+      <Description>"生命值固定，一击必杀 [+1EFAB9]"</Description>
       <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+1EFAB9,F3 0F 11 83 24 0B 00 00)
+label(return)
+alloc(cave,128,ExampleGame-Win64-Shipping.exe)
+
+ExampleGame-Win64-Shipping.exe+1EFAB9:
+  jmp cave
+  nop 3
+return:
+
+cave:
+  pushfq
+  cmp [rbx+B48],00
+  je case1
+default:
+  popfq
+  //movss [rbx+B24],xmm0
+  mov [rbx+B24],00
+  jmp return
+case1:
+  popfq
+  jmp return
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+1EFAB9:
+  movss [rbx+00000B24],xmm0
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"生命值固定，一击必杀 [+20F5DB]"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+20F5DB,F3 0F 11 83 24 0B 00 00)
+label(return)
+alloc(cave,128,ExampleGame-Win64-Shipping.exe)
+
+ExampleGame-Win64-Shipping.exe+20F5DB:
+  jmp cave
+  nop 3
+return:
+
+cave:
+  pushfq
+  cmp [rbx+B48],00
+  je case1
+default:
+  popfq
+  //movss [rbx+B24],xmm0
+  mov [rbx+B24],00
+  jmp return
+case1:
+  popfq
+  jmp return
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+20F5DB:
+  movss [rbx+00000B24],xmm0
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"构造角色指针，生命值固定，一击必杀 (有BUG)"</Description>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert(ExampleGame-Win64-Shipping.exe+1CED20,0F 57 C0 0F 2F 81 24 0B 00 00 73 0C)
 label(return)
 alloc(cave,128,ExampleGame-Win64-Shipping.exe)
-//label(cheat1_store)
+label(cheat1_store)
 
 ExampleGame-Win64-Shipping.exe+1CED23:
   jmp cave
@@ -38,13 +108,13 @@ default:
   comiss xmm0,[rcx+00000B24]
   jmp return
 case1:
-  //mov [cheat1_store],rcx
+  mov [cheat1_store],rcx
   mov [rcx+B24],43960000
   popfq
   comiss xmm0,[rcx+00000B24]
   jmp return
-//cheat1_store:
-//  DB 00 00 00 00
+cheat1_store:
+  DB 00 00 00 00
 
 [DISABLE]
 ExampleGame-Win64-Shipping.exe+1CED23:
@@ -52,6 +122,14 @@ ExampleGame-Win64-Shipping.exe+1CED23:
 
 dealloc(cave)
 </AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"无描述"</Description>
+      <LastState Value="0" RealAddress="2230F366BC4"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>000002230F3660A0+b24</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
