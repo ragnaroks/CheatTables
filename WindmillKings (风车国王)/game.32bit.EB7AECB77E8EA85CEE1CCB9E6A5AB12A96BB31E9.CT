@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"红方金钱"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"game.exe"+00111124</Address>
+      <Offsets>
+        <Offset>26C</Offset>
+        <Offset>10</Offset>
+        <Offset>1C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"红方点数"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"game.exe"+00111124</Address>
+      <Offsets>
+        <Offset>270</Offset>
+        <Offset>10</Offset>
+        <Offset>1C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"蓝方金钱"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"game.exe"+00111124</Address>
+      <Offsets>
+        <Offset>2E0</Offset>
+        <Offset>10</Offset>
+        <Offset>1C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"蓝方点数"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"game.exe"+00111124</Address>
+      <Offsets>
+        <Offset>2E4</Offset>
+        <Offset>10</Offset>
+        <Offset>1C</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>扣钱</Description>
+      <AddressString>game.exe+4CF55</AddressString>
+      <Before>
+        <Byte>E9</Byte>
+        <Byte>74</Byte>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>2B</Byte>
+        <Byte>45</Byte>
+        <Byte>E8</Byte>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+        <Byte>38</Byte>
+      </Actual>
+      <After>
+        <Byte>29</Byte>
+        <Byte>4C</Byte>
+        <Byte>3B</Byte>
+        <Byte>3C</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="Battle" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" DisplayMethod="无符号整数"/>
+        <Element Offset="4" Vartype="Pointer" Bytesize="4" OffsetHex="00000004" Description="Pointer to instance of AssetManager" DisplayMethod="无符号整数"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="4" OffsetHex="00000008" DisplayMethod="无符号整数"/>
+        <Element Offset="12" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000000C" DisplayMethod="无符号整数"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" OffsetHex="00000010" DisplayMethod="无符号整数"/>
+        <Element Offset="20" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000014" DisplayMethod="无符号整数"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" RLECount="2" OffsetHex="0000001C" DisplayMethod="无符号整数"/>
+        <Element Offset="36" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000024" DisplayMethod="无符号整数"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="4" OffsetHex="00000028" DisplayMethod="无符号整数"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" RLECount="14" OffsetHex="0000002C" DisplayMethod="无符号整数"/>
+        <Element Offset="100" Vartype="Float" Bytesize="4" RLECount="5" OffsetHex="00000064" DisplayMethod="无符号整数"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
