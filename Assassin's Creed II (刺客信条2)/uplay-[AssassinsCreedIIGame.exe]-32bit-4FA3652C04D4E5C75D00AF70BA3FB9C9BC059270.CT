@@ -24,16 +24,12 @@ return:
 cheat1_code:
   and eax,ecx
   pushfd
-  cmp [esi+0C],00
-  je default
   cmp [esi+1C],000A000A
   jne default
   cmp [esi+40],00
   je default
-  cmp [esi+5C],64
-  jne default
-  cmp [esi+60],00
-  jne default
+//  cmp [esi+60],00
+//  jne default
   cmp [esi+70],40000000
   jne default
   cmp [esi+B8],FFFFFFFF
@@ -45,7 +41,9 @@ default:
   jmp return
 case1:
   popfd
-  mov [esi+58],64
+  mov eax,[esi+5C]
+  mov [esi+58],eax
+  mov [esi+60],00
   jmp return
 
 [DISABLE]

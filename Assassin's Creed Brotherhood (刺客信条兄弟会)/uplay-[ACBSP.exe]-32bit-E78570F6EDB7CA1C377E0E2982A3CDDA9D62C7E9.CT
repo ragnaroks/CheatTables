@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"#1 金钱不减"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("ACBSP.exe"+BB8D2D,2B C2)
+assert("ACBSP.exe"+BB8D2F,89 41 0C)
+
+"ACBSP.exe"+BB8D2D:
+  nop 2
+"ACBSP.exe"+BB8D2F:
+  nop 3
+
+[DISABLE]
+"ACBSP.exe"+BB8D2D:
+  DB 2B C2
+"ACBSP.exe"+BB8D2F:
+  DB 89 41 0C
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"#2 生命值固定"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 生命值每一个方格 = 4
+
+[ENABLE]
+assert("ACBSP.exe"+105B20E,23 C1)
+assert("ACBSP.exe"+105B210,89 46 58)
+alloc(cheat2_code,96,"ACBSP.exe")
+registersymbol(cheat2_code)
+label(return)
+label(default)
+label(case1)
+
+"ACBSP.exe"+105B20E:
+  jmp cheat2_code
+return:
+
+cheat2_code:
+  and eax,ecx
+  pushfd
+  cmp [esi+1C],000B000B
+  jne default
+//  cmp [esi+60],00
+//  jne default
+  cmp [esi+70],40000000
+  jne default
+  cmp [esi+B8],FFFFFFFF
+  jne default
+  jmp case1
+default:
+  popfd
+  mov [esi+58],eax
+  jmp return
+case1:
+  popfd
+  mov eax,[esi+5C]
+  //满生命值
+  mov [esi+58],eax
+  //装备无损
+  mov [esi+60],00
+  jmp return
+
+[DISABLE]
+"ACBSP.exe"+105B20E:
+  DB 23 C1
+"ACBSP.exe"+105B210:
+  DB 89 46 58
+
+unregistersymbol(cheat2_code)
+dealloc(cheat2_code)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="003E0000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"#3 敌人两击必杀 (盟友也会死)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 原本应该注入 "ACBSP.exe"+10745D5 ，但是字节数不够
+
+[ENABLE]
+//assert("ACBSP.exe"+10745D5,89 46 58)
+assert("ACBSP.exe"+10745EA,8B 4E 58)
+assert("ACBSP.exe"+10745ED,89 48 08)
+alloc(cheat3_code,136,"ACBSP.exe")
+registersymbol(cheat3_code)
+label(return)
+label(default)
+label(case1)
+
+"ACBSP.exe"+10745EA:
+  jmp cheat3_code
+  nop
+return:
+
+cheat3_code:
+  mov ecx,[esi+58]
+  mov [eax+08],ecx
+  pushfd
+  cmp [esi+1C],000B000B
+  jne default
+  cmp [esi+44],00040004
+  jne default
+  cmp [esi+48],0B
+  jne default
+  cmp [esi+60],FFFFFFFF
+  jne default
+  cmp [esi+6C],3E800000
+  jne default
+  cmp [esi+7C],00
+  jne default
+  cmp [esi+80],40000000
+  jne default
+  // 如果生命值低于 2 则跳过处理
+  cmp [esi+58],02
+  jl default
+  jmp case1
+default:
+  popfd
+  jmp return
+case1:
+  popfd
+  // 如果生命值大于 2 则改成 1
+  mov [esi+58],01
+  jmp return
+
+[DISABLE]
+"ACBSP.exe"+10745EA:
+  DB 8B 4E 58
+"ACBSP.exe"+10745ED:
+  DB 89 48 08
+
+unregistersymbol(cheat3_code)
+dealloc(cheat3_code)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="003D0000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"#4 恶名值固定"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 恶名值初始值 0.00F，满值 1.00F
+
+[ENABLE]
+assert("ACBSP.exe"+7B1D44,F3 0F 11 46 0C)
+
+"ACBSP.exe"+7B1D44:
+  nop 5
+
+[DISABLE]
+"ACBSP.exe"+7B1D44:
+  DB F3 0F 11 46 0C
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
