@@ -4,22 +4,27 @@
     <CheatEntry>
       <ID>22</ID>
       <Description>"#1 金钱不减"</Description>
-      <LastState Activated="1"/>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACBSP.exe"+BB8D2D,2B C2)
 assert("ACBSP.exe"+BB8D2F,89 41 0C)
+assert("ACBSP.exe"+BB8D32,B0 01)
 
 "ACBSP.exe"+BB8D2D:
   nop 2
 "ACBSP.exe"+BB8D2F:
   nop 3
+"ACBSP.exe"+BB8D32:
+  nop 2
 
 [DISABLE]
 "ACBSP.exe"+BB8D2D:
   DB 2B C2
 "ACBSP.exe"+BB8D2F:
   DB 89 41 0C
+"ACBSP.exe"+BB8D32:
+  DB B0 01
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
@@ -80,7 +85,7 @@ dealloc(cheat2_code)
         <CheatEntry>
           <ID>20</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="003E0000"/>
+          <LastState Value="" RealAddress="00470000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -91,7 +96,7 @@ dealloc(cheat2_code)
     <CheatEntry>
       <ID>23</ID>
       <Description>"#3 敌人两击必杀 (盟友也会死)"</Description>
-      <LastState Activated="1"/>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// 原本应该注入 "ACBSP.exe"+10745D5 ，但是字节数不够
 
@@ -154,7 +159,7 @@ dealloc(cheat3_code)
         <CheatEntry>
           <ID>24</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="003D0000"/>
+          <LastState Value="" RealAddress="00460000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -180,6 +185,51 @@ assert("ACBSP.exe"+7B1D44,F3 0F 11 46 0C)
   DB F3 0F 11 46 0C
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"#5 不被警觉 (可能会导致任务进程异常)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("ACBSP.exe"+9F7E0B,80 7D FF 00)
+
+"ACBSP.exe"+9F7E0B:
+  DB 80 7D FF EF
+
+[DISABLE]
+"ACBSP.exe"+9F7E0B:
+  DB 80 7D FF 00
+</AssemblerScript>
+    </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols/>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>s1_enable</Name>
+      <Address>031100C6</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>l1_enable</Name>
+      <Address>031100CA</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>s_enable</Name>
+      <Address>06CB00BB</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>l_enable</Name>
+      <Address>06CB00BF</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>u_enable</Name>
+      <Address>06CB00C3</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>one</Name>
+      <Address>06CB00C7</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>two</Name>
+      <Address>06CB00CB</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
 </CheatTable>
