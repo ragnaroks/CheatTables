@@ -37,7 +37,7 @@ assert("ACBSP.exe"+BB8D32,B0 01)
 [ENABLE]
 assert("ACBSP.exe"+105B20E,23 C1)
 assert("ACBSP.exe"+105B210,89 46 58)
-alloc(cheat2_code,96,"ACBSP.exe")
+alloc(cheat2_code,80,"ACBSP.exe")
 registersymbol(cheat2_code)
 label(return)
 label(default)
@@ -85,7 +85,7 @@ dealloc(cheat2_code)
         <CheatEntry>
           <ID>20</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00470000"/>
+          <LastState Value="" RealAddress="003A0000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -159,7 +159,7 @@ dealloc(cheat3_code)
         <CheatEntry>
           <ID>24</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00460000"/>
+          <LastState Value="" RealAddress="00390000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -173,17 +173,42 @@ dealloc(cheat3_code)
       <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// 恶名值初始值 0.00F，满值 1.00F
+// 这里可以直接nop，但是可能有别的地方强制变更状态，不如一直写0
 
 [ENABLE]
 assert("ACBSP.exe"+7B1D44,F3 0F 11 46 0C)
+alloc(cheat4_code,32,"ACBSP.exe")
+registersymbol(cheat4_code)
+label(return)
 
 "ACBSP.exe"+7B1D44:
-  nop 5
+  jmp cheat4_code
+return:
+
+cheat4_code:
+  movss [esi+0C],xmm0
+  mov [esi++0C],00
+  jmp return
+
 
 [DISABLE]
 "ACBSP.exe"+7B1D44:
   DB F3 0F 11 46 0C
+
+unregistersymbol(cheat4_code)
+dealloc(cheat4_code)
 </AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="00380000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>26</ID>
@@ -201,7 +226,78 @@ assert("ACBSP.exe"+9F7E0B,80 7D FF 00)
   DB 80 7D FF 00
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>33</ID>
+      <Description>"#6 计时器固定 (接任务之后开，交任务之前关)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("ACBSP.exe"+353FCC,8B 41 0C)
+assert("ACBSP.exe"+353FCF,8B 51 08)
+alloc(cheat6_code,64,"ACBSP.exe")
+registersymbol(cheat6_code)
+label(return)
+
+"ACBSP.exe"+353FCC:
+  jmp cheat6_code
+  nop
+return:
+
+cheat6_code:
+  mov [ecx+08],edi
+  add [ecx+08],44AA20
+  mov eax,[ecx+0C]
+  mov edx,[ecx+08]
+  jmp return
+
+[DISABLE]
+"ACBSP.exe"+353FCC:
+  DB 8B 41 0C
+"ACBSP.exe"+353FCF:
+  DB 8B 51 08
+
+unregistersymbol(cheat6_code)
+dealloc(cheat6_code)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"地址"</Description>
+          <LastState Value="" RealAddress="00390000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat6_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
   </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>替换了 subsd xmm1,xmm2</Description>
+      <AddressString>ACBSP.exe+C119D7</AddressString>
+      <Before>
+        <Byte>5A</Byte>
+        <Byte>D2</Byte>
+        <Byte>0F</Byte>
+        <Byte>5A</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>CA</Byte>
+      </Actual>
+      <After>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>s1_enable</Name>
