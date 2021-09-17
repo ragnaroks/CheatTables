@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="38">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"查找角色指针"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 实际地址有 +70 的偏移
+
+[ENABLE]
+assert(comctl32.dll+4E2E4,8B F9 8B C2 8B 4F 10 8B 77 08 8B 5F 0C)
+alloc(cheat1_code,128,comctl32.dll)
+registersymbol(cheat1_code)
+label(return)
+label(cheat1_store)
+registersymbol(cheat1_store)
+
+comctl32.dll+4E2E4:
+  jmp cheat1_code
+  nop 2
+return:
+
+cheat1_code:
+  mov [cheat1_store],ecx
+  mov edi,ecx
+  mov eax,edx
+  mov ecx,[edi+10]
+  jmp return
+cheat1_store:
+  DB 00 00 00 00
+
+[DISABLE]
+comctl32.dll+4E2E4:
+  DB 8B F9 8B C2 8B 4F 10 8B 77 08 8B 5F 0C
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"注入代码地址"</Description>
+          <LastState Value="00120D89" RealAddress="5E100000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"角色指针地址"</Description>
+          <LastState Value="0072AB28" RealAddress="5E100012"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"经验上限"</Description>
+          <LastState Value="659328004" RealAddress="0072AB94"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>6C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"当前经验"</Description>
+          <LastState Value="999999999" Activated="1" RealAddress="0072AB98"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>70</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
