@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="39">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#1 友军无敌"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat1_hijack,55 8B EC 53 57 56 83 EC 3C 8B 75 08 8B 7D 0C 0F B6 46 18 85 C0 83 EC 0C 57 39 3F,"+X")
+assert(cheat1_hijack+B2,FF 50 44)
+registersymbol(cheat1_hijack)
+
+cheat1_hijack+B2:
+  nop 3
+
+[DISABLE]
+cheat1_hijack+B2:
+  DB FF 50 44
+
+unregistersymbol(*)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#2 锁定时间"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat2_hijack,55 8B EC 57 83 EC 24 8B 7D 08 83 EC 0C 57,"+X")
+assert(cheat2_hijack+58,75 3B)
+registersymbol(cheat2_hijack)
+
+cheat2_hijack+58:
+  DB EB
+
+[DISABLE]
+cheat2_hijack+58:
+  DB 75
+
+unregistersymbol(*)
+
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>96</Key>
+          </Keys>
+          <Description>锁定时间</Description>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
