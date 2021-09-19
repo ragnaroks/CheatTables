@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="39">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#1 无敌"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(cheat1_hijack,55 48 8B EC 48 83 EC 40 48 89 75 E8 48 89 7D F0 4C 89 7D F8 48 8B F2 83 3E 00,"+X")
+assert(cheat1_hijack+D5,74 1C)
+registersymbol(cheat1_hijack)
+
+cheat1_hijack+D5:
+  DB EB
+
+[DISABLE]
+cheat1_hijack+D5:
+  DB 74
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#2 解锁成就 Collect all rainbows!"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(cheat2_hijack,55 48 8B EC 48 83 EC 30 48 8D 64 24 00 90 49 BB ? ? ? ? ? ? ? ? 41 FF D3 85 C0 0F 84 ? ? ? ? 48 B8 ? ? ? ? ? ? ? ? 48 8B 00 48 8B C8 83 39 00 48 63 40 34 83 F8 72,"+X")
+assert(cheat2_hijack+3D,75 2C)
+registersymbol(cheat2_hijack)
+
+cheat2_hijack+3D:
+  nop 2
+
+[DISABLE]
+cheat2_hijack+3D:
+  DB 75 2C
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"#3 解锁成就 Collector!"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(cheat3_hijack,55 48 8B EC 48 83 EC 30 48 8D 64 24 00 90 49 BB ? ? ? ? ? ? ? ? 41 FF D3 85 C0 0F 84 ? ? ? ? 48 B8 ? ? ? ? ? ? ? ? 48 8B 00 48 8B C8 83 39 00 48 63 40 34 3D 9A 00 00 00,"+X")
+assert(cheat3_hijack+3F,75 2A)
+registersymbol(cheat3_hijack)
+
+cheat3_hijack+3F:
+  nop 2
+
+[DISABLE]
+cheat3_hijack+3F:
+  DB 75 2A
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of call r11</Description>
+      <AddressString>2E484E8EE50</AddressString>
+      <Before>
+        <Byte>84</Byte>
+        <Byte>E4</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>75</Byte>
+        <Byte>E8</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call rsi</Description>
+      <AddressString>2E484E8ABA9</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>17</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D6</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>15</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>45</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
