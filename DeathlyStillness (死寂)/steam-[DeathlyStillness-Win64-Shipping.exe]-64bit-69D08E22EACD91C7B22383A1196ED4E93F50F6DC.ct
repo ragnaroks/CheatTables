@@ -2,23 +2,9 @@
 <CheatTable CheatEngineTableVersion="39">
   <CheatEntries>
     <CheatEntry>
-      <ID>3</ID>
-      <Description>"弹匣"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"THREADSTACK0"-00000B30</Address>
-      <Offsets>
-        <Offset>17C</Offset>
-        <Offset>18</Offset>
-        <Offset>900</Offset>
-        <Offset>7F8</Offset>
-        <Offset>48</Offset>
-        <Offset>0</Offset>
-        <Offset>938</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
       <ID>9</ID>
       <Description>"弹匣"</Description>
+      <LastState Value="26" RealAddress="1C08CF47650"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"DeathlyStillness-Win64-Shipping.exe"+043CA7C0</Address>
       <Offsets>
