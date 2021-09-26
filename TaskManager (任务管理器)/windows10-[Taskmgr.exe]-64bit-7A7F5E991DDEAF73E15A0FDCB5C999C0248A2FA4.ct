@@ -2,9 +2,15 @@
 <CheatTable CheatEngineTableVersion="39">
   <CheatEntries>
     <CheatEntry>
+      <ID>16</ID>
+      <Description>"-------------------------------- CPU --------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
       <ID>13</ID>
       <Description>"频率显示文本"</Description>
-      <LastState RealAddress="7FF6366864B8"/>
+      <LastState RealAddress="7FF66A8364B8"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>String</VariableType>
       <Length>8</Length>
@@ -16,7 +22,7 @@
     <CheatEntry>
       <ID>27</ID>
       <Description>"进程数量"</Description>
-      <LastState Value="196" RealAddress="7FF63668C38C"/>
+      <LastState Value="175" RealAddress="7FF66A83C38C"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>taskmgr.exe+11C38C</Address>
@@ -24,7 +30,7 @@
     <CheatEntry>
       <ID>29</ID>
       <Description>"线程数量"</Description>
-      <LastState Value="2534" RealAddress="7FF63668C390"/>
+      <LastState Value="2108" RealAddress="7FF66A83C390"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>taskmgr.exe+11C390</Address>
@@ -32,16 +38,10 @@
     <CheatEntry>
       <ID>28</ID>
       <Description>"句柄数量"</Description>
-      <LastState Value="80029" RealAddress="7FF63668C394"/>
+      <LastState Value="69143" RealAddress="7FF66A83C394"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>taskmgr.exe+11C394</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>16</ID>
-      <Description>"-------------------------------- CPU --------------------------------"</Description>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
     </CheatEntry>
     <CheatEntry>
       <ID>10</ID>
@@ -252,6 +252,36 @@ dealloc(*)
           <Address>cheat5_store</Address>
         </CheatEntry>
       </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"-------------------------------- CPU --------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"频率显示文本"</Description>
+      <LastState RealAddress="7FF66A835E30"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>String</VariableType>
+      <Length>8</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>taskmgr.exe+115E30</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"已使用插槽"</Description>
+      <LastState RealAddress="7FF66A835EC8"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>String</VariableType>
+      <Length>4</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>7FF66A835EC8</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
