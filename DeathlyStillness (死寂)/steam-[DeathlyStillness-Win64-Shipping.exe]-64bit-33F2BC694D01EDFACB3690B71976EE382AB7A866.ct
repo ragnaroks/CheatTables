@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="38">
+<CheatTable CheatEngineTableVersion="39">
   <CheatEntries>
     <CheatEntry>
-      <ID>31</ID>
+      <ID>24</ID>
       <Description>"#1 弹药无限 (射击一次后生效)"</Description>
       <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
       <LastState/>
@@ -10,17 +10,16 @@
       <AssemblerScript>{$STRICT}
 [ENABLE]
 assert(DeathlyStillness-Win64-Shipping.exe+29BF2E2,89 06 48 8B 74 24 48)
-alloc(cheat1_code,256,DeathlyStillness-Win64-Shipping.exe)
+alloc(cheat1_code,192,DeathlyStillness-Win64-Shipping.exe)
 registersymbol(cheat1_code)
 label(return)
-label(check_settings)
-label(process_address)
 label(default)
+label(process_address)
 label(magize)
 label(ammo)
 label(condition1)
-label(condition2)
-label(condition3)
+label(cheat1_store1)
+label(cheat1_store2)
 label(cheat1_setting1)
 label(cheat1_setting2)
 registersymbol(cheat1_setting1)
@@ -33,38 +32,36 @@ return:
 
 cheat1_code:
   pushfq
-check_settings:
-  cmp byte ptr [cheat1_setting1],01
+  cmp [cheat1_setting1],01
   je magize
-  cmp byte ptr [cheat1_setting2],01
-//  je ammo
-//  jmp process_address
-  jne process_address
+  cmp [cheat1_setting2],01
+  je ammo
+  jmp process_address
 magize:
-  cmp rsi,[condition2]
-  jne process_address
+  cmp rsi,[cheat1_store1]
+  jne default
   popfq
   mov [rsi],1F
   mov rsi,[rsp+48]
   jmp return
 ammo:
-  cmp rsi,[condition3]
-  jne process_address
+  cmp rsi,[cheat1_store2]
+  jne default
   popfq
   mov [rsi],258
   mov rsi,[rsp+48]
   jmp return
 process_address:
   push rax
-  mov rax,[condition1]
-  cmp rax,[rbp-48]
+  mov rax,[rbp-48]
+  cmp rax,[condition1]
   pop rax
   jne default
   push rax
   mov rax,rsi
-  mov [condition2],rax
+  mov [cheat1_store1],rax
   sub rax,1DC
-  mov [condition3],rax
+  mov [cheat1_store2],rax
   pop rax
 default:
   popfq
@@ -72,15 +69,17 @@ default:
   mov rsi,[rsp+48]
   jmp return
 condition1:
-  DB B1 70 47 CB F6 7F 00 00
-//弹匣地址
-condition2:
+  DB B1 70 DB D5 F6 7F 00 00
+// 弹匣地址
+cheat1_store1:
   DB 00 00 00 00 00 00 00 00
-//备弹地址
-condition3:
+// 备弹地址
+cheat1_store2:
   DB 00 00 00 00 00 00 00 00
+// 弹匣处理方式
 cheat1_setting1:
   DB 00
+// 备弹处理方式
 cheat1_setting2:
   DB 00
 
@@ -88,20 +87,12 @@ cheat1_setting2:
 DeathlyStillness-Win64-Shipping.exe+29BF2E2:
   DB 89 06 48 8B 74 24 48
 
-dealloc(*)
 unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
-          <ID>32</ID>
-          <Description>"注入代码地址"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Byte</VariableType>
-          <Address>cheat1_code</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>33</ID>
+          <ID>26</ID>
           <Description>"弹匣处理方式"</Description>
           <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">00:默认
 01:锁 31
@@ -112,7 +103,7 @@ unregistersymbol(*)
           <Address>cheat1_setting1</Address>
         </CheatEntry>
         <CheatEntry>
-          <ID>34</ID>
+          <ID>27</ID>
           <Description>"备弹处理方式"</Description>
           <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">00:默认
 01:锁 600
@@ -122,33 +113,38 @@ unregistersymbol(*)
           <VariableType>Byte</VariableType>
           <Address>cheat1_setting2</Address>
         </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>38</ID>
-      <Description>"#2 生命值无限 (向前步行后生效)"</Description>
+      <ID>32</ID>
+      <Description>"#2 生命值无限 (人物前进后生效)"</Description>
       <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
       <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// 用组合搜索 4:1084227584(5F) 4:1126825984(170F) 可快速定位生命值的地址
-// 用唯一搜索结果的地址 +6F0 即可
-
-{$STRICT}
+      <AssemblerScript>{$STRICT}
 [ENABLE]
 assert(DeathlyStillness-Win64-Shipping.exe+29AD9E3,F3 0F 58 4C 24 40 F3 0F 11 0F)
-alloc(cheat2_code,64,DeathlyStillness-Win64-Shipping.exe)
+alloc(cheat2_code,256,DeathlyStillness-Win64-Shipping.exe)
 registersymbol(cheat2_code)
 label(return)
+label(health)
 label(process_address)
 label(default)
-label(health)
+label(condition1)
+label(condition2)
+label(condition3)
+label(condition4)
 label(cheat2_store1)
 label(cheat2_store2)
-label(cheat2_store3)
-label(cheat2_store4)
-label(cheat2_store5)
-registersymbol(cheat2_store5)
-label(cheat2_store6)
+registersymbol(cheat2_store1)
 
 DeathlyStillness-Win64-Shipping.exe+29AD9E3:
   jmp cheat2_code
@@ -158,70 +154,234 @@ return:
 cheat2_code:
   pushfq
 health:
-  cmp rdi,[cheat2_store5]
+  cmp rdi,[cheat2_store1]
   jne process_address
   popfq
-  movss xmm1,[cheat2_store6]
+  movss xmm1,[cheat2_store2]
   movss [rdi],xmm1
   jmp return
 process_address:
   push rax
-  mov rax,[rbp-40]
-  cmp rax,[cheat2_store1]
-  pop rax
-  jne default
-  push rax
   mov rax,[rbp-18]
-  cmp rax,[cheat2_store2]
+  cmp rax,[condition1]
   pop rax
   jne default
   push rax
   mov rax,[rbp-08]
-  cmp rax,[cheat2_store2]
+  cmp rax,[condition1]
   pop rax
   jne default
   push rax
   mov rax,[rbp-10]
-  cmp eax,[cheat2_store3]
+  cmp eax,[condition2]
   pop rax
   jne default
   push rax
   mov rax,[rbp+08]
-  cmp rax,[cheat2_store4]
+  cmp rax,[condition3]
+  pop rax
+  jne default
+  push rax
+  mov rax,[rbp-40]
+  cmp rax,[condition4]
   pop rax
   jne default
   push rax
   mov rax,rdi
   add rax,6A0
-  mov [cheat2_store5],rax
+  mov [cheat2_store1],rax
   pop rax
 default:
   popfq
   addss xmm1,[rsp+40]
   movss [rdi],xmm1
   jmp return
-//rbp-40
-cheat2_store1:
-  DB C0 31 8D CE F6 7F 00 00
-//rbp-18,rbp-08
-cheat2_store2:
-  DB 00 00 00 00 F6 7F 00 00
-//rbp-10
-cheat2_store3:
-  DB 00 00 80 3F
-//rbp+08
-cheat2_store4:
-  DB F9 13 DE CC F6 7F 00 00
 //生命值地址
-cheat2_store5:
+cheat2_store1:
   DB 00 00 00 00 00 00 00 00
 //待写入的生命值
-cheat2_store6:
+cheat2_store2:
   DB 00 00 C8 42
- 
+//rbp-18,rbp-08
+condition1:
+  DB 00 00 00 00 F6 7F 00 00
+//rbp-10
+condition2:
+  DB 00 00 80 3F
+//rbp+08
+condition3:
+  DB F9 13 72 D7 F6 7F 00 00
+//rbp-40,不确定
+condition4:
+  DB C0 31 21 D9 F6 7F 00 00
+
 [DISABLE]
 DeathlyStillness-Win64-Shipping.exe+29AD9E3:
   DB F3 0F 58 4C 24 40 F3 0F 11 0F
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"生命值地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>34</ID>
+      <Description>"#3 弹药无限，内联C实现 (射击一次后生效)"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(DeathlyStillness-Win64-Shipping.exe+29BF2E2,89 06 48 8B 74 24 48)
+alloc(cheat3_code,32,DeathlyStillness-Win64-Shipping.exe)
+registersymbol(cheat3_code)
+label(return)
+
+{$C}
+// 弹匣地址
+unsigned long long cheat3_store1=0x00;
+// 备弹地址
+unsigned long long cheat3_store2=0x00;
+// 弹匣处理方式
+unsigned char cheat3_setting1=0x00;
+// 备弹处理方式
+unsigned char cheat3_setting2=0x00;
+{$ASM}
+
+DeathlyStillness-Win64-Shipping.exe+29BF2E2:
+  jmp cheat3_code
+  nop 2
+return:
+
+cheat3_code:
+{$CCODE refRBP=rbp refRSI=rsi refEAX=eax}
+  unsigned long long *condition1=(unsigned long long *)(refRBP-0x48);
+  if(*condition1==0x7FF6D5DB70B1){
+    cheat3_store1=refRSI;
+    cheat3_store2=refRSI-0x1DC;
+  }
+  if(cheat3_setting1==1 &amp;&amp; cheat3_store1==refRSI){ refEAX=31;  }
+  if(cheat3_setting2==1 &amp;&amp; cheat3_store2==refRSI){ refEAX=600; }
+{$ASM}
+  mov [rsi],eax
+  mov rsi,[rsp+48]
+  jmp return
+
+[DISABLE]
+DeathlyStillness-Win64-Shipping.exe+29BF2E2:
+  DB 89 06 48 8B 74 24 48
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"弹匣地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"备弹地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat3_store2</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"弹匣处理方式"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:默认
+1:锁 31
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_setting1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>36</ID>
+          <Description>"备弹处理方式"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:默认
+1:锁 600
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_setting2</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>40</ID>
+      <Description>"#4 生命值无限，内联C实现 (人物前进后生效)"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(DeathlyStillness-Win64-Shipping.exe+29AD9E3,F3 0F 58 4C 24 40 F3 0F 11 0F)
+alloc(cheat4_code,256,DeathlyStillness-Win64-Shipping.exe)
+registersymbol(cheat4_code)
+label(return)
+
+{$C}
+// 生命值地址
+unsigned long long cheat4_store1=0x00;
+{$ASM}
+
+DeathlyStillness-Win64-Shipping.exe+29AD9E3:
+  jmp cheat4_code
+  nop 5
+return:
+
+cheat4_code:
+  addss xmm1,[rsp+40]
+  movss [rdi],xmm1
+{$CCODE refRBP=rbp refRDI=rdi}
+  unsigned long long *condition1=(unsigned long long *)(refRBP-0x18);
+  unsigned long long *condition2=(unsigned long long *)(refRBP-0x08);
+  unsigned int *condition3=(unsigned long long *)(refRBP-0x10);
+  unsigned long long *condition4=(unsigned long long *)(refRBP+0x08);
+  unsigned long long *condition5=(unsigned long long *)(refRBP-0x40);
+  if(*condition1==0x7FF600000000 &amp;&amp; *condition2==0x7FF600000000 &amp;&amp; *condition3==0x3F800000 &amp;&amp; *condition4==0x7FF6D77213F9 &amp;&amp; *condition5==0x7FF6D92131C0){ cheat4_store1=refRDI+0x6A0; }
+  if(refRDI==cheat4_store1){
+    unsigned long long *ptr=(unsigned long long *)refRDI;
+    *ptr=0x42C80000;
+  }
+{$ASM}
+  jmp return
+
+[DISABLE]
+DeathlyStillness-Win64-Shipping.exe+29AD9E3:
+  DB F3 0F 58 4C 24 40 F3 0F 11 0F
+
 unregistersymbol(*)
 dealloc(*)
 </AssemblerScript>
@@ -232,15 +392,15 @@ dealloc(*)
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>cheat2_code</Address>
+          <Address>cheat4_code</Address>
         </CheatEntry>
         <CheatEntry>
-          <ID>44</ID>
+          <ID>42</ID>
           <Description>"生命值地址"</Description>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
-          <Address>cheat2_store5</Address>
+          <Address>cheat4_store1</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
