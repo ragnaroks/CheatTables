@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
     <CheatEntry>
       <ID>22</ID>
       <Description>"#1 金钱不减"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACBSP.exe"+BB8D2D,2B C2)
@@ -30,7 +29,6 @@ assert("ACBSP.exe"+BB8D32,B0 01)
     <CheatEntry>
       <ID>19</ID>
       <Description>"#2 生命值固定"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// 生命值每一个方格 = 4
 
@@ -78,14 +76,13 @@ case1:
 "ACBSP.exe"+105B210:
   DB 89 46 58
 
-unregistersymbol(cheat2_code)
-dealloc(cheat2_code)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
           <ID>20</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="003A0000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -95,8 +92,7 @@ dealloc(cheat2_code)
     </CheatEntry>
     <CheatEntry>
       <ID>23</ID>
-      <Description>"#3 敌人两击必杀 (盟友也会死)"</Description>
-      <LastState/>
+      <Description>"#3 两击必杀 (包括盟友)"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// 原本应该注入 "ACBSP.exe"+10745D5 ，但是字节数不够
 
@@ -152,14 +148,13 @@ case1:
 "ACBSP.exe"+10745ED:
   DB 89 48 08
 
-unregistersymbol(cheat3_code)
-dealloc(cheat3_code)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
           <ID>24</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00390000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -170,7 +165,6 @@ dealloc(cheat3_code)
     <CheatEntry>
       <ID>21</ID>
       <Description>"#4 恶名值固定"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// 恶名值初始值 0.00F，满值 1.00F
 // 这里可以直接nop，但是可能有别的地方强制变更状态，不如一直写0
@@ -195,14 +189,13 @@ cheat4_code:
 "ACBSP.exe"+7B1D44:
   DB F3 0F 11 46 0C
 
-unregistersymbol(cheat4_code)
-dealloc(cheat4_code)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
           <ID>35</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00380000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -213,7 +206,6 @@ dealloc(cheat4_code)
     <CheatEntry>
       <ID>26</ID>
       <Description>"#5 不被警觉 (可能会导致任务进程异常)"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACBSP.exe"+9F7E0B,80 7D FF 00)
@@ -229,7 +221,6 @@ assert("ACBSP.exe"+9F7E0B,80 7D FF 00)
     <CheatEntry>
       <ID>33</ID>
       <Description>"#6 计时器固定 (接任务之后开，交任务之前关)"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACBSP.exe"+353FCC,8B 41 0C)
@@ -263,7 +254,6 @@ dealloc(cheat6_code)
         <CheatEntry>
           <ID>34</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00390000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
@@ -272,60 +262,4 @@ dealloc(cheat6_code)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="20000000">
-      <Description>替换了 subsd xmm1,xmm2</Description>
-      <AddressString>ACBSP.exe+C119D7</AddressString>
-      <Before>
-        <Byte>5A</Byte>
-        <Byte>D2</Byte>
-        <Byte>0F</Byte>
-        <Byte>5A</Byte>
-        <Byte>C8</Byte>
-      </Before>
-      <Actual>
-        <Byte>F2</Byte>
-        <Byte>0F</Byte>
-        <Byte>5C</Byte>
-        <Byte>CA</Byte>
-      </Actual>
-      <After>
-        <Byte>F2</Byte>
-        <Byte>0F</Byte>
-        <Byte>10</Byte>
-        <Byte>15</Byte>
-        <Byte>90</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
-  <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>s1_enable</Name>
-      <Address>031100C6</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>l1_enable</Name>
-      <Address>031100CA</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>s_enable</Name>
-      <Address>06CB00BB</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>l_enable</Name>
-      <Address>06CB00BF</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>u_enable</Name>
-      <Address>06CB00C3</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>one</Name>
-      <Address>06CB00C7</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>two</Name>
-      <Address>06CB00CB</Address>
-    </SymbolEntry>
-  </UserdefinedSymbols>
 </CheatTable>
