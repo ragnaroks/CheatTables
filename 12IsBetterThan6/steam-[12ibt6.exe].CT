@@ -1,44 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>2</ID>
-      <Description>"meta"</Description>
-      <Options moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>3</ID>
-          <Description>"address"</Description>
-          <LastState Value="" RealAddress="00400000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('12ibt6.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>5</ID>
-          <Description>"moduleSize"</Description>
-          <LastState Value="" RealAddress="0066A000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getModuleSize('12ibt6.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>4</ID>
-          <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="00A6A000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('12ibt6.exe')+getModuleSize('12ibt6.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
     <CheatEntry>
       <ID>8</ID>
       <Description>"指针扫描结果"</Description>
       <Options moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
