@@ -1,61 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>7</ID>
-      <Description>"meta"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>8</ID>
-          <Description>"address"</Description>
-          <LastState Value="" RealAddress="00A90000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('Cat Quest II.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>10</ID>
-          <Description>"moduleSize"</Description>
-          <LastState Value="" RealAddress="000A0000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getModuleSize('Cat Quest II.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9</ID>
-          <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="00B30000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('Cat Quest II.exe')+getModuleSize('Cat Quest II.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>653</ID>
-      <Description>"双击右边查看说明"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript Async="1">// aobscan(eip,55 8B EC 83 EC 28 8B 45 08 8B 00 89 45 FC 90 E8 ? ? ? ? 8B C8 8B 45 FC 89 4C 24 08 C7 44 24 04 ? ? ? ? 89 04 24 8D 6D 00 E8 ? ? ? ? C9 C3)
-// 可能搜索到多个结果,找到其中的"mov eax,[eax]"并找出指令访问的地址
-// 里面就会有金币/生命值/防御值/魔法值的数据
-// 找到金币的地址后,直接修改一个较大的数,比如"99999999",注意不要锁定
-// 去铁匠把"蓝色法师帽"/"蓝色法师背心"强化到满级,给猫/狗穿
-// 去铁匠把"猫咪冒险者帽"/"猫咪冒险者背心"强化到满级,给猫/狗穿
-// 现在打所有敌人都是一击必杀了
-// 如果手残可以把"XX背心"换成"猫士兵护甲",强化满级后加大量生命值
-
-[ENABLE]
-[DISABLE]
-</AssemblerScript>
-    </CheatEntry>
     <CheatEntry>
       <ID>22</ID>
       <Description>"生命值固定"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aobeip1,8B 4D 84 89 48 08 8B 85 54 FF FF FF 89 44 24 08 8B 85 78 FF FF FF 89 44 24 04 89 1C 24 39 1B)
@@ -76,7 +24,6 @@ unregistersymbol(aobeip1)
         <CheatEntry>
           <ID>23</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>aobeip1</Address>
@@ -86,7 +33,6 @@ unregistersymbol(aobeip1)
     <CheatEntry>
       <ID>650</ID>
       <Description>"金币固定 (仅在消耗时用)"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aobeip2,55 8B EC 53 57 83 EC 20 C7 44 24 08 ? ? ? ? C7 44 24 04 ? ? ? ? 8B 45 08 89 04 24 90 E8 ? ? ? ? 8B F8 85 FF 74 0F 8B 07 8B 00 3D ? ? ? ? 0F 85 ? ? ? ? 8B DF 8B 45 0C 89 43 08 89 5C 24 08 C7 44 24 04 ? ? ? ? 8B 45 08 89 04 24 E8 ? ? ? ? 8D 65 F8 8D 65 F8 5F 5B C9 C3 6A 3B 68 ? ? ? ? E8 ? ? ? ? 00 00 55 8B EC 83 EC 08 B8 ? ? ? ? C9 C3)
@@ -104,7 +50,6 @@ unregistersymbol(aobeip2)
         <CheatEntry>
           <ID>651</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>aobeip2</Address>
