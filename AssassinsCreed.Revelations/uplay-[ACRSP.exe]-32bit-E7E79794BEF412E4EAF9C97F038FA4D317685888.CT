@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
     <CheatEntry>
       <ID>84</ID>
       <Description>"#1 生命值不减"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// 每一格代表 4 生命值
 // 原始操作码在 "ACRSP.exe"+1074EB9，但此处无法修改
@@ -41,7 +40,6 @@ dealloc(cheat1_code)
         <CheatEntry>
           <ID>86</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>cheat1_code</Address>
@@ -51,7 +49,6 @@ dealloc(cheat1_code)
     <CheatEntry>
       <ID>87</ID>
       <Description>"#2 一击必杀"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACRSP.exe"+72614B,8B 51 20)
@@ -90,7 +87,6 @@ dealloc(cheat2_code)
         <CheatEntry>
           <ID>88</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>cheat2_code</Address>
@@ -100,7 +96,6 @@ dealloc(cheat2_code)
     <CheatEntry>
       <ID>89</ID>
       <Description>"#3 金钱不减"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACRSP.exe"+BBDADD,2B C2)
@@ -119,7 +114,6 @@ assert("ACRSP.exe"+BBDADF,89 41 0C)
     <CheatEntry>
       <ID>90</ID>
       <Description>"#4 不被警觉"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACRSP.exe"+8C809B,80 7D FF 00)
@@ -135,7 +129,6 @@ assert("ACRSP.exe"+8C809B,80 7D FF 00)
     <CheatEntry>
       <ID>92</ID>
       <Description>"#5 士气固定 500"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACRSP.exe"+912E7F,01 9E 34 12 00 00)
@@ -163,7 +156,6 @@ dealloc(cheat5_code)
         <CheatEntry>
           <ID>93</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>cheat5_code</Address>
@@ -173,7 +165,6 @@ dealloc(cheat5_code)
     <CheatEntry>
       <ID>94</ID>
       <Description>"#6 恶名值固定"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("ACRSP.exe"+7A467F,F3 0F 10 45 08)
@@ -202,7 +193,6 @@ dealloc(cheat6_code)
         <CheatEntry>
           <ID>95</ID>
           <Description>"地址"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>cheat6_code</Address>
@@ -210,65 +200,4 @@ dealloc(cheat6_code)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry Color="20000000">
-      <Description>Change of fstp dword ptr [esi+000000B8],1</Description>
-      <AddressString>ACRSP.exe+E7C085</AddressString>
-      <Before>
-        <Byte>45</Byte>
-        <Byte>08</Byte>
-        <Byte>83</Byte>
-        <Byte>C4</Byte>
-        <Byte>08</Byte>
-      </Before>
-      <Actual>
-        <Byte>D9</Byte>
-        <Byte>9E</Byte>
-        <Byte>B8</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Actual>
-      <After>
-        <Byte>5E</Byte>
-        <Byte>5D</Byte>
-        <Byte>C2</Byte>
-        <Byte>04</Byte>
-        <Byte>00</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry Color="20000000">
-      <Description>代码 :mov [esi+58],eax</Description>
-      <AddressString>ACRSP.exe+1093C85</AddressString>
-      <Before>
-        <Byte>85</Byte>
-        <Byte>C0</Byte>
-        <Byte>7C</Byte>
-        <Byte>32</Byte>
-        <Byte>56</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>46</Byte>
-        <Byte>58</Byte>
-      </Actual>
-      <After>
-        <Byte>E8</Byte>
-        <Byte>13</Byte>
-        <Byte>01</Byte>
-        <Byte>45</Byte>
-        <Byte>FF</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
-  <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>nonotoriety</Name>
-      <Address>1CDE0023</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>Countdown</Name>
-      <Address>0F700000</Address>
-    </SymbolEntry>
-  </UserdefinedSymbols>
 </CheatTable>
