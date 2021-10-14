@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"生命值固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 生命值实际数值=显示数值*200
+[ENABLE]
+assert("AlienShooter.exe"+A30CE,89 8E D4 01 00 00)
+
+"AlienShooter.exe"+A30CE:
+  //nop 6
+  inc [esi+1D4]
+
+[DISABLE]
+"AlienShooter.exe"+A30CE:
+  mov [esi+000001D4],ecx
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"弹匣固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// [eax+40] 是打了多少发子弹,达到某个数值就会要求换弹匣
+// 这里直接判断,如果不需要换弹的就正常走,如果需要换弹就跳过
+
+[ENABLE]
+assert("AlienShooter.exe"+447AC,8B 45 2C 01 58 40)
+label(return)
+alloc(cave,24,"AlienShooter.exe"+447AC)
+
+"AlienShooter.exe"+447AC:
+  jmp cave
+  nop
+return:
+
+cave:
+  mov eax,[ebp+2C]
+  cmp [eax+40],00
+  jne return
+  add [eax+40],ebx
+  jmp return
+
+[DISABLE]
+"AlienShooter.exe"+447AC:
+  mov eax,[ebp+2C]
+  add [eax+40],ebx
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"备弹数量固定"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 子弹实际数值=显示数值*64
+[ENABLE]
+assert("AlienShooter.exe"+A9F9E,01 43 40)
+
+"AlienShooter.exe"+A9F9E:
+  nop 3
+
+[DISABLE]
+"AlienShooter.exe"+A9F9E:
+  add [ebx+40],eax
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"载具生命值固定 (功能不正常,敌方大型单位生命值也固定,不要使用)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("AlienShooter.exe"+436E0,89 5E 28)
+
+"AlienShooter.exe"+436E0:
+  nop 3
+  //inc [esi+28]
+
+[DISABLE]
+"AlienShooter.exe"+436E0:
+  mov [esi+28],ebx
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
