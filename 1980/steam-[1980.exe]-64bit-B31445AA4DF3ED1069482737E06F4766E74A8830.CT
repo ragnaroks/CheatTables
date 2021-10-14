@@ -1,52 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
     <CheatEntry>
-      <ID>2</ID>
-      <Description>"meta"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>3</ID>
-          <Description>"address"</Description>
-          <LastState Value="" RealAddress="7FF7C9F40000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('1980.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>4</ID>
-          <Description>"moduleSize"</Description>
-          <LastState Value="" RealAddress="000A3000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getModuleSize('1980.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>5</ID>
-          <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="7FF7C9FE3000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('1980.exe')+getModuleSize('1980.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>10</ID>
-      <Description>"资金不减"</Description>
-      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>6</ID>
-          <Description>"资金不减(建筑)"</Description>
-          <LastState Activated="1"/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript Async="1">[ENABLE]
+      <ID>6</ID>
+      <Description>"资金不减(建筑)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip1,41 FF D3 49 63 86 A0 00 00 00 2B 45 D8 41 89 86 A0 00 00 00 4C 8B 75 F0 4C 8B 7D F8 48 8D 65 00 5D C3)
 registersymbol(aob_eip1)
 
@@ -59,13 +18,12 @@ aob_eip1+0A:
 
 unregistersymbol(aob_eip1)
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9</ID>
-          <Description>"资金不减(购买)"</Description>
-          <LastState Activated="1"/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript Async="1">[ENABLE]
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"资金不减(购买)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip2,49 BB * * * * * * * * 41 FF D3 48 B8 * * * * * * * * 48 8B 00 48 63 88 A0 00 00 00 48 63 96 90 00 00 00 2B CA 89 88 A0 00 00 00 48 B8 * * * * * * * * 48 8B 00 48 8B 40 48 48 63 8E 8C 00 00 00 48 63 C9 39 48 18)
 registersymbol(aob_eip2)
 
@@ -78,8 +36,6 @@ aob_eip2+28:
 
 unregistersymbol(aob_eip2)
 </AssemblerScript>
-        </CheatEntry>
-      </CheatEntries>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
