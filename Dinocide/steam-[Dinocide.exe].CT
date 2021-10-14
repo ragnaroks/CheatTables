@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="29">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
     <CheatEntry>
       <ID>12</ID>
       <Description>"特征码搜寻_玩家结构"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(address101,D9 45 0C D9 5F 10 8B 77 0C 8B C6 85 C0)
 registersymbol(address101)
-//code from here to '[DISABLE]' will be used to enable the cheat
 alloc(newmem,128)
 
 newmem:
@@ -37,18 +35,17 @@ address101+3:
   nop
 
 [DISABLE]
-dealloc(newmem)
 address101+3:
   fstp dword ptr [edi+10]
   mov esi,[edi+0C]
 unregistersymbol(address101)
+dealloc(newmem)
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
       <ID>13</ID>
       <Description>"玩家结构_通常"</Description>
       <Options moManualExpandCollapse="1"/>
-      <LastState Value="058B26A8" RealAddress="058B26A8"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>4 Bytes</VariableType>
       <Address>"Dinocide.exe"+00F085C0</Address>
@@ -61,7 +58,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>1</ID>
           <Description>"玩家当前HP"</Description>
-          <LastState Value="76" RealAddress="058B26B8"/>
           <VariableType>Float</VariableType>
           <Address>"Dinocide.exe"+00F085C0</Address>
           <Offsets>
@@ -74,7 +70,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>14</ID>
           <Description>"玩家最大HP"</Description>
-          <LastState Value="1.30857202E-35" RealAddress="058B26BC"/>
           <VariableType>Float</VariableType>
           <Address>"Dinocide.exe"+00F085C0</Address>
           <Offsets>
@@ -87,7 +82,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>15</ID>
           <Description>"玩家当前SP"</Description>
-          <LastState Value="1.308575464E-35" RealAddress="058B26D0"/>
           <VariableType>Float</VariableType>
           <Address>"Dinocide.exe"+00F085C0</Address>
           <Offsets>
@@ -100,7 +94,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>16</ID>
           <Description>"玩家最大SP"</Description>
-          <LastState Value="1.308574316E-35" RealAddress="058B26CC"/>
           <VariableType>Float</VariableType>
           <Address>"Dinocide.exe"+00F085C0</Address>
           <Offsets>
@@ -184,7 +177,6 @@ unregistersymbol(address101)
       <ID>35</ID>
       <Description>"玩家结构_托管"</Description>
       <Options moManualExpandCollapse="1"/>
-      <LastState Value="144285BC" RealAddress="06742940"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>Float</VariableType>
       <Address>"mono.dll"+001F52F0</Address>
@@ -198,7 +190,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>36</ID>
           <Description>"玩家当前HP"</Description>
-          <LastState Value="3.394449986E-27" RealAddress="144285CC"/>
           <VariableType>Float</VariableType>
           <Address>"mono.dll"+001F52F0</Address>
           <Offsets>
@@ -212,7 +203,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>37</ID>
           <Description>"玩家最大HP"</Description>
-          <LastState Value="7.649362331E-27" RealAddress="144285D0"/>
           <VariableType>Float</VariableType>
           <Address>"mono.dll"+001F52F0</Address>
           <Offsets>
@@ -226,7 +216,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>38</ID>
           <Description>"玩家当前SP"</Description>
-          <LastState Value="7.598395484E-35" RealAddress="144285E4"/>
           <VariableType>Float</VariableType>
           <Address>"mono.dll"+001F52F0</Address>
           <Offsets>
@@ -240,7 +229,6 @@ unregistersymbol(address101)
         <CheatEntry>
           <ID>39</ID>
           <Description>"玩家最大SP"</Description>
-          <LastState Value="9.820936166E-27" RealAddress="144285E0"/>
           <VariableType>Float</VariableType>
           <Address>"mono.dll"+001F52F0</Address>
           <Offsets>
