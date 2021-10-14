@@ -9,7 +9,7 @@ Cheat Engine 作弊表
 
 **作者**字段可不提供。
 
-**平台**字段可选项：`'steam','ubisoft/uplay','epic','gog'`
+**平台**字段可选项：`'indie','steam','ubisoft/uplay','epic','gog'`
 
 如果脚本来自别处，除非已明确允许转载，否则需得到原始作者许可，并在相应 README.md 文件中注明原始链接或可查出处。
 
@@ -17,9 +17,9 @@ Cheat Engine 作弊表
 在相应文件夹内创建如上命名格式的表单，并在文件夹内的 README.md 中以如下形式附加说明。
 ```plain
 ### uplay-[Future Soldier DX9.exe]-32bit-120C4B89B8B8F3D5D65CE61DDB63DC446C861F64
-- 只适用于 DX9 版本
-- 无限子弹和无限弹匣不要同时开启
-- ...
+只适用于 DX9 版本。
+无限子弹和无限弹匣不要同时开启。
+...
 ```
 
 如果还没有相应文件夹或文件夹内不存在 README.md 文件，可自行创建。
