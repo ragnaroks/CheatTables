@@ -1,39 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>1</ID>
-      <Description>"meta"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>2</ID>
-          <Description>"address"</Description>
-          <LastState Value="" RealAddress="00D60000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('disgaea2.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>4</ID>
-          <Description>"moduleSize"</Description>
-          <LastState Value="" RealAddress="00771000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getModuleSize('disgaea2.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>3</ID>
-          <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="014D1000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('disgaea2.exe')+getModuleSize('disgaea2.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
     <CheatEntry>
       <ID>0</ID>
       <Description>"HL"</Description>
@@ -52,19 +19,19 @@
     <CheatEntry>
       <ID>227</ID>
       <Description>"设置奖励等级 = 9"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 disgaea2.exe+34D98C:
   DD 90000
 
 [DISABLE]
+disgaea2.exe+34D98C:
+  DD 90000
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
       <ID>219</ID>
       <Description>"友军单位生命值不减"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("disgaea2.exe"+44FF6,8B 55 F0)
@@ -205,14 +172,12 @@ dealloc(begin)
       <ID>41</ID>
       <Description>"人物属性 (按照"排列替代"排序)"</Description>
       <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>6</ID>
           <Description>"一号位 [disgaea2.exe+2A0000+738] (默认是阿迪鲁)"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -291,7 +256,6 @@ dealloc(begin)
           <ID>120</ID>
           <Description>"二号位 [disgaea2.exe+2A0000+1638] (默认是罗莎琳)"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -370,7 +334,6 @@ dealloc(begin)
           <ID>131</ID>
           <Description>"三号位 [disgaea2.exe+2A0000+2538]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -449,7 +412,6 @@ dealloc(begin)
           <ID>142</ID>
           <Description>"四号位 [disgaea2.exe+2A0000+3438]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -528,7 +490,6 @@ dealloc(begin)
           <ID>153</ID>
           <Description>"五号位 [disgaea2.exe+2A0000+4338]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -607,7 +568,6 @@ dealloc(begin)
           <ID>164</ID>
           <Description>"六号位 [disgaea2.exe+2A0000+5238]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -686,7 +646,6 @@ dealloc(begin)
           <ID>175</ID>
           <Description>"七号位 [disgaea2.exe+2A0000+6138]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -765,7 +724,6 @@ dealloc(begin)
           <ID>186</ID>
           <Description>"八号位 [disgaea2.exe+2A0000+7038]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -844,7 +802,6 @@ dealloc(begin)
           <ID>197</ID>
           <Description>"九号位 [disgaea2.exe+2A0000+7F38]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -923,7 +880,6 @@ dealloc(begin)
           <ID>208</ID>
           <Description>"十号位 [disgaea2.exe+2A0000+8E38]"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
