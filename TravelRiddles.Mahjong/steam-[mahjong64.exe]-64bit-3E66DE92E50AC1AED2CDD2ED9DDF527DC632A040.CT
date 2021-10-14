@@ -1,40 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>7</ID>
-      <Description>"meta"</Description>
-      <Options moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>8</ID>
-          <Description>"getAddress"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>getAddress('mahjong64.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9</ID>
-          <Description>"getModuleSize"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>getModuleSize('mahjong64.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>10</ID>
-          <Description>"getAddress+getModuleSize"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>getAddress('mahjong64.exe')+getModuleSize('mahjong64.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
     <CheatEntry>
       <ID>11</ID>
       <Description>"金币道具不变"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 assert("mahjong64.exe"+47033D,48 89 03)
