@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>1</ID>
-      <Description>"meta"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>5</ID>
-          <Description>"getAddress"</Description>
-          <LastState Value="" RealAddress="00700000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('RuneStoneKeeper.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>7</ID>
-          <Description>"getModuleSize"</Description>
-          <LastState Value="" RealAddress="01233000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getModuleSize('RuneStoneKeeper.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>6</ID>
-          <Description>"getAddress+getModuleSize"</Description>
-          <LastState Value="" RealAddress="01933000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('RuneStoneKeeper.exe')+getModuleSize('RuneStoneKeeper.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
     <CheatEntry>
       <ID>14</ID>
       <Description>"灵魂不减 (使用过灵魂后才能启用)"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip1,55 8B EC 83 EC 08 8B 0D * * * * 2B 4D 08 B8 * * * * 89 08 8B 05 * * * * 85 C0 7D 0B)
@@ -57,7 +23,6 @@ unregistersymbol(aob_eip1)
         <CheatEntry>
           <ID>31</ID>
           <Description>"灵魂值"</Description>
-          <LastState Value="520" RealAddress="13F28F58"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip1+10</Address>
@@ -68,7 +33,6 @@ unregistersymbol(aob_eip1)
         <CheatEntry>
           <ID>37</ID>
           <Description>"灵魂值上限"</Description>
-          <LastState Value="520" RealAddress="13F28F68"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip1+10</Address>
@@ -81,7 +45,6 @@ unregistersymbol(aob_eip1)
     <CheatEntry>
       <ID>15</ID>
       <Description>"生命不减 (生命减少后才能启用)"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip2,55 8B EC 53 57 83 EC 20 8B 5D 08 8B 7D 10 8B 43 28 8B 48 10 2B 4D 0C 89 48 10 83 EC 08 6A 2C 53)
@@ -125,7 +88,6 @@ dealloc(cave)
         <CheatEntry>
           <ID>25</ID>
           <Description>"生命值"</Description>
-          <LastState Value="393" RealAddress="2847CC10"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -136,7 +98,6 @@ dealloc(cave)
         <CheatEntry>
           <ID>26</ID>
           <Description>"魔法值"</Description>
-          <LastState Value="11" RealAddress="2847CC20"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -147,7 +108,6 @@ dealloc(cave)
         <CheatEntry>
           <ID>34</ID>
           <Description>"耐力值"</Description>
-          <LastState Value="10" RealAddress="2847CC24"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip2_player</Address>
@@ -160,7 +120,6 @@ dealloc(cave)
     <CheatEntry>
       <ID>27</ID>
       <Description>"魔法不减 (使用过魔法后才能启用)"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip3,55 8B EC 56 83 EC 04 8B 75 08 8B 46 28 8B 48 20 2B 4D 0C 89 48 20 8B 46 28 8B 40 20 85 C0 7D 0C)
@@ -204,7 +163,6 @@ dealloc(cave)
         <CheatEntry>
           <ID>28</ID>
           <Description>"生命值"</Description>
-          <LastState Value="551989584" RealAddress="22AF2790"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip3_player</Address>
@@ -215,7 +173,6 @@ dealloc(cave)
         <CheatEntry>
           <ID>29</ID>
           <Description>"魔法值"</Description>
-          <LastState Value="0" RealAddress="22AF27A0"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip3_player</Address>
@@ -226,7 +183,6 @@ dealloc(cave)
         <CheatEntry>
           <ID>33</ID>
           <Description>"耐力值"</Description>
-          <LastState Value="0" RealAddress="22AF27A4"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>aob_eip3_player</Address>
@@ -239,7 +195,6 @@ dealloc(cave)
     <CheatEntry>
       <ID>17</ID>
       <Description>"金币不减 (使用过金币后才能启用)"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip4,FF 50 38 83 C4 10 8B 05 * * * * 8B 48 14 2B 4D F0 89 48 14 E8 * * * * 83 EC 0C 50 39 00)
@@ -271,7 +226,6 @@ unregistersymbol(aob_eip4)
     <CheatEntry>
       <ID>36</ID>
       <Description>"更多经验 (得到过经验后才能启用)"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip5,83 C4 10 8B C8 8B 45 F4 03 C1 89 86 A8 01 00 00 8D 86 A8 01 00 00)
@@ -302,7 +256,6 @@ dealloc(cave)
     <CheatEntry>
       <ID>39</ID>
       <Description>"护甲不减 (护甲减少后才能启用)"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip6,83 C4 10 8B F8 8B 83 EC 00 00 00 2B C7 89 45 F0 89 BB EC 00 00 00 D9 EE)
@@ -342,7 +295,6 @@ dealloc(cave)
     <CheatEntry>
       <ID>40</ID>
       <Description>"护甲不清空 (护甲减少后才能启用,清空指的是攻击高于护甲导致护甲归零)"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aob_eip7,FF 90 D0 00 00 00 83 C4 20 33 C0 EB 39 39 7D 10 7E 32 8B 45 10 2B C7 89 45 F0 C7 83 EC 00 00 00 00 00 00 00 D9 EE)
@@ -364,19 +316,19 @@ dealloc(cave)
   <Structures StructVersion="2">
     <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
       <Elements>
-        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" DisplayMethod="无符号整数"/>
-        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000004" DisplayMethod="无符号整数"/>
-        <Element Offset="8" Vartype="Pointer" Bytesize="4" OffsetHex="00000008" DisplayMethod="无符号整数"/>
-        <Element Offset="12" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000000C" DisplayMethod="无符号整数"/>
-        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000010" Description="生命" DisplayMethod="无符号整数"/>
-        <Element Offset="20" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000014" Description="敏捷 ?" DisplayMethod="无符号整数"/>
-        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="智力 ?" DisplayMethod="无符号整数"/>
-        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="力量 ?" DisplayMethod="无符号整数"/>
-        <Element Offset="32" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000020" Description="魔法" DisplayMethod="无符号整数"/>
-        <Element Offset="36" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000024" Description="耐力 ?" DisplayMethod="无符号整数"/>
-        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000028" DisplayMethod="无符号整数"/>
-        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="攻击 ?" DisplayMethod="无符号整数"/>
-        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" DisplayMethod="无符号整数"/>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000004" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000000C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000010" Description="生命" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000014" Description="敏捷 ?" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="智力 ?" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="力量 ?" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000020" Description="魔法" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000024" Description="耐力 ?" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000028" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="攻击 ?" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" DisplayMethod="Unsigned Integer"/>
       </Elements>
     </Structure>
   </Structures>
