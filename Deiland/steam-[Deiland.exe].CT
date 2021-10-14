@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="29">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>2</ID>
-      <Description>"getAddress('Deiland.exe')"</Description>
-      <LastState Value="9460301" RealAddress="7FF6232C0000"/>
-      <VariableType>4 Bytes</VariableType>
-      <Address>getAddress('Deiland.exe')</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>3</ID>
-      <Description>"getModuleSize('Deiland.exe')"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>getModuleSize('Deiland.exe')</Address>
-    </CheatEntry>
     <CheatEntry>
       <ID>4</ID>
       <Description>"生命"</Description>
-      <LastState Value="455" RealAddress="12441EF4"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"Deiland.exe"+013983E0</Address>
       <Offsets>
@@ -29,7 +15,6 @@
     <CheatEntry>
       <ID>6</ID>
       <Description>"精力"</Description>
-      <LastState Value="235" RealAddress="12441EFC"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"Deiland.exe"+013983E0</Address>
       <Offsets>
@@ -41,7 +26,6 @@
     <CheatEntry>
       <ID>7</ID>
       <Description>"饥饿"</Description>
-      <LastState Value="100" RealAddress="12441F1C"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"Deiland.exe"+013983E0</Address>
       <Offsets>
