@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>1</ID>
-      <Description>"meta"</Description>
-      <Options moManualExpandCollapse="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>2</ID>
-          <Description>"address"</Description>
-          <LastState Value="" RealAddress="7FF6DCC70000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('BC.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>4</ID>
-          <Description>"moduleSize"</Description>
-          <LastState Value="" RealAddress="0163D000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getModuleSize('BC.exe')</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>3</ID>
-          <Description>"address+moduleSize"</Description>
-          <LastState Value="" RealAddress="7FF6DE2AD000"/>
-          <ShowAsSigned>0</ShowAsSigned>
-          <GroupHeader>1</GroupHeader>
-          <Address>getAddress('BC.exe')+getModuleSize('BC.exe')</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
     <CheatEntry>
       <ID>0</ID>
       <Description>"己方无敌,敌方秒杀"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aobeip1,55 48 8B EC 56 48 83 EC 18 48 8B F1 F3 0F 11 4D E8 F3 0F 10 45 E8 F3 0F 5A C0 66 0F 57 C9 F3 0F 10 56 7C F3 0F 5A D2 F2 0F 5A EA F3 0F 11 6D F4 F3 0F 10 55 F4 F3 0F 5A D2 F2 0F 5A D2 F2 0F 5A C9 F2 0F 5A C0 48 83 EC 20 49 BB * * * * * * * * 41 FF D3 48 83 C4 20 F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 6E 78 48 8B 75 F8 C9 C3)
@@ -85,15 +51,14 @@ dealloc(cave)
       <CheatEntries>
         <CheatEntry>
           <ID>6</ID>
-          <Description>"地址 (勿动此项)"</Description>
-          <LastState Value="" RealAddress="24882540"/>
+          <Description>"地址"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>aobeip1</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>8</ID>
-          <Description>"敌方处理模式 (勿动此项,改后面选项)"</Description>
+          <Description>"敌方处理模式"</Description>
           <DropDownList ReadOnly="1" DisplayValueAsItem="1">1:默认
 0:秒杀 (不获得经验)
 </DropDownList>
@@ -106,7 +71,6 @@ dealloc(cave)
     <CheatEntry>
       <ID>5</ID>
       <Description>"无限空格技能"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aobeip2,55 48 8B EC 57 41 57 48 83 EC 10 4C 8B F9 48 8B FA 4C 89 45 E8 48 83 EC 20 49 BB * * * * * * * * 41 FF D3 48 83 C4 20 85 C0 0F 85 5B 00 00 00 48 63 47 18 85 C0 7E 1F 48 8B 47 10 48 63 40 58 83 F8 05 75 09 49 89 BF C0 00 00 00 EB 09 48 63 47 18 FF C8 89 47 18 48 8B 57 10 49 8B CF 4C 63 45 E8 48 83 EC 10 48 8B 45 30 48 89 04 24 48 63 45 38 89 44 24 08 48 83 EC 20 49 BB * * * * * * * * 41 FF D3 48 83 C4 30 48 8D 65 F0 41 5F 5F C9 C3)
@@ -125,8 +89,7 @@ unregistersymbol(aobeip2)
       <CheatEntries>
         <CheatEntry>
           <ID>7</ID>
-          <Description>"地址 (勿动此项)"</Description>
-          <LastState Value="" RealAddress="0F6282A0"/>
+          <Description>"地址"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>aobeip2</Address>
@@ -136,7 +99,6 @@ unregistersymbol(aobeip2)
     <CheatEntry>
       <ID>9</ID>
       <Description>"金币不减反增"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(aobeip3,48 83 EC 18 48 89 34 24 48 89 7C 24 08 4C 89 7C 24 10 4C 8B F9 48 8B FA 49 8B F0 85 FF 74 07 83 FF 01 74 0E EB 16 49 63 47 28 2B C6 41 89 47 28 EB 0A 49 63 47 2C 2B C6 41 89 47 2C 48 8B 34 24 48 8B 7C 24 08 4C 8B 7C 24 10 48 83 C4 18 C3)
@@ -155,8 +117,7 @@ unregistersymbol(aobeip3)
       <CheatEntries>
         <CheatEntry>
           <ID>10</ID>
-          <Description>"地址 (勿动此项)"</Description>
-          <LastState Value="" RealAddress="49DDF5A0"/>
+          <Description>"地址"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <GroupHeader>1</GroupHeader>
           <Address>aobeip3</Address>
