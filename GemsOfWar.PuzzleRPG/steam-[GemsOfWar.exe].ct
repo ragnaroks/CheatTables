@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="29">
+<CheatTable CheatEngineTableVersion="40">
   <CheatEntries>
-    <CheatEntry>
-      <ID>61</ID>
-      <Description>"getAddress('GemsOfWar.exe')"</Description>
-      <LastState Value="9460301" RealAddress="00C90000"/>
-      <VariableType>4 Bytes</VariableType>
-      <Address>getAddress('GemsOfWar.exe')</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>62</ID>
-      <Description>"getModuleSize('GemsOfWar.exe')"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>getModuleSize('GemsOfWar.exe')</Address>
-    </CheatEntry>
     <CheatEntry>
       <ID>6</ID>
       <Description>"人造指针_所有"</Description>
       <Options moManualExpandCollapse="1"/>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 aobscan(address8,EC 83 EC 08 8B 45 08 8B 40 3C C9 C3 00 00 55 8B EC 83 EC 08 8B 45 08 8B 40 30)
@@ -460,7 +446,6 @@ unregistersymbol(address8)
       <ID>49</ID>
       <Description>"人造指针_选择单位"</Description>
       <Options moManualExpandCollapse="1"/>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript Async="1">[ENABLE]
 {$lua}
@@ -655,30 +640,6 @@ unregistersymbol(address1)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry>
-      <Description>替换了 mov [esi],eax</Description>
-      <AddressString>0131120F</AddressString>
-      <Before>
-        <Byte>77</Byte>
-        <Byte>11</Byte>
-        <Byte>8B</Byte>
-        <Byte>4D</Byte>
-        <Byte>F8</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>06</Byte>
-      </Actual>
-      <After>
-        <Byte>2B</Byte>
-        <Byte>C1</Byte>
-        <Byte>8D</Byte>
-        <Byte>65</Byte>
-        <Byte>FC</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name/>
@@ -688,125 +649,37 @@ unregistersymbol(address1)
   <Structures StructVersion="2">
     <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
       <Elements>
-        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="8" Vartype="Pointer" Bytesize="4" RLECount="8" DisplayMethod="无符号整数"/>
-        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="44" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" Description="hp" DisplayMethod="无符号整数"/>
-        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" Description="hp max" DisplayMethod="无符号整数"/>
-        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" Description="acttacker" DisplayMethod="无符号整数"/>
-        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" Description="def" DisplayMethod="无符号整数"/>
-        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" Description="def max" DisplayMethod="无符号整数"/>
-        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" Description="sk" DisplayMethod="无符号整数"/>
-        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" Description="sk max" DisplayMethod="无符号整数"/>
-        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" Description="level" DisplayMethod="无符号整数"/>
-        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" Description="flag1" DisplayMethod="无符号整数"/>
-        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" Description="flag2" DisplayMethod="无符号整数"/>
-        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="100" Vartype="4 Bytes" Bytesize="4" Description="state,0:正常,256:死亡" DisplayMethod="无符号整数"/>
-        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" Description="flag3,1:玩家" DisplayMethod="无符号整数"/>
-        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="无符号整数"/>
-        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" Description="位置" DisplayMethod="无符号整数"/>
-        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-      </Elements>
-    </Structure>
-    <Structure Name="未命名的结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
-      <Elements>
-        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="8" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="20" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="24" Vartype="Pointer" Bytesize="4" RLECount="10" DisplayMethod="无符号整数"/>
-        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" RLECount="34" DisplayMethod="无符号整数"/>
-        <Element Offset="200" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="204" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="208" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="216" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="220" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="232" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="240" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="无符号整数"/>
-      </Elements>
-    </Structure>
-    <Structure Name="未命名的结构 2" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
-      <Elements>
-        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="8" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="无符号整数"/>
-        <Element Offset="36" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="无符号整数"/>
-        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="56" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="68" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="92" Vartype="Pointer" Bytesize="4" RLECount="6" DisplayMethod="无符号整数"/>
-        <Element Offset="116" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="120" Vartype="Pointer" Bytesize="4" RLECount="52" DisplayMethod="无符号整数"/>
-        <Element Offset="328" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="332" Vartype="String" Bytesize="5" DisplayMethod="无符号整数"/>
-        <Element Offset="337" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="339" Vartype="2 Bytes" Bytesize="2" DisplayMethod="无符号整数"/>
-        <Element Offset="341" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="344" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="无符号整数"/>
-        <Element Offset="364" Vartype="String" Bytesize="5" DisplayMethod="无符号整数"/>
-        <Element Offset="369" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="372" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="380" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="无符号整数"/>
-        <Element Offset="384" Vartype="Pointer" Bytesize="4" RLECount="39" DisplayMethod="无符号整数"/>
-        <Element Offset="540" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="544" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="无符号整数"/>
-        <Element Offset="560" Vartype="String" Bytesize="6" DisplayMethod="无符号整数"/>
-        <Element Offset="566" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="568" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="576" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="580" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="584" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="592" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="600" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="604" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="608" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="612" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="616" Vartype="Byte" Bytesize="1" DisplayMethod="无符号整数"/>
-        <Element Offset="617" Vartype="String" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="621" Vartype="Byte" Bytesize="1" DisplayMethod="无符号整数"/>
-        <Element Offset="622" Vartype="String" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="626" Vartype="Byte" Bytesize="1" DisplayMethod="无符号整数"/>
-        <Element Offset="627" Vartype="2 Bytes" Bytesize="2" DisplayMethod="无符号整数"/>
-        <Element Offset="629" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="632" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="640" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="无符号整数"/>
-        <Element Offset="660" Vartype="4 Bytes" Bytesize="4" DisplayMethod="十六进制"/>
-        <Element Offset="664" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="672" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="684" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="无符号整数"/>
-        <Element Offset="716" Vartype="Double" Bytesize="8" DisplayMethod="无符号整数"/>
-        <Element Offset="724" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="728" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="740" Vartype="4 Bytes" Bytesize="4" DisplayMethod="十六进制"/>
-        <Element Offset="744" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="无符号整数"/>
-        <Element Offset="768" Vartype="Float" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="772" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="无符号整数"/>
-        <Element Offset="776" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="无符号整数"/>
-        <Element Offset="800" Vartype="4 Bytes" Bytesize="4" DisplayMethod="十六进制"/>
-        <Element Offset="804" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="808" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="无符号整数"/>
-        <Element Offset="810" Vartype="2 Bytes" Bytesize="2" DisplayMethod="无符号整数"/>
-        <Element Offset="812" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="无符号整数"/>
-        <Element Offset="868" Vartype="Double" Bytesize="8" DisplayMethod="无符号整数"/>
-        <Element Offset="876" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="888" Vartype="4 Bytes" Bytesize="4" DisplayMethod="十六进制"/>
-        <Element Offset="892" Vartype="4 Bytes" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="896" Vartype="4 Bytes" Bytesize="4" DisplayMethod="十六进制"/>
-        <Element Offset="900" Vartype="4 Bytes" Bytesize="4" RLECount="115" DisplayMethod="无符号整数"/>
-        <Element Offset="1360" Vartype="Pointer" Bytesize="4" DisplayMethod="无符号整数"/>
-        <Element Offset="1364" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="无符号整数"/>
-        <Element Offset="1376" Vartype="Pointer" Bytesize="4" RLECount="168" DisplayMethod="无符号整数"/>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000004" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="8" OffsetHex="0000000C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="8" OffsetHex="00000014" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="8" OffsetHex="0000001C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="8" OffsetHex="00000024" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="8" OffsetHex="0000002C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000030" Description="hp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="hp max" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="acttacker" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="def" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000040" Description="def max" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000044" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000048" Description="sk" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000004C" Description="sk max" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000050" Description="level" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000054" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="flag1" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="flag2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000060" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="100" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000064" Description="state,0:正常,256:死亡" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000068" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000006C" Description="flag3,1:玩家" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="00000070" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000084" Description="位置" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000088" DisplayMethod="Unsigned Integer"/>
       </Elements>
     </Structure>
   </Structures>
