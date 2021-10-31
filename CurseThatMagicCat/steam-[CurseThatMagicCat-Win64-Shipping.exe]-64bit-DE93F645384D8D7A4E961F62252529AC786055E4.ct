@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>43</ID>
+      <Description>"#1 获取数据"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(CurseThatMagicCat-Win64-Shipping.exe+D7A776,41 FF 54 C5 00 48 85 DB)
+alloc(cheat1_code,64,CurseThatMagicCat-Win64-Shipping.exe)
+registersymbol(cheat1_code)
+label(return)
+
+{$C}
+// 总时间地址
+unsigned long long cheat1_store1=0x00;
+// 当前时间地址
+unsigned long long cheat1_store2=0x00;
+// 破坏值地址
+unsigned long long cheat1_store3=0x00;
+// 警觉值地址
+unsigned long long cheat1_store4=0x00;
+{$ASM}
+
+cheat1_code:
+  call qword ptr [r13+rax*8+00]
+{$CCODE refRBP=rbp refRAX=rax refRSI=rsi refR8=r8 refR9=r9 refR10=r10 refR13=r13}
+  unsigned long long *ptrRBP=(unsigned long long *)refRBP;
+  if(refRSI==0x7FF640E5A120 &amp;&amp; refR8==0x04 &amp;&amp; refR9==0x7FFD2C07140A &amp;&amp; refR10==0x7FFD2C070000 &amp;&amp; refR13==0x7FF640E5A120){
+    //总时间
+    if(*(ptrRBP-4)==0x00 &amp;&amp; *(ptrRBP-1)==0x7FF640E5A120 &amp;&amp; *ptrRBP==0x00 &amp;&amp; *(ptrRBP+5)==0x7FF63DD9A898 &amp;&amp; *(ptrRBP+6)==0x7FF640E5A120 &amp;&amp; *(ptrRBP+11)==0x00 &amp;&amp; *(ptrRBP+13)==0x7FF63DD8C8CF &amp;&amp; *(ptrRBP+15)==0x7FF640E5A120 &amp;&amp; *(ptrRBP+17)==0x7FF640E5A120){
+      //这里必须用字节承载，否则产生的汇编是 eax 比较而不是 al 比较
+      unsigned char v1=(unsigned char)refRAX&lt;&lt;4;
+      if(v1==0x40){ cheat1_store1=refRAX; }
+    }
+    //时间
+    if(*(ptrRBP-4)==0x00 &amp;&amp; *(ptrRBP-1)==0x7FF640E5A120 &amp;&amp; *(ptrRBP+5)==0x7FF63F527D70 &amp;&amp; *(ptrRBP+13)==0x7FF63DD8C8CF &amp;&amp; *(ptrRBP+21)==0x7FF63DD8C90F &amp;&amp; *(ptrRBP+23)==0x7FF640E5A100 &amp;&amp; *(ptrRBP+25)==0x7FF640E5A120){
+      //这里必须用字节承载，否则产生的汇编是 eax 比较而不是 al 比较
+      unsigned char v1=(unsigned char)refRAX&lt;&lt;4;
+      if(v1==0x00){ cheat1_store2=refRAX; }
+    }
+    //破坏
+    if(*(ptrRBP-4)==0x00 &amp;&amp; *ptrRBP==0x00 &amp;&amp; *(ptrRBP+1)==0x7FF63DD8C38D &amp;&amp; *(ptrRBP+4)==0x00 &amp;&amp; *(ptrRBP+5)==0x7FF640E58D90 &amp;&amp; *(ptrRBP+11)==0x00 &amp;&amp; *(ptrRBP+13)==0x7FF63DD8C8CF &amp;&amp; *(ptrRBP+15)==0x7FF640E5A120){
+      //这里必须用字节承载，否则产生的汇编是 eax 比较而不是 al 比较
+      unsigned char v1=(unsigned char)refRAX&lt;&lt;4;
+      if(v1==0x40){ cheat1_store3=refRAX; }
+    }
+    //警觉
+    if(*(ptrRBP-4)==0x00 &amp;&amp; *(ptrRBP+5)==0x7FF63DD9A898 &amp;&amp; *(ptrRBP+6)==0x7FF640E5A120 &amp;&amp; *(ptrRBP+11)==0x00 &amp;&amp; *(ptrRBP+13)==0x7FF63DD8C8CF &amp;&amp; *(ptrRBP+15)==0x7FF640E5A120 &amp;&amp; *(ptrRBP+17)==0x7FF640E5A120 &amp;&amp; *(ptrRBP+19)==0x7FF63DD8C90F){
+      //这里必须用字节承载，否则产生的汇编是 eax 比较而不是 al 比较
+      unsigned char v1=(unsigned char)refRAX&lt;&lt;4;
+      if(v1==0x80){ cheat1_store4=refRAX; }
+    }
+  }
+{$ASM}
+  jmp return
+
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  jmp cheat1_code
+return:
+
+[DISABLE]
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  DB 41 FF 54 C5 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>44</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>45</ID>
+          <Description>"总时间"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>46</ID>
+          <Description>"时间"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store2</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>49</ID>
+          <Description>"破坏"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store3</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"警觉"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store4</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"#11 显示的剩余时间"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(CurseThatMagicCat-Win64-Shipping.exe+D7A776,41 FF 54 C5 00 48 85 DB)
+alloc(cheat11_code,336,CurseThatMagicCat-Win64-Shipping.exe)
+registersymbol(cheat11_code)
+label(return)
+label(default)
+label(timeout)
+label(cheat11_condition_rsi)
+label(cheat11_condition_r9)
+label(cheat11_condition_r10)
+label(cheat11_condition_r13)
+label(cheat11_condition_rsp18)
+label(cheat11_condition_rsp48)
+label(cheat11_condition_rsp50)
+label(cheat11_condition_rsp88)
+label(cheat11_condition_rsp98)
+label(cheat11_condition_rspA8)
+label(cheat11_store1)
+registersymbol(cheat11_store1)
+
+cheat11_code:
+  call qword ptr [r13+rax*8+00]
+  nop 4
+  pushfq
+  push rax
+  cmp rsi,[cheat11_condition_rsi]
+  jne default
+  cmp r8,04
+  jne default
+  cmp r9,[cheat11_condition_r9]
+  jne default
+  cmp r10,[cheat11_condition_r10]
+  jne default
+  cmp r13,[cheat11_condition_r13]
+  jne default
+  cmp [rsp+10],00 //rsp+00,rbp-20
+  jne default
+  mov rax,[cheat11_condition_rsp18]
+  cmp [rsp+28],rax //rsp+18,rbp-08
+  jne default
+  cmp [rsp+30],00 //rsp+20,rbp-00
+  jne default
+  mov rax,[cheat11_condition_rsp48]
+  cmp [rsp+58],rax //rsp+48,rbp+28
+  jne default
+  mov rax,[cheat11_condition_rsp50]
+  cmp [rsp+60],rax //rsp+50,rbp+30
+  jne default
+  cmp [rsp+88],00 //rsp+78,rbp+58
+  jne default
+  mov rax,[cheat11_condition_rsp88]
+  cmp [rsp+98],rax //rsp+88,rbp+68
+  jne default
+  mov rax,[cheat11_condition_rsp98]
+  cmp [rsp+A8],rax //rsp+98,rbp+78
+  jne default
+  mov rax,[cheat11_condition_rspA8]
+  cmp [rsp+B8],rax //rsp+A8,rbp+88
+  jne default
+  xor rax,rax
+  mov al,BYTE PTR [rsp]
+  shl al,4
+  cmp al,40
+  jne default
+timeout:
+  mov rax,[rsp]
+  mov [cheat11_store1],rax
+//  mov [rax],12C
+//  mov rcx,12C
+default:
+  pop rax
+  popfq
+  jmp return
+cheat11_condition_r9:
+  DB 0A 14 07 2C FD 7F 00 00
+cheat11_condition_r10:
+  DB 00 00 07 2C FD 7F 00 00
+cheat11_condition_rsp48:
+  DB 98 A8 D9 3D F6 7F 00 00
+cheat11_condition_rsp88:
+  DB CF C8 D8 3D F6 7F 00 00
+cheat11_condition_rsi:
+cheat11_condition_r13:
+cheat11_condition_rsp18:
+cheat11_condition_rsp50:
+cheat11_condition_rsp98:
+cheat11_condition_rspA8:
+  DB 20 A1 E5 40 F6 7F 00 00
+// 时间地址
+cheat11_store1:
+  DB 00 00 00 00 00 00 00 00
+
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  jmp cheat11_code
+return:
+
+[DISABLE]
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  DB 41 FF 54 C5 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"时间地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"时间值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>[cheat1_store1]</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"#12 获取时间地址 (错误)"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(CurseThatMagicCat-Win64-Shipping.exe+D7A776,41 FF 54 C5 00 48 85 DB)
+alloc(cheat12_code,336,CurseThatMagicCat-Win64-Shipping.exe)
+registersymbol(cheat12_code)
+label(return)
+
+cheat12_code:
+  call qword ptr [r13+rax*8+00]
+{$CCODE refRSP=rsp refRAX=rax}
+  unsigned long long *ptrRSP=(unsigned long long *)refRSP;
+  unsigned long long v1=*ptrRSP;
+{$ASM}
+  jmp return
+
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  jmp cheat12_code
+return:
+
+[DISABLE]
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  DB 41 FF 54 C5 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"总时间地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>34</ID>
+      <Description>"#13 获取时间地址 (正确 +18)"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(CurseThatMagicCat-Win64-Shipping.exe+D7A776,41 FF 54 C5 00 48 85 DB)
+alloc(cheat13_code,64,CurseThatMagicCat-Win64-Shipping.exe)
+registersymbol(cheat13_code)
+label(return)
+
+cheat13_code:
+  call qword ptr [r13+rax*8+00]
+{$CCODE refRSP=rsp refRAX=rax}
+  // rsp 是特殊寄存器，CE此处并没有将rsp的值正确传递，使用rbp替代
+  unsigned long long *ptrRSP=(unsigned long long *)(refRSP+0x18);
+  unsigned long long v1=*ptrRSP;
+{$ASM}
+  jmp return
+
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  jmp cheat13_code
+return:
+
+[DISABLE]
+CurseThatMagicCat-Win64-Shipping.exe+D7A776:
+  DB 41 FF 54 C5 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>36</ID>
+          <Description>"总时间地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat2_store1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
