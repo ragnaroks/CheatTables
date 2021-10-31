@@ -121,7 +121,7 @@ dealloc(*)
     </CheatEntry>
     <CheatEntry>
       <ID>16</ID>
-      <Description>"#11 显示的剩余时间"</Description>
+      <Description>"#11 获取时间地址"</Description>
       <Options moHideChildren="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{$STRICT}
