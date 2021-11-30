@@ -113,7 +113,7 @@ dealloc(*)
         </CheatEntry>
         <CheatEntry>
           <ID>9</ID>
-          <Description>"紫色道具地址"</Description>
+          <Description>"紫宝石道具地址"</Description>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
@@ -131,7 +131,7 @@ dealloc(*)
         </CheatEntry>
         <CheatEntry>
           <ID>11</ID>
-          <Description>"紫色道具数量"</Description>
+          <Description>"紫宝石数量"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>cheat2_store2</Address>
@@ -142,98 +142,5 @@ dealloc(*)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry>
-      <Description>Change of fstp qword ptr [ebp-08]</Description>
-      <AddressString>05F75513</AddressString>
-      <Before>
-        <Byte>45</Byte>
-        <Byte>08</Byte>
-        <Byte>D9</Byte>
-        <Byte>40</Byte>
-        <Byte>24</Byte>
-      </Before>
-      <Actual>
-        <Byte>DD</Byte>
-        <Byte>5D</Byte>
-        <Byte>F8</Byte>
-      </Actual>
-      <After>
-        <Byte>F2</Byte>
-        <Byte>0F</Byte>
-        <Byte>10</Byte>
-        <Byte>45</Byte>
-        <Byte>F8</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry>
-      <Description>Change of mov [ebp-1C],eax</Description>
-      <AddressString>05F7551F</AddressString>
-      <Before>
-        <Byte>F8</Byte>
-        <Byte>F2</Byte>
-        <Byte>0F</Byte>
-        <Byte>2C</Byte>
-        <Byte>C0</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>45</Byte>
-        <Byte>E4</Byte>
-      </Actual>
-      <After>
-        <Byte>B9</Byte>
-        <Byte>3C</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry>
-      <Description>Change of fsubp st(1),st(0)</Description>
-      <AddressString>05F75833</AddressString>
-      <Before>
-        <Byte>C9</Byte>
-        <Byte>D9</Byte>
-        <Byte>CA</Byte>
-        <Byte>DE</Byte>
-        <Byte>C9</Byte>
-      </Before>
-      <Actual>
-        <Byte>DE</Byte>
-        <Byte>E9</Byte>
-      </Actual>
-      <After>
-        <Byte>D9</Byte>
-        <Byte>5F</Byte>
-        <Byte>24</Byte>
-        <Byte>D9</Byte>
-        <Byte>47</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry>
-      <Description>Change of fstp dword ptr [edi+24]</Description>
-      <AddressString>05F75835</AddressString>
-      <Before>
-        <Byte>CA</Byte>
-        <Byte>DE</Byte>
-        <Byte>C9</Byte>
-        <Byte>DE</Byte>
-        <Byte>E9</Byte>
-      </Before>
-      <Actual>
-        <Byte>D9</Byte>
-        <Byte>5F</Byte>
-        <Byte>24</Byte>
-      </Actual>
-      <After>
-        <Byte>D9</Byte>
-        <Byte>47</Byte>
-        <Byte>24</Byte>
-        <Byte>DD</Byte>
-        <Byte>5D</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>
