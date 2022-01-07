@@ -1,4 +1,4 @@
 # Minoria
 
-### steam-[Minoria.exe]-64bit-5DFB44D798FD85685E05E5AE1A50E51B5EB24B3E
+### steam-[Minoria.exe]-amd64-5DFB44D798FD85685E05E5AE1A50E51B5EB24B3E
 游戏太无聊，没玩下去，就只做了个无限生命。

@@ -1,6 +1,6 @@
 # CatQuest2 (猫咪斗恶龙2)
 
-### steam-[Cat Quest II.exe]-32bit-D0AE9707B0EF5F88832573FD1C6A29E957175D5B
+### steam-[Cat Quest II.exe]-x86-D0AE9707B0EF5F88832573FD1C6A29E957175D5B
 > 此表单无实际作用，在此分享修改思路。
 
 搜索字节数组 `55 8B EC 83 EC 28 8B 45 08 8B 00 89 45 FC 90 E8 ? ? ? ? 8B C8 8B 45 FC 89 4C 24 08 C7 44 24 04 ? ? ? ? 89 04 24 8D 6D 00 E8 ? ? ? ? C9 C3`，可能搜索到多个结果，找到其中的 `mov eax,[eax]` 并找出指令访问的地址。

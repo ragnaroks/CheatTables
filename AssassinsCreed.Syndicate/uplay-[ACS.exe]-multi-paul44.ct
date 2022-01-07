@@ -4508,7 +4508,7 @@ function getStaticAddr(sAOB,nOffset,sBaseAddr,nEval,nStartMem,nEndMem,sFlags)
   scan.waitTillDone()
   scan.getOnlyResult()
 
-  local bArch = targetIs64Bit()
+  local bArch = targetIsamd64()
   local addrStruct = scan.Result
   --print(string.format('+ %X +',scan.Result))
   if (nEval == 0 or nEval == 2) then
