@@ -577,34 +577,6 @@ dealloc(*)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry>
-      <Description>Change of call System.Collections.Generic.Dictionary`2[ResourceItemType,System.Int32]:set_Item</Description>
-      <AddressString>243A5820</AddressString>
-      <Before>
-        <Byte>52</Byte>
-        <Byte>51</Byte>
-        <Byte>50</Byte>
-        <Byte>39</Byte>
-        <Byte>00</Byte>
-      </Before>
-      <Actual>
-        <Byte>E8</Byte>
-        <Byte>4B</Byte>
-        <Byte>B6</Byte>
-        <Byte>B1</Byte>
-        <Byte>E1</Byte>
-      </Actual>
-      <After>
-        <Byte>83</Byte>
-        <Byte>C4</Byte>
-        <Byte>10</Byte>
-        <Byte>8D</Byte>
-        <Byte>45</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
-  <UserdefinedSymbols/>
   <Structures StructVersion="2">
     <Structure Name="Therion" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
       <Elements>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#1 无限生命数量"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 0108A0DD
+// 00C0AD32
+{$STRICT}
+[ENABLE]
+assert("Blazing Chrome.exe"+1BAD32,E8)
+alloc(cheat1_code,4,"Blazing Chrome.exe")
+registersymbol(cheat1_code)
+
+cheat1_code:
+  readmem("Blazing Chrome.exe"+1BAD33,4)
+
+"Blazing Chrome.exe"+1BAD32:
+  nop 5
+
+[DISABLE]
+"Blazing Chrome.exe"+1BAD32:
+  DB E8
+  readmem(cheat1_code,4)
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

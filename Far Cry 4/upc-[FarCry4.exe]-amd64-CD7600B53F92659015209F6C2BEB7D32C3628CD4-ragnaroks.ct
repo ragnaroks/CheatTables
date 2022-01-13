@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#1 不被探测"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+1876BCC,F3 0F 58 73 0C)
+
+FC64.dll+1876BCC:
+  xorps xmm6,xmm6
+  nop 2
+
+[DISABLE]
+FC64.dll+1876BCC:
+  DB F3 0F 58 73 0C
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#2 弹匣不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// 偏移 +104
+{$STRICT}
+[ENABLE]
+assert(FC64.dll+D2E136,2B CB)
+
+FC64.dll+D2E136:
+  nop 2
+
+[DISABLE]
+FC64.dll+D2E136:
+  DB 2B CB
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#3 备弹不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+B82D87,2B C1)
+
+FC64.dll+B82D87:
+  nop 2
+
+[DISABLE]
+FC64.dll+B82D87:
+  DB 2B C1
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#4 获取金钱地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+B851D7,8B 96 28 01 00 00)
+alloc(cheat4_code,32,FC64.dll)
+registersymbol(cheat4_code)
+label(returnhere)
+label(cheat4_store1)
+registersymbol(cheat4_store1)
+
+cheat4_code:
+  lea rdx,[rsi+00000128]
+  mov [cheat4_store1],rdx
+  mov edx,[rsi+00000128]
+  jmp returnhere
+cheat4_store1:
+  DB 00 00 00 00 00 00 00 00
+
+FC64.dll+B851D7:
+  jmp cheat4_code
+  nop
+returnhere:
+
+[DISABLE]
+FC64.dll+B851D7:
+  DB 8B 96 28 01 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"金钱"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_store1</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"#5 获取坐标用于传送"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// FC64.dll+1EE18DE 这里有相同的代码，但是修改会造成掉出地图和不能通过输入移动
+{$STRICT}
+[ENABLE]
+assert(FC64.dll+1EE2223,0F 29 81 20 01 00 00)
+assert(FC64.dll+136FC2E,48 8B D8 48 8D 50 20)
+alloc(cheat5_code,156,FC64.dll)
+registersymbol(cheat5_code)
+label(returnhere1)
+label(cheat5_code1)
+label(cheat5_code1_exit)
+label(returnhere2)
+label(cheat5_code2)
+label(cheat5_code3)
+registersymbol(cheat5_code3)
+label(cheat5_code3_exit)
+label(cheat5_store1)
+registersymbol(cheat5_store1)
+label(cheat5_store2)
+registersymbol(cheat5_store2)
+
+cheat5_code:
+  nop
+/* 获取人物坐标 */
+cheat5_code1:
+  pushfq
+  cmp [rsp+50],FC64.dll+1FA4A93
+  jne short cheat5_code1_exit
+  mov [cheat5_store1],rcx
+cheat5_code1_exit:
+  popfq
+  movaps [rcx+00000120],xmm0
+  jmp returnhere1
+/* 获取导航坐标 */
+cheat5_code2:
+  mov [cheat5_store2],rax
+  mov rbx,rax
+  lea rdx,[rax+20]
+  jmp returnhere2
+/* 传送 */
+cheat5_code3:
+  mov rbx,[cheat5_store2]
+  cmp rbx,00
+  je short cheat5_code3_exit
+  cmp [rbx],00
+  je short cheat5_code3_exit
+  add rbx,04
+  cmp [rbx],00
+  je short cheat5_code3_exit
+  add rbx,04
+  cmp [rbx],00
+  je short cheat5_code3_exit
+  mov rbx,[cheat5_store2]
+  mov rax,[cheat5_store1]
+  add rax,120
+  mov ecx,[rbx]
+  mov [rax],ecx
+  add rbx,04
+  add rax,04
+  mov ecx,[rbx]
+  mov [rax],ecx
+  add rbx,04
+  add rax,04
+  mov ecx,[rbx]
+  mov [rax],ecx
+cheat5_code3_exit:
+  ret
+/* 数据存储区 */
+align 08 90
+cheat5_store1:
+  DB 00 00 00 00 00 00 00 00
+cheat5_store2:
+  DB 00 00 00 00 00 00 00 00
+
+FC64.dll+1EE2223:
+  jmp cheat5_code1
+  nop 2
+returnhere1:
+
+FC64.dll+136FC2E:
+  jmp cheat5_code2
+  nop 2
+returnhere2:
+
+[DISABLE]
+FC64.dll+1EE2223:
+  DB 0F 29 81 20 01 00 00
+FC64.dll+136FC2E:
+  DB 48 8B D8 48 8D 50 20
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>42</ID>
+          <Description>"执行传送 (CTRL+HOME)"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$STRICT}
+[ENABLE]
+createthread(cheat5_code3)
+[DISABLE]
+createthread(cheat5_code3)
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>36</Key>
+              </Keys>
+              <ID>0</ID>
+              <ActivateSound>Activate</ActivateSound>
+              <DeactivateSound>Deactivate</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"人物坐标"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"X"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>cheat5_store1</Address>
+              <Offsets>
+                <Offset>120</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"Y"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>cheat5_store1</Address>
+              <Offsets>
+                <Offset>124</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>33</ID>
+              <Description>"Z"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>cheat5_store1</Address>
+              <Offsets>
+                <Offset>128</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"导航坐标"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>39</ID>
+              <Description>"X"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>cheat5_store2</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>40</ID>
+              <Description>"Y"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>cheat5_store2</Address>
+              <Offsets>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>41</ID>
+              <Description>"Z"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>cheat5_store2</Address>
+              <Offsets>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>45</ID>
+      <Description>"#6 无限生命值"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+910D05,F3 0F 11 49 18)
+alloc(cheat6_code,32,FC64.dll)
+registersymbol(cheat6_code)
+label(returnhere)
+
+{$C}
+#include "stdbool.h"
+{$ASM}
+cheat6_code:
+  push rax
+  mov rax,FC64.dll
+{$CCODE refRSP=rsp refRAX=rax refRDX=rdx refXMM0=xmm0 refXMM1=xmm1}
+  unsigned long long *ptrRSP=(unsigned long long *)(refRSP+0x08);
+  /* 生命值 */
+  bool healthCondition1=refRDX==refRAX+0x279B100;
+  bool healthCondition2=*(ptrRSP+1)==refRAX+0x9BF0DA;
+  if(healthCondition1 &amp;&amp; healthCondition2){
+    refXMM1.f0=refXMM0.f0;
+    goto labelWriteBack;
+  }
+  /* 耐力值 */
+  bool staminaCondition1=*(ptrRSP+7)==refRAX+0x9BF0DA;
+  bool staminaCondition2=*(ptrRSP+15)==refRAX+0x5E434A;
+  bool staminaCondition3=*(ptrRSP+21)==refRAX+0xF0AAF2;
+  if(staminaCondition1 &amp;&amp; staminaCondition2 &amp;&amp; staminaCondition3){
+    refXMM1.f0=refXMM0.f0;
+    goto labelWriteBack;
+  }
+  /* 氧气值 */
+  bool oxygenCondition1=*(ptrRSP+1)==refRAX+0x9BF0DA;
+  bool oxygenCondition2=*(ptrRSP+7)==refRAX+0x9BF0DA;
+  bool oxygenCondition3=*(ptrRSP+15)==refRAX+0xEE4DE4;
+  bool oxygenCondition4=*(ptrRSP+21)==refRAX+0xF0A74E;
+  if(oxygenCondition1 &amp;&amp; oxygenCondition2 &amp;&amp; oxygenCondition3 &amp;&amp; oxygenCondition4){
+    refXMM1.f0=refXMM0.f0;
+    goto labelWriteBack;
+  }
+  /* 防弹衣？ */
+  /*
+  bool armorCondition1=*(ptrRSP+7)==refRAX+0xEE5722;
+  bool armorCondition2=*(ptrRSP+15)==refRAX+0x8E24E2;
+  bool armorCondition3=*(ptrRSP+21)==refRAX+0xEE77C2;
+  if(armorCondition1 &amp;&amp; armorCondition2 &amp;&amp; armorCondition3){
+    refXMM1.f0=refXMM0.f0;
+    goto labelWriteBack;
+  }*/
+  /* 回写 */
+  labelWriteBack:
+{$ASM}
+  pop rax
+  movss [rcx+18],xmm1
+  jmp returnhere
+
+FC64.dll+910D05:
+//  movaps xmm1,xmm0
+//  nop 2
+  jmp cheat6_code
+returnhere:
+
+[DISABLE]
+FC64.dll+910D05:
+  DB F3 0F 11 49 18
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>50</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat6_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>51</ID>
+      <Description>"#7 箭、地雷、C4不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+B82D87,2B C1)
+
+FC64.dll+B82D87:
+  nop 2
+
+[DISABLE]
+FC64.dll+B82D87:
+  DB 2B C1
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>55</ID>
+      <Description>"#8 设置冲刺速度"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+EE49DA,F3 0F 11 B0 F8 00 00 00)
+alloc(cheat8_code,32,FC64.dll)
+registersymbol(cheat8_code)
+label(returnhere)
+label(cheat8_setting1)
+registersymbol(cheat8_setting1)
+
+cheat8_code:
+  movss xmm6,[cheat8_setting1]
+  movss [rax+F8],xmm6
+  jmp returnhere
+align 04
+cheat8_setting1:
+  DB 00 00 B4 41
+
+FC64.dll+EE49DA:
+  jmp cheat8_code
+  nop 3
+returnhere:
+
+[DISABLE]
+FC64.dll+EE49DA:
+  DB F3 0F 11 B0 F8 00 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat8_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"速度 (初始 7.5)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat8_setting1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>58</ID>
+      <Description>"#9 每种针剂 8 个"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(FC64.dll+1276E8A,45 8B B5 C8 00 00 00)
+alloc(cheat9_code,32,FC64.dll)
+registersymbol(cheat9_code)
+label(returnhere)
+
+cheat9_code:
+  mov [r13+C8],08
+  mov r14d,[r13+C8]
+  jmp returnhere
+
+FC64.dll+1276E8A:
+  jmp cheat9_code
+  nop 2
+returnhere:
+
+[DISABLE]
+FC64.dll+1276E8A:
+  DB 45 8B B5 C8 00 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>59</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat9_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>
