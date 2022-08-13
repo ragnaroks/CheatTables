@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 无限金币"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(GameAssembly.dll+488593,8B 7D 10 01 7E 14)
+label(returnhere)
+alloc(cheat1_code,32,GameAssembly.dll)
+registersymbol(cheat1_code)
+
+cheat1_code:
+  mov edi,[ebp+10]
+  add [esi+14],edi
+  mov [esi+14],2000
+  jmp returnhere
+
+GameAssembly.dll+488593:
+  jmp cheat1_code
+  nop
+returnhere:
+
+[DISABLE]
+GameAssembly.dll+488593:
+  DB 8B 7D 10 01 7E 14
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
