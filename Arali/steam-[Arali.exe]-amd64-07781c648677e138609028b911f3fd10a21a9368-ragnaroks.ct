@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 技能无冷却"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(Arali.exe+C3E1E,F3 41 0F 11 04 C8)
+label(returnhere)
+alloc(cheat1_code,32,Arali.exe)
+registersymbol(cheat1_code)
+label(default)
+
+cheat1_code:
+  pushfq
+  cmp rax,05
+  jne short default
+  cmp rcx,00
+  je short default
+  cmp rdx,00
+  je short default
+  xorps xmm0,xmm0
+default:
+  popfq
+  movss [r8+rcx*8],xmm0
+  jmp returnhere
+
+Arali.exe+C3E1E:
+  jmp cheat1_code
+  nop
+returnhere:
+
+[DISABLE]
+Arali.exe+C3E1E:
+  DB F3 41 0F 11 04 C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#2 无限生命值"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(Arali.exe+950C0,8B 4E 18 2B C8 89 4E 18)
+
+Arali.exe+950C0:
+  nop 8
+
+[DISABLE]
+Arali.exe+950C0:
+  DB 8B 4E 18 2B C8 89 4E 18
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
