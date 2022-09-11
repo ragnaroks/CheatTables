@@ -1,6 +1,6 @@
 # AssassinsCreed.Rogue (刺客信条叛变)
 
-### uplay-[ACC.exe]-amd64-D32BCC7F3DF2A9D0C898EBBD8B736950CD85FABD-unknown
+### uplay-[ACC]-amd64-D32BCC7F3DF2A9D0C898EBBD8B736950CD85FABD-unknown
 > 这是一份来源未知的表单。
 激活**Enable Cheats**后选择功能。
 

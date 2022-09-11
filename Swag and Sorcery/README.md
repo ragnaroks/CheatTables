@@ -1,6 +1,6 @@
 # Swag and Sorcery (赃物与巫术)
 
-### steam-[Swag and Sorcery.exe]-x86-BBAB912C7610EAE513F801D550169A22861138FA-ragnaroks
+### steam-[Swag and Sorcery]-x86-BBAB912C7610EAE513F801D550169A22861138FA-ragnaroks
 **游戏本身有 BUG，即触发剧情的时候可能崩溃，和修改项无关**  
 - `#1` 需要一次金钱变动之后才能激活，可以点一下澡堂
 - `#2` 需要战斗一次之后才能激活，且只能防御直接攻击，不能防御技能攻击

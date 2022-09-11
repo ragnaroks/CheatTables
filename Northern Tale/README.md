@@ -1,4 +1,4 @@
 # NorthernTale
 
-### steam-[NorthernTale.exe]
+### steam-[NorthernTale]
 无特别说明。

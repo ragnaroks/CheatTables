@@ -1,6 +1,6 @@
 # This Is The Police
 
-### steam-[Police.exe]-x86-5DC8630D16C7522CE52EE518C204DF91FAE69257
+### steam-[Police]-x86-5DC8630D16C7522CE52EE518C204DF91FAE69257
 激活`#2`可修改槽位数量，建议一步到位，警员 64 个，探员 24 个。
 
 `#3`其实没啥用，游戏内部对失败任务数量没有任何处理逻辑。

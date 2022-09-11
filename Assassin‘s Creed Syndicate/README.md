@@ -1,7 +1,7 @@
 # AssassinsCreed.Syndicate (刺客信条枭雄)
 **syndicate**一般情况下翻译为**辛迪加**，意为暴力集团。
 
-### uplay-[ACS.exe]-multi-paul44
+### uplay-[ACS]-multi-paul44
 > 这是一份来自 paul44 的表单，[作者说明](https://fearlessrevolution.com/viewtopic.php?t=12874)。
 
 必须完全加载游戏后（一般此时会出现随机事件）再启动修改。
