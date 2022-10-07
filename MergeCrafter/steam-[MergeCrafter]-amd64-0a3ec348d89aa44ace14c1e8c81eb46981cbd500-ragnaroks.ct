@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="44">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 获取货币数据"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//{CurrencyManager:GetCurrency+4b}
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:CurrencyManager:GetCurrency)
+assert(cheat1_entry+4B,83 3E 00 48 8B 46 38)
+registersymbol(cheat1_entry)
+label(returnhere)
+alloc(cheat1_code,80,cheat1_entry)
+registersymbol(cheat1_code)
+label(exit)
+label(slot0)
+label(slot1)
+label(slot2)
+label(slot3)
+label(slot4)
+label(cheat1_store)
+registersymbol(cheat1_store)
+
+cheat1_code:
+  pushfq
+  cmp rcx,00
+  je short slot0
+  cmp rcx,18
+  je short slot1
+  cmp rcx,48
+  je short slot2
+  cmp rcx,A8
+  je short slot3
+  cmp rcx,C0
+  je short slot4
+exit:
+  popfq
+  mov rax,[rsi+38]
+  jmp returnhere
+slot0:
+  mov [cheat1_store],rsi
+  jmp short exit
+slot1:
+  mov [cheat1_store+08],rsi
+  jmp short exit
+slot2:
+  mov [cheat1_store+10],rsi
+  jmp short exit
+slot3:
+  mov [cheat1_store+18],rsi
+  jmp short exit
+slot4:
+  mov [cheat1_store+20],rsi
+  jmp short exit
+align 4
+cheat1_store:
+  DB 00 00 00 00 00 00 00 00
+  DB 00 00 00 00 00 00 00 00
+  DB 00 00 00 00 00 00 00 00
+  DB 00 00 00 00 00 00 00 00
+  DB 00 00 00 00 00 00 00 00
+
+cheat1_entry+4B:
+  jmp cheat1_code
+  nop 2
+returnhere:
+
+[DISABLE]
+cheat1_entry+4B:
+  DB 83 3E 00 48 8B 46 38
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"coins"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"energy"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store+08</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"runic"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store+10</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"camp supplies"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store+18</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"xp"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store+20</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#2 16 倍经验值"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//XPManager:SpawnXPOrbs+4
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:XPManager:SpawnXPOrbs)
+assert(cheat2_entry+04,48 81 EC 40 01 00 00)
+registersymbol(cheat2_entry)
+label(returnhere)
+alloc(cheat2_code,32,cheat2_entry)
+registersymbol(cheat2_code)
+
+cheat2_code:
+  shl rdx,04
+  sub rsp,140
+  jmp returnhere
+
+cheat2_entry+04:
+  jmp cheat2_code
+  nop 2
+returnhere:
+
+[DISABLE]
+cheat2_entry+04:
+  DB 48 81 EC 40 01 00 00
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#3 工具耐久度不变"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//ToolCell:set_CurrentDurability
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,Assembly-CSharp:ToolCell:set_CurrentDurability)
+registersymbol(cheat3_entry)
+
+cheat3_entry:
+  DB C3
+
+[DISABLE]
+cheat3_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"#4 解锁内购"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//IAPManager:StartPurchase+5e
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat4_entry,Assembly-CSharp:IAPManager:StartPurchase)
+findmonomethod(cheat4_entry2,Assembly-CSharp:IAPManager:PurchaseSteam)
+findmonomethod(cheat4_entry3,Assembly-CSharp:IAPManager:PurchaseSuccess)
+assert(cheat4_entry+57,48 8B 4D F0 48 8B D6 49 BB)
+registersymbol(cheat4_entry)
+registersymbol(cheat4_entry2)
+registersymbol(cheat4_entry3)
+
+cheat4_entry+5E:
+  mov r11,cheat4_entry3
+
+[DISABLE]
+cheat4_entry+5E:
+  //DB 48 8B 4D F0 48 8B D6 49 BB
+  mov r11,cheat4_entry2
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#5 16 倍破坏力"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Breakable:TakeDamageFromTool+8
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat5_entry,Assembly-CSharp:Breakable:TakeDamageFromTool)
+assert(cheat5_entry+08,48 89 75 F8 48 8B F1)
+registersymbol(cheat5_entry)
+label(returnhere)
+alloc(cheat5_code,32,cheat5_entry)
+registersymbol(cheat5_code)
+label(cheat5_define1)
+
+cheat5_code:
+  mov [rbp-08],rsi
+  mov rsi,rcx
+  mulss xmm1,[cheat5_define1]
+  jmp returnhere
+align 4
+cheat5_define1:
+  DB 00 00 80 41
+
+cheat5_entry+08:
+  jmp cheat5_code
+  nop 2
+returnhere:
+
+[DISABLE]
+cheat5_entry+08:
+  DB 48 89 75 F8 48 8B F1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"#6 高速熔炉"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//FuelComponent:StartWork+8
+// [rcx+30] 剩余燃料
+// [rcx+40] 物品还要烧多久
+// [rcx+44] 物品总共要烧多久
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat6_entry,Assembly-CSharp:FuelComponent:StartWork)
+assert(cheat6_entry+08,48 89 75 F8 48 8B F1)
+registersymbol(cheat6_entry)
+label(returnhere)
+alloc(cheat6_code,32,cheat6_entry)
+registersymbol(cheat6_code)
+
+cheat6_code:
+  mov [rbp-08],rsi
+  mov rsi,rcx
+  mov [rcx+40],00
+  jmp returnhere
+
+cheat6_entry+08:
+  jmp cheat6_code
+  nop 2
+returnhere:
+
+[DISABLE]
+cheat6_entry+08:
+  DB 48 89 75 F8 48 8B F1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat6_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat6_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
