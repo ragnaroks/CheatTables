@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 子弹不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat1_address,8B 70 28 8D 76 FF 89 70 28 8D 89 80 00 00 00 8D 55 F0)
+registersymbol(cheat1_address)
+
+cheat1_address:
+  nop 9
+
+[DISABLE]
+/*
+134CFFA9 - 8B 70 28              - mov esi,[eax+28]
+134CFFAC - 8D 76 FF              - lea esi,[esi-01]
+134CFFAF - 89 70 28              - mov [eax+28],esi
+134CFFB2 - 8D 89 80000000        - lea ecx,[ecx+00000080]
+134CFFB8 - 8D 55 F0              - lea edx,[ebp-10]
+*/
+cheat1_address:
+  DB 8B 70 28 8D 76 FF 89 70 28
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_address</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"#2 营地时间不增加"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat2_address,8B 58 58 03 DE 8B 75 A8 89 58 58 8B 82 A8 02 00 00 85 C0)
+assert(cheat2_address+03,03 DE)
+registersymbol(cheat2_address)
+
+cheat2_address+03:
+  nop 2
+
+[DISABLE]
+/*
+1342543F - 8B 58 58              - mov ebx,[eax+58]
+13425442 - 03 DE                 - add ebx,esi
+13425444 - 8B 75 A8              - mov esi,[ebp-58]
+13425447 - 89 58 58              - mov [eax+58],ebx
+1342544A - 8B 82 A8020000        - mov eax,[edx+000002A8]
+13425450 - 85 C0                 - test eax,eax
+*/
+cheat2_address+03:
+  DB 03 DE
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_address</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"#3 生命值不减（第 1 匹配项）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">/*
+1358AC10 - 8B 87 F0000000        - mov eax,[edi+000000F0]
+1358AC16 - 8B 4E 24              - mov ecx,[esi+24]
+1358AC19 - 8B 7E 20              - mov edi,[esi+20]
+1358AC1C - 66 0F57 C0            - xorpd xmm0,xmm0
+1358AC20 - F2 0F2A C1            - cvtsi2sd xmm0,ecx
+1358AC24 - 66 0F57 C9            - xorpd xmm1,xmm1
+1358AC28 - F2 0F2A CF            - cvtsi2sd xmm1,edi
+1358AC2C - F2 0F5E C1            - divsd xmm0,xmm1
+1358AC30 - 85 C0                 - test eax,eax
+*/
+
+[ENABLE]
+aobscan(cheat3_address_o1,8B 87 F0 00 00 00 8B 4E 24 8B 7E 20 66 0F 57 C0 F2 0F 2A C1 66 0F 57 C9 F2 0F 2A CF F2 0F 5E C1 85 C0)
+assert(cheat3_address_o1+06,8B 4E 24 8B 7E 20)
+registersymbol(cheat3_address_o1)
+label(returnhere)
+alloc(cheat3_code_o1,32,cheat3_address_o1)
+registersymbol(cheat3_code_o1)
+
+cheat3_code_o1:
+  mov edi,[esi+20]
+  mov [esi+24],edi
+  mov ecx,edi
+  jmp returnhere
+
+cheat3_address_o1+06:
+  jmp cheat3_code_o1
+  nop
+returnhere:
+
+[DISABLE]
+cheat3_address_o1+06:
+  DB 8B 4E 24 8B 7E 20
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_address_o1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code_o1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"#3 生命值不减（第 2 匹配项）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">/*
+1358AC10 - 8B 87 F0000000        - mov eax,[edi+000000F0]
+1358AC16 - 8B 4E 24              - mov ecx,[esi+24]
+1358AC19 - 8B 7E 20              - mov edi,[esi+20]
+1358AC1C - 66 0F57 C0            - xorpd xmm0,xmm0
+1358AC20 - F2 0F2A C1            - cvtsi2sd xmm0,ecx
+1358AC24 - 66 0F57 C9            - xorpd xmm1,xmm1
+1358AC28 - F2 0F2A CF            - cvtsi2sd xmm1,edi
+1358AC2C - F2 0F5E C1            - divsd xmm0,xmm1
+1358AC30 - 85 C0                 - test eax,eax
+*/
+
+[ENABLE]
+aobscan(cheat3_address_o2,8B 87 F0 00 00 00 8B 4E 24 8B 7E 20 66 0F 57 C0 F2 0F 2A C1 66 0F 57 C9 F2 0F 2A CF F2 0F 5E C1 85 C0)
+assert(cheat3_address_o2+06,8B 4E 24 8B 7E 20)
+registersymbol(cheat3_address_o2)
+label(returnhere)
+alloc(cheat3_code_o2,32,cheat3_address_o2)
+registersymbol(cheat3_code_o2)
+
+cheat3_code_o2:
+  mov edi,[esi+20]
+  mov [esi+24],edi
+  mov ecx,edi
+  jmp returnhere
+
+cheat3_address_o2+06:
+  jmp cheat3_code_o2
+  nop
+returnhere:
+
+[DISABLE]
+cheat3_address_o2+06:
+  DB 8B 4E 24 8B 7E 20
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_address_o2</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code_o2</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#4 机枪塔子弹不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">/*
+134FC34C - 8B 58 28              - mov ebx,[eax+28]
+134FC34F - 8D 5B FF              - lea ebx,[ebx-01]
+134FC352 - 89 58 28              - mov [eax+28],ebx
+134FC355 - 8B B0 00020000        - mov esi,[eax+00000200]
+134FC35B - 85 F6                 - test esi,esi
+*/
+
+[ENABLE]
+aobscan(cheat4_address,8B 58 28 8D 5B FF 89 58 28 8B B0 00 02 00 00 85 F6)
+registersymbol(cheat4_address)
+
+cheat4_address:
+  nop 9
+
+[DISABLE]
+cheat4_address:
+  DB 8B 58 28 8D 5B FF 89 58 28
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_address</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#5 精力不减（探索次数）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">/*
+13473436 - 8B 59 5C              - mov ebx,[ecx+5C]
+13473439 - 8D 5B FF              - lea ebx,[ebx-01]
+1347343C - 89 59 5C              - mov [ecx+5C],ebx
+1347343F - 8B 98 B8000000        - mov ebx,[eax+000000B8]
+*/
+
+[ENABLE]
+aobscan(cheat5_address,8B 59 5C 8D 5B FF 89 59 5C 8B 98 B8 00 00 00)
+registersymbol(cheat5_address)
+
+cheat5_address:
+  nop 9
+
+[DISABLE]
+cheat5_address:
+  DB 8B 59 5C 8D 5B FF 89 59 5C
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_address</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"#6 支援火炮不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">/*
+1A67D94B - 8B 41 24              - mov eax,[ecx+24]
+1A67D94E - 8D 40 FF              - lea eax,[eax-01]
+1A67D951 - 89 41 24              - mov [ecx+24],eax
+1A67D954 - 8B 83 F0010000        - mov eax,[ebx+000001F0]
+1A67D95A - 85 C0                 - test eax,eax
+*/
+
+[ENABLE]
+aobscan(cheat6_address,8B 41 24 8D 40 FF 89 41 24 8B 83 F0 01 00 00 85 C0)
+registersymbol(cheat6_address)
+
+cheat6_address:
+  nop 9
+
+[DISABLE]
+cheat6_address:
+  DB 8B 41 24 8D 40 FF 89 41 24
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"注入地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_address</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
