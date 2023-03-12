@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#1 生命值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(GameAssembly.dll+28CB28,FF 48 08)
+
+GameAssembly.dll+28CB28:
+  nop 3
+
+[DISABLE]
+GameAssembly.dll+28CB28:
+  DB FF 48 08
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#2 金币不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(GameAssembly.dll+28E47E,2B D1 89 50 20)
+
+GameAssembly.dll+28E47E:
+  nop 2
+
+[DISABLE]
+GameAssembly.dll+28E47E:
+  DB 2B D1
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
