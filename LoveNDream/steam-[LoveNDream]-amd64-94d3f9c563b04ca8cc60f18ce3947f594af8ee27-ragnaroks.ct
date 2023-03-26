@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 无限时间"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:Timer:Wait)
+assert(cheat1_entry+0A,0F B6 47 1C 85 C0)
+registersymbol(cheat1_entry)
+label(returnhere)
+alloc(cheat1_code,32,cheat1_entry)
+registersymbol(cheat1_code)
+
+cheat1_code:
+  mov [edi+20],01
+  movzx eax,byte ptr [edi+1C]
+  test eax,eax
+  jmp returnhere
+
+cheat1_entry+0A:
+  jmp cheat1_code
+  nop
+returnhere:
+
+
+
+[DISABLE]
+cheat1_entry+0A:
+  DB 0F B6 47 1C 85 C0
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="String" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="Length" DisplayMethod="unsigned integer"/>
+        <Element Offset="12" Vartype="Unicode String" Bytesize="128" OffsetHex="0000000C" Description="Value" DisplayMethod="unsigned integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="Timer" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="4" OffsetHex="0000000C" Description="uiText" DisplayMethod="unsigned integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" OffsetHex="00000010" Description="timeIncCountText" DisplayMethod="unsigned integer"/>
+        <Element Offset="20" Vartype="String" Bytesize="1" OffsetHex="00000014" Description="incCountKey" DisplayMethod="unsigned integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="timeInSeconds" DisplayMethod="unsigned integer"/>
+        <Element Offset="28" Vartype="Byte" Bytesize="1" OffsetHex="0000001C" Description="isPaused" DisplayMethod="unsigned integer"/>
+        <Element Offset="32" Vartype="Float" Bytesize="4" OffsetHex="00000020" Description="timeCounter" DisplayMethod="unsigned integer"/>
+        <Element Offset="36" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000024" Description="totalTime" DisplayMethod="unsigned integer"/>
+        <Element Offset="40" Vartype="Float" Bytesize="4" OffsetHex="00000028" Description="sleepTime" DisplayMethod="unsigned integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="incCount" DisplayMethod="unsigned integer"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000030" Description="timeInitialColor" DisplayMethod="unsigned integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
