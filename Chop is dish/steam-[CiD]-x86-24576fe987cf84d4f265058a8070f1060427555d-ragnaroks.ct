@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 无限生命、无限弹药"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(CiD.exe+1292C4,DD 00 DD 1F 5F 5E 5D 5B 59 C3)
+label(returnhere)
+alloc(cheat1_code,64,CiD.exe)
+registersymbol(cheat1_code)
+label(default)
+label(health)
+label(ammo)
+
+cheat1_code:
+  pushfd
+  cmp [esp+48],186B2
+  je short health
+  cmp [esp+48],186B6
+  je short ammo
+default:
+  popfd
+  fld qword ptr [eax]
+  fstp qword ptr [edi]
+  pop edi
+  pop esi
+  pop ebp
+  pop ebx
+  pop ecx
+  jmp returnhere
+health:
+  mov [eax],00
+  mov [eax+04],4058C000
+  jmp short default
+ammo:
+  mov [eax],00
+  mov [eax+04],4058C000
+  jmp short default
+
+CiD.exe+1292C4:
+  jmp cheat1_code
+  nop 4
+returnhere:
+
+
+
+[DISABLE]
+CiD.exe+1292C4:
+  DB DD 00 DD 1F 5F 5E 5D 5B 59 C3
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
