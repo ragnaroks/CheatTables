@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 获取金钱数量"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//GameManagerScript:set_playerGold
+{$STRICT}
+[ENABLE]
+aobscan(cheat1_entry,55 8B EC 53 56 83 EC 40 8B 75 08 C7 45 DC 00 00 00 00 C7 45 E0 00 00 00 00 C7 45 E4 00 00 00 00 C7 45 E8 00 00 00 00 8B 8E 30 03 00 00 8B 45 0C 8B D8 2B D9 89 86 30 03 00 00 85 C0 7D 12 C7 44 24 04 00 00 00 00 89 34 24 8B C0 E8 B0 FF FF FF 8B 86 04 02 00 00 89 04 24 8B C0 E8 ?? ?? ?? ?? 85 C0 74 30 8B 86 04 02 00 00 8B C8 89 4C 24 04 89 04 24 39 00 8B C0 E8 ?? ?? ?? ?? 85 C0 75 14 8B 86 04 02 00 00 89 44 24 04 89 34 24 8B C0 E8 ?? ?? ?? ?? 8B 86 20 01 00 00 8D 4D DC 89 4C 24 04 89 04 24 39 00 90 E8 ?? ?? ?? ?? 83 EC 04 EB 1B 8D A4 24 00 00 00 00 8B 45 E8 89 5C 24 04 89 04 24 39 00 8D 6D 00 E8 ?? ?? ?? ?? 8D 45 DC BA ?? ?? ?? ?? 89 04 24 E8 ?? ?? ?? ?? 85 C0 75 D8 C7 45 D8 00 00 00 00 83 EC 0C E8 13 00 00 00 83 C4 0C 83 7D D8 00 74 08 8D 6D 00 E8 ?? ?? ?? ?? EB 10 89 65 F4 83 EC 10 8D 45 DC 89 45 D4 8B 65 F4 C3 85 DB 7E 0A 89 34 24 8B C0 E8 ?? ?? ?? ?? 89 34 24 E8 ?? ?? ?? ?? 8D 65 F8 8D 65 F8 5E 5B C9 C3,"+W+X")
+assert(cheat1_entry+34,89 86 30 03 00 00)
+registersymbol(cheat1_entry)
+alloc(cheat1_code,32,cheat1_entry)
+registersymbol(cheat1_code)
+label(returnhere)
+label(cheat1_store1)
+registersymbol(cheat1_store1)
+
+cheat1_code:
+  mov [esi+330],eax
+  mov [cheat1_store1],esi
+  jmp returnhere
+cheat1_store1:
+  DB 00 00 00 00
+
+cheat1_entry+34:
+  jmp cheat1_code
+  nop
+returnhere:
+
+[DISABLE]
+cheat1_entry+34:
+  DB 89 86 30 03 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"金钱数量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>330</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"#2 英雄生命值不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Color>000000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//CharacterScript:Damage
+{$STRICT}
+[ENABLE]
+aobscan(cheat2_entry,55 8B EC 53 56 81 EC F0 00 00 00 8B 5D 08 C7 45 BC 00 00 00 00 C7 45 C0 00 00 00 00 C7 45 C4 00 00 00 00 C7 45 C8 00 00 00 00 C7 45 CC 00 00 00 00 C7 45 D0 00 00 00 00 C7 45 D4 00 00 00 00 C7 45 D8 00 00 00 00 C7 45 A0 00 00 00 00 C7 45 9C 00 00 00 00 0F B6 45 10 85 C0 0F 85 29 02 00 00 8B 43 50 89 04 24 90 E8 ?? ?? ?? ?? 85 C0 0F 84 15 02 00 00 8B 43 50 8B 40 28 8D 4D BC 89 4C 24 04 89 04 24 39 00 90 E8 ?? ?? ?? ?? 83 EC 04 E9 A3 01 00 00 8D 64 24 00 8B 75 C8 8B C6 8B 40 0C 8B 4B 0C 89 4C 24 04 89 04 24 90 E8 ?? ?? ?? ?? 85 C0 0F 85 7F 01 00 00 8B 86 28 01 00 00 85 C0 0F 84 71 01 00 00 8B 86 28 01 00 00 8B C8 39 09 8B 40 0C 85 C0 0F 8E 5C 01 00 00 0F B6 86 0C 02 00 00 85 C0 0F 85 76 00 00 00 8B 05 ?? ?? ?? ?? 89 04 24 E8 ?? ?? ?? ?? 85 C0 0F 84 60 00 00 00 C6 86 0C 02 00 00 01 8B 43 50 89 85 58 FF FF FF 8B 05 ?? ?? ?? ?? 8B 40 70 89 85 54 FF FF FF 89 34 24 39 36 8D 6D 00,"+W+X")
+assert(cheat2_entry+690,8B C8 8B 85 58 FF FF FF 2B C1 89 83 C4 00 00 00)
+registersymbol(cheat2_entry)
+
+cheat2_entry+698:
+//  inc eax
+//  nop
+  add eax,ecx
+
+[DISABLE]
+cheat2_entry+698:
+  DB 2B C1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#3 材料 100 个"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//GameManagerScript:ShowItemStatsStatic
+{$STRICT}
+[ENABLE]
+aobscan(cheat3_entry,55 8B EC 53 57 56 83 EC 7C 8B 75 0C C7 04 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 45 A8 8B 4D 08 89 48 08 8B 0D ?? ?? ?? ?? 8B 45 10 89 4D A4 85 C0 7D 0C 8B 45 A8 8B 40 08 8B 40 28 89 45 10 8B 45 A4 39 00 8B 40 2C 8B 80 F0 00 00 00 89 45 A0 83 7D A8 00 0F 84 40 0A 00 00 C7 04 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B C8 8B 45 A0 83 7D A8 00 0F 84 1E 0A 00 00 8B 55 A8 89 51 10,"+W+X")
+assert(cheat3_entry+37,8B 40 28 89 45 10)
+registersymbol(cheat3_entry)
+alloc(cheat3_code,32,cheat3_entry)
+registersymbol(cheat3_code)
+label(returnhere)
+
+cheat3_code:
+  mov [eax+28],64
+  mov eax,[eax+28]
+  mov [ebp+10],eax
+  jmp returnhere
+
+cheat3_entry+37:
+  jmp cheat3_code
+  nop
+returnhere:
+ 
+[DISABLE]
+cheat3_entry+37:
+  DB 8B 40 28 89 45 10
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"#4 消耗品 100 个"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//GameManagerScript:ShowItemStats
+{$STRICT}
+[ENABLE]
+aobscan(cheat4_entry,55 8B EC 83 EC 28 8B 45 0C 8B 48 14 0F B6 55 14 89 54 24 10 89 4C 24 0C 8B 4D 10 89 4C 24 08 89 44 24 04 8B 45 08 89 04 24 8B C0 E8 28 00 00 00 C9 C3,"+W+X")
+assert(cheat4_entry+6,8B 45 0C 8B 48 14)
+registersymbol(cheat4_entry)
+alloc(cheat4_code,32,cheat4_entry)
+registersymbol(cheat4_code)
+label(returnhere)
+
+cheat4_code:
+  mov eax,[ebp+0C]
+  mov [eax+14],64
+  mov ecx,[eax+14]
+  jmp returnhere
+
+cheat4_entry+6:
+  jmp cheat4_code
+  nop
+returnhere:
+
+[DISABLE]
+cheat4_entry+6:
+  DB 8B 45 0C 8B 48 14
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"#102 英雄无敌（慎用）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Color>C0C0C0</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//AdventureScript:MonsterAttackDamage
+{$STRICT}
+[ENABLE]
+aobscan(cheat102_entry,55 8B EC 53 57 56 81 EC 0C 01 00 00 8B 7D 08 8B 5D 0C 8B 75 10 C6 45 88 00 C7 45 8C 00 00 00 00 C7 45 90 00 00 00 00 C7 45 94 00 00 00 00 C7 45 98 00 00 00 00 33 C0 88 85 60 FF FF FF 33 C0 88 45 88 C7 44 24 04 ?? ?? ?? ?? 8B 45 14 89 04 24 8D 6D 00 E8 ?? ?? ?? ?? 85 C0 0F 84 9B 00 00 00 8B 43 0C 8B 4E 0C 89 4C 24 08 C7 44 24 04 ?? ?? ?? ?? 89 04 24 8B C0 E8 ?? ?? ?? ?? 89 04 24 E8 ?? ?? ?? ?? 39 1B BA ?? ?? ?? ?? 89 1C 24 90 E8 ?? ?? ?? ?? 8B C8 89 8D 48 FF FF FF 8D 4D 88 C7 44 24 08 ?? ?? ?? ?? 89 4C 24 04 89 04 24 8B 00 FF 90 B4 00 00 00 8B 8D 48 FF FF FF 89 45 84 8B C1 8B 89 F4 01 00 00 89 4D 80 8B C8 89 8D 4C FF FF FF 89 04 24 39 00 E8 ?? ?? ?? ?? 8B C8 8B 85 4C FF FF FF 89 8D 7C FF FF FF 8B 80 40 01 00 00 89 85 78 FF FF FF E9 FA 00 00 00,"+W+X")
+registersymbol(cheat102_entry)
+
+cheat102_entry:
+  ret
+
+[DISABLE]
+cheat102_entry:
+  push ebp
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

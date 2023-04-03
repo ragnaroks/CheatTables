@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="41">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#1 获取人物结构地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+aobscan(cheat1_address,8B 48 08 89 8D 1C FE FF FF FF 35 ? ? ? ? 6A 00 8B 15 ? ? ? ? 8B 01 8B 40 28 FF 50 10,"+W+X")
+registersymbol(cheat1_address)
+alloc(cheat1_code,32,cheat1_address)
+registersymbol(cheat1_code)
+label(returnhere)
+label(cheat1_store1)
+registersymbol(cheat1_store1)
+
+cheat1_code:
+  mov ecx,[eax+08]
+  mov [ebp-000001E4],ecx
+  mov [cheat1_store1],ecx
+  jmp returnhere
+cheat1_store1:
+  DB 00 00 00 00
+
+cheat1_address:
+  jmp cheat1_code
+  nop 4
+returnhere:
+
+[DISABLE]
+cheat1_address:
+  DB 8B 48 08 89 8D 1C FE FF FF
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"注入点地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_address</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"结构地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"生命值上限"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>F4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>F8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"防御"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>A8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"速度 (默认 600)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"跳跃高度 (默认 900)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>D4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"力量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>100</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"坐标 X (shift+左) (shift+右)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>198</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>37</Key>
+              </Keys>
+              <Value>50</Value>
+              <Description>左移 50 单位</Description>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>39</Key>
+              </Keys>
+              <Value>50</Value>
+              <Description>右移 50 单位</Description>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"坐标 Y (shift+上) (shift+下)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat1_store1</Address>
+          <Offsets>
+            <Offset>19C</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>38</Key>
+              </Keys>
+              <Value>50</Value>
+              <Description>上移 50 单位</Description>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>40</Key>
+              </Keys>
+              <Value>50</Value>
+              <Description>下移 50 单位</Description>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#2 一击必杀"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+aobscan(cheat2_entry,55 8B EC 57 56 53 83 EC 20 8B F1 83 7E 48 00 74 08,"+W+X")
+assert(cheat2_entry+8F,89 86 F8 00 00 00)
+registersymbol(cheat2_entry)
+alloc(cheat2_code,32,cheat2_entry)
+registersymbol(cheat2_code)
+label(returnhere)
+label(enemy)
+label(player)
+
+cheat2_code:
+  pushfd
+  cmp [esi+24],00
+  je player
+  cmp [esi+44],00
+  je player
+  cmp [esi+48],00
+  je player
+enemy:
+  popfd
+  mov [esi+000000F8],01
+  jmp returnhere
+player:
+  popfd
+  mov [esi+000000F8],eax
+  jmp returnhere
+
+cheat2_entry+8F:
+  jmp cheat2_code
+  nop
+returnhere:
+
+[DISABLE]
+cheat2_entry+8F:
+  DB 89 86 F8 00 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"#3 获取状态结构地址"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+aobscan(cheat3_entry,55 8B EC 57 56 53 83 EC 08 8B F1 8B FA 83 3D,"+W+X")
+assert(cheat3_entry+399,8B 0D)
+assert(cheat3_entry+39F,8B D7 39 09)
+alloc(cheat3_code,32,cheat3_entry)
+registersymbol(cheat3_code)
+label(cheat3_store1)
+registersymbol(cheat3_store1)
+
+cheat3_code:
+  DB 00 00 00 00
+cheat3_store1:
+  readmem(cheat3_entry+39B,4)
+
+[DISABLE]
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"临时存储地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"结构地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"经验"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>34</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"升级所需经验"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>38</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"等级 (显示值/4)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>88</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"等级上限"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>8C</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>36</ID>
+          <Description>"精力"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>90</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"精力上限"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>94</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"技能点"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>98</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"攻击力"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>9C</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"防御力"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>A4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"小烦人"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>AC</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"幸运值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>B4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"游戏时间 (秒)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>E8</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"金钱"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat3_store1</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="Dust.CharClasses.Character" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="Pointer" Bytesize="4" OffsetHex="00000004" Description="textureRange" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="4" OffsetHex="00000008" Description="AnimName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="4" OffsetHex="0000000C" Description="prevFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" OffsetHex="00000010" Description="nextKeyFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="4" OffsetHex="00000014" Description="returnFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="4" OffsetHex="00000018" Description="Name" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" OffsetHex="0000001C" Description="script" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" OffsetHex="00000020" Description="Definition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="4" OffsetHex="00000024" Description="Ai" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="4" OffsetHex="00000028" Description="partsSnap" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="4" OffsetHex="0000002C" Description="GotoGoal" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="4" OffsetHex="00000030" Description="QueueGoal" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="textureID" DisplayMethod="Signed Integer"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="textureIndex" DisplayMethod="Signed Integer"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="prevTextureID" DisplayMethod="Signed Integer"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000040" Description="prevTextureIndex" DisplayMethod="Signed Integer"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000044" Description="Team" DisplayMethod="Signed Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000048" Description="ID" DisplayMethod="Signed Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000004C" Description="NPC" DisplayMethod="Signed Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000050" Description="CollectEquipID" DisplayMethod="Signed Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000054" Description="FlyType" DisplayMethod="Signed Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="PatrolType" DisplayMethod="Signed Integer"/>
+        <Element Offset="92" Vartype="Float" Bytesize="4" OffsetHex="0000005C" Description="flyingSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Float" Bytesize="4" OffsetHex="00000060" Description="animFrameTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="100" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000064" Description="curAnimFrame" DisplayMethod="Signed Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000068" Description="maxAnimFrames" DisplayMethod="Signed Integer"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000006C" Description="AnimFrame" DisplayMethod="Signed Integer"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000070" Description="Anim" DisplayMethod="Signed Integer"/>
+        <Element Offset="116" Vartype="Float" Bytesize="4" OffsetHex="00000074" Description="prevDuration" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Float" Bytesize="4" OffsetHex="00000078" Description="et" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="124" Vartype="Float" Bytesize="4" OffsetHex="0000007C" Description="curFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Float" Bytesize="4" OffsetHex="00000080" Description="shadowAlpha" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="Float" Bytesize="4" OffsetHex="00000084" Description="lungeTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Float" Bytesize="4" OffsetHex="00000088" Description="glowing" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="140" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000008C" Description="maxIdles" DisplayMethod="Signed Integer"/>
+        <Element Offset="144" Vartype="Float" Bytesize="4" OffsetHex="00000090" Description="CharRotationDest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="148" Vartype="Float" Bytesize="4" OffsetHex="00000094" Description="CharRotation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000098" Description="Face" DisplayMethod="Signed Integer"/>
+        <Element Offset="156" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000009C" Description="State" DisplayMethod="Signed Integer"/>
+        <Element Offset="160" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A0" Description="DieType" DisplayMethod="Signed Integer"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A4" Description="SpawnType" DisplayMethod="Signed Integer"/>
+        <Element Offset="168" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A8" Description="Defense" DisplayMethod="Signed Integer"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000AC" Description="LiftType" DisplayMethod="Signed Integer"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B0" Description="DamageType" DisplayMethod="Signed Integer"/>
+        <Element Offset="180" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B4" Description="LungeState" DisplayMethod="Signed Integer"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B8" Description="ledgeAttach" DisplayMethod="Signed Integer"/>
+        <Element Offset="188" Vartype="Float" Bytesize="4" OffsetHex="000000BC" Description="runTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Float" Bytesize="4" OffsetHex="000000C0" Description="footOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="196" Vartype="Float" Bytesize="4" OffsetHex="000000C4" Description="Friction" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" Description="jumpTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="204" Vartype="Float" Bytesize="4" OffsetHex="000000CC" Description="CharCol" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" Description="Speed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="212" Vartype="Float" Bytesize="4" OffsetHex="000000D4" Description="JumpVelocity" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Float" Bytesize="4" OffsetHex="000000D8" Description="LifeBarPercent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="220" Vartype="Float" Bytesize="4" OffsetHex="000000DC" Description="ShadowWidth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="Float" Bytesize="4" OffsetHex="000000E0" Description="CanHurtFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="228" Vartype="Float" Bytesize="4" OffsetHex="000000E4" Description="CanHurtProjectileFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="Float" Bytesize="4" OffsetHex="000000E8" Description="DyingFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="236" Vartype="Float" Bytesize="4" OffsetHex="000000EC" Description="HPLossFrame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F0" Description="Ethereal" DisplayMethod="Signed Integer"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F4" Description="MaxHP" DisplayMethod="Signed Integer"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="HP" DisplayMethod="Signed Integer"/>
+        <Element Offset="252" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000FC" Description="pHP" DisplayMethod="Signed Integer"/>
+        <Element Offset="256" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000100" Description="Strength" DisplayMethod="Signed Integer"/>
+        <Element Offset="260" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000104" Description="DefaultWidth" DisplayMethod="Signed Integer"/>
+        <Element Offset="264" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000108" Description="DefaultHeight" DisplayMethod="Signed Integer"/>
+        <Element Offset="268" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000010C" Description="Height" DisplayMethod="Signed Integer"/>
+        <Element Offset="272" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000110" Description="Aggression" DisplayMethod="Signed Integer"/>
+        <Element Offset="276" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000114" Description="GrabbedBy" DisplayMethod="Signed Integer"/>
+        <Element Offset="280" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000118" Description="ReturnExp" DisplayMethod="Signed Integer"/>
+        <Element Offset="284" Vartype="Float" Bytesize="4" OffsetHex="0000011C" Description="MaskGlow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000120" Description="Exists" DisplayMethod="Signed Integer"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000124" Description="Boosting" DisplayMethod="Signed Integer"/>
+        <Element Offset="296" Vartype="Float" Bytesize="4" OffsetHex="00000128" Description="BoostTraj" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000012C" Description="terrainType" DisplayMethod="Signed Integer"/>
+        <Element Offset="304" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000130" Description="StatusEffect" DisplayMethod="Signed Integer"/>
+        <Element Offset="308" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000134" Description="StatusStrength" DisplayMethod="Signed Integer"/>
+        <Element Offset="312" Vartype="Float" Bytesize="4" OffsetHex="00000138" Description="StatusTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="316" Vartype="Float" Bytesize="4" OffsetHex="0000013C" Description="DownTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="Float" Bytesize="4" OffsetHex="00000140" Description="MaxDownTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000144" Description="PressedKey" DisplayMethod="Signed Integer"/>
+        <Element Offset="328" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000148" Description="QueuedKey" DisplayMethod="Signed Integer"/>
+        <Element Offset="332" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000014C" Description="QueueTrig" DisplayMethod="Signed Integer"/>
+        <Element Offset="336" Vartype="Byte" Bytesize="1" OffsetHex="00000150" Description="RandomTextures" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="337" Vartype="Byte" Bytesize="1" OffsetHex="00000151" Description="RandomWeapons" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="338" Vartype="Byte" Bytesize="1" OffsetHex="00000152" Description="RandomSkin" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="339" Vartype="Byte" Bytesize="1" OffsetHex="00000153" Description="randomWeapon" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="340" Vartype="Byte" Bytesize="1" OffsetHex="00000154" Description="QuestGiver" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="341" Vartype="Byte" Bytesize="1" OffsetHex="00000155" Description="KeyLeft" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="342" Vartype="Byte" Bytesize="1" OffsetHex="00000156" Description="KeyRight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="343" Vartype="Byte" Bytesize="1" OffsetHex="00000157" Description="KeyUp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Byte" Bytesize="1" OffsetHex="00000158" Description="KeyDown" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="345" Vartype="Byte" Bytesize="1" OffsetHex="00000159" Description="KeyJump" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="346" Vartype="Byte" Bytesize="1" OffsetHex="0000015A" Description="KeyAttack" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="347" Vartype="Byte" Bytesize="1" OffsetHex="0000015B" Description="KeySecondary" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="348" Vartype="Byte" Bytesize="1" OffsetHex="0000015C" Description="KeyThrow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="349" Vartype="Byte" Bytesize="1" OffsetHex="0000015D" Description="KeyEvade" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="350" Vartype="Byte" Bytesize="1" OffsetHex="0000015E" Description="refracting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="351" Vartype="Byte" Bytesize="1" OffsetHex="0000015F" Description="renderable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="Byte" Bytesize="1" OffsetHex="00000160" Description="IsFalling" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="353" Vartype="Byte" Bytesize="1" OffsetHex="00000161" Description="canJump" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="354" Vartype="Byte" Bytesize="1" OffsetHex="00000162" Description="CanCancel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="355" Vartype="Byte" Bytesize="1" OffsetHex="00000163" Description="Floating" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="356" Vartype="Byte" Bytesize="1" OffsetHex="00000164" Description="Hanging" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="357" Vartype="Byte" Bytesize="1" OffsetHex="00000165" Description="WallInWay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="358" Vartype="Byte" Bytesize="1" OffsetHex="00000166" Description="Holding" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="359" Vartype="Byte" Bytesize="1" OffsetHex="00000167" Description="CanFallThrough" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="Byte" Bytesize="1" OffsetHex="00000168" Description="alwaysUpdatable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="364" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000016C" Description="flyingOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="368" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000170" Description="flyingOffset_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="372" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000174" Description="updateRect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="376" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000178" Description="updateRect_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="380" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000017C" Description="updateRect_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000180" Description="updateRect_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="388" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000184" Description="renderRect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000188" Description="renderRect_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="396" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000018C" Description="renderRect_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="400" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000190" Description="renderRect_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="404" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000194" Description="defaultColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="408" Vartype="Float" Bytesize="4" OffsetHex="00000198" Description="Location" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="412" Vartype="Float" Bytesize="4" OffsetHex="0000019C" Description="Location_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="416" Vartype="Float" Bytesize="4" OffsetHex="000001A0" Description="PLoc" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="420" Vartype="Float" Bytesize="4" OffsetHex="000001A4" Description="PLoc_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="424" Vartype="Double" Bytesize="8" OffsetHex="000001A8" Description="Trajectory" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="432" Vartype="Double" Bytesize="8" OffsetHex="000001B0" Description="Trajectory_2" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="Dust.Stats" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="Pointer" Bytesize="4" OffsetHex="00000004" Description="StructureBuilt" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="4" OffsetHex="00000008" Description="upgrade" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="4" OffsetHex="0000000C" Description="upgradedStat" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" OffsetHex="00000010" Description="achievementEarned" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="4" OffsetHex="00000014" Description="villagerDialogue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="4" OffsetHex="00000018" Description="Equipment" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" OffsetHex="0000001C" Description="EquipBluePrint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" OffsetHex="00000020" Description="shopEquipment" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="4" OffsetHex="00000024" Description="Material" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="4" OffsetHex="00000028" Description="shopMaterial" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="Score" DisplayMethod="Signed Integer"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000030" Description="playerLifeState" DisplayMethod="Signed Integer"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="XP" DisplayMethod="Signed Integer"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="nextLevelXP" DisplayMethod="Signed Integer"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="prevLevelXP" DisplayMethod="Signed Integer"/>
+        <Element Offset="64" Vartype="Float" Bytesize="4" OffsetHex="00000040" Description="comboXP" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000044" Description="comboXPTally" DisplayMethod="Signed Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000048" Description="chainXPTally" DisplayMethod="Signed Integer"/>
+        <Element Offset="76" Vartype="Float" Bytesize="4" OffsetHex="0000004C" Description="comboEnemies" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000050" Description="gainedXP" DisplayMethod="Signed Integer"/>
+        <Element Offset="84" Vartype="Float" Bytesize="4" OffsetHex="00000054" Description="Completion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="Explored" DisplayMethod="Signed Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="TreasureFound" DisplayMethod="Signed Integer"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000060" Description="FriendsFound" DisplayMethod="Signed Integer"/>
+        <Element Offset="100" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000064" Description="comboMeter" DisplayMethod="Signed Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000068" Description="damageMeter" DisplayMethod="Signed Integer"/>
+        <Element Offset="108" Vartype="Float" Bytesize="4" OffsetHex="0000006C" Description="comboTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Float" Bytesize="4" OffsetHex="00000070" Description="comboDisplayTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="116" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000074" Description="comboBreak" DisplayMethod="Signed Integer"/>
+        <Element Offset="120" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000078" Description="longestChain" DisplayMethod="Signed Integer"/>
+        <Element Offset="124" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000007C" Description="melodicHitCount" DisplayMethod="Signed Integer"/>
+        <Element Offset="128" Vartype="Float" Bytesize="4" OffsetHex="00000080" Description="melodicHitTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="Float" Bytesize="4" OffsetHex="00000084" Description="melodicMidHitTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000088" Description="LEVEL" DisplayMethod="Signed Integer"/>
+        <Element Offset="140" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000008C" Description="LEVELCap" DisplayMethod="Signed Integer"/>
+        <Element Offset="144" Vartype="Float" Bytesize="4" OffsetHex="00000090" Description="curCharge" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="148" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000094" Description="maxCharge" DisplayMethod="Signed Integer"/>
+        <Element Offset="152" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000098" Description="skillPoints" DisplayMethod="Signed Integer"/>
+        <Element Offset="156" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000009C" Description="attack" DisplayMethod="Signed Integer"/>
+        <Element Offset="160" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A0" Description="attackEquip" DisplayMethod="Signed Integer"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A4" Description="defense" DisplayMethod="Signed Integer"/>
+        <Element Offset="168" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A8" Description="defenseEquip" DisplayMethod="Signed Integer"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000AC" Description="fidget" DisplayMethod="Signed Integer"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B0" Description="newFidgetEquip" DisplayMethod="Signed Integer"/>
+        <Element Offset="180" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B4" Description="luck" DisplayMethod="Signed Integer"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B8" Description="luckEquip" DisplayMethod="Signed Integer"/>
+        <Element Offset="188" Vartype="Float" Bytesize="4" OffsetHex="000000BC" Description="bonusHealth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C0" Description="newHealtRegen" DisplayMethod="Signed Integer"/>
+        <Element Offset="196" Vartype="Float" Bytesize="4" OffsetHex="000000C4" Description="healthRegenTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C8" Description="enemiesDefeated" DisplayMethod="Signed Integer"/>
+        <Element Offset="204" Vartype="Float" Bytesize="4" OffsetHex="000000CC" Description="attackBonusTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" Description="defenseBonusTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="212" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D4" Description="projectileType" DisplayMethod="Signed Integer"/>
+        <Element Offset="216" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D8" Description="projectileCost" DisplayMethod="Signed Integer"/>
+        <Element Offset="220" Vartype="Float" Bytesize="4" OffsetHex="000000DC" Description="overHeating" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" Description="fidgetState" DisplayMethod="Signed Integer"/>
+        <Element Offset="228" Vartype="Float" Bytesize="4" OffsetHex="000000E4" Description="fidgetAwayTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="Float" Bytesize="4" OffsetHex="000000E8" Description="gameClock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000EC" Description="currentItem" DisplayMethod="Signed Integer"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F0" Description="currentPendant" DisplayMethod="Signed Integer"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F4" Description="currentAugment" DisplayMethod="Signed Integer"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="currentArmor" DisplayMethod="Signed Integer"/>
+        <Element Offset="252" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000FC" Description="currentRingLeft" DisplayMethod="Signed Integer"/>
+        <Element Offset="256" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000100" Description="currentRingRight" DisplayMethod="Signed Integer"/>
+        <Element Offset="260" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000104" Description="Gold" DisplayMethod="Signed Integer"/>
+        <Element Offset="264" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000108" Description="maxMaterials" DisplayMethod="Signed Integer"/>
+        <Element Offset="268" Vartype="Float" Bytesize="4" OffsetHex="0000010C" Description="prevWeatherSaturation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="Float" Bytesize="4" OffsetHex="00000110" Description="prevWeatherBloom" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="276" Vartype="Float" Bytesize="4" OffsetHex="00000114" Description="reviveTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="Byte" Bytesize="1" OffsetHex="00000118" Description="gameDifficulty" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="281" Vartype="Byte" Bytesize="1" OffsetHex="00000119" Description="startDifficulty" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="282" Vartype="Byte" Bytesize="1" OffsetHex="0000011A" Description="saveSlot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="283" Vartype="Byte" Bytesize="1" OffsetHex="0000011B" Description="manualSaveSlot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="284" Vartype="Byte" Bytesize="1" OffsetHex="0000011C" Description="gameComplete" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="285" Vartype="Byte" Bytesize="1" OffsetHex="0000011D" Description="comboComplete" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="286" Vartype="Byte" Bytesize="1" OffsetHex="0000011E" Description="canEarnAchievements" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="287" Vartype="Byte" Bytesize="1" OffsetHex="0000011F" Description="canThrow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="Byte" Bytesize="1" OffsetHex="00000120" Description="isSpinning" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="289" Vartype="Byte" Bytesize="1" OffsetHex="00000121" Description="inFront" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="290" Vartype="Byte" Bytesize="1" OffsetHex="00000122" Description="doubleJump" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="292" Vartype="Float" Bytesize="4" OffsetHex="00000124" Description="lastSafeLoc" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="Float" Bytesize="4" OffsetHex="00000128" Description="lastSafeLoc_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000012C" Description="prevWeatherColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000130" Description="prevWeatherColor_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="308" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000134" Description="prevWeatherColor_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000138" Description="prevWeatherColor_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

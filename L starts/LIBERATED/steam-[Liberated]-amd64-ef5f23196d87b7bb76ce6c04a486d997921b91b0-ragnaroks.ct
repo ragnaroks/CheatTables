@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 隐身"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//PlayerControllerNL:IsVisible
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,CSharp-Assembly:PlayerControllerNL:IsVisible)
+assert(cheat1_entry+04,48 83 EC 30 48 89 75 F8 48 8B F1)
+registersymbol(cheat1_entry)
+
+cheat1_entry+04:
+  xor rax,rax
+  lea rsp,[rbp]
+  pop rbp
+  ret
+  nop 2
+
+[DISABLE]
+cheat1_entry+04:
+  DB 48 83 EC 30 48 89 75 F8 48 8B F1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

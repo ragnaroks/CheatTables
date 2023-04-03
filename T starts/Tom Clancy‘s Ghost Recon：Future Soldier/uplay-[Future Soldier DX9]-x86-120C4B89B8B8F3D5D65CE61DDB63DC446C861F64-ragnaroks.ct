@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"弹匣处理方式"</Description>
+      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">144:不减
+73:正常
+</DropDownList>
+      <LastState Value="73" RealAddress="169CC007"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Byte</VariableType>
+      <Address>"AICLASS_PC_F.DLL"+10C007</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"备弹处理方式"</Description>
+      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">102 41 136 124 1 0 0:正常
+15 31 128 0 0 0 0:不减
+</DropDownList>
+      <LastState Value="102 41 136 124 1 0 0" RealAddress="169CDF25"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>7</ByteLength>
+      <Address>"AICLASS_PC_F.DLL"+10DF25</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"生命值处理方式"</Description>
+      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">216 100 36 4:正常
+144 144 144 144:不减
+</DropDownList>
+      <LastState Value="216 100 36 4" RealAddress="168CA167"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>4</ByteLength>
+      <Address>"AICLASS_PC_F.DLL"+A167</Address>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>

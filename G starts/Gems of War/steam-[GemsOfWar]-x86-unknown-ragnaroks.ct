@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"人造指针_所有"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(address8,EC 83 EC 08 8B 45 08 8B 40 3C C9 C3 00 00 55 8B EC 83 EC 08 8B 45 08 8B 40 30)
+registersymbol(address8)
+alloc(codecave8,$256)
+registersymbol(codecave8)
+
+codecave8:
+  cmp [eax+58],01 //5C也是1
+  jne +24
+  cmp [eax+84],00 //友军位置1
+  je +3F
+  cmp [eax+84],01 //友军位置2
+  je +3D
+  cmp [eax+84],02 //友军位置3
+  je +3B
+  cmp [eax+84],03 //友军位置4
+  je +39
+  cmp [eax+84],00 //敌方位置1
+  je +37
+  cmp [eax+84],01 //敌方位置2
+  je +35
+  cmp [eax+84],02 //敌方位置3
+  je +33
+  cmp [eax+84],03 //敌方位置4
+  je +31
+  mov [codecave8+90],eax //友军位置1基址
+  jmp +2F
+  mov [codecave8+94],eax //友军位置2基址
+  jmp +28
+  mov [codecave8+98],eax //友军位置3基址
+  jmp +21
+  mov [codecave8+9C],eax //友军位置4基址
+  jmp +1A
+  mov [codecave8+A0],eax //敌方位置1基址
+  jmp +13
+  mov [codecave8+A4],eax //敌方位置2基址
+  jmp +0C
+  mov [codecave8+A8],eax //敌方位置3基址
+  jmp +05
+  mov [codecave8+AC],eax //敌方位置4基址
+  mov eax,[ebp+08] //origin
+  mov eax,[eax+30]
+  jmp address8+1A
+
+address8+14:
+  jmp codecave8
+  nop
+
+[DISABLE]
+address8+14:
+  mov eax,[ebp+08]
+  mov eax,[eax+30]
+
+dealloc(codecave8)
+unregistersymbol(codecave8)
+unregistersymbol(address8)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"玩家"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>codecave8+90</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>7</ID>
+              <Description>"HP"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9</ID>
+              <Description>"HP max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10</ID>
+              <Description>"攻击力"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>11</ID>
+              <Description>"def"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>12</ID>
+              <Description>"def max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>13</ID>
+              <Description>"sk"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>48</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>14</ID>
+              <Description>"sk max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>15</ID>
+              <Description>"level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>16</ID>
+              <Description>"state"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+90</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"友军2"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>codecave8+94</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>18</ID>
+              <Description>"HP"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>19</ID>
+              <Description>"HP max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"攻击力"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>21</ID>
+              <Description>"def"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>22</ID>
+              <Description>"def max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"sk"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>48</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>24</ID>
+              <Description>"sk max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>25</ID>
+              <Description>"level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>26</ID>
+              <Description>"state"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+94</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"友军3"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>codecave8+98</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>28</ID>
+              <Description>"HP"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>29</ID>
+              <Description>"HP max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>30</ID>
+              <Description>"攻击力"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"def"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"def max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>33</ID>
+              <Description>"sk"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>48</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>34</ID>
+              <Description>"sk max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>35</ID>
+              <Description>"level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"state"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+98</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"友军4"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>codecave8+9C</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>38</ID>
+              <Description>"HP"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>39</ID>
+              <Description>"HP max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>40</ID>
+              <Description>"攻击力"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>41</ID>
+              <Description>"def"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>42</ID>
+              <Description>"def max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>43</ID>
+              <Description>"sk"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>48</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>44</ID>
+              <Description>"sk max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>45</ID>
+              <Description>"level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"state"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave8+9C</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>49</ID>
+      <Description>"人造指针_选择单位"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$lua}
+--lua 指定范围搜索会比较快
+local addressList=AOBScan('EC 83 EC 08 8B 45 08 8B 40 3C C9 C3 00 00 55 8B EC 83 EC 08 8B 45 08 8B 40 30','+W',0)
+if addressList.Count~=1 then return end
+--registerSymbol(address1,addressList[0])
+return string.format([[
+define(address1,%s)
+]],addressList[0])
+{$asm}
+//aobscan(address1,EC 83 EC 08 8B 45 08 8B 40 3C C9 C3 00 00 55 8B EC 83 EC 08 8B 45 08 8B 40 30)
+registersymbol(address1)
+alloc(codecave1,$32)
+registersymbol(codecave1)
+
+codecave1:
+  mov [codecave1+10],eax
+  mov eax,[ebp+08]
+  mov eax,[eax+30]
+  jmp address1+1A
+
+address1+14:
+  jmp codecave1
+  nop
+
+[DISABLE]
+address1+14:
+  mov eax,[ebp+08]
+  mov eax,[eax+30]
+
+dealloc(codecave1)
+unregistersymbol(codecave1)
+unregistersymbol(address1)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>50</ID>
+          <Description>"单位"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>codecave1+10</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"HP[mb5]"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Set Value</Action>
+                  <Keys>
+                    <Key>6</Key>
+                  </Keys>
+                  <Value>999</Value>
+                  <ID>0</ID>
+                  <ActivateSound>Activate</ActivateSound>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>52</ID>
+              <Description>"HP max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"攻击力[mb5]"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Set Value</Action>
+                  <Keys>
+                    <Key>6</Key>
+                  </Keys>
+                  <Value>999</Value>
+                  <ID>0</ID>
+                  <ActivateSound>Activate</ActivateSound>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>54</ID>
+              <Description>"def[mb5][mb4]"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Set Value</Action>
+                  <Keys>
+                    <Key>6</Key>
+                  </Keys>
+                  <Value>999</Value>
+                  <ID>0</ID>
+                  <ActivateSound>Activate</ActivateSound>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Set Value</Action>
+                  <Keys>
+                    <Key>5</Key>
+                  </Keys>
+                  <Value>999</Value>
+                  <ID>1</ID>
+                  <ActivateSound>Activate</ActivateSound>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>55</ID>
+              <Description>"def max"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"sk"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>48</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57</ID>
+              <Description>"sk max[mb5][mb4]"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Set Value</Action>
+                  <Keys>
+                    <Key>6</Key>
+                  </Keys>
+                  <Value>0</Value>
+                  <ID>0</ID>
+                  <ActivateSound>Activate</ActivateSound>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Set Value</Action>
+                  <Keys>
+                    <Key>5</Key>
+                  </Keys>
+                  <Value>0</Value>
+                  <ID>2</ID>
+                  <ActivateSound>Activate</ActivateSound>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>59</ID>
+              <Description>"state"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>codecave1+10</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name/>
+      <Address>00F130E2</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Structures StructVersion="2">
+    <Structure Name="单位结构" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000004" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="8" OffsetHex="0000000C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="8" OffsetHex="00000014" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="8" OffsetHex="0000001C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="8" OffsetHex="00000024" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="8" OffsetHex="0000002C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000030" Description="hp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="hp max" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="acttacker" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="def" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000040" Description="def max" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000044" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000048" Description="sk" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000004C" Description="sk max" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000050" Description="level" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000054" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="flag1" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="flag2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000060" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="100" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000064" Description="state,0:正常,256:死亡" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000068" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000006C" Description="flag3,1:玩家" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="00000070" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000084" Description="位置" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000088" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

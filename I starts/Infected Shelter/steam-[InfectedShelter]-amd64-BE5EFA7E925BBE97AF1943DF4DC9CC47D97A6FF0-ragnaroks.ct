@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#1 生命值不减，一击必杀"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(DamageableEntity:DoOneDamage+2B3B,F3 0F 10 4D CC)
+label(return)
+alloc(cave,64,DamageableEntity:DoOneDamage)
+label(default)
+label(case1)
+
+DamageableEntity:DoOneDamage+2B3B:
+  jmp cave
+return:
+
+//  cmp [r13+248],00
+//  cmp [r13+3B0],00
+cave:
+  pushfq
+  cmp [r13+84C],01
+  jne default
+  cmp [r13+528],00
+  je default
+  cmp [r13+530],00
+  je default
+  cmp [r13+540],00
+  je default
+  cmp [r13+548],00
+  je default
+  cmp [r13+5B0],00
+  je default
+  cmp [r13+834],00
+  jne default
+  cmp [r13+850],00
+  jne default
+  cmp [r13+8F8],00
+  je default
+  jmp case1
+default:
+  popfq
+  movss xmm1,[r13+21C]
+  jmp return
+case1:
+  popfq
+  jmp return
+
+[DISABLE]
+DamageableEntity:DoOneDamage+2B3B:
+  DB F3 0F 10 4D CC
+
+dealloc(cave)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"#2 角色指针"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(DamageableEntity:IsDamageable+24,F3 0F 10 86 1C 02 00 00)
+label(return)
+alloc(cheat2_code,128,DamageableEntity:IsDamageable)
+registersymbol(cheat2_code)
+label(default)
+label(case1)
+label(cheat2_store)
+registersymbol(cheat2_store)
+
+DamageableEntity:IsDamageable+24:
+  jmp cheat2_code
+  nop 3
+return:
+
+cheat2_code:
+  movss xmm0,[rsi+21C]
+  pushfq
+  cmp [rsi+84C],01
+  jne default
+  cmp [rsi+528],00
+  je default
+  cmp [rsi+530],00
+  je default
+  cmp [rsi+540],00
+  je default
+  cmp [rsi+548],00
+  je default
+  cmp [rsi+5B0],00
+  je default
+  cmp [rsi+834],00
+  jne default
+  cmp [rsi+850],00
+  jne default
+  cmp [rsi+8F8],00
+  je default
+  jmp case1
+default:
+  popfq
+  jmp return
+case1:
+  popfq
+  mov [cheat2_store],rsi
+  jmp return
+cheat2_store:
+  DQ 00
+
+[DISABLE]
+DamageableEntity:IsDamageable+24:
+  DB F3 0F 10 86 1C 02 00 00
+
+dealloc(cheat2_code)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"cheat2_code"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"cheat2_store"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>cheat2_store</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"Damageable"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>214</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"_CurrentHP"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>21C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"Unstoppable"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>2FF</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"MoveSpeed"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>3D0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"RunSpeed"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>3D8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"_BadgeMoney"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>944</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"_EnergyCell"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat2_store</Address>
+          <Offsets>
+            <Offset>948</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"#3 感染样本不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(TabProperty:SpendCell+5E7,F2 0F 5C C1)
+assert(TabProperty:SpendCell+5EB,F2 0F 5A E8)
+assert(TabProperty:SpendCell+5EF,F3 0F 11 A8 48 09 00 00)
+
+TabProperty:SpendCell+5E7:
+  nop 4
+TabProperty:SpendCell+5EB:
+  nop 4
+TabProperty:SpendCell+5EF:
+  nop 4
+  nop 4
+
+[DISABLE]
+TabProperty:SpendCell+5E7:
+  DB F2 0F 5C C1
+TabProperty:SpendCell+5EB:
+  DB F2 0F 5A E8
+TabProperty:SpendCell+5EF:
+  DB F3 0F 11 A8 48 09 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"#4 金币不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(PlayerEntity:DecreaseBadgeMondey+76,F3 0F 11 AE 44 09 00 00)
+//assert(PlayerEntity:DecreaseBadgeMondey+B3,F3 0F 11 AE 44 09 00 00)
+
+PlayerEntity:DecreaseBadgeMondey+76:
+  nop 4
+  nop 4
+//PlayerEntity:DecreaseBadgeMondey+B3:
+//  nop 4
+//  nop 4
+
+[DISABLE]
+PlayerEntity:DecreaseBadgeMondey+76:
+  DB F3 0F 11 AE 44 09 00 00
+//PlayerEntity:DecreaseBadgeMondey+B3:
+//  DB F3 0F 11 AE 44 09 00 00
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

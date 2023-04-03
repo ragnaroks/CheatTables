@@ -2,16 +2,18 @@
 Cheat Engine 作弊表
 
 ### CT表命名格式
-{发行平台}-[{可执行文件名}]-{架构}-{可执行文件SHA1}-{作者}
+{发行平台}-[{可执行文件名}]-{架构}-{可执行文件SHA1}-{作者}.ct
 
-- `steam-[ExampleGame-Win64-Shipping]-amd64-3955A4217A4E41DF0C361C11CA27AF955DBB0130-ragnaroks`
-- `uplay-[Future Soldier DX9]-x86-120C4B89B8B8F3D5D65CE61DDB63DC446C861F64-ragnaroks`
+- `steam-[ExampleGame-Win64-Shipping]-amd64-3955A4217A4E41DF0C361C11CA27AF955DBB0130-ragnaroks.ct`
+- `uplay-[Future Soldier DX9]-x86-120C4B89B8B8F3D5D65CE61DDB63DC446C861F64-ragnaroks.ct`
 
-**发行平台**字段可选项：`'indie','steam','uplay','epic','gog'`
+**发行平台**字段可选项：`'indie','steam','uplay','epic','gog'`。
 
-**架构**字段可选项：`'x86','amd64/x64','aarch64'`
+**架构**字段可选项：`'x86','amd64/x64','aarch64'`。
 
-如果脚本来自别处，除非已明确允许转载，否则需得到原始作者许可，并在相应 README.md 文件中注明原始链接或可查出处。
+**可执行文件SHA1**大小写任意。
+
+如果脚本来自别处，除非已明确允许转载，否则需得到原始作者许可，并在相应文件夹的 README.md 文件中注明原始链接或可查出处。
 
 脚本文件名出现 `'` 字符时使用 `‘` 替换以避免出现混淆。
 
@@ -31,6 +33,12 @@ Cheat Engine 作弊表
 对表单质量没有要求，即使此表单可能造成游戏崩溃、反作弊侦测、系统不稳定等，需要使用者自行承担后果。
 
 默认情况下，不允许对他人表单进行修改，建议以 Issue 的形式沟通处理。
+
+### 提交说明
+提交的 title 为游戏名，提交的 message 为动作及脚本名称，可附加说明。
+
+- Tom Clancy‘s Ghost Recon：Future Soldier
+- 更新 uplay-[Future Soldier DX9]-x86-120C4B89B8B8F3D5D65CE61DDB63DC446C861F64-ragnaroks，修复了一些错误
 
 ### 注意事项
 **不接受任何多人游戏的表单。**

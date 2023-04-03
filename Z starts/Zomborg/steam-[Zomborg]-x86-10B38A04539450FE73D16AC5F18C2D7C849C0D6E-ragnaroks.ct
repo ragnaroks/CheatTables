@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"金钱不减 (不推荐)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+aobscan(cheat1,55 48 8B EC 57 48 83 EC 08 48 8B F9 48 89 55 F0 48 63 47 28 2B 45 F0 89 47 28 48 B8 ? ? ? ? ? ? ? ? 48 8B 08 48 63 57 28 48 83 EC 20 49 BB ? ? ? ? ? ? ? ? 41 FF D3 48 83 C4 20 48 8B 7D F8 C9 C3)
+registersymbol(cheat1)
+
+cheat1+14:
+  nop 3
+cheat1+17:
+  nop 3
+
+[DISABLE]
+cheat1+14:
+  DB 2B 45 F0
+cheat1+17:
+  DB 89 47 28
+
+unregistersymbol(cheat1)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"金钱不减"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(GameData:DecMoney+14,2B 45 F0)
+assert(GameData:DecMoney+17,89 47 28)
+
+GameData:DecMoney+14:
+  nop 3
+GameData:DecMoney+17:
+  nop 3
+
+[DISABLE]
+GameData:DecMoney+14:
+  DB 2B 45 F0
+GameData:DecMoney+17:
+  DB 89 47 28
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"弹匣不减"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(WeaponLauncher:Shoot+16E,FF C8)
+assert(WeaponLauncher:Shoot+170,89 86 F8 00 00 00)
+
+WeaponLauncher:Shoot+16E:
+  nop 2
+WeaponLauncher:Shoot+170:
+  nop 2
+  nop 4
+
+[DISABLE]
+WeaponLauncher:Shoot+16E:
+  DB FF C8
+WeaponLauncher:Shoot+170:
+  DB 89 86 F8 00 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"生命值不减"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//生命值初始 100F
+
+[ENABLE]
+{$LUA}
+if syntaxcheck then return end;
+if LaunchMonoDataCollector() == 0 then return end;
+{$ASM}
+assert(PlayerStat:ApplyDamage+29,F3 0F 11 6F 5C)
+
+PlayerStat:ApplyDamage+29:
+  nop 5
+
+[DISABLE]
+PlayerStat:ApplyDamage+29:
+  DB F3 0F 11 6F 5C
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

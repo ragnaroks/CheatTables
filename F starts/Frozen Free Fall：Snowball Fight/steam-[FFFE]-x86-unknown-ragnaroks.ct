@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"玩家移动不减步数"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(address101,8B 47 28 48 89 47 28 85 C0)
+registersymbol(address101)
+address101+03:
+  nop
+ 
+[DISABLE]
+address101+03:
+  dec eax
+unregistersymbol(address101)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"缤纷乐不减步数"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(address102,8B 48 28 49 39 12 89 48 28)
+registersymbol(address102)
+address102+03:
+  nop
+
+[DISABLE]
+address102+03:
+  dec ecx
+unregistersymbol(address102)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"倒计时不减"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscan(address103,D9 45 0C 8B 45 08 D9 58 34)
+registersymbol(address103)
+address103:
+  nop
+  nop
+  nop
+  mov eax,[ebp+08]
+  nop
+  nop
+  nop
+
+[DISABLE]
+address103:
+  fld dword ptr [ebp+0C]
+  mov eax,[ebp+08]
+  fstp dword ptr [eax+34]
+unregistersymbol(address103)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"玩家数据结构"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"FFFE.exe"+00A2DA80</Address>
+      <Offsets>
+        <Offset>14</Offset>
+        <Offset>18</Offset>
+        <Offset>2D4</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"初始步数"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FFFE.exe"+00A2DA80</Address>
+          <Offsets>
+            <Offset>24</Offset>
+            <Offset>14</Offset>
+            <Offset>18</Offset>
+            <Offset>2D4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"当前步数"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FFFE.exe"+00A2DA80</Address>
+          <Offsets>
+            <Offset>28</Offset>
+            <Offset>14</Offset>
+            <Offset>18</Offset>
+            <Offset>2D4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"初始倒计时"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"FFFE.exe"+00A2DA80</Address>
+          <Offsets>
+            <Offset>30</Offset>
+            <Offset>14</Offset>
+            <Offset>18</Offset>
+            <Offset>2D4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"当前倒计时"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"FFFE.exe"+00A2DA80</Address>
+          <Offsets>
+            <Offset>34</Offset>
+            <Offset>14</Offset>
+            <Offset>18</Offset>
+            <Offset>2D4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"场景数据结构"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"FFFE.exe"+00A2DA80</Address>
+      <Offsets>
+        <Offset>34</Offset>
+        <Offset>18</Offset>
+        <Offset>2D4</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"当前分数"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FFFE.exe"+00A2DA80</Address>
+          <Offsets>
+            <Offset>20</Offset>
+            <Offset>34</Offset>
+            <Offset>18</Offset>
+            <Offset>2D4</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

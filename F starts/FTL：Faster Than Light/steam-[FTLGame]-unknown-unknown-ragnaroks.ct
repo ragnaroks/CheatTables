@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"当前选择的船员[+0]"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"FTLGame.exe"+00513494</Address>
+      <Offsets>
+        <Offset>0</Offset>
+        <Offset>4</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"船员HP[+0][+28]"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"FTLGame.exe"+00513494</Address>
+          <Offsets>
+            <Offset>28</Offset>
+            <Offset>0</Offset>
+            <Offset>4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>70</ID>
+          <Description>"船员HP上限[+0][+2C]"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"FTLGame.exe"+00513494</Address>
+          <Offsets>
+            <Offset>2C</Offset>
+            <Offset>0</Offset>
+            <Offset>4</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"舰体"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"FTLGame.exe"+0051348C</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"结构[+CC]"</Description>
+          <Color>FF9900</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>CC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"结构上限[+D0]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>72</ID>
+          <Description>"护盾层[+44][+1EC]"</Description>
+          <Color>FF9900</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>1EC</Offset>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>73</ID>
+          <Description>"护盾层上限[+44][+1F0]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>1F0</Offset>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"资源[+4D4]"</Description>
+          <Color>FF9900</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>4D4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"燃料[+494]"</Description>
+          <Color>FF9900</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>494</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"导弹[+48][+1E8]"</Description>
+          <Color>FF9900</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>1E8</Offset>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>75</ID>
+          <Description>"无人机模块[+800] (未激活无人机系统)"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>800</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"无人机模块[+4C][+1CC] (已激活无人机系统)"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>1CC</Offset>
+            <Offset>4C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"护盾等级[+44][+50]"</Description>
+          <Color>000000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"护盾等级上限[+44][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>42</ID>
+          <Description>"护盾完整性[+44][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"护盾完整性上限[+44][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>44</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>49</ID>
+          <Description>"武器等级[+48][+50]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"武器等级上限[+48][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>50</ID>
+          <Description>"武器完整性[+48][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>52</ID>
+          <Description>"武器完整性上限[+48][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>48</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>53</ID>
+          <Description>"无人机等级[+4C][+50]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>4C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"无人机等级上限[+4C][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>4C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>54</ID>
+          <Description>"无人机完整性[+4C][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>4C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"无人机完整性上限[+4C][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>4C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>45</ID>
+          <Description>"引擎等级[+50][+50]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>47</ID>
+          <Description>"引擎等级上限[+50][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>46</ID>
+          <Description>"引擎完整性[+50][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>48</ID>
+          <Description>"引擎完整性上限[+50][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"医疗等级[+54][+50]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>59</ID>
+          <Description>"医疗等级上限[+54][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>58</ID>
+          <Description>"医疗完整性[+54][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>60</ID>
+          <Description>"医疗完整性上限[+54][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>62</ID>
+          <Description>"氧气等级[+24][+50]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>24</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>64</ID>
+          <Description>"氧气等级上限[+24][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>24</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>63</ID>
+          <Description>"氧气完整性[+24][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>24</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>65</ID>
+          <Description>"氧气完整性上限[+24][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>24</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>67</ID>
+          <Description>"隐身等级[+2C][+50]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>50</Offset>
+            <Offset>2C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>68</ID>
+          <Description>"隐身等级上限[+2C][+54]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>54</Offset>
+            <Offset>2C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>66</ID>
+          <Description>"隐身完整性[+2C][+100]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>100</Offset>
+            <Offset>2C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>69</ID>
+          <Description>"隐身完整性上限[+2C][+104]"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FTLGame.exe"+0051348C</Address>
+          <Offsets>
+            <Offset>104</Offset>
+            <Offset>2C</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

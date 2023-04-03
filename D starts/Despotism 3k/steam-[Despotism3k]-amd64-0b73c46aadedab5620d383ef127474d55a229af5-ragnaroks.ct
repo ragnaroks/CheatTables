@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 喂食不减少能量"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Despotism.P:Feeding
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:P:Feeding)
+registersymbol(cheat1_entry)
+
+cheat1_entry:
+  DB C3
+
+[DISABLE]
+cheat1_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#2 升级不减少能量"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Despotism.P:AddPower+13
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:P:AddPower)
+assert(cheat2_entry+13,F3 0F 11 4D C8)
+registersymbol(cheat2_entry)
+label(returnhere)
+alloc(cheat2_code,32,cheat2_entry)
+registersymbol(cheat2_code)
+label(default)
+label(define1)
+
+cheat2_code:
+  pushfq
+  comiss xmm1,[define1]
+//  inc [define1]
+//  dec [define1]
+  ja short default
+  movss xmm1,[define1]
+default:
+  popfq
+  movss [rbp-38],xmm1
+  jmp returnhere
+align 4
+define1:
+  DB 00 00 00 00
+
+cheat2_entry+13:
+  jmp cheat2_code
+returnhere:
+
+[DISABLE]
+cheat2_entry+13:
+  DB F3 0F 11 4D C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#3 小人体力不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//Despotism.Device:AffectHuman
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,Assembly-CSharp:Device:AffectHuman)
+registersymbol(cheat3_entry)
+
+cheat3_entry:
+  DB C3
+
+[DISABLE]
+cheat3_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

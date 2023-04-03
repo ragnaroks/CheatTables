@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="40">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 获取角色地址"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//ArtificialIntelligence.Runtime.AIExecutor:ReasoningRoutine+4df
+{$STRICT}
+[ENABLE]
+aobscan(cheat1_entry,55 8B EC 53 56 81 EC C0 01 00 00 8B 75 08 C7 85 64 FE FF FF 00 00 00 00,"+W+X")
+assert(cheat1_entry+4DA,8B 40 0C 8B C8 39 09)
+registersymbol(cheat1_entry)
+alloc(cheat1_code,64,cheat1_entry)
+registersymbol(cheat1_code)
+label(returnhere)
+label(player)
+label(default)
+label(cheat1_store1)
+registersymbol(cheat1_store1)
+label(cheat1_store2)
+registersymbol(cheat1_store2)
+
+cheat1_code:
+  mov eax,[eax+0C]
+  mov ecx,eax
+  pushfd
+  cmp [eax+B0],00
+  jne default
+  cmp [eax+0C],00
+  je default
+  cmp [eax+30],00
+  je default
+  cmp [eax+38],00
+  je default
+player:
+  mov [cheat1_store1],eax
+  popfd
+  jmp returnhere
+default:
+  mov [cheat1_store2],eax
+  popfd
+  jmp returnhere
+cheat1_store1:
+  DB 00 00 00 00
+cheat1_store2:
+  DB 00 00 00 00
+
+cheat1_entry+4DA:
+  jmp cheat1_code
+returnhere:
+[DISABLE]
+cheat1_entry+4DA:
+  DB 8B 40 0C 8B C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"玩家角色地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store1</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>6</ID>
+              <Description>"子弹数量"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>cheat1_store1</Address>
+              <Offsets>
+                <Offset>100</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"敌方角色地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat1_store2</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#2 无需换弹"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//CharacterInput:ExecuteFiring
+{$STRICT}
+[ENABLE]
+aobscan(cheat2_entry,55 8B EC 53 57 56 81 EC DC 01 00 00 C7 85,"+W+X")
+assert(cheat2_entry+11F9,83 EC 08 51 50 E8)
+assert(cheat2_entry+1203,83 C4 10)
+registersymbol(cheat2_entry)
+alloc(cheat2_code,128,cheat2_entry)
+registersymbol(cheat2_code)
+label(returnhere)
+label(default)
+label(magize)
+
+cheat2_code:
+  sub esp,08
+  push ecx
+  push eax
+  pushfd
+//  cmp [eax+B0],00
+//  jne default
+  cmp [eax+0C],00
+  je default
+  cmp [eax+30],00
+  je default
+  cmp [eax+38],00
+  je default
+magize:
+  popfd
+  jmp cheat2_entry+1203
+default:
+  popfd
+  mov ecx,00
+  mov [ebp-1F4],00
+  mov [eax+100],00
+  mov [eax+A4],3DCCCCCD
+  mov [eax+A8],3A830000
+  mov [eax+B4],3A830000
+  jmp returnhere
+
+cheat2_entry+11F9:
+  jmp cheat2_code
+returnhere:
+[DISABLE]
+cheat2_entry+11F9:
+  DB 83 EC 08 51 50
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"#3 敌人不能射击"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">//CharacterInput:FireGun
+{$STRICT}
+[ENABLE]
+aobscan(cheat3_entry,55 8B EC 53 57 56 83 EC 7C 8B 7D 08 8D 45 90 83 EC 04 6A 24 6A 00 50,"+W+X")
+assert(cheat3_entry+06,83 EC 7C 8B 7D 08)
+registersymbol(cheat3_entry)
+alloc(cheat3_code,64,cheat3_entry)
+registersymbol(cheat3_code)
+label(returnhere)
+label(enemy)
+label(default)
+
+cheat3_code:
+  pushfd
+//  cmp [ebp-1048],edi
+//  jne enemy
+  cmp [edi+B0],00
+  jne enemy
+  cmp [edi+0C],00
+  je enemy
+  cmp [edi+30],00
+  je enemy
+  cmp [edi+38],00
+  je enemy
+default:
+  popfd
+  sub esp,7C
+  mov edi,[ebp+08]
+  jmp returnhere
+enemy:
+  popfd
+  jmp cheat3_entry+209
+
+cheat3_entry+06:
+  jmp cheat3_code
+  nop
+returnhere:
+[DISABLE]
+cheat3_entry+06:
+  DB 83 EC 7C 8B 7D 08
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="CharacterInput" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="m_CachedPtr" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="4" OffsetHex="0000000C" Description="&lt;ControlNames&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" OffsetHex="00000010" Description="animator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="4" OffsetHex="00000014" Description="renderer_Legs" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="4" OffsetHex="00000018" Description="renderer_Torso" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" OffsetHex="0000001C" Description="visionCone" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" OffsetHex="00000020" Description="weaponData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="4" OffsetHex="00000024" Description="&lt;ThrowableWeapon&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="4" OffsetHex="00000028" Description="&lt;IgnoredCollidersWhenFiring&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="4" OffsetHex="0000002C" Description="movementVectorPoint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="4" OffsetHex="00000030" Description="aimCrosshair" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="Pointer" Bytesize="4" OffsetHex="00000034" Description="cameraTarget" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="4" OffsetHex="00000038" Description="vaultProbe" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="60" Vartype="Pointer" Bytesize="4" OffsetHex="0000003C" Description="_aibrain" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="4" OffsetHex="00000040" Description="AILookTarget" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="Pointer" Bytesize="4" OffsetHex="00000044" Description="lastPatrolData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="Pointer" Bytesize="4" OffsetHex="00000054" Description="visionConeColors" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="4" OffsetHex="00000058" Description="suspectLookPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="Pointer" Bytesize="4" OffsetHex="0000005C" Description="AITargetTag" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="4" OffsetHex="00000060" Description="coarseCollider" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="100" Vartype="Pointer" Bytesize="4" OffsetHex="00000064" Description="movementBumper" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="4" OffsetHex="00000068" Description="OnAmmoChange" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="108" Vartype="Pointer" Bytesize="4" OffsetHex="0000006C" Description="OnShoot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="4" OffsetHex="00000070" Description="OnWeaponChange" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="116" Vartype="Pointer" Bytesize="4" OffsetHex="00000074" Description="OnPlayerSpot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="4" OffsetHex="00000078" Description="registeredCovers" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="124" Vartype="Pointer" Bytesize="4" OffsetHex="0000007C" Description="strangledCharacter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="4" OffsetHex="00000080" Description="characterToMirror" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000084" Description="currentAxis" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="140" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000008C" Description="lastCurrentAxis" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="148" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000094" Description="mouseDelta" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Float" Bytesize="4" OffsetHex="000000A0" Description="mouseDeltaAcceleration" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="164" Vartype="Float" Bytesize="4" OffsetHex="000000A4" Description="speed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Float" Bytesize="4" OffsetHex="000000A8" Description="aimPrecision" DisplayMethod="Signed Integer"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000AC" Description="pushAmount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="180" Vartype="Float" Bytesize="4" OffsetHex="000000B4" Description="defaultLookAngle" DisplayMethod="Signed Integer"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B8" Description="currentMode" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="188" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000BC" Description="savedMode" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Byte" Bytesize="1" OffsetHex="000000C0" Description="savedAIPauseState" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="196" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C4" Description="animatorYAxisDirection" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" Description="torsoZOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="204" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000CC" Description="targetOverlayColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="220" Vartype="Float" Bytesize="4" OffsetHex="000000DC" Description="aimAngle" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" Description="_cursorLock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="228" Vartype="Float" Bytesize="4" OffsetHex="000000E4" Description="timer_cursorLock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E8" Description="burstCount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000EC" Description="&lt;LastPosition&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="lockDirectionUntilRelease" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="256" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000100" Description="ammoCount_" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="260" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000104" Description="_specialAction" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="264" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000108" Description="&lt;AIPathExecutionPoint&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="268" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000010C" Description="&lt;AIPathCurrentVersion&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000110" Description="_AIActionParameters" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000118" Description="AIVisionLayerMask" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000011C" Description="lastBehaviour" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="Float" Bytesize="4" OffsetHex="00000120" Description="lastPlayerAwarnessLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="292" Vartype="Float" Bytesize="4" OffsetHex="00000124" Description="timer_visionDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="Float" Bytesize="4" OffsetHex="00000128" Description="lastInPlaceRotationAngle" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="Float" Bytesize="4" OffsetHex="0000012C" Description="timer_suspectLookTimeout" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="Byte" Bytesize="1" OffsetHex="00000130" Description="AIVisionSidekickSwitch" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="308" Vartype="Float" Bytesize="4" OffsetHex="00000134" Description="&lt;FootRadius&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000138" Description="&lt;ColliderBounds_Normal&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000148" Description="&lt;ColliderBounds_Ducking&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Float" Bytesize="4" OffsetHex="00000158" Description="timer_AIPathreset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="348" Vartype="Float" Bytesize="4" OffsetHex="0000015C" Description="timer_AIPathpointTimeout" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="Float" Bytesize="4" OffsetHex="00000160" Description="timer_duckingDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="356" Vartype="Float" Bytesize="4" OffsetHex="00000164" Description="timer_stuckTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="Float" Bytesize="4" OffsetHex="00000168" Description="timer_AIVisionRaycast" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="364" Vartype="Float" Bytesize="4" OffsetHex="0000016C" Description="timer_duckingPressingTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="368" Vartype="Byte" Bytesize="1" OffsetHex="00000170" Description="fireLock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="369" Vartype="Byte" Bytesize="1" OffsetHex="00000171" Description="&lt;LockGunDraw&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="370" Vartype="Byte" Bytesize="1" OffsetHex="00000172" Description="&lt;LockMovement&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="371" Vartype="Byte" Bytesize="1" OffsetHex="00000173" Description="&lt;Mute&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="372" Vartype="Byte" Bytesize="1" OffsetHex="00000174" Description="&lt;Blind&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="373" Vartype="Byte" Bytesize="1" OffsetHex="00000175" Description="&lt;Deaf&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="374" Vartype="Byte" Bytesize="1" OffsetHex="00000176" Description="&lt;Pushable&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="375" Vartype="Byte" Bytesize="1" OffsetHex="00000177" Description="&lt;DisableVisionCone&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="376" Vartype="Byte" Bytesize="1" OffsetHex="00000178" Description="&lt;ForceVisionCone&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="377" Vartype="Byte" Bytesize="1" OffsetHex="00000179" Description="&lt;ForceWalk&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="378" Vartype="Byte" Bytesize="1" OffsetHex="0000017A" Description="pushed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="379" Vartype="Byte" Bytesize="1" OffsetHex="0000017B" Description="handlingVault" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="380" Vartype="Byte" Bytesize="1" OffsetHex="0000017C" Description="&lt;SnapVaultDirection&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="381" Vartype="Byte" Bytesize="1" OffsetHex="0000017D" Description="reloadRequest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="382" Vartype="Byte" Bytesize="1" OffsetHex="0000017E" Description="rollRequest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="383" Vartype="Byte" Bytesize="1" OffsetHex="0000017F" Description="&lt;EverEnteredScreen&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="Byte" Bytesize="1" OffsetHex="00000180" Description="allowRendererFlip" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

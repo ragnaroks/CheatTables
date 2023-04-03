@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="39">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#1 回合数固定"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(wesnoth.exe+5C25AD,E8 7E B0 D2 FF)
+
+"wesnoth.exe"+5C25AD:
+  nop 5
+
+[DISABLE]
+"wesnoth.exe"+5C25AD:
+  DB E8 7E B0 D2 FF
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#2 金币不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(wesnoth.exe+3D98C1,8B 45 18 29 42 04)
+alloc(cheat2_code,64,wesnoth.exe)
+registersymbol(cheat2_code)
+label(return)
+label(default)
+label(player)
+
+wesnoth.exe+3D98C1:
+  jmp cheat2_code
+  nop
+return:
+
+cheat2_code:
+  mov eax,[ebp+18]
+//sub [edx+04],eax
+  pushfd
+  cmp [edx+F8],00
+  jne player
+default:
+  popfd
+  mov [edx+04],00
+  jmp return
+player:
+  popfd
+  jmp return
+
+[DISABLE]
+wesnoth.exe+3D98C1:
+  DB 8B 45 18 29 42 04
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"注入代码地址"</Description>
+          <LastState Value="" RealAddress="001B0000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#3 生命值不减 (有问题)"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(wesnoth.exe+3D3301,29 FB)
+assert(wesnoth.exe+3D3303,85 DB)
+assert(wesnoth.exe+3D3305,89 98 80 00 00 00)
+assert(wesnoth.exe+3D330B,89 9D 30 FC FF FF)
+alloc(cheat3_code,128,wesnoth.exe)
+registersymbol(cheat3_code)
+label(return)
+label(enemy)
+
+wesnoth.exe+3D3301:
+  jmp cheat3_code
+  nop 5
+  nop 6
+return:
+
+cheat3_code:
+  pushfd
+  cmp [eax+10],00
+  je enemy
+  cmp [eax+14],00
+  je enemy
+  cmp [eax+18],00
+  je enemy
+  popfd
+  jmp return
+enemy:
+  popfd
+  sub ebx,edi
+  test ebx,ebx
+  mov [eax+00000080],ebx
+  mov [ebp-000003D0],ebx
+  jmp return
+
+[DISABLE]
+wesnoth.exe+3D3301:
+  DB 29 FB
+wesnoth.exe+3D3303:
+  DB 85 DB
+wesnoth.exe+3D3305:
+  DB 89 98 80 00 00 00
+wesnoth.exe+3D330B:
+  DB 89 9D 30 FC FF FF
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入代码地址"</Description>
+          <LastState Value="" RealAddress="00120000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="单位" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000004" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" RLECount="8" OffsetHex="00000010" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000030" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="String" Bytesize="32" OffsetHex="00000034" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000040" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="Pointer" Bytesize="4" RLECount="2" OffsetHex="00000044" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000004C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="4" OffsetHex="00000050" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="00000054" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="4" OffsetHex="00000068" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" RLECount="6" OffsetHex="0000006C" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="场景" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" OffsetHex="00000000" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000004" Description="金币" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" DisplayMethod="Signed Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" RLECount="3" OffsetHex="00000010" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="占领小镇" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000020" DisplayMethod="Signed Integer"/>
+        <Element Offset="36" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000024" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000030" DisplayMethod="Signed Integer"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000034" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="String" Bytesize="8" OffsetHex="00000040" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000048" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="Pointer" Bytesize="4" RLECount="2" OffsetHex="0000004C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000054" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000058" DisplayMethod="Signed Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="00000068" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="124" Vartype="String" Bytesize="5" OffsetHex="0000007C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="129" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000081" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="Pointer" Bytesize="4" RLECount="3" OffsetHex="00000084" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000090" Description="阵营分组？" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="148" Vartype="Pointer" Bytesize="4" OffsetHex="00000094" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000098" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="156" Vartype="String" Bytesize="32" OffsetHex="0000009C" Description="阵营文本" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="4" RLECount="6" OffsetHex="000000A8" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="196" Vartype="String" Bytesize="7" OffsetHex="000000C4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="204" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000CC" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Pointer" Bytesize="4" RLECount="4" OffsetHex="000000D0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="228" Vartype="String" Bytesize="16" OffsetHex="000000E4" Description="单位文本？" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="244" Vartype="Pointer" Bytesize="4" OffsetHex="000000F4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="名称长度" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="252" Vartype="String" Bytesize="16" OffsetHex="000000FC" Description="玩家名称" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="268" Vartype="Pointer" Bytesize="4" OffsetHex="0000010C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000110" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="276" Vartype="Byte" Bytesize="1" OffsetHex="00000114" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="277" Vartype="String" Bytesize="10" OffsetHex="00000115" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="287" Vartype="Byte" Bytesize="1" OffsetHex="0000011F" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="String" Bytesize="5" OffsetHex="00000120" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="293" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="00000125" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="Pointer" Bytesize="4" OffsetHex="00000128" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000012C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="Byte" Bytesize="1" OffsetHex="00000130" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="305" Vartype="String" Bytesize="15" OffsetHex="00000131" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="Pointer" Bytesize="4" OffsetHex="00000140" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000144" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="Byte" Bytesize="1" OffsetHex="00000148" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="329" Vartype="String" Bytesize="15" OffsetHex="00000149" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Pointer" Bytesize="4" OffsetHex="00000158" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="348" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000015C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="String" Bytesize="8" OffsetHex="00000160" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="String" Bytesize="5" OffsetHex="00000168" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="365" Vartype="Byte" Bytesize="1" RLECount="4" OffsetHex="0000016D" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="369" Vartype="String" Bytesize="5" OffsetHex="00000171" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="374" Vartype="Byte" Bytesize="1" OffsetHex="00000176" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="375" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000177" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="377" Vartype="Byte" Bytesize="1" RLECount="7" OffsetHex="00000179" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000180" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="388" Vartype="Byte" Bytesize="1" RLECount="4" OffsetHex="00000184" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="4 Bytes" Bytesize="4" RLECount="5" OffsetHex="00000188" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="412" Vartype="Pointer" Bytesize="4" OffsetHex="0000019C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="416" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001A0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="420" Vartype="Pointer" Bytesize="4" OffsetHex="000001A4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="424" Vartype="String" Bytesize="6" OffsetHex="000001A8" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="432" Vartype="Pointer" Bytesize="4" OffsetHex="000001B0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="436" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001B4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="440" Vartype="Float" Bytesize="4" OffsetHex="000001B8" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="444" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001BC" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="448" Vartype="Byte" Bytesize="1" OffsetHex="000001C0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="449" Vartype="String" Bytesize="8" OffsetHex="000001C1" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="457" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000001C9" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="460" Vartype="Float" Bytesize="4" OffsetHex="000001CC" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="464" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001D0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="468" Vartype="String" Bytesize="5" OffsetHex="000001D4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="473" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000001D9" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="476" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001DC" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="480" Vartype="Pointer" Bytesize="4" RLECount="2" OffsetHex="000001E0" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="488" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001E8" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="492" Vartype="String" Bytesize="5" OffsetHex="000001EC" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="497" Vartype="Byte" Bytesize="1" RLECount="3" OffsetHex="000001F1" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="500" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001F4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="504" Vartype="Pointer" Bytesize="4" RLECount="2" OffsetHex="000001F8" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="512" Vartype="4 Bytes" Bytesize="4" RLECount="6" OffsetHex="00000200" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="536" Vartype="Pointer" Bytesize="4" RLECount="4" OffsetHex="00000218" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="552" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000228" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="556" Vartype="String" Bytesize="15" OffsetHex="0000022C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="571" Vartype="Byte" Bytesize="1" OffsetHex="0000023B" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="572" Vartype="Pointer" Bytesize="4" RLECount="3" OffsetHex="0000023C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="584" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000248" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="588" Vartype="Pointer" Bytesize="4" RLECount="8" OffsetHex="0000024C" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="620" Vartype="String" Bytesize="8" OffsetHex="0000026C" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
