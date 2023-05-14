@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#1 无限物资"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("MinecraftLegends.Windows.exe"+1554B73,0F 2F 70 08 40 0F 96 C6)
+label(returnhere)
+alloc(cheat1_code,64,"MinecraftLegends.Windows.exe")
+registersymbol(cheat1_code)
+label(default)
+label(deal)
+
+cheat1_code:
+  pushfq
+  cmp [rax],1F
+  je short deal
+  cmp [rax],20
+  je short deal
+  cmp [rax],21
+  je short deal
+  cmp [rax],22
+  je short deal
+  cmp [rax],23
+  je short deal
+  cmp [rax],24
+  je short deal
+  cmp [rax],25
+  je short deal
+default:
+  popfq
+  comiss xmm6,[rax+08]
+  setbe sil
+  jmp returnhere
+deal:
+  push rbx
+  mov ebx,[rax+0C]
+  mov [rax+08],ebx
+  pop rbx
+  jmp short default
+
+"MinecraftLegends.Windows.exe"+1554B73:
+  jmp cheat1_code
+  nop 3
+returnhere:
+
+
+
+[DISABLE]
+"MinecraftLegends.Windows.exe"+1554B73:
+  DB 0F 2F 70 08 40 0F 96 C6
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#2 无限物资"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert("MinecraftLegends.Windows.exe"+1554A1A,0F 2F 70 08 0F 96 C0)
+label(returnhere)
+alloc(cheat2_code,40,"MinecraftLegends.Windows.exe")
+registersymbol(cheat2_code)
+label(default)
+label(deal)
+
+cheat2_code:
+  pushfq
+  cmp [rax],20
+  je short deal
+  cmp [rax],28
+  je short deal
+default:
+  popfq
+  comiss xmm6,[rax+08]
+  setbe al
+  jmp returnhere
+deal:
+  push rbx
+  mov ebx,[rax+0C]
+  mov [rax+08],ebx
+  pop rbx
+  jmp short default
+
+"MinecraftLegends.Windows.exe"+1554A1A:
+  jmp cheat2_code
+  nop 2
+returnhere:
+
+
+
+[DISABLE]
+"MinecraftLegends.Windows.exe"+1554A1A:
+  DB 0F 2F 70 08 0F 96 C0
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
