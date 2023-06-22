@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 美元不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:PlayerData:useMoney)
+assert(cheat1_entry,55)
+registersymbol(cheat1_entry)
+
+cheat1_entry:
+  DB C3
+
+
+
+[DISABLE]
+cheat1_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"#2 FatalityRate - 1450"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:IndustryItemCategory:addFatalityRate)
+assert(cheat2_entry+63,48 8B 34 24 48 83 C4 18)
+registersymbol(cheat2_entry)
+label(returnhere)
+alloc(cheat2_code,32,cheat2_entry)
+
+cheat2_code:
+  mov [rsi+000000A0],C4B54000
+  mov [rsi+000000A4],C4B54000
+  mov rsi,[rsp]
+  add rsp,18
+  jmp returnhere
+
+cheat2_entry+63:
+  jmp cheat2_code
+  nop 3
+returnhere:
+
+
+
+[DISABLE]
+cheat2_entry+63:
+  DB 48 8B 34 24 48 83 C4 18
+
+unregistersymbol(*)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#3 InfectionRate - 1450"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,Assembly-CSharp:IndustryItemCategory:addInfectionRate)
+assert(cheat3_entry+63,48 8B 34 24 48 83 C4 18 C3)
+registersymbol(cheat3_entry)
+label(returnhere)
+alloc(cheat3_code,32,cheat3_entry)
+
+cheat3_code:
+  mov [rsi+00000088],C4B54000
+  mov [rsi+0000008C],C4B54000
+  mov rsi,[rsp]
+  add rsp,18
+  jmp returnhere
+
+cheat3_entry+63:
+  jmp cheat3_code
+  nop 3
+returnhere:
+
+
+
+[DISABLE]
+cheat3_entry+63:
+  DB 48 8B 34 24 48 83 C4 18
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#4 RecoveryRate + 1450"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat4_entry,Assembly-CSharp:IndustryItemCategory:addRecoveryRate)
+assert(cheat4_entry+63,48 8B 34 24 48 83 C4 18 C3)
+registersymbol(cheat4_entry)
+label(returnhere)
+alloc(cheat4_code,32,cheat4_entry)
+
+cheat4_code:
+  mov [rsi+00000094],44B54000
+  mov [rsi+00000098],44B54000
+  mov rsi,[rsp]
+  add rsp,18
+  jmp returnhere
+
+cheat4_entry+63:
+  jmp cheat4_code
+  nop 3
+returnhere:
+
+
+
+[DISABLE]
+cheat4_entry+63:
+  DB 48 8B 34 24 48 83 C4 18
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
