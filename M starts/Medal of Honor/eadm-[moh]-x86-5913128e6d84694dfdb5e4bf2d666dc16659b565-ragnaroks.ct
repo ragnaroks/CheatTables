@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 无限子弹"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(moh.exe+713CB6,8B 84 81 30 03 00 00)
+label(returnhere)
+alloc(cheat1_code,32,moh.exe)
+
+cheat1_code:
+  mov [ecx+eax*4+330],18
+  mov eax,[ecx+eax*4+330]
+  jmp returnhere
+
+moh.exe+713CB6:
+  jmp cheat1_code
+  nop 2
+returnhere:
+
+
+[DISABLE]
+moh.exe+713CB6:
+  DB 8B 84 81 30 03 00 00
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#2 准星无扩散"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(moh.exe+7A950,F3 0F 10 44 24 10 F3 0F 11 07 F3 0F 10 44 24 14)
+label(returnhere)
+alloc(cheat2_code,32,moh.exe)
+
+cheat2_code:
+  mov [esp+10],00
+  movss xmm0,[esp+10]
+  jmp returnhere
+
+moh.exe+7A950:
+  jmp cheat2_code
+  nop
+returnhere:
+
+
+
+[DISABLE]
+moh.exe+7A950:
+  DB F3 0F 10 44 24 10
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
