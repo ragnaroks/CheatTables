@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 无限弹匣"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(Kani-Win64-Shipping.exe+FACDC0,E8 2B FE 00 00)
+
+Kani-Win64-Shipping.exe+FACDC0:
+  nop 5
+
+[DISABLE]
+Kani-Win64-Shipping.exe+FACDC0:
+  DB E8 2B FE 00 00
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#2 强制挑战成功"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(Kani-Win64-Shipping.exe+FAC29B,45 33 FF 44 0F B6 EA)
+label(returnhere)
+alloc(cheat2_code,16,Kani-Win64-Shipping.exe)
+
+cheat2_code:
+  xor r15d,r15d
+  mov dl,01
+  movzx r13d,dl
+  jmp returnhere
+
+Kani-Win64-Shipping.exe+FAC29B:
+  jmp cheat2_code
+  nop 2
+returnhere:
+
+
+[DISABLE]
+Kani-Win64-Shipping.exe+FAC29B:
+  DB 45 33 FF 44 0F B6 EA
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"Kani-Win64-Shipping.exe"+FACDC0</Address>
+      <Comment>call 7FF756E6CBF0
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Kani-Win64-Shipping.exe"+FBCC20</Address>
+      <Comment>sub ecx,r8d
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Kani-Win64-Shipping.exe"+FBCC28</Address>
+      <Comment>sub r9d,r8d
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Kani-Win64-Shipping.exe"+FFC6DE</Address>
+      <Comment>movss [rdi+000000B8],xmm0
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
