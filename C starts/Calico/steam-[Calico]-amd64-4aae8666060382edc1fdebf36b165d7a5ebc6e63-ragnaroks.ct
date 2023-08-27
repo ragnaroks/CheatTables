@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 制作分数 8 倍"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:FeedbackPopup:ScorePoints)
+assert(cheat1_entry+18,4C 8B F9 48 8B FA)
+registersymbol(cheat1_entry)
+label(returnhere)
+alloc(cheat1_code,32,cheat1_entry)
+
+cheat1_code:
+  shl rdx,03
+  mov r15,rcx
+  mov rdi,rdx
+  jmp returnhere
+
+cheat1_entry+18:
+  jmp cheat1_code
+  nop
+returnhere:
+
+
+
+[DISABLE]
+cheat1_entry+18:
+  DB 4C 8B F9 48 8B FA
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#2 金钱不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:InventoryMasterLua:AddRemoveMoney)
+assert(cheat2_entry+0F,F3 0F 11 4D E0)
+registersymbol(cheat2_entry)
+label(returnhere)
+alloc(cheat2_code,32,cheat2_entry)
+label(default)
+
+cheat2_code:
+  pushfq
+  comiss xmm1,[data1]
+  ja short default
+  xorps xmm1,xmm1
+default:
+  popfq
+  movss [rbp-20],xmm1
+  jmp returnhere
+align 4
+data1:
+  DB 00 00 00 00
+
+cheat2_entry+0F:
+  jmp cheat2_code
+returnhere:
+
+
+
+[DISABLE]
+cheat2_entry+0F:
+  DB F3 0F 11 4D E0
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"#3 台球次数不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,Assembly-CSharp:PoolController:Shoot)
+assert(cheat3_entry+302,FF C8)
+registersymbol(cheat3_entry)
+
+cheat3_entry+302:
+  nop 2
+
+
+[DISABLE]
+cheat3_entry+302:
+  DB FF C8
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
