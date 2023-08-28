@@ -1,4 +1,4 @@
-# DeathlyStillness (死寂)
+# Deathly Stillness（死寂）
 
 ### steam-[DeathlyStillness-Win64-Shipping]-amd64-69D08E22EACD91C7B22383A1196ED4E93F50F6DC
 > 此为视频教程用表单。
