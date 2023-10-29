@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 生命值 1024"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(Rungore.exe+1AB23F,48 8B 07 48 89 03)
+label(returnhere)
+alloc(cheat1_data1,8,Rungore.exe)
+alloc(cheat1_data2,28,Rungore.exe)
+alloc(cheat1_data3,8,Rungore.exe)
+registersymbol(cheat1_data3)
+alloc(cheat1_code,256,Rungore.exe)
+registersymbol(cheat1_code)
+label(default)
+
+cheat1_data1:
+  DB 00 00 00 00 00 00 90 40
+
+cheat1_data2:
+  DB 'gml_Script_StructFighter',0
+
+cheat1_data3:
+  DB 00 00 00 00 00 00 00 00
+
+cheat1_code:
+  pushfq
+// 自己攻击自己时无法匹配 187AA
+//  cmp [rsp+28],187AA
+//  jne default
+  cmp [rsp+60],1870F
+  jne default
+//  lea rbx,[rbx+00]
+  mov [cheat1_data3],r8
+  cmp r8,00
+  je default
+// r8-&gt;48
+  mov rax,[r8+48]
+  cmp rax,00
+  je default
+// r8-&gt;48-&gt;10
+  mov rax,[rax+10]
+  cmp eax,00
+  je default
+// r8-&gt;48-&gt;10-&gt;0
+  mov rax,[rax]
+  cmp rax,00
+  je default
+// r8-&gt;48-&gt;10-&gt;0-&gt;24，必须是 0x00000000
+  push rbx
+  mov ebx,[rax+24]
+  cmp ebx,00
+  pop rbx
+  jne default
+// r8-&gt;48-&gt;10-&gt;0-&gt;28，必须是 0x78787878
+  push rbx
+  mov ebx,[rax+28]
+  cmp ebx,78787878
+  pop rbx
+  jne default
+// r8-&gt;48-&gt;10-&gt;0-&gt;2C，必须是 0x00FFFFFF
+  push rbx
+  mov ebx,[rax+2C]
+  cmp ebx,FFFFFF
+  pop rbx
+  jne default
+// r8-&gt;48-&gt;10-&gt;0-&gt;30，必须不是 0x00000000
+  push rbx
+  mov ebx,[rax+30]
+  cmp ebx,00
+  pop rbx
+  je default
+// r8-&gt;48-&gt;10-&gt;0-&gt;34，必须不是 0x3FF00000
+  push rbx
+  mov ebx,[rax+34]
+  cmp ebx,3FF00000
+  pop rbx
+  je default
+// r8-&gt;48-&gt;10-&gt;0-&gt;30
+  mov rax,[rax+30]
+  cmp rax,00
+  je default
+// r8-&gt;48-&gt;10-&gt;0-&gt;30-&gt;28
+  push rsi
+  mov rsi,[rax+28]
+  cmp rsi,00
+  je default
+// 对比字符串
+  push rcx
+  mov cx,[rsi-04]
+  push rdi
+  mov rdi,cheat1_data2
+  repe cmpsb
+  pop rdi
+  pop rcx
+  pop rsi
+  jne default
+//  lea rbx,[rbx+00]
+  mov rax,[cheat1_data1]
+  mov [rdi],rax
+default:
+  popfq
+  mov rax,[rdi]
+  mov [rbx],rax
+  jmp returnhere
+
+Rungore.exe+1AB23F:
+  jmp cheat1_code
+  nop
+returnhere:
+
+
+[DISABLE]
+Rungore.exe+1AB23F:
+  DB 48 8B 07 48 89 03
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"r8"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>data3</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="YYObjectBase" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Byte" Bytesize="1" RLECount="2" OffsetHex="00000000" DisplayMethod="unsigned integer"/>
+        <Element Offset="2" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000002" DisplayMethod="unsigned integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" RLECount="7" OffsetHex="00000004" DisplayMethod="unsigned integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" DisplayMethod="unsigned integer">
+          <Structure Name="Autocreated from 06331F04" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+            <Elements>
+              <Element Offset="0" Vartype="String" Bytesize="28" OffsetHex="00000000" Description="角色名称" DisplayMethod="unsigned integer"/>
+            </Elements>
+          </Structure>
+        </Element>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" DisplayMethod="unsigned integer">
+          <Structure Name="Autocreated from 19DA4BE0" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+            <Elements>
+              <Element Offset="0" Vartype="4 Bytes" Bytesize="4" RLECount="4" OffsetHex="00000000" DisplayMethod="unsigned integer"/>
+              <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" DisplayMethod="unsigned integer">
+                <Structure Name="Autocreated from 0EF12A00" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+                  <Elements>
+                    <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" DisplayMethod="unsigned integer">
+                      <Structure Name="Autocreated from 198B5090" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+                        <Elements>
+                          <Element Offset="0" Vartype="Double" Bytesize="8" OffsetHex="00000000" Description="生命值" DisplayMethod="unsigned integer"/>
+                          <Element Offset="8" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000008" DisplayMethod="unsigned integer"/>
+                          <Element Offset="16" Vartype="Double" Bytesize="8" OffsetHex="00000010" DisplayMethod="unsigned integer"/>
+                          <Element Offset="24" Vartype="4 Bytes" Bytesize="4" RLECount="3" OffsetHex="00000018" DisplayMethod="unsigned integer"/>
+                          <Element Offset="36" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000024" DisplayMethod="hexadecimal"/>
+                          <Element Offset="40" Vartype="String" Bytesize="4" OffsetHex="00000028" DisplayMethod="unsigned integer"/>
+                          <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" DisplayMethod="hexadecimal"/>
+                          <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" ChildStruct="YYObjectBase" Description="Pointer to instance of YYObjectBase" DisplayMethod="unsigned integer"/>
+                          <Element Offset="56" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000038" DisplayMethod="unsigned integer"/>
+                        </Elements>
+                      </Structure>
+                    </Element>
+                    <Element Offset="8" Vartype="4 Bytes" Bytesize="4" RLECount="2" OffsetHex="00000008" DisplayMethod="hexadecimal"/>
+                  </Elements>
+                </Structure>
+              </Element>
+              <Element Offset="24" Vartype="4 Bytes" Bytesize="4" RLECount="6" OffsetHex="00000018" DisplayMethod="unsigned integer"/>
+            </Elements>
+          </Structure>
+        </Element>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
