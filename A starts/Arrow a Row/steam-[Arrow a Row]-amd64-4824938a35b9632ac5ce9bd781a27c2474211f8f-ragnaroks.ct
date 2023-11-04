@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 无限金币"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(GameAssembly.dll+83FBF6,41 2B 0C 06 89 4A 08)
+
+GameAssembly.dll+83FBF6:
+  mov [rdx+08],4000
+
+
+[DISABLE]
+GameAssembly.dll+83FBF6:
+  DB 41 2B 0C 06 89 4A 08
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#2 无限生命"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+assert(GameAssembly.dll+83519F,F3 0F 5C CE F3 0F 11 4F 28)
+assert(GameAssembly.dll+13ADD96,F3 0F 5C 43 18 F3 0F 11 40 28)
+assert(GameAssembly.dll+13ACEA0,F3 0F 5C C8 F3 0F 11 48 28)
+
+GameAssembly.dll+83519F:
+  addss xmm1,xmm6
+GameAssembly.dll+13ADD96:
+  addss xmm0,[rbx+18]
+GameAssembly.dll+13ACEA0:
+  addss xmm1,xmm0
+
+
+[DISABLE]
+GameAssembly.dll+83519F:
+  DB F3 0F 5C CE F3 0F 11 4F 28
+GameAssembly.dll+13ADD96:
+  DB F3 0F 5C 43 18 F3 0F 11 40 28
+GameAssembly.dll+13ACEA0:
+  DB F3 0F 5C C8 F3 0F 11 48 28
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
