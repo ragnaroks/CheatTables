@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#1 生命值不减、弹药不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+local defined = 'define(cheat1_entry,0)';
+if syntaxcheck then return defined end;
+if LaunchDotNetInterface()==false then return defined end;
+local address = dotnet_findDotNetMethodAddress('Medusa','PlayerFunc','PlayerUpdate','Cryptark.exe');
+if address==nil then return defined end;
+return string.format('define(cheat1_entry,%x)',address);
+{$ASM}
+assert(cheat1_entry+0E,8D BD 08 FE FF FF)
+registersymbol(cheat1_entry)
+label(returnhere)
+alloc(cheat1_code,32,Cryptark.exe)
+registersymbol(cheat1_code)
+label(exit)
+label(health)
+label(ammo)
+
+cheat1_code:
+  pushfd
+  cmp [ecx+4D4],00
+  je short exit
+health:
+  mov esi,[ecx+460]
+  mov [ecx+280],esi
+ammo:
+  mov esi,[ecx+100]
+  cmp esi,00
+  je short exit
+  mov edi,[esi+88]
+  mov [esi+078],edi
+exit:
+  popfd
+  mov esi,ecx
+  lea edi,[ebp-000001F8]
+  jmp returnhere
+
+cheat1_entry+0E:
+  jmp cheat1_code
+  nop
+returnhere:
+
+
+
+[DISABLE]
+cheat1_entry+0E:
+  DB 8D BD 08 FE FF FF
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_entry</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat1_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#2 开门不减密钥"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+local defined = 'define(cheat2_entry,0)';
+if syntaxcheck then return defined end;
+if LaunchDotNetInterface()==false then return defined end;
+local address = dotnet_findDotNetMethodAddress('Medusa','LevelObjects','DoorInteract','Cryptark.exe');
+if address==nil then return defined end;
+return string.format('define(cheat2_entry,%x)',address);
+{$ASM}
+assert(cheat2_entry+20C,8B 80 84 00 00 00 48 39 81 84 00 00 00)
+registersymbol(cheat2_entry)
+
+cheat2_entry+212:
+  DB 90
+
+
+[DISABLE]
+cheat2_entry+212:
+  DB 48
+
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"注入方法地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_entry</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
