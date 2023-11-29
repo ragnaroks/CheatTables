@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#1 污染不增"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:EmissionsCard:AddEmission)
+registersymbol(cheat1_entry)
+assert(cheat1_entry+09,8B 45 08 8B 48 54)
+label(returnhere)
+alloc(cheat1_code,32,cheat1_entry)
+label(default)
+
+cheat1_code:
+  pushfd
+  cmp [ebp+18],00
+  jl short default
+  mov [ebp+18],00
+default:
+  popfd
+  mov eax,[ebp+08]
+  mov ecx,[eax+54]
+  jmp returnhere
+
+cheat1_entry+09:
+  jmp cheat1_code
+  nop
+returnhere:
+
+
+[DISABLE]
+cheat1_entry+09:
+  DB 8B 45 08 8B 48 54
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
