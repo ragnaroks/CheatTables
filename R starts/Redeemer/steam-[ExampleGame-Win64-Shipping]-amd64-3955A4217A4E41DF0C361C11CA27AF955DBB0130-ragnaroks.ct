@@ -1,116 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="40">
+<CheatTable CheatEngineTableVersion="45">
   <CheatEntries>
     <CheatEntry>
-      <ID>6</ID>
-      <Description>"生命值固定，一击必杀 [+1EFAB9]"</Description>
+      <ID>26236</ID>
+      <Description>"#1 无限弹药"</Description>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// 默认生命值为 300F，初始场景的小兵一次打掉 20F
+      <AssemblerScript>// [     6B0]
+// 000001BF033C40B0
+// BoolProperty
+// 00000101
+// /Script/ExampleGame.ExamplePlayerController:bInfiniteAmmo
+// 初始值 0x10 AND 0x01 =&gt; 0x11
+{$STRICT}
 [ENABLE]
-assert(ExampleGame-Win64-Shipping.exe+1EFAB9,F3 0F 11 83 24 0B 00 00)
-label(return)
-alloc(cave,128,ExampleGame-Win64-Shipping.exe)
+assert(ExampleGame-Win64-Shipping.exe+21D791,F6 83 B0 06 00 00 01)
 
-ExampleGame-Win64-Shipping.exe+1EFAB9:
-  jmp cave
-  nop 3
-return:
+ExampleGame-Win64-Shipping.exe+21D791:
+//  test byte ptr [rbx+000006B0],11
+  setz al
+  nop 4
 
-cave:
-  pushfq
-  cmp [rbx+B48],00
-  je case1
-default:
-  popfq
-  //movss [rbx+B24],xmm0
-  mov [rbx+B24],00
-  jmp return
-case1:
-  popfq
-  jmp return
+
 
 [DISABLE]
-ExampleGame-Win64-Shipping.exe+1EFAB9:
-  movss [rbx+00000B24],xmm0
-
-dealloc(cave)
+ExampleGame-Win64-Shipping.exe+21D791:
+  DB F6 83 B0 06 00 00 01
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
-      <ID>5</ID>
-      <Description>"生命值固定，一击必杀 [+20F5DB]"</Description>
+      <ID>26237</ID>
+      <Description>"#3 无限生命"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// 默认生命值为 300F，初始场景的小兵一次打掉 20F
+      <AssemblerScript>// [     6B0]
+// 000001BF033C3FB0
+// BoolProperty
+// 00000404
+// /Script/ExampleGame.ExamplePlayerController:bGodMode
+{$STRICT}
 [ENABLE]
-assert(ExampleGame-Win64-Shipping.exe+20F5DB,F3 0F 11 83 24 0B 00 00)
-label(return)
-alloc(cave,128,ExampleGame-Win64-Shipping.exe)
+assert(ExampleGame-Win64-Shipping.exe+21D710,0F B6 81 B0 06 00 00)
+label(returnhere)
+alloc(cheat3_code,32,ExampleGame-Win64-Shipping.exe)
+registersymbol(cheat3_code)
 
-ExampleGame-Win64-Shipping.exe+20F5DB:
-  jmp cave
-  nop 3
-return:
+cheat3_code:
+  movzx eax,byte ptr [rcx+000006B0]
+  or al,04
+  jmp returnhere
 
-cave:
-  pushfq
-  cmp [rbx+B48],00
-  je case1
-default:
-  popfq
-  //movss [rbx+B24],xmm0
-  mov [rbx+B24],00
-  jmp return
-case1:
-  popfq
-  jmp return
-
-[DISABLE]
-ExampleGame-Win64-Shipping.exe+20F5DB:
-  movss [rbx+00000B24],xmm0
-
-dealloc(cave)
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>3</ID>
-      <Description>"构造角色指针，生命值固定，一击必杀 (有BUG)"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-assert(ExampleGame-Win64-Shipping.exe+1CED20,0F 57 C0 0F 2F 81 24 0B 00 00 73 0C)
-label(return)
-alloc(cave,128,ExampleGame-Win64-Shipping.exe)
-label(cheat1_store)
-
-ExampleGame-Win64-Shipping.exe+1CED23:
-  jmp cave
+ExampleGame-Win64-Shipping.exe+21D710:
+  jmp cheat3_code
   nop 2
-return:
+returnhere:
 
-cave:
-  pushfq
-  cmp [rcx+B48],00
-  je case1
-default:
-  mov [rcx+B24],3F800000
-  popfq
-  comiss xmm0,[rcx+00000B24]
-  jmp return
-case1:
-  mov [cheat1_store],rcx
-  mov [rcx+B24],43960000
-  popfq
-  comiss xmm0,[rcx+00000B24]
-  jmp return
-cheat1_store:
-  DB 00 00 00 00
+
 
 [DISABLE]
-ExampleGame-Win64-Shipping.exe+1CED23:
-  comiss xmm0,[rcx+00000B24]
+ExampleGame-Win64-Shipping.exe+21D710:
+  DB 0F B6 81 B0 06 00 00
 
-dealloc(cave)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26238</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26230</ID>
+      <Description>"#4 隐身"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// [     6B0]
+// 000001BF033C3F30
+// BoolProperty
+// 00000808
+// /Script/ExampleGame.ExamplePlayerController:bGhostMode
+{$STRICT}
+[ENABLE]
+assert(ExampleGame-Win64-Shipping.exe+21E640,0F B6 81 B0 06 00 00)
+label(returnhere)
+alloc(cheat4_code,32,ExampleGame-Win64-Shipping.exe)
+registersymbol(cheat4_code)
+
+cheat4_code:
+  movzx eax,byte ptr [rcx+6B0]
+  // bts ax,3
+  or al,08
+  jmp returnhere
+
+ExampleGame-Win64-Shipping.exe+21E640:
+  jmp cheat4_code
+  nop 2
+returnhere:
+
+
+
+[DISABLE]
+ExampleGame-Win64-Shipping.exe+21E640:
+  DB 0F B6 81 B0 06 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26235</ID>
+          <Description>"注入代码地址"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat4_code</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26227</ID>
+      <Description>"生命值指针"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>"ExampleGame-Win64-Shipping.exe"+2D4C608</Address>
+      <Offsets>
+        <Offset>B24</Offset>
+        <Offset>358</Offset>
+        <Offset>30</Offset>
+        <Offset>0</Offset>
+        <Offset>38</Offset>
+        <Offset>E10</Offset>
+      </Offsets>
     </CheatEntry>
   </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>生命值变动</Description>
+      <AddressString>ExampleGame-Win64-Shipping.exe+1EFAB9</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>83</Byte>
+        <Byte>24</Byte>
+        <Byte>0B</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>1A</Byte>
+        <Byte>ED</Byte>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>
