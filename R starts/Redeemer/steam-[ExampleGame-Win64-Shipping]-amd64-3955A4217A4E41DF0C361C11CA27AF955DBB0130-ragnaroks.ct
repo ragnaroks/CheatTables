@@ -13,18 +13,16 @@
 // 初始值 0x10 AND 0x01 =&gt; 0x11
 {$STRICT}
 [ENABLE]
-assert(ExampleGame-Win64-Shipping.exe+21D791,F6 83 B0 06 00 00 01)
+assert(ExampleGame-Win64-Shipping.exe+21D798,75 0D)
 
-ExampleGame-Win64-Shipping.exe+21D791:
-//  test byte ptr [rbx+000006B0],11
-  setz al
-  nop 4
+ExampleGame-Win64-Shipping.exe+21D798:
+  DB EB 0D
 
 
 
 [DISABLE]
-ExampleGame-Win64-Shipping.exe+21D791:
-  DB F6 83 B0 06 00 00 01
+ExampleGame-Win64-Shipping.exe+21D798:
+  DB 75 0D
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
@@ -39,40 +37,19 @@ ExampleGame-Win64-Shipping.exe+21D791:
 // /Script/ExampleGame.ExamplePlayerController:bGodMode
 {$STRICT}
 [ENABLE]
-assert(ExampleGame-Win64-Shipping.exe+21D710,0F B6 81 B0 06 00 00)
-label(returnhere)
-alloc(cheat3_code,32,ExampleGame-Win64-Shipping.exe)
-registersymbol(cheat3_code)
+assert(ExampleGame-Win64-Shipping.exe+21D717,C0 E8 02)
 
-cheat3_code:
-  movzx eax,byte ptr [rcx+000006B0]
-  or al,04
-  jmp returnhere
-
-ExampleGame-Win64-Shipping.exe+21D710:
-  jmp cheat3_code
-  nop 2
-returnhere:
+ExampleGame-Win64-Shipping.exe+21D717:
+  shr al,04
 
 
 
 [DISABLE]
-ExampleGame-Win64-Shipping.exe+21D710:
-  DB 0F B6 81 B0 06 00 00
+ExampleGame-Win64-Shipping.exe+21D717:
+  DB C0 E8 02
 
 unregistersymbol(*)
-dealloc(*)
 </AssemblerScript>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>26238</ID>
-          <Description>"注入代码地址"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Byte</VariableType>
-          <Address>cheat3_code</Address>
-        </CheatEntry>
-      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>26230</ID>
@@ -86,41 +63,19 @@ dealloc(*)
 // /Script/ExampleGame.ExamplePlayerController:bGhostMode
 {$STRICT}
 [ENABLE]
-assert(ExampleGame-Win64-Shipping.exe+21E640,0F B6 81 B0 06 00 00)
-label(returnhere)
-alloc(cheat4_code,32,ExampleGame-Win64-Shipping.exe)
-registersymbol(cheat4_code)
+assert(ExampleGame-Win64-Shipping.exe+21E647,C0 E8 03)
 
-cheat4_code:
-  movzx eax,byte ptr [rcx+6B0]
-  // bts ax,3
-  or al,08
-  jmp returnhere
-
-ExampleGame-Win64-Shipping.exe+21E640:
-  jmp cheat4_code
-  nop 2
-returnhere:
+ExampleGame-Win64-Shipping.exe+21E647:
+  shr al,04
 
 
 
 [DISABLE]
-ExampleGame-Win64-Shipping.exe+21E640:
-  DB 0F B6 81 B0 06 00 00
+ExampleGame-Win64-Shipping.exe+21E647:
+  DB C0 E8 03
 
 unregistersymbol(*)
-dealloc(*)
 </AssemblerScript>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>26235</ID>
-          <Description>"注入代码地址"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Byte</VariableType>
-          <Address>cheat4_code</Address>
-        </CheatEntry>
-      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>26227</ID>
