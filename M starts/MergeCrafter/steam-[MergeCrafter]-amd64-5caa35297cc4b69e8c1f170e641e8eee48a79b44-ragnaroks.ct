@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="49">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>41</ID>
+      <Description>"#1 XP、ENERGY、COINS、RUNIC 不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+//CurrencyManager.SpendCurrency
+assert(GameAssembly.dll+4E5FE0,48 89 6C 24 20)
+alloc(newmem,32,GameAssembly.dll)
+label(cheat1_code)
+
+newmem:
+  DB 90 90 90 90
+cheat1_code:
+  // returnValue =&gt; true
+  xor rax,rax
+  inc eax
+  ret
+
+GameAssembly.dll+4E5FE0:
+  jmp cheat1_code
+
+
+[DISABLE]
+GameAssembly.dll+4E5FE0:
+  DB 48 89 6C 24 20
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#2 工具耐久度不变"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+//ToolCell:set_CurrentDurability
+assert(GameAssembly.dll+58F270,40 53)
+
+GameAssembly.dll+58F270:
+  DB C3
+  DB 90
+
+[DISABLE]
+GameAssembly.dll+58F270:
+  DB 40 53
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"#3 解锁内购"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+//IAPManager.StartPurchase
+assert(GameAssembly.dll+4EA740,48 89 5C 24 10)
+//IAPManager.StartPurchase+99
+assert(GameAssembly.dll+4EA7D9,E8 F2 F0 FF FF)
+//IAPManager.PurchaseSuccess
+assert(GameAssembly.dll+4E9F80,40 57)
+
+GameAssembly.dll+4EA7D9:
+  call GameAssembly.dll+4E9F80
+
+
+[DISABLE]
+GameAssembly.dll+4EA7D9:
+  DB E8 F2 F0 FF FF
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#4 工具破坏力 32 倍"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+assert(GameAssembly.dll+5428B0,40 53)
+assert(GameAssembly.dll+5428C0,0F 29 74 24 30 0F 28 F1)
+//assert(GameAssembly.dll+5428F9,F3 0F 5C C6 45 33 C0)
+alloc(newmem,64,GameAssembly.dll)
+label(returnhere)
+label(cheat4_data1)
+label(cheat4_code)
+
+newmem:
+  DB 90 90 90 90
+cheat4_data1:
+  DB 00 00 00 42
+cheat4_code:
+  DB 0F 29 74 24 30
+  mulss xmm1,[cheat4_data1]
+  jmp returnhere
+
+
+GameAssembly.dll+5428C0:
+  jmp cheat4_code
+returnhere:
+
+
+[DISABLE]
+GameAssembly.dll+5428C0:
+  DB 0F 29 74 24 30
+  DB 0F 28 F1
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>38</ID>
+      <Description>"#5 托盘物品数量不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+//PalletronCell.set_SetCount
+assert(GameAssembly.dll+584660,48 89 5C 24 08)
+assert(GameAssembly.dll+584671,8B FA 48 8B D9)
+alloc(newmem,64,GameAssembly.dll)
+label(cheat5_code)
+label(returnhere)
+
+newmem:
+  DB 90 90 90 90
+cheat5_code:
+  mov edx,60
+  DB 8B FA
+  DB 48 8B D9
+  jmp returnhere
+
+GameAssembly.dll+584671:
+  jmp cheat5_code
+returnhere:
+
+
+[DISABLE]
+GameAssembly.dll+584671:
+  DB 8B FA
+  DB 48 8B D9
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>33</ID>
+      <Description>"#6 强制解锁活动地块（不确定是否能用）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{$STRICT}
+[ENABLE]
+//EventLandGridCell.CanBeEventLandUnlocked
+assert(GameAssembly.dll+526360,40 53 48 83 EC 20)
+alloc(newmem,64,GameAssembly.dll)
+label(cheat6_code)
+
+newmem:
+  DB 90 90 90 90
+cheat6_code:
+  xor rax,rax
+  inc eax
+  ret
+
+GameAssembly.dll+526360:
+  jmp cheat6_code
+  nop
+
+[DISABLE]
+GameAssembly.dll+526360:
+  DB 40 53
+  DB 48 83 EC 20
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Code :call InventoryItemData.set_count</Description>
+      <AddressString>GameAssembly.dll+4E6E00</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D3</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CD</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>0B</Byte>
+        <Byte>6D</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>74</Byte>
+        <Byte>24</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
