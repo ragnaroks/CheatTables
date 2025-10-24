@@ -179,32 +179,5 @@ dealloc(*)
 </AssemblerScript>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry>
-      <Description>Code :call InventoryItemData.set_count</Description>
-      <AddressString>GameAssembly.dll+4E6E00</AddressString>
-      <Before>
-        <Byte>8B</Byte>
-        <Byte>D3</Byte>
-        <Byte>48</Byte>
-        <Byte>8B</Byte>
-        <Byte>CD</Byte>
-      </Before>
-      <Actual>
-        <Byte>E8</Byte>
-        <Byte>0B</Byte>
-        <Byte>6D</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Actual>
-      <After>
-        <Byte>48</Byte>
-        <Byte>8B</Byte>
-        <Byte>74</Byte>
-        <Byte>24</Byte>
-        <Byte>48</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols/>
 </CheatTable>
