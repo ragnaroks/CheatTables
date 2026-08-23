@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 无实际功能，忽略本条目"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+aobscanex(cheat1_entry,55 48 89 E5 49 3B 66 48 0F 86 ?? ?? ?? ?? 48 8B 45 10 48 8B 78 2F E8 ?? ?? ?? ?? 48 89 C1 48 89 C8)
+registersymbol(cheat1_entry)
+alloc(newmem,64,cheat1_entry)
+label(returnhere)
+label(cheat1_code)
+
+newmem:
+  nop 4
+cheat1_code:
+  DB 48 8B 45 10
+  DB 48 8B 78 2F
+// rbx 从 0 开始，代表不同的工作类型
+  jmp returnhere
+
+
+cheat1_entry+0E:
+  jmp cheat1_code
+  nop 3
+returnhere:
+
+
+[DISABLE]
+cheat1_entry+0E:
+  DB 48 8B 45 10
+  DB 48 8B 78 2F
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>53</ID>
+      <Description>"#2 经验倍增"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+aobscanex(cheat2_entry,55 48 89 E5 48 83 EC 30 48 89 7D F8 49 8B 42 1F 49 8B 4A 37 49 3B 8F ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 49 8B 4A 3F 48 2B C1 48 8B 4C 85 08)
+assert(cheat2_entry+1FB,48 03 C8 48 89 CE)
+registersymbol(cheat2_entry)
+alloc(newmem,64,cheat2_entry)
+label(returnhere)
+label(cheat2_data)
+registersymbol(cheat2_data)
+label(cheat2_code)
+
+newmem:
+  nop 4
+cheat2_data:
+  DB 00
+align 4
+cheat2_code:
+  pushfq
+  push rcx
+  mov cl,[cheat2_data]
+  shl eax,cl
+  pop rcx
+  popfq
+  DB 48 03 C8
+  DB 48 89 CE
+  jmp returnhere
+
+
+cheat2_entry+1FB:
+  jmp cheat2_code
+  nop
+returnhere:
+
+
+[DISABLE]
+cheat2_entry+1FB:
+  DB 48 03 C8
+  DB 48 89 CE
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>54</ID>
+          <Description>"倍率（右边双击修改）"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:默认
+1:2 倍
+2:4 倍
+3:8 倍
+4:16 倍
+5:32 倍
+6:64 倍
+7:128 倍
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat2_data</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>56</ID>
+      <Description>"#3 物品倍增"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+aobscanex(cheat3_entry,55 48 89 E5 48 83 EC 38 48 89 F9 48 89 F0 48 89 7D F0 48 89 75 E8 49 8B 52 1F 49 8B 5A 37 49 3B 9F ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 49 8B 5A 3F 48 2B D3)
+assert(cheat3_entry+E4,48 03 C1 48 89 43 0F)
+registersymbol(cheat3_entry)
+alloc(newmem,64,cheat3_entry)
+label(returnhere)
+label(cheat3_data)
+registersymbol(cheat3_data)
+label(cheat3_code)
+
+newmem:
+  nop 4
+cheat3_data:
+  DB 00
+align 4
+cheat3_code:
+  pushfq
+  push rax
+  mov rax,rcx
+  push rcx
+  mov cl,[cheat3_data]
+  shl eax,cl
+  pop rcx
+  mov rcx,rax
+  pop rax
+  popfq
+  DB 48 03 C1
+  DB 48 89 43 0F
+  jmp returnhere
+
+cheat3_entry+E4:
+  jmp cheat3_code
+  nop 2
+returnhere:
+
+
+[DISABLE]
+cheat3_entry+E4:
+  DB 48 03 C1
+  DB 48 89 43 0F
+
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"倍率（右边双击修改）"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:默认
+1:2 倍
+2:4 倍
+3:8 倍
+4:16 倍
+5:32 倍
+6:64 倍
+7:128 倍
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat3_data</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>58</ID>
+      <Description>"#4 加速 100 倍"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+{$LUA}
+speedhack_setSpeed(100.0)
+{$ASM}
+
+[DISABLE]
+{$LUA}
+speedhack_setSpeed(1.0)
+{$ASM}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
