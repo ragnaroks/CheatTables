@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 无需换弹"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：FF 90 50 01 00 00 48 85 FF 74 ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 8F 88 0A 00 00 8B 93 F4 03 00 00
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+7ED470,FF 90 50 01 00 00)
+
+RAGE2.exe+7ED470:
+  nop 6
+
+
+[DISABLE]
+RAGE2.exe+7ED470:
+  DB FF 90 50 01 00 00
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"当前值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>RAGE2.exe+2D7DC60</Address>
+          <Offsets>
+            <Offset>3F8</Offset>
+            <Offset>48</Offset>
+            <Offset>2D890</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#2 生命值不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+72354C,41 0F BF 86 EE 02 00 00)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat2_code)
+
+newmem:
+  nop 4
+cheat2_code:
+  mov ax,[r14+2E0]
+  mov [r14+2EE],ax
+  DB 41 0F BF 86 EE 02 00 00
+  jmp returnhere
+
+RAGE2.exe+72354C:
+  jmp cheat2_code
+  nop 3
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+72354C:
+  DB 41 0F BF 86 EE 02 00 00
+
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>RAGE2.exe+2D7D658</Address>
+          <Offsets>
+            <Offset>2EE</Offset>
+            <Offset>188</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"生命值（2）"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>RAGE2.exe+29472B8</Address>
+          <Offsets>
+            <Offset>2EE</Offset>
+            <Offset>188</Offset>
+            <Offset>58</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#3 弹药不减（武器弹药、车辆弹药）"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：89 7B 20 45 84 FF 75 ?? 8B 54 24 68 2B FD 44 8B C7 49 8B CE E8 ?? ?? ?? ?? 48 8B 5C 24 70 48 83 C4 30
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+740B38,89 7B 20 45 84 FF)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat3_code)
+
+newmem:
+  nop 4
+cheat3_code:
+  pushfq
+  push rax
+  mov eax,[rbx+20]
+  cmp edi,eax
+  cmovl edi,eax
+  pop rax
+  popfq
+  DB 89 7B 20
+  DB 45 84 FF
+  jmp returnhere
+
+RAGE2.exe+740B38:
+  jmp cheat3_code
+  nop
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+740B38:
+  DB 89 7B 20
+  DB 45 84 FF
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"#4 无限金钱"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：89 7B 20 49 8B CF 8B 55 6F 8B DF 44 29 F3 44 8B C3 E8 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 41 8B D5 4C 8B 48 28 4C 8B 40 30
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+746C81,89 7B 20 49 8B CF)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat4_code)
+
+newmem:
+  nop 4
+cheat4_code:
+  mov edi,87654
+  DB 89 7B 20
+  DB 49 8B CF
+  jmp returnhere
+
+RAGE2.exe+746C81:
+  jmp cheat4_code
+  nop
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+746C81:
+  DB 89 7B 20
+  DB 49 8B CF
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"#5 资源不减（制作材料、升级物品、其它资源）"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：89 7B 20 49 8B CC 8B 55 6F 41 2B FF 44 8B C7 E8 ?? ?? ?? ?? 48 83 3D ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 49 63 B5 ?? ?? ?? ?? 48 8D 4D A7
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+746882,89 7B 20 49 8B CC)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat5_code)
+
+newmem:
+  nop 4
+cheat5_code:
+  pushfq
+  push rax
+  mov eax,[rbx+20]
+  cmp edi,eax
+  cmovl edi,eax
+  pop rax
+  popfq
+  DB 89 7B 20
+  DB 49 8B CC
+  jmp returnhere
+
+RAGE2.exe+746882:
+  jmp cheat5_code
+  nop
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+746882:
+  DB 89 7B 20
+  DB 49 8B CC
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#6 道具不减（注射器、手雷等）"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：89 7B 20 49 8B CD 8B 54 24 78 41 2B FE 44 8B C7 E8 ?? ?? ?? ?? 4C 8B 7C 24 30 8B C7
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+7461C2,89 7B 20 49 8B CD)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat6_code)
+
+newmem:
+  nop 4
+cheat6_code:
+  pushfq
+  push rax
+  mov eax,[rbx+20]
+  cmp edi,eax
+  cmovl edi,eax
+  pop rax
+  popfq
+  DB 89 7B 20
+  DB 49 8B CD
+  jmp returnhere
+
+RAGE2.exe+7461C2:
+  jmp cheat6_code
+  nop
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+7461C2:
+  DB 89 7B 20
+  DB 49 8B CD
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"#7 武器精准度增强"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：F3 0F 10 81 30 04 00 00 F3 0F 5C CA F3 0F 59 05 ?? ?? ?? ?? F3 0F 10 98 C0 00 00 00 F3 0F 5C C2 F3 0F 5E C1 0F 57 C9
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+7F196F,F3 0F 10 81 30 04 00 00)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat7_code)
+
+newmem:
+  nop 4
+cheat7_code:
+  push rax
+  xor rax,rax
+  mov [rcx+430],eax
+  pop rax
+  DB F3 0F 10 81 30 04 00 00
+  jmp returnhere
+
+RAGE2.exe+7F196F:
+  jmp cheat7_code
+  nop 3
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+7F196F:
+  DB F3 0F 10 81 30 04 00 00
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"#8 武器射速增强"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：89 BB 50 03 00 00 48 8B 05 ?? ?? ?? ?? 48 8B 48 30 49 BC ?? ?? ?? ?? ?? ?? ?? ?? 49 8B C4 48 F7 E1
+//排除判断条件的话对所有武器都生效，包括敌人的武器
+{$STRICT}
+[ENABLE]
+assert(RAGE2.exe+7EA35A,89 BB 50 03 00 00)
+label(returnhere)
+alloc(newmem,64,RAGE2.exe)
+label(cheat8_code)
+label(cheat8_exit)
+
+newmem:
+  nop 4
+cheat8_code:
+  pushfq
+  test r10,r10
+  jz cheat8_exit
+  cmp dword ptr [rbx+22C],00
+  jne cheat8_exit
+  cmp qword ptr [rbx+558],00
+  je cheat8_exit
+  popfq
+  jmp returnhere
+cheat8_exit:
+  popfq
+  DB 89 BB 50 03 00 00
+  jmp returnhere
+
+RAGE2.exe+7EA35A:
+  jmp cheat8_code
+  nop
+returnhere:
+
+
+[DISABLE]
+RAGE2.exe+7EA35A:
+  DB 89 BB 50 03 00 00
+
+dealloc(*)
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
