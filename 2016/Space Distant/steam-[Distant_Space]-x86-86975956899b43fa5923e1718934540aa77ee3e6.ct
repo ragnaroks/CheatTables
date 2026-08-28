@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"#1 生命值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：E8 4A CD EB FF 83 C4 0C E9 ?? ?? ?? ?? 81 E2 FF FF FF 00 8B C2 83 F8 03 74 ?? 83 F8 06 0F 85 ?? ?? ?? ?? 8B 4D A0 85 C9 0F 84 ?? ?? ?? ?? 8D 83 60 79 FE FF 33 FF 85 C0
+{$STRICT}
+[ENABLE]
+assert(Distant_Space.exe+150EF1,E8)
+assert(Distant_Space.exe+150EF6,83 C4 0C)
+label(returnhere)
+alloc(newmem,64)
+label(cheat1_code)
+label(cheat1_case1)
+
+newmem:
+  nop 4
+cheat1_code:
+  pushfd
+  cmp ebx,186A7
+  je cheat1_case1
+  popfd
+  call Distant_Space.exe+DC40
+  jmp returnhere
+cheat1_case1:
+  popfd
+  jmp returnhere
+
+Distant_Space.exe+150EF1:
+  jmp newmem
+returnhere:
+
+
+[DISABLE]
+Distant_Space.exe+150EF1:
+  call Distant_Space.exe+DC40
+
+dealloc(newmem)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
