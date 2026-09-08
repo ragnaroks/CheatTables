@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable UsesMono="1" CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#1 金钱不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：01 BA 74 01 00 00 45 33 C0 8B D7 48 8B CB E8 ?? ?? ?? ?? 4C 8B 4B 10 4D 85 C9 0F 84
+{$STRICT}
+[ENABLE]
+assert(GameAssembly.dll+8CD0D0,01 BA 74 01 00 00)
+label(returnhere)
+alloc(newmem,64,GameAssembly.dll)
+label(cheat1_code)
+label(bypass)
+label(default)
+
+newmem:
+  nop 4
+cheat1_code:
+  pushfq
+  cmp edi,00
+  jg default
+bypass:
+  popfq
+  jmp returnhere
+default:
+  popfq
+  DB 01 BA 74 01 00 00
+  jmp returnhere
+
+GameAssembly.dll+8CD0D0:
+  jmp cheat1_code
+  nop
+returnhere:
+
+
+[DISABLE]
+GameAssembly.dll+8CD0D0:
+  DB 01 BA 74 01 00 00
+
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"当前值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameAssembly.dll+41BA268</Address>
+          <Offsets>
+            <Offset>174</Offset>
+            <Offset>10</Offset>
+            <Offset>0</Offset>
+            <Offset>B8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#2 角色无敌"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// GameAssembly.dll+19C72A - movss [rbx+38],xmm6
+// xmm6 来自上面的 xmm1
+
+//AOB：48 8B D9 0F 28 F1 75 1F 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 05 1A D5 1A 04 01 48 85 DB 0F 84
+{$STRICT}
+[ENABLE]
+assert(GameAssembly.dll+19C689,48 8B D9 0F 28 F1)
+label(returnhere)
+alloc(newmem,64,GameAssembly.dll)
+label(cheat2_code)
+
+newmem:
+  nop 4
+cheat2_code:
+  movss xmm1,[rcx+20]
+  DB 48 8B D9
+  DB 0F 28 F1
+  jmp returnhere
+
+GameAssembly.dll+19C689:
+  jmp cheat2_code
+  nop
+returnhere:
+
+
+[DISABLE]
+GameAssembly.dll+19C689:
+  DB 48 8B D9
+  DB 0F 28 F1
+
+dealloc(*)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"当前生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>UnityPlayer.dll+1CC3DD0</Address>
+          <Offsets>
+            <Offset>38</Offset>
+            <Offset>10</Offset>
+            <Offset>88</Offset>
+            <Offset>28</Offset>
+            <Offset>18</Offset>
+            <Offset>0</Offset>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"当前体力值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>UnityPlayer.dll+1CC3DD0</Address>
+          <Offsets>
+            <Offset>38</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>28</Offset>
+            <Offset>18</Offset>
+            <Offset>0</Offset>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"当前魔力值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>UnityPlayer.dll+1CC3DD0</Address>
+          <Offsets>
+            <Offset>38</Offset>
+            <Offset>20</Offset>
+            <Offset>88</Offset>
+            <Offset>28</Offset>
+            <Offset>18</Offset>
+            <Offset>0</Offset>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"当前护盾值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>UnityPlayer.dll+1CC3DD0</Address>
+          <Offsets>
+            <Offset>38</Offset>
+            <Offset>28</Offset>
+            <Offset>88</Offset>
+            <Offset>28</Offset>
+            <Offset>18</Offset>
+            <Offset>0</Offset>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"#3 强制开锁（取消开锁即成功）"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(GameAssembly.dll+7A3931,83 BE CC 00 00 00 00)
+label(returnhere)
+alloc(newmem,64,GameAssembly.dll)
+label(cheat3_code)
+
+newmem:
+  nop 4
+cheat3_code:
+  push rax
+  mov rax,[rsi+D0]
+  mov [rsi+D8],rax
+  pop rax
+  DB 83 BE CC 00 00 00 00
+  jmp returnhere
+
+GameAssembly.dll+7A3931:
+  jmp cheat3_code
+  nop 2
+returnhere:
+
+
+[DISABLE]
+GameAssembly.dll+7A3931:
+  DB 83 BE CC 00 00 00 00
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#4 负重清零"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+assert(GameAssembly.dll+8CE69F,66 0F 6E 40 18)
+label(returnhere)
+alloc(newmem,64,GameAssembly.dll)
+label(cheat4_code)
+
+newmem:
+  nop 4
+cheat4_code:
+  // weight
+  mov dword ptr [rax+30],00
+  // remainCD
+  mov dword ptr [rax+40],00
+  DB 66 0F 6E 40 18
+  jmp returnhere
+
+GameAssembly.dll+8CE69F:
+  jmp cheat4_code
+returnhere:
+
+
+[DISABLE]
+GameAssembly.dll+8CE69F:
+  DB 66 0F 6E 40 18
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"======== 调试 ========"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"ptrWarehouseUI"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>GameAssembly.dll+4101AD8</Address>
+          <Offsets>
+            <Offset>1D0</Offset>
+            <Offset>0</Offset>
+            <Offset>B8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>弹射物（可能的）扣减</Description>
+      <AddressString>GameAssembly.dll+7EEB82</AddressString>
+      <Before>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>28</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>48</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>20</Byte>
+        <Byte>5B</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
