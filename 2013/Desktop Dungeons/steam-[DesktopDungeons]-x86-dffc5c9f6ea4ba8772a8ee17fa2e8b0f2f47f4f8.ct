@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable UsesMono="1" CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"#1 不受伤害"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：55 8B EC 57 56 83 EC 20 8B 75 08 8B 7D 0C
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:PlayerObject:TakeDamage)
+registersymbol(cheat1_entry)
+
+cheat1_entry:
+  DB C3
+
+
+[DISABLE]
+cheat1_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"#2 无限魔力"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：55 8B EC 83 EC 08 8B 45 08 8B 48 68 2B 4D 0C
+{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:PlayerObject:SpendMana)
+registersymbol(cheat2_entry)
+
+cheat2_entry:
+  DB C3
+
+
+[DISABLE]
+cheat2_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#3 一击必杀"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB（不唯一）：55 8B EC 53 57 83 EC 30 8B 7D 0C 8B 5D 10 D9 EE D9 5D F4 D9 EE D9 5D E4 D9 EE D9 5D F4 83 7D 14 FF 0F 85 ?? ?? ?? ?? 8B 4D 08 8B 41 40 53 57 51 50 8B 00 90 90 90 FF 50 3C 83 C4 10 D9 5D E4 8B 43 24 D9 45 E4 DD 5D E8
+{$STRICT}
+[ENABLE]
+{$LUA}
+if syntaxcheck then return 'define(cheat3_entry,0)' end
+if LaunchMonoDataCollector() == 0 then return 'define(cheat3_entry,0)' end
+local classID = mono_findClass('Assembly-CSharp', 'PlayerObject')
+if classID == nil then return 'define(cheat3_entry,0)' end
+local methodTable = mono_class_enumMethods(classID)
+if #methodTable &lt; 1 then return 'define(cheat3_entry,0)' end
+local methodID = nil
+for key,value in ipairs(methodTable) do
+  if value.name == 'CalcDamage' then
+    local signResult,signParams = mono_method_getSignature(value.method)
+    if #signParams == 4 then
+      methodID = value.method
+    end
+  end
+end
+if methodID == nil then return 'define(cheat3_entry,0)' end
+local address = mono_compile_method(methodID);
+--return string.format('define(cheat3_entry,%X)',address);
+registerSymbol('cheat3_entry',address,true)
+{$ASM}
+assert(cheat3_entry+312,F2 0F 10 45 E8)
+assert(cheat3_entry+317,F2 0F 2C C0)
+
+cheat3_entry+317:
+  mov eax,[edi+50]
+  inc eax
+
+[DISABLE]
+cheat3_entry+317:
+  DB F2 0F 2C C0
+
+unregistersymbol(cheat3_entry)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"#5 鼠标滑动开图"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//AOB：8B 50 2C 33 C9 B8 01 00 00 00 83 FA 02
+[ENABLE]
+usemono()
+findmonomethod(cheat5_callee,Assembly-CSharp:GridLevel:RevealGrid)
+findmonomethod(cheat5_entry,Assembly-CSharp:GridLevel:IsRevealed)
+assert(cheat5_entry+74,8B 50 2C 33 C9)
+registersymbol(cheat5_entry)
+label(returnhere)
+alloc(newmem,64,cheat5_entry)
+label(cheat5_code)
+label(execute)
+
+newmem:
+  nop 4
+cheat5_code:
+  pushfd
+  cmp [eax+2C],02
+  jl execute
+  popfd
+  DB 8B 50 2C
+  DB 33 C9
+  jmp returnhere
+execute:
+  popfd
+  push eax
+  push [ebp+10]//y
+  push [ebp+0C]//x
+  push [ebp+08]//this =&gt; GridLevel
+  call cheat5_callee
+  add esp,0C
+  pop eax
+  jmp returnhere
+
+cheat5_entry+74:
+  jmp cheat5_code
+returnhere:
+
+
+[DISABLE]
+cheat5_entry+74:
+  DB 8B 50 2C
+  DB 33 C9
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"#6 一键开图"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+{$LUA}
+if syntaxcheck then return end
+if LaunchMonoDataCollector() == 0 then return end
+--synchronize(function()
+--part1
+local gridBlockClassID = mono_findClass('Assembly-CSharp','GridBlock')
+if gridBlockClassID == nil then error('未找到 Assembly-CSharp:GridBlock 类') end
+local gridBlockMethodTable = mono_class_enumMethods(gridBlockClassID)
+if gridBlockMethodTable == nil or #gridBlockMethodTable &lt; 1 then error('未找到 Assembly-CSharp:GridBlock 类方法列表') end
+local revealMethodID = nil
+for key,value in ipairs(gridBlockMethodTable) do
+  if value.name == 'Reveal' then
+    revealMethodID = value.method
+    break
+  end
+end
+if revealMethodID == nil then error('未找到 Assembly-CSharp:GridBlock 类方法 Reveal') end
+--part2
+local gameManagerClassID = mono_findClass('Assembly-CSharp','GameManager')
+if gameManagerClassID == nil then error('未找到 Assembly-CSharp:GameManager 类') end
+local ptrGridManager = mono_class_getStaticFieldAddress(0,gameManagerClassID)
+if ptrGridManager == nil or ptrGridManager &lt; 1 then error('获取 GridManager 指针失败') end
+local gridManagerAddress = readInteger(ptrGridManager)
+if gridManagerAddress &lt; 1 then error('获取 GridManager 地址失败') end
+local gridLevelAddress = readInteger(gridManagerAddress+0x10)
+if gridLevelAddress &lt; 1 then error('获取 GridLevel 地址失败') end
+local gridBlockArrayAddress = readInteger(gridLevelAddress+0x30)
+if gridBlockArrayAddress &lt; 1 then error('获取 GridBlock[x,y] 地址失败') end
+local blockCount = readInteger(gridBlockArrayAddress+0x0C)
+if blockCount &lt; 1 or blockCount &gt; 400 then error('获取 blockCount 数据失败') end
+for blockIndex=0, blockCount-1 do
+  sleep(20)
+  local address = readInteger(gridBlockArrayAddress + 0x10 + (blockIndex*4))
+  if address &lt; 1 then goto continue end
+
+  local ok1,clsID,clsName = pcall(mono_object_getClass, address)
+  if not ok1 or clsName ~= 'GridBlock' then
+    printf('#%d (%X) 非 GridBlock: %s', blockIndex+1, address, tostring(clsName))
+    goto continue
+  end
+
+  local revealLevel = readInteger(address+0x2C)
+  if revealLevel &gt; 1 then goto continue end
+
+--  printf('%x =&gt; %s',address,blockIndex+1)
+--  mono_invoke_method(0,revealMethodID,address,{})
+
+  local ok2,err2 = pcall(mono_invoke_method,0,revealMethodID,address,{})
+  if not ok2 then
+    printf('中止于 #%d (%X): %s', blockIndex+1, address, tostring(err2))
+    break
+  end
+  ::continue::
+end
+--end)
+{$ASM}
+[DISABLE]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"======== 调试 ========"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"#1 获取 PlayerObject 指针"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(inspect1_entry,Assembly-CSharp:PlayerObject:GetPlayer)
+assert(inspect1_entry,8B 05)
+registersymbol(inspect1_entry)
+alloc(newmem,32,inspect1_entry)
+label(inspect1_data1)
+registersymbol(inspect1_data1)
+
+newmem:
+  nop 4
+align 4 90
+inspect1_data1:
+  readmem(inspect1_entry+2,4)
+
+
+[DISABLE]
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"生命值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>inspect1_data1</Address>
+          <Offsets>
+            <Offset>5C</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"魔力值"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>inspect1_data1</Address>
+          <Offsets>
+            <Offset>68</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"当前经验"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>inspect1_data1</Address>
+          <Offsets>
+            <Offset>94</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"基础伤害"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>inspect1_data1</Address>
+          <Offsets>
+            <Offset>B0</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"金币"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>inspect1_data1</Address>
+          <Offsets>
+            <Offset>CC</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
