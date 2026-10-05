@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"#1 黄值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//默认值 200.0F
+[ENABLE]
+//AOB：F3 0F 11 88 F0 05 00 00 48 8B 43 58 0F 2F 90 F0 05 00 00
+assert("TravelerGame-Win64-Shipping.exe"+13B4C7,F3 0F 11 88 F0 05 00 00)
+
+"TravelerGame-Win64-Shipping.exe"+13B4C7:
+  nop 8
+
+
+[DISABLE]
+"TravelerGame-Win64-Shipping.exe"+13B4C7:
+  DB F3 0F 11 88 F0 05 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"#2 蓝值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//默认值 200.0F
+[ENABLE]
+//AOB：F3 0F 11 80 FC 05 00 00 49 8D 4E 04 33 D2
+assert("TravelerGame-Win64-Shipping.exe"+1401C6,F3 0F 11 80 FC 05 00 00)
+//AOB：F3 0F 11 88 FC 05 00 00 48 8B 43 58 0F 2F B0 FC 05 00 00
+assert("TravelerGame-Win64-Shipping.exe"+13AC2E,F3 0F 11 88 FC 05 00 00)
+
+"TravelerGame-Win64-Shipping.exe"+1401C6:
+  nop 8
+
+"TravelerGame-Win64-Shipping.exe"+13AC2E:
+  nop 8
+
+
+[DISABLE]
+"TravelerGame-Win64-Shipping.exe"+1401C6:
+  DB F3 0F 11 80 FC 05 00 00
+
+"TravelerGame-Win64-Shipping.exe"+13AC2E:
+  DB F3 0F 11 88 FC 05 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"#3 生命值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//默认值 125.0F
+[ENABLE]
+//AOB：F3 0F 11 87 48 05 00 00 F2 0F 11 75 8F 44 89 75 97 48 85 C0
+assert("TravelerGame-Win64-Shipping.exe"+1375A5,F3 0F 11 87 48 05 00 00)
+label(returnhere)
+alloc(newmem,64,"TravelerGame-Win64-Shipping.exe")
+label(cheat3_code)
+label(case_process)
+label(case_default)
+
+// [rdi+00] =&gt; g1:0x7FF76D591DD0 ("TravelerGame-Win64-Shipping.exe"+19D1DD0),
+//             g2:0x7FF76D590C10 ("TravelerGame-Win64-Shipping.exe"+19D0C10)
+// [rdi+08] =&gt; g1: 0x48, g2: 0x08
+// [rdi+108] =&gt; g1: !0x00, g2: 0x00
+// [rdi+1DC] =&gt; g1:0x00, g2:0x1AE
+// [rdi+1E0] =&gt; g1:0x00, g2:0x01
+// [rdi+1E4] =&gt; g1:0x00, g2:0x04
+// [rdi+280] =&gt; g1: 0x01, g2: 0x02
+
+newmem:
+  nop 4
+cheat3_code:
+  pushfq
+  //这行指令被截断是符合预期的，因为前面的 7FF7 是一致的
+  cmp dword ptr [rdi],"TravelerGame-Win64-Shipping.exe"+19D1DD0
+  jne case_default
+  cmp dword ptr [rdi+08],48
+  jne case_default
+  cmp dword ptr [rdi+108],00
+  je case_default
+  cmp dword ptr [rdi+1DC],00
+  jne case_default
+  cmp dword ptr [rdi+1E0],00
+  jne case_default
+  cmp dword ptr [rdi+1E4],00
+  jne case_default
+  cmp dword ptr [rdi+280],01
+  jne case_default
+case_process:
+  popfq
+  nop QWORD PTR [rdi+548]
+  jmp returnhere
+case_default:
+  popfq
+  movss [rdi+548],xmm0
+  jmp returnhere
+
+"TravelerGame-Win64-Shipping.exe"+1375A5:
+  jmp cheat3_code
+  nop 3
+returnhere:
+
+
+[DISABLE]
+"TravelerGame-Win64-Shipping.exe"+1375A5:
+  DB F3 0F 11 87 48 05 00 00
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
