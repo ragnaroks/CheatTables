@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"#1 子弹不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+//AOB：75 ?? 8B 43 20 3B F0 76 ?? 89 6B 20 EB ?? 2B C6 89 43 20 75 ?? 8B 81 84 03 00 00
+assert(za4_dx12.exe+8A52B8,75 26)
+assert(za4_dx12.exe+8A52C6,2B C6 89 43 20)
+
+za4_dx12.exe+8A52B8:
+  DB EB 26
+
+
+[DISABLE]
+za4_dx12.exe+8A52B8:
+  DB 75 26
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"#2 道具不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+//AOB：0F 85 ?? ?? ?? ?? 44 8B 68 30 41 3B DD 48 8B 01 44 0F 42 EB 44 89  6C 24 68
+assert(za4_dx12.exe+8C19FB,0F 85 9D 03 00 00)
+
+za4_dx12.exe+8C19FB:
+  jmp za4_dx12.exe+8C1D9E
+  nop
+
+
+[DISABLE]
+za4_dx12.exe+8C19FB:
+  DB 0F 85 9D 03 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"#3 生命值不减"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+//AOB：F3 0F 5C D6 0F 28 C8 44 0F 28 C8 F3 0F 11 53 68 FF 90 ?? ?? ?? ?? 0F 2F 7B 68
+assert(za4_dx12.exe+1DC773,F3 0F 5C D6 0F 28 C8 44 0F 28 C8 F3 0F 11 53 68)
+label(returnhere)
+alloc(newmem,64,za4_dx12.exe)
+label(cheat3_data1)
+registersymbol(cheat3_data1)
+label(cheat3_code)
+label(case_default)
+
+
+newmem:
+  nop 4
+cheat3_data1:
+  DB 00 00 80 3F
+cheat3_code:
+  pushfq
+  cmp dword ptr [rbx+88],563CA41E
+  jne case_default
+  cmp byte ptr [rbx+98],01
+  jne case_default
+  cmp byte ptr [rbx+AC],00
+  jne case_default
+  popfq
+  xorps xmm6,xmm6
+  DB 0F 28 C8
+  jmp returnhere
+case_default:
+  popfq
+  mulss xmm6,[cheat3_data1]
+  DB F3 0F 5C D6
+  DB 0F 28 C8
+  jmp returnhere
+
+za4_dx12.exe+1DC773:
+  jmp cheat3_code
+  nop 2
+returnhere:
+
+
+[DISABLE]
+za4_dx12.exe+1DC773:
+  DB F3 0F 5C D6
+  DB 0F 28 C8
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"对敌方伤害倍率"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>cheat3_data1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#4 超级精准"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+//AOB：F3 0F 10 48 40 EB ?? 0F 57 C9 F3 0F 59 0D F8 D8 32 00
+assert(za4_dx12.exe+98E3E2,F3 0F 10 48 40)
+label(returnhere)
+alloc(newmem,64,za4_dx12.exe)
+label(cheat4_code)
+
+newmem:
+  nop 4
+cheat4_code:
+  push rbx
+  xor rbx,rbx
+  mov [rax+40],rbx
+  pop rbx
+  DB F3 0F 10 48 40
+  jmp returnhere
+
+za4_dx12.exe+98E3E2:
+  jmp cheat4_code
+returnhere:
+
+
+
+[DISABLE]
+za4_dx12.exe+98E3E2:
+  DB F3 0F 10 48 40
+
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"==== 调试 ===="</Description>
+      <Options moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"子弹数量 6"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>za4_dx12.exe+1A25FB8</Address>
+          <Offsets>
+            <Offset>20</Offset>
+            <Offset>88</Offset>
+            <Offset>D0</Offset>
+            <Offset>20</Offset>
+            <Offset>0</Offset>
+            <Offset>9440</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"子弹数量 7"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>za4_dx12.exe+1A25FB8</Address>
+          <Offsets>
+            <Offset>20</Offset>
+            <Offset>88</Offset>
+            <Offset>D0</Offset>
+            <Offset>20</Offset>
+            <Offset>0</Offset>
+            <Offset>260</Offset>
+            <Offset>9450</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"升级包数量"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>za4_dx12.exe+20EC59E</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
