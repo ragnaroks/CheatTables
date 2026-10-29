@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable UsesMono="1" CheatEngineTableVersion="52">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"#1 能量不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat1_entry,Assembly-CSharp:Game:ReduceEnergy)
+registersymbol(cheat1_entry)
+
+cheat1_entry:
+  DB C3
+
+
+[DISABLE]
+cheat1_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"#2 生命值不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat2_entry,Assembly-CSharp:Game:ReduceLife)
+registersymbol(cheat2_entry)
+
+cheat2_entry:
+  DB C3
+
+
+[DISABLE]
+cheat2_entry:
+  DB 55
+
+unregistersymbol(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"#3 命令无冷却"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat3_entry,Assembly-CSharp:Command:.ctor)
+assert(cheat3_entry+14,D9 45 10 D9 EE)
+registersymbol(cheat3_entry)
+label(returnhere)
+alloc(newmem,32,cheat3_entry)
+label(cheat3_code)
+
+newmem:
+  nop 4
+cheat3_code:
+// 堆栈中的 cooldown 在后面有再用到，不能用两个 fldz 替代
+// 直接 mov dword ptr [ebp+10],00 会导致图标显示异常
+  mov dword ptr [ebp+10],3C000000
+  DB D9 45 10
+  DB D9 EE
+  jmp returnhere
+
+cheat3_entry+14:
+  jmp cheat3_code
+returnhere:
+
+
+[DISABLE]
+cheat3_entry+14:
+  DB D9 45 10
+  DB D9 EE
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"#4 获取 PlayerData"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat4_entry,Assembly-CSharp:PlayerData:set_gold)
+assert(cheat4_entry+15,0F 4F F8)
+assert(cheat4_entry+18,B8)
+assert(cheat4_entry+1D,89 38)
+registersymbol(cheat4_entry)
+alloc(newmem,32,cheat4_entry)
+label(cheat4_data)
+registersymbol(cheat4_data)
+
+newmem:
+  nop 4
+cheat4_data:
+  readmem(cheat4_entry+19,4)
+
+[DISABLE]
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"gold"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_data</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"modals"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_data</Address>
+          <Offsets>
+            <Offset>4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"totalModals"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_data</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"itemCount1"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_data</Address>
+          <Offsets>
+            <Offset>10</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"itemCount2"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_data</Address>
+          <Offsets>
+            <Offset>14</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"itemCount3"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>cheat4_data</Address>
+          <Offsets>
+            <Offset>18</Offset>
+            <Offset>54</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"#5 强制合成徽章类型"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat5_entry,Assembly-CSharp:WindowBadges:GetResultBadge)
+assert(cheat5_entry+8B,8B C6 0F 44 C1)
+registersymbol(cheat5_entry)
+label(returnhere)
+alloc(newmem,32,cheat5_entry)
+label(cheat5_data)
+registersymbol(cheat5_data)
+label(cheat5_code)
+
+newmem:
+  nop 4
+cheat5_data:
+  DB 05
+cheat5_code:
+  mov al,byte ptr [cheat5_data]
+  jmp returnhere
+
+cheat5_entry+8B:
+  jmp cheat5_code
+returnhere:
+
+
+[DISABLE]
+cheat5_entry+8B:
+  DB 8B C6
+  DB 0F 44 C1
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"类型"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:力量
+1:敏捷
+2:能量
+3:时间
+4:触发
+5:随机
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat5_data</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"#6 强制结算徽章类型"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$STRICT}
+[ENABLE]
+usemono()
+findmonomethod(cheat6_entry,Assembly-CSharp:InGame:GenerateBadges)
+// aobscan issue =&gt; https://github.com/cheat-engine/cheat-engine/issues/288
+//registersymbol(cheat6_entry)
+//aobscanregion(cheat6_target,cheat6_entry,cheat6_entry+320,83 EC 08 6A 05 6A 00 E8 ?? ?? ?? ?? 83 C4 10)
+aobscanregion(cheat6_target,Assembly-CSharp:InGame:GenerateBadges,Assembly-CSharp:InGame:GenerateBadges+320,83 EC 08 6A 05 6A 00 E8 ?? ?? ?? ?? 83 C4 10)
+registersymbol(cheat6_target)
+label(returnhere)
+alloc(newmem,32,cheat6_entry)
+label(cheat6_data)
+registersymbol(cheat6_data)
+label(cheat6_backup)
+registersymbol(cheat6_backup)
+label(cheat6_code)
+
+newmem:
+  nop 4
+cheat6_data:
+  DB 00
+cheat6_backup:
+  readmem(cheat6_target,15)
+cheat6_code:
+  mov al,byte ptr [cheat6_data]
+  jmp returnhere
+
+cheat6_target:
+  nop 3
+  nop 2
+  nop 2
+  jmp cheat6_code
+  nop 3
+returnhere:
+
+
+[DISABLE]
+cheat6_target:
+  readmem(cheat6_backup,15)
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"类型"</Description>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:力量
+1:敏捷
+2:能量
+3:时间
+4:触发
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>cheat6_data</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="PlayerData.Static" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="1" DoNotSaveLocal="1" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000000" Description="_gold" DisplayMethod="unsigned integer"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000004" Description="_medals" DisplayMethod="unsigned integer"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="_totalMedals" DisplayMethod="unsigned integer"/>
+        <Element Offset="12" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000000C" Description="_stageUnlocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000010" Description="_stageCleared" DisplayMethod="unsigned integer"/>
+        <Element Offset="20" Vartype="Byte" Bytesize="1" OffsetHex="00000014" Description="_gameCleared" DisplayMethod="unsigned integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="_gameSpeed" DisplayMethod="unsigned integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" OffsetHex="0000001C" Description="unitsUnlocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" OffsetHex="00000020" Description="enemiesUnlocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="4" OffsetHex="00000024" Description="stagesGrade" DisplayMethod="unsigned integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="4" OffsetHex="00000028" Description="badges" DisplayMethod="unsigned integer"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="4" OffsetHex="0000002C" Description="unitsBadgesIndex" DisplayMethod="unsigned integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="4" OffsetHex="00000030" Description="upgradesLevel" DisplayMethod="unsigned integer"/>
+        <Element Offset="52" Vartype="Pointer" Bytesize="4" OffsetHex="00000034" Description="abilitiesUnlocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="4" OffsetHex="00000038" Description="abilitiesLevel" DisplayMethod="unsigned integer"/>
+        <Element Offset="60" Vartype="Pointer" Bytesize="4" OffsetHex="0000003C" Description="facilitiesUnlocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="4" OffsetHex="00000040" Description="instructionsUnlocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="68" Vartype="Pointer" Bytesize="4" OffsetHex="00000044" Description="missionsStep" DisplayMethod="unsigned integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="4" OffsetHex="00000048" Description="missionsValue" DisplayMethod="unsigned integer"/>
+        <Element Offset="76" Vartype="Pointer" Bytesize="4" OffsetHex="0000004C" Description="setAbilities" DisplayMethod="unsigned integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="4" OffsetHex="00000050" Description="setUnits" DisplayMethod="unsigned integer"/>
+        <Element Offset="84" Vartype="Pointer" Bytesize="4" OffsetHex="00000054" Description="itemsCount" DisplayMethod="unsigned integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="4" OffsetHex="00000058" Description="&lt;&gt;f__am$cache0" DisplayMethod="unsigned integer"/>
+        <Element Offset="92" Vartype="Pointer" Bytesize="4" OffsetHex="0000005C" Description="&lt;&gt;f__am$cache1" DisplayMethod="unsigned integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
